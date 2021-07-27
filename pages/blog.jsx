@@ -12,7 +12,6 @@ export function getStaticProps() {
         },
     };
 }
-
 function Blog({ post }) {
     return (
         <LinkCard

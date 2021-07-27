@@ -1,40 +1,61 @@
+import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
 import { ThemeContext, useTelegramComments } from "lib/hooks";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import EmailMeFooter from "components/email-footer";
 
 export default function Blog({ data, html }) {
+    const [articleDOM, setArticleDOM] = useState(null);
     if (!data) return null;
     const { theme } = useContext(ThemeContext);
+    const articleRef = useRef(null);
     useTelegramComments("blog-post");
     const emailTitle = `Re: ${encodeURI(data.title)}`;
-
+    useEffect(() => {
+        setArticleDOM(articleRef.current);
+    }, [articleRef]);
     return (
         <div id="blog-post">
-            <h1 className="post-title">{data.title}</h1>
-            <article dangerouslySetInnerHTML={{ __html: html }} />
-            <EmailMeFooter
-                title={emailTitle}
-                text="Having thoughts? email me"
-            />
+            <HeadlineSidebar article={articleDOM} />
+            <div className="blog-wrapper">
+                <h1 className="post-title">{data.title}</h1>
+                <article
+                    ref={articleRef}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                />
+                <EmailMeFooter
+                    title={emailTitle}
+                    text="Having thoughts? email me"
+                />
+            </div>
             <style jsx>{`
-                div {
+                #blog-post {
+                    display: flex;
+                    justify-content: center;
+                }
+                .blog-wrapper {
                     max-width: 100rem;
+                    width: 100%;
                     margin: 0 auto;
                 }
-            `}</style>
-            <style jsx global>{`
                 h1.post-title {
                     padding-bottom: 2rem;
                     color: ${theme.headerText};
                     font-weight: 200;
                 }
+            `}</style>
+            <style jsx global>{`
                 p {
                     filter: brightness(150%);
                     margin: 0 0 0 0;
                 }
-
+                h1,
+                h2,
+                h3,
+                h4 {
+                    scroll-margin-top: 7.5rem;
+                }
                 h1 a,
                 h2 a,
                 h3 a {
@@ -56,7 +77,6 @@ export default function Blog({ data, html }) {
                 }
 
                 article > pre {
-                    max-height: 60rem;
                     padding: 1rem;
                     overflow-y: auto;
                     overflow-x: auto;
@@ -64,9 +84,10 @@ export default function Blog({ data, html }) {
                     font-family: "Fira Code", monospace;
                 }
                 @media only screen and (max-width: 968px) {
-                    article > pre {
-                        width: 90vw;
-                        transform: translateX(-5vw);
+                    h1.post-title,
+                    article > :not(pre, iframe) {
+                        max-width: 80vw;
+                        margin-inline: auto;
                     }
                 }
                 article blockquote:before {
@@ -109,12 +130,15 @@ export default function Blog({ data, html }) {
 
 export async function getStaticProps({ params }) {
     const { data, content } = getPostData(params.slug);
+    const html = renderMarkdown(content);
     return {
         props: {
             data,
             title: "Blog",
-            html: renderMarkdown(content),
+            html: html,
             headerTitle: "Blog",
+            width: "100vw",
+            maxWidth: "100vw",
         },
     };
 }

@@ -11,7 +11,7 @@ function App({ Component, pageProps }) {
         selector: "main",
         isColumns: true,
     });
-    const { isCentered } = pageProps;
+    const { isCentered, maxWidth = "80vw", width = "120rem" } = pageProps;
     const mainClassName = isCentered ? centerClassName : "";
     const _title = title
         ? `Itamar Sharify - ${pageProps.title}`
@@ -31,8 +31,8 @@ function App({ Component, pageProps }) {
                 </main>
                 <style jsx>{`
                     main {
-                        max-width: 80vw;
-                        width: 120rem;
+                        max-width: ${maxWidth};
+                        width: ${width};
                         margin: 0 auto;
                         display: block;
                         transition: filter 0.5s linear;
@@ -47,6 +47,7 @@ function App({ Component, pageProps }) {
                     html {
                         font-size: 10px;
                         box-sizing: border-box;
+                        scroll-behavior: smooth;
                     }
                     @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
                     @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
@@ -69,7 +70,7 @@ function App({ Component, pageProps }) {
 
                     a {
                         color: ${theme.link};
-                        scroll-margin-top: 65px;
+                        scroll-margin-top: 6.5rem;
                     }
 
                     h1 {
