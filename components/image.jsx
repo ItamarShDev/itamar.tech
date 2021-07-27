@@ -2,7 +2,7 @@ import NextImage from "next/image";
 
 export default function Image({
     src,
-    url,
+    url = null,
     alt,
     title = null,
     className = "",

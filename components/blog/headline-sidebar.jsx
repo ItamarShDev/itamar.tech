@@ -33,6 +33,7 @@ export function HeadlineSidebar({ article }) {
             <div>
                 <h6>Headlines</h6>
                 <dl>{headings}</dl>
+                <span className="line"></span>
             </div>
             <style jsx>{`
                 div {
@@ -43,6 +44,42 @@ export function HeadlineSidebar({ article }) {
                     width: 20rem;
                     margin-inline: 5rem;
                     padding-inline: 5px;
+                }
+                .line {
+                    position: absolute;
+                    width: 1px;
+                    height: 90vh;
+                    top: 0;
+                    left: 100%;
+                    background: rgba(255, 255, 255, 0.1);
+                    overflow: hidden;
+                }
+                .line::after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height: 15vh;
+                    width: 100%;
+                    top: -50%;
+                    left: 0;
+                    background: linear-gradient(
+                        to bottom,
+                        rgba(255, 255, 255, 0) 0%,
+                        #ffffff 75%,
+                        #ffffff 100%
+                    );
+                    animation: drop 7s 0s infinite;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+                }
+                @keyframes drop {
+                    from {
+                        top: -50%;
+                    }
+
+                    to {
+                        top: 110%;
+                    }
                 }
             `}</style>
             <style jsx global>{`
