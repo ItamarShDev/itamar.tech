@@ -3,19 +3,19 @@ import { useContext } from "react";
 
 const EmailMeFooter = ({ text, title }) => {
     const { theme } = useContext(ThemeContext);
-    const mailTo = `"mailto:itamarsharifytech@gmail.com?subject=${title}`;
+    const mailTo = `mailto:itamarsharifytech@gmail.com?subject=${title}`;
     return (
         <address>
-            <p>
+            <div>
                 {text}
                 <a href={mailTo}>here</a>
-            </p>
+            </div>
             <style jsx>{`
                 address {
                     color: ${theme.paragraph};
                     font-size: 1.5rem;
                     font-style: italic;
-                    padding-block: 1rem;
+                    padding-block-start: 1rem;
                     padding-inline-start: 1rem;
                     border-top: 1px dotted ${theme.text};
                 }

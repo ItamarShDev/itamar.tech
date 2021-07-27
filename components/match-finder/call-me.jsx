@@ -5,7 +5,10 @@ export default function CallMe({ percentage }) {
         useTelegramComments("call-me");
         return (
             <div id="call-me">
-                <EmailMeFooter title="We are a match!" text="Email me" />
+                <EmailMeFooter
+                    title="We are a match! let's talk."
+                    text="Offer me a job"
+                />
             </div>
         );
     }

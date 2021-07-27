@@ -15,7 +15,19 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                                 className="close"
                                 onClick={() => setOpened(false)}
                             >
-                                ×
+                                <svg
+                                    viewBox="0 0 15 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="15"
+                                    height="15"
+                                >
+                                    <path
+                                        d="M1.5 1.5l12 12m-12 0l12-12"
+                                        stroke={theme.text}
+                                        stroke-width="2px"
+                                    ></path>
+                                </svg>
                             </a>
                         </div>
                     )}
@@ -84,7 +96,6 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                 .header {
                     display: grid;
                     grid-template-columns: 1fr 6rem;
-                    border-bottom: 1px solid ${theme.decorations};
                 }
 
                 .title {
@@ -101,16 +112,18 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                 .header .close {
                     font-size: 3rem;
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
                     text-align: center;
+                    line-height: 6rem;
                     cursor: pointer;
                     color: ${theme.text};
+                    justify-content: center;
+                    align-items: center;
                 }
                 .close:hover {
                     opacity: 0.8;
-                    background-color: rgba(0, 0, 0, 0.1);
-                    border-radius: 1rem;
+                    transform: scale(1.3) rotate(1turn);
+                    transition: transform ease-in-out 0.3s;
+                    transform-origin: center center;
                 }
             `}</style>
         </div>

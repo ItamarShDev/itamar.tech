@@ -3,6 +3,7 @@ import { useTheme } from "lib/hooks";
 import { Header } from "layouts";
 import { centered } from "theme/styles";
 import Head from "next/head";
+import React from "react";
 function App({ Component, pageProps }) {
     const { theme, toggleTheme, ThemeContext, isDark } = useTheme();
     const title = pageProps.headerTitle;
@@ -26,7 +27,7 @@ function App({ Component, pageProps }) {
                 <Header title={title} />
 
                 <main className={mainClassName}>
-                    <Component {...pageProps} />
+                    <Component theme={theme} {...pageProps} />
                     {centerStyle}
                 </main>
                 <style jsx>{`

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import Theme from '../../theme/theme';
 export const ThemeContext = createContext(Theme.light);
 
@@ -62,4 +62,8 @@ export default function useTheme(currentTheme: String = "light") {
         isDark: theme == "dark",
         isSystemTheme: theme === null,
     };
+}
+
+export function useThemeContext() {
+    return useContext(ThemeContext)
 }

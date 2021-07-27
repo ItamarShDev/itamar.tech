@@ -1,14 +1,13 @@
 import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
-import { ThemeContext, useTelegramComments } from "lib/hooks";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useTelegramComments } from "lib/hooks";
+import { useEffect, useRef, useState } from "react";
 import EmailMeFooter from "components/email-footer";
 
-export default function Blog({ data, html }) {
+export default function Blog({ theme, data, html }) {
     const [articleDOM, setArticleDOM] = useState(null);
     if (!data) return null;
-    const { theme } = useContext(ThemeContext);
     const articleRef = useRef(null);
     useTelegramComments("blog-post");
     const emailTitle = `Re: ${encodeURI(data.title)}`;

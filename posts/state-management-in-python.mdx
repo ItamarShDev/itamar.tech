@@ -6,7 +6,8 @@ category: Python
 summary: Proxy inspired solution to a state management in jupyter applications
 ---
 
-## Intro
+# Intro
+
 I work at a cool company named Imubit.
 This company creates AI solutions for refineries.
 
@@ -15,11 +16,13 @@ After a lot of discussion, we landed on building those tools in JupyterLab.
 
 My task was (and still is) to create data visualization tools that let the user query big amount of data, modify it and visualize it in charts and heat maps.
 
-## The problem
+# The problem
+
 The applications became bigger and bigger, and had components that were used in multiple different applications.
 This created a situation where I needed to find a way to manage and share data between multiple components, across multiple applications.
 
 ## The light bulb
+
 As a frontend developer I knew what I needed right away: State management.
 
 The idea was simple:
@@ -28,7 +31,8 @@ This source should be able to notify a component on a data change.
 
 Now, if I was using React for example, I would probably go for MobX, but sadly, it does not exist for Python.
 
-## Solution
+# Solution
+
 My solution was a Proxy inspired idea:
 Create a class that inherit dict, and add the option to notify and trigger listeners.
 
@@ -37,6 +41,7 @@ Because we are dealing with Python, I did not want to use an Event based mechani
 This will be easier to debug and use in Python.
 
 We start with a “proxy” like solution:
+
 ```python
 class StateManager(dict):
 	def __init__(self initial_state: dict):
@@ -48,9 +53,9 @@ class StateManager(dict):
 From there we need to add the state management.
 I chose to use `set_state(*path, value)` and `get_state(*path)`
 
-set_state(*path, value) - will iterate the path and add the value to that path in self[’state’], will create that path if not exists
+set_state(\*path, value) - will iterate the path and add the value to that path in self[’state’], will create that path if not exists
 
-get_state(*path) - will iterate the path and return the value if exists.
+get_state(\*path) - will iterate the path and return the value if exists.
 
 Now, that we have a state caching, we can add the components update mechanism;
 
@@ -62,6 +67,7 @@ class StateManager(dict):
 
 # ….
 ```
+
 ```python
 def register(self, func: Callable):
 	#  gets the function name, and subscribe to a top level keyword with that name.

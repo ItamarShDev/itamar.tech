@@ -41,9 +41,10 @@ function MatchCalculator({ properties }) {
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    display: grid;
-                    gap: 1rem;
-                    grid-template-rows: 1fr 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    margin: 0.5rem;
                 }
             `}</style>
         </div>

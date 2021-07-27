@@ -89,8 +89,7 @@ export function FilterJobs({ jobs, updateJobs }) {
         </div>
     );
 }
-export default function Resume({ resumeData, attributesData }) {
-    const { theme } = useContext(ThemeContext);
+export default function Resume({ theme, resumeData, attributesData }) {
     const [opened, setOpened] = useState(0);
     const [jobs, setJobs] = useState([]);
 
@@ -99,13 +98,7 @@ export default function Resume({ resumeData, attributesData }) {
             <FilterJobs jobs={resumeData.jobs} updateJobs={setJobs} />
             <div className="timeline">
                 {jobs.map((job, index) => (
-                    <Job
-                        key={index}
-                        job={job}
-                        index={index}
-                        opened={opened}
-                        setOpened={setOpened}
-                    />
+                    <Job key={index} job={job} />
                 ))}
             </div>
             <style jsx>{`
