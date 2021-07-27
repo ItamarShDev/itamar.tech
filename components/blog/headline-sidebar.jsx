@@ -31,17 +31,18 @@ export function HeadlineSidebar({ article }) {
     return (
         <aside>
             <div>
-                <h6>Heading</h6>
+                <h6>Headlines</h6>
                 <dl>{headings}</dl>
             </div>
             <style jsx>{`
                 div {
                     position: sticky;
-                    top: 0;
+                    scroll-margin-top: 7rem;
+                    top: 9rem;
                     left: 0;
                     width: 20rem;
-                    margin: 5rem;
-                    padding: 5px;
+                    margin-inline: 5rem;
+                    padding-inline: 5px;
                 }
             `}</style>
             <style jsx global>{`

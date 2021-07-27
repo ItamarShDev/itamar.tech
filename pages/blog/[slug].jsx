@@ -67,6 +67,11 @@ export default function Blog({ data, html }) {
                     align-items: center;
                     gap: 10px;
                 }
+                code {
+                    background-color: ${theme.inputs};
+                    font-style: italic;
+                    font-size: 1.5rem;
+                }
                 article {
                     font-weight: 300;
                     font-size: 1.8rem;
