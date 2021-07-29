@@ -8,7 +8,7 @@ export function FilterJobs({ jobs, updateJobs }) {
     useEffect(() => {
         const _jobs = jobs.slice(0).reverse();
         updateJobs(_jobs);
-    }, [jobs]);
+    }, [jobs, updateJobs]);
 
     const filterJobs = (e) => {
         const text = e.target.value.toLowerCase();

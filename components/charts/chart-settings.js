@@ -1,7 +1,7 @@
 import { hexToHSL } from "lib/utils";
 import { ThemeContext } from "lib/hooks";
 
-const { useState, useContext, useEffect } = require("react");
+import { useState, useContext, useEffect } from "react";
 function themedDatasets(values, theme) {
     return values.map((item, index) => {
         const [h, s, l] = hexToHSL(theme.charts, index);
@@ -112,7 +112,7 @@ export default function useChartSettings({
         const radarOptions = themedRadarSettings(title, theme);
         const lineOptions = themedLineSettings(title, theme);
         setSettings({ lineOptions, radarOptions, data });
-    }, [theme]);
+    }, [theme, datasets, labels, title]);
 
     return settings;
 }

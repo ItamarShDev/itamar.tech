@@ -1,8 +1,8 @@
 import EmailMeFooter from "../email-footer";
 import { useTelegramComments } from "lib/hooks";
 export default function CallMe({ percentage }) {
+    useTelegramComments("call-me");
     if (percentage >= 90) {
-        useTelegramComments("call-me");
         return (
             <div id="call-me">
                 <EmailMeFooter

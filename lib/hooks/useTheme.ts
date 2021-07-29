@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import Theme from '../../theme/theme';
+import { createContext, useContext, useEffect, useState } from "react";
+import Theme from "../../theme/theme";
 export const ThemeContext = createContext(Theme.light);
 
 /**
  * uses System define theme
  * @param {Function} setTheme
  */
-function useSystemTheme(setTheme: Function) {
+function setThemeFromSystem(setTheme: Function) {
     if (
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -35,7 +35,7 @@ export default function useTheme(currentTheme: String = "light") {
             setTheme(savedTheme);
         } else {
             if (process.browser) {
-                useSystemTheme(setTheme);
+                setThemeFromSystem(setTheme);
             }
         }
     }, []);
@@ -50,7 +50,7 @@ export default function useTheme(currentTheme: String = "light") {
         localStorage.removeItem("theme");
         setTheme(null);
         if (process.browser) {
-            useSystemTheme(setTheme);
+            setThemeFromSystem(setTheme);
         }
     };
 
@@ -65,5 +65,5 @@ export default function useTheme(currentTheme: String = "light") {
 }
 
 export function useThemeContext() {
-    return useContext(ThemeContext)
+    return useContext(ThemeContext);
 }

@@ -11,7 +11,7 @@ export default function LinkCard({
 }) {
     const { theme } = useContext(ThemeContext);
     return (
-        <Link href={routeRef || route} as={route}>
+        <Link href={routeRef || route} as={route} passHref>
             <dl>
                 <dt>{title}</dt>
                 <dd>{subTitle}</dd>

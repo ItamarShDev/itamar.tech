@@ -25,7 +25,7 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                                     <path
                                         d="M1.5 1.5l12 12m-12 0l12-12"
                                         stroke={theme.text}
-                                        stroke-width="2px"
+                                        strokeWidth="2px"
                                     ></path>
                                 </svg>
                             </a>
@@ -139,8 +139,6 @@ function Modal({
     footer = null,
     parentEl = null,
 }) {
-    // @ts-ignore
-    if (!process.browser) return null;
     const [_, setScrollingOnBody] = useBodyScroll(!open);
     useEffect(() => {
         setScrollingOnBody(!open);
@@ -154,8 +152,6 @@ function Modal({
             setRoot(elm);
         }
     }, []);
-    if (!root) return null;
-
     const modal = (
         <ModalComponent
             open={open}
@@ -166,10 +162,15 @@ function Modal({
             {children}
         </ModalComponent>
     );
+    const portal = usePortal(modal, root);
+
+    if (!process.browser) return null;
+    if (!root) return null;
+
     if (refreshOnRender) {
-        return open ? usePortal(modal, root) : null;
+        return open ? portal : null;
     }
-    return usePortal(modal, root);
+    return portal;
 }
 
 export default Modal;

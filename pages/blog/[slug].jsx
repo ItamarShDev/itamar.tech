@@ -7,18 +7,19 @@ import EmailMeFooter from "components/email-footer";
 
 export default function Blog({ theme, data, html }) {
     const [articleDOM, setArticleDOM] = useState(null);
-    if (!data) return null;
     const articleRef = useRef(null);
     useTelegramComments("blog-post");
-    const emailTitle = `Re: ${encodeURI(data.title)}`;
+    const emailTitle = `Re: ${encodeURI(data?.title)}`;
+
     useEffect(() => {
         setArticleDOM(articleRef.current);
     }, [articleRef]);
+    if (!data) return null;
     return (
         <div id="blog-post">
             <HeadlineSidebar article={articleDOM} />
             <div className="blog-wrapper">
-                <h1 className="post-title">{data.title}</h1>
+                <h1 className="post-title">{data?.title}</h1>
                 <article
                     ref={articleRef}
                     dangerouslySetInnerHTML={{ __html: html }}
