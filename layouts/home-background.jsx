@@ -1,8 +1,13 @@
 import { useThemeContext } from "lib/hooks/useTheme";
 import React from "react";
 
+function getNarrowAngle() {
+    const degree = Math.random() * 360;
+    if (degree % 60 > 30) return degree + 30;
+    return degree;
+}
 function HomeBackground() {
-    const randomDegree = Math.random() * 360;
+    const randomDegree = getNarrowAngle();
     const { theme } = useThemeContext();
     return (
         <>
@@ -11,7 +16,7 @@ function HomeBackground() {
             <div className="bg bg3"></div>
             <style jsx>{`
                 .bg {
-                    animation: slide 10s ease-in-out infinite alternate;
+                    animation: slide 20s ease-in-out 2 alternate;
                     background-image: linear-gradient(
                         -${randomDegree}deg,
                         ${theme.bg} 50%,
@@ -28,11 +33,11 @@ function HomeBackground() {
 
                 .bg2 {
                     animation-direction: alternate-reverse;
-                    animation-duration: 13s;
+                    animation-duration: 15s;
                 }
 
                 .bg3 {
-                    animation-duration: 10s;
+                    animation-duration: 12s;
                 }
                 @keyframes slide {
                     from {

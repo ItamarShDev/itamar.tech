@@ -162,9 +162,10 @@ export default function PropertiesSelect({
             </div>
             <style jsx>{`
                 label {
+                    display: block;
                     color: ${theme.text};
                     font-size: 1.5rem;
-                    margin-bottom: 5px;
+                    margin-block-end: 0.5rem;
                 }
                 input,
                 input:focus {
@@ -223,6 +224,7 @@ export default function PropertiesSelect({
                 ul {
                     width: inherit;
                     max-height: 200px;
+                    font-size: 1.5rem;
                     overflow-y: auto;
                     position: absolute;
                     z-index: 1;

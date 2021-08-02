@@ -46,6 +46,45 @@ export default class MyDocument extends Document {
                         property="twitter:image"
                         content="https://itamar.tech/images/meta-image.png"
                     />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.googleapis.com"
+                    />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.gstatic.com"
+                        crossOrigin
+                    />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Codystar&display=swap"
+                        rel="stylesheet"
+                    />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.googleapis.com"
+                    />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.gstatic.com"
+                        crossOrigin
+                    />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,400;0,500;1,400&family=Codystar&display=swap"
+                        rel="stylesheet"
+                    />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.googleapis.com"
+                    />
+                    <link
+                        rel="preconnect"
+                        href="https://fonts.gstatic.com"
+                        crossOrigin
+                    />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap"
+                        rel="stylesheet"
+                    />
                 </Head>
                 <body>
                     <Main />

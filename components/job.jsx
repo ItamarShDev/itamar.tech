@@ -44,6 +44,9 @@ export default function Job({ job }) {
                 dl {
                     position: relative;
                 }
+                p {
+                    margin-block: 1rem;
+                }
                 dl::before {
                     content: "";
                     position: absolute;
@@ -73,21 +76,27 @@ export default function Job({ job }) {
                 }
 
                 .title {
-                    font-size: 1.7rem;
-                    margin-block-end: 0.5rem;
+                    font-size: 2.5rem;
+                    line-height: 2.5rem;
+                    margin-block: 0.5rem;
                 }
                 .company {
                     display: flex;
-                    font-size: 1.2rem;
+                    font-size: 1.5rem;
                     font-style: italic;
                     align-items: center;
-                    color: ${theme.subText};
+                    margin-block: 1rem 1.5rem;
                 }
                 .company a {
+                    filter: opacity(0.9);
                     color: ${theme.subText};
+                    text-decoration: none;
                 }
                 @media (hover: hover) {
-                    .company a:hover {
+                    .company:hover {
+                        color: ${theme.decorations};
+                    }
+                    .company:hover a {
                         color: ${theme.decorations};
                         text-decoration: underline double;
                     }
@@ -99,37 +108,22 @@ export default function Job({ job }) {
                     font-size: 1rem;
                     margin: 0 0.5rem;
                 }
-                .logo {
-                    position: absolute;
-                    height: 1.5rem;
-                    width: 10rem;
-                    display: flex;
-                    align-items: center;
-                    top: 3rem;
-                    right: -1rem;
-                    transform: rotate(30deg);
-                }
 
-                .logo .image {
-                    position: relative;
-                    height: inherit;
-                    width: auto;
-                    margin: 0 auto;
-                }
                 .summary {
-                    font-size: 1.5rem;
+                    font-size: 2rem;
                     break-after: always;
                     white-space: wrap;
                 }
 
                 .extra {
-                    font-size: 1.1rem;
-                    font-style: italic;
+                    font-size: 1.5rem;
+                    filter: opacity(0.9);
                 }
 
                 .tags {
                     font-size: 1rem;
-                    color: ${theme.subText};
+                    font-style: italic;
+                    filter: opacity(0.7);
                 }
             `}</style>
         </dl>

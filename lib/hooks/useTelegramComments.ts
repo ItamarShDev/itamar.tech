@@ -12,12 +12,12 @@ const useTelegramComments = (elementId = "blog-post") => {
         script.setAttribute("data-colorful", "1");
         script.setAttribute("data-dark", "1");
         const post = document.getElementById(elementId);
-        post.appendChild(script);
+        if (post) post.appendChild(script);
 
         return () => {
             post.removeChild(script);
         };
-    }, []);
+    }, [elementId]);
 };
 
 export default useTelegramComments;

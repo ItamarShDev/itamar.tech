@@ -35,7 +35,6 @@ const Header = (props) => {
                     top: 0;
                     z-index: 10;
                     background-color: ${theme.bg};
-                    transition: all 0.2s linear;
                 }
                 .divider {
                     color: ${theme.header};

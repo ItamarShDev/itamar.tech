@@ -54,7 +54,6 @@ function App({ Component, pageProps }) {
                     @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
 
                     body {
-                        transition: all 0.2s linear;
                         background-color: ${theme.bg};
                         color: ${theme.text};
                         padding: 0;
