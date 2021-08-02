@@ -6,7 +6,7 @@ category: React
 summary: How i stumbled upon a clean async component
 ---
 
-# Abstrct
+## Abstrct
 
 In the past year, we decided to create out new sister app in React.
 Sooner than later, we met on of the most famous issues with React's synchronous rendering:
@@ -108,7 +108,7 @@ this can be easily fixed by returning the props and the result.
 This method is not declarative.
 and cannot be nested easily.
 
-# Final Cut
+## Final Cut
 
 Enter the declarative AsyncRender:
 
@@ -162,7 +162,7 @@ class AsyncRender extends React.Component {
 }
 ```
 
-# Async? Sync?
+##s Async? Sync?
 
 Let's take a look at this implementation's power, shall we?
 Let assume we have one page.
@@ -223,7 +223,7 @@ class App extends React.Component {
             comments: fromPromise(postComments(2)),
         },
         {
-            post: fromPromise(getData(3)),
+            posts: fromPromise(getData(3)),
             comments: fromPromise(postComments(3)),
         },
         {

@@ -1,11 +1,11 @@
 import { useScreenSize } from "lib/hooks";
 
 function generateLinkMarkup($contentElement) {
-    const headings = [...$contentElement.querySelectorAll("h1, h2")];
+    const headings = [...$contentElement.querySelectorAll("h2, h3")];
     const parsedHeadings = headings.map((heading) => {
         return {
             title: heading.innerText,
-            depth: heading.nodeName.replace(/\D/g, ""),
+            depth: heading.nodeName.replace(/\D/g, "") - 1,
             id: heading.getAttribute("id"),
         };
     });
@@ -30,20 +30,30 @@ export function HeadlineSidebar({ article }) {
     ));
     return (
         <aside>
-            <div>
-                <h6>Headlines</h6>
-                <dl>{headings}</dl>
+            <div className="container">
+                <div>
+                    <h5>Headlines</h5>
+                    <dl>{headings}</dl>
+                </div>
                 <span className="line"></span>
             </div>
             <style jsx>{`
-                div {
+                .container {
                     position: sticky;
-                    scroll-margin-top: 7rem;
                     top: 9rem;
                     left: 0;
                     width: 20rem;
-                    margin-inline: 5rem;
-                    padding-inline: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    margin-inline: 3rem;
+                    scroll-margin-top: 7rem;
+                }
+
+                h5 {
+                    margin-block-end: 2rem;
+                }
+                dl {
+                    padding-inline-start: 1rem;
                 }
                 .line {
                     position: absolute;

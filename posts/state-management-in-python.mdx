@@ -6,7 +6,7 @@ category: Python
 summary: Proxy inspired solution to a state management in jupyter applications
 ---
 
-# Intro
+## Intro
 
 I work at a cool company named Imubit.
 This company creates AI solutions for refineries.
@@ -16,12 +16,12 @@ After a lot of discussion, we landed on building those tools in JupyterLab.
 
 My task was (and still is) to create data visualization tools that let the user query big amount of data, modify it and visualize it in charts and heat maps.
 
-# The problem
+## The problem
 
 The applications became bigger and bigger, and had components that were used in multiple different applications.
 This created a situation where I needed to find a way to manage and share data between multiple components, across multiple applications.
 
-## The light bulb
+### The light bulb
 
 As a frontend developer I knew what I needed right away: State management.
 
@@ -31,7 +31,7 @@ This source should be able to notify a component on a data change.
 
 Now, if I was using React for example, I would probably go for MobX, but sadly, it does not exist for Python.
 
-# Solution
+## Solution
 
 My solution was a Proxy inspired idea:
 Create a class that inherit dict, and add the option to notify and trigger listeners.

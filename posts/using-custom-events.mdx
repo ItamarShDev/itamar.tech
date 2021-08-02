@@ -6,13 +6,13 @@ category: React
 summary: There are some points in life, where you encounter a case so unique, so different, so unexpected — that the solution just has to be special.
 ---
 
-# Intro
+## Intro
 
 We use an everything-is-a-module approach - alongside micro-services everywhere in our company.
 This usually is a good place to be in.
 Yet sometimes you reach to a point where you component being a module is just too much.
 
-# Case
+## Case
 
 ### Imagine the following scenario:
 
@@ -25,7 +25,7 @@ Cool.
 
 Now, you want to use multiple tweet viewers on screen, **while keep calling just one fetch for all of them**.
 
-## How can we do that??
+### How can we do that??
 
 _This is merely wrong and there must be another way!_
 _Because, when you think about it…_
@@ -33,7 +33,7 @@ _Because, when you think about it…_
 > How can we call an inner function of one component, and update all others from it?
 > How can multiple components communicate each other, without using the parent?
 
-# Enters CustomEvent
+## Enters CustomEvent
 
 After all, events were invented for a reason.
 It helps us communicating between different aspects of the web application.
