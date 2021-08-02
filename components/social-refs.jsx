@@ -1,4 +1,6 @@
-import Image from "components/image";
+import GithubLogo from "images/GithubLogo";
+import MediumLogo from "images/MediumLogo";
+import TwitterLogo from "images/TwitterLogo";
 import { grid } from "theme/styles";
 
 function SocialRefs({ withTitle = false }) {
@@ -19,7 +21,7 @@ function SocialRefs({ withTitle = false }) {
                     rel="noreferrer noopener"
                     title="Twitter"
                 >
-                    <Image src="icons/twitter.svg" alt="Twitter logo" />
+                    <TwitterLogo />
                 </a>
                 <a
                     className="item github"
@@ -28,7 +30,7 @@ function SocialRefs({ withTitle = false }) {
                     rel="noreferrer noopener"
                     title="Github"
                 >
-                    <Image src="icons/github.svg" alt="github logo" />
+                    <GithubLogo />
                 </a>
                 <a
                     href="https://medium.com/@itamarsharify"
@@ -37,7 +39,7 @@ function SocialRefs({ withTitle = false }) {
                     rel="noreferrer noopener"
                     title="Medium"
                 >
-                    <Image src="icons/medium.svg" alt="Medium logo" />
+                    <MediumLogo />
                 </a>
                 {gridStyle}
             </div>

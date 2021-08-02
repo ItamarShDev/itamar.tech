@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { ThemeContext } from "lib/hooks";
-import Image from "components/image";
+import TwitterLogo from "images/TwitterLogo";
+import GithubLogo from "images/GithubLogo";
+import MediumLogo from "images/MediumLogo";
 
 const Footer = () => {
     const { theme } = useContext(ThemeContext);
@@ -13,12 +15,7 @@ const Footer = () => {
                 className="twitter"
             >
                 <div>
-                    <Image
-                        src="icons/twitter.svg"
-                        alt="Twitter logo"
-                        type="svg"
-                        center
-                    />
+                    <TwitterLogo center />
                 </div>
                 Twitter
             </a>
@@ -28,12 +25,7 @@ const Footer = () => {
                 rel="noreferrer noopener"
             >
                 <div>
-                    <Image
-                        type="svg"
-                        src="icons/github.svg"
-                        alt="github logo"
-                        center
-                    />
+                    <GithubLogo center />
                 </div>
                 Github
             </a>
@@ -44,12 +36,7 @@ const Footer = () => {
                 rel="noreferrer noopener"
             >
                 <div>
-                    <Image
-                        type="svg"
-                        src="icons/medium.svg"
-                        alt="Medium logo"
-                        center
-                    />
+                    <MediumLogo center />
                 </div>
                 Medium
             </a>

@@ -5,7 +5,7 @@ function AboutMe() {
         <div className="about-me">
             <div className="summary">
                 <h1>Itamar.</h1>
-                <h2>Web Developer</h2>
+                <h2>Software Engineer</h2>
                 <p>
                     <i>Geek. Joker. Coder.</i>
                 </p>

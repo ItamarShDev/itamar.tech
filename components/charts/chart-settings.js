@@ -112,7 +112,7 @@ export default function useChartSettings({
         const radarOptions = themedRadarSettings(title, theme);
         const lineOptions = themedLineSettings(title, theme);
         setSettings({ lineOptions, radarOptions, data });
-    }, [theme, datasets, labels, title]);
+    }, [theme]);
 
     return settings;
 }

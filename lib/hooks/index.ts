@@ -3,8 +3,9 @@ import usePortal from "./usePortal";
 import useTelegramComments from "./useTelegramComments";
 import useTheme, { ThemeContext } from "./useTheme";
 import useTrackVisibility from "./useTrackVisibility";
-import useBodyScroll from "./useBodyScroll";
+import useScrollbarOnBody from "./useBodyScroll";
 import useScreenSize from "lib/hooks/useScreenSize";
+import useScrollObserver from "lib/hooks/useScrollObserver";
 export {
     useTheme,
     ThemeContext,
@@ -13,5 +14,6 @@ export {
     useTrackVisibility,
     useIntersectionObserver,
     useTelegramComments,
-    useBodyScroll,
+    useScrollbarOnBody,
+    useScrollObserver,
 };

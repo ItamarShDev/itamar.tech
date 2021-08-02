@@ -15,8 +15,7 @@ const EmailMeFooter = ({ text, title }) => {
                     color: ${theme.paragraph};
                     font-size: 1.5rem;
                     font-style: italic;
-                    padding-block-start: 1rem;
-                    padding-inline-start: 1rem;
+                    padding-block: 2rem;
                     border-top: 1px dotted ${theme.text};
                 }
                 a {

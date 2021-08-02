@@ -1,8 +1,6 @@
 import NextImage from "next/image";
 
 export default function Image({
-    src,
-    url = null,
     alt,
     title = null,
     className = "",
@@ -10,14 +8,16 @@ export default function Image({
     circle = false,
     objectFit = "contain",
     layout = "fill",
+    image = null,
 }) {
-    const imageSrc = url || `/${src}`;
     return (
         <div className={className} title={title}>
             <NextImage
+                priority
+                placeholder="blur"
                 layout={layout}
-                key={imageSrc}
-                src={imageSrc}
+                key={alt}
+                src={image}
                 alt={alt}
                 objectFit={objectFit}
                 objectPosition="50% 50%"

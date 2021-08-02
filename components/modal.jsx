@@ -1,4 +1,4 @@
-import { ThemeContext, useBodyScroll, usePortal } from "lib/hooks";
+import { ThemeContext, useScrollbarOnBody, usePortal } from "lib/hooks";
 import { useState, useContext, useEffect } from "react";
 
 function ModalComponent({ open, setOpened, title, children, footer = null }) {
@@ -139,7 +139,7 @@ function Modal({
     footer = null,
     parentEl = null,
 }) {
-    const [_, setScrollingOnBody] = useBodyScroll(!open);
+    const [_, setScrollingOnBody] = useScrollbarOnBody(!open);
     useEffect(() => {
         setScrollingOnBody(!open);
     }, [open]);

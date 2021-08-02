@@ -50,11 +50,11 @@ function App({ Component, pageProps }) {
                         box-sizing: border-box;
                         scroll-behavior: smooth;
                     }
+
                     @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
                     @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
 
                     body {
-                        transition: all 0.2s linear;
                         background-color: ${theme.bg};
                         color: ${theme.text};
                         padding: 0;

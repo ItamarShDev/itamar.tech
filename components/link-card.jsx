@@ -3,18 +3,22 @@ import { useContext } from "react";
 import Link from "next/link";
 
 export default function LinkCard({
-    children = null,
+    route,
     title,
     subTitle,
-    route,
-    routeRef,
+    routeRef = null,
+    date = null,
+    children = null,
 }) {
     const { theme } = useContext(ThemeContext);
     return (
         <Link href={routeRef || route} as={route} passHref>
             <dl>
                 <dt>{title}</dt>
-                <dd>{subTitle}</dd>
+                <dd>
+                    <p>{subTitle}</p>
+                    <span>{date}</span>
+                </dd>
                 {children}
 
                 <style jsx>{`

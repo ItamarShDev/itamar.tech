@@ -33,22 +33,53 @@ export default function Blog({ theme, data, html }) {
                 #blog-post {
                     display: flex;
                     justify-content: center;
+                    font-size: 20px;
+                    width: inherit;
                 }
                 .blog-wrapper {
-                    max-width: 100rem;
-                    width: 100%;
-                    margin: 0 auto;
+                    width: max-content;
+                    max-width: 80%;
+                    padding: 3rem;
                 }
                 h1.post-title {
-                    padding-bottom: 2rem;
+                    padding-bottom: 1em;
                     color: ${theme.headerText};
                     font-weight: 200;
+                }
+                @media only screen and (max-width: 640px) {
+                    #blog-post {
+                        font-size: 16px;
+                        display: block;
+                    }
+                    .blog-wrapper {
+                        max-width: 100%;
+                        margin: 0 auto;
+                    }
                 }
             `}</style>
             <style jsx global>{`
                 p {
                     filter: brightness(150%);
                     margin: 0 0 0 0;
+                }
+                h1 {
+                    font-family: "Codystar", Arial, Helvetica, sans-serif;
+                }
+                h2 {
+                    font-size: 2em;
+                    margin-block-end: 0.3em;
+                }
+                h3 {
+                    font-size: 1.8em;
+                }
+                h4 {
+                    font-size: 1.5em;
+                }
+                h2,
+                h3,
+                h4 {
+                    margin-block-end: 0.3em;
+                    font-family: "Alegreya Sans SC", sans-serif;
                 }
                 h1,
                 h2,
@@ -58,6 +89,7 @@ export default function Blog({ theme, data, html }) {
                 }
                 h1 a,
                 h2 a,
+                h4 a,
                 h3 a {
                     filter: brightness(225%);
                     font-weight: 300;
@@ -69,24 +101,58 @@ export default function Blog({ theme, data, html }) {
                 }
                 code {
                     background-color: ${theme.inputs};
-                    font-style: italic;
-                    font-size: 1.5rem;
+                    font-size: 0.75em;
+                    padding: 3px;
                 }
                 article {
                     font-weight: 300;
-                    font-size: 1.8rem;
-                    line-height: 3rem;
+                    font-size: 1em;
                     letter-spacing: 0.5px;
                     color: ${theme.paragraph};
-                    font-family: "Roboto", sans-serif;
+                    font-family: "Quicksand", sans-serif;
+                }
+                article > p {
+                    line-height: 2em;
                 }
 
                 article > pre {
-                    padding: 1rem;
+                    font-size: 0.8em;
+                    padding: 1em;
                     overflow-y: auto;
                     overflow-x: auto;
                     border-left: 3px ${theme.decorations} solid;
                     font-family: "Fira Code", monospace;
+                }
+
+                article blockquote:before {
+                    content: "„";
+                    position: absolute;
+                    font-size: 10em;
+                    left: 0;
+                    top: 0;
+                    color: grey;
+                    line-height: 0;
+                }
+                article blockquote {
+                    position: relative;
+                    font-family: "Helvetica", serif;
+                    padding: 2.5em 1em 1em 5em;
+                    margin: 0;
+                    font-style: italic;
+                    font-size: 0.8em;
+                    font-weight: 100;
+                    line-height: 1.4em;
+                }
+                blockquote p {
+                    margin: 0;
+                }
+                article ul {
+                    font-family: "Roboto", sans-serif;
+                    font-size: 0.7em;
+                    list-style-type: square;
+                }
+                ul li {
+                    margin: 0.8em auto;
                 }
                 @media only screen and (max-width: 968px) {
                     h1.post-title,
@@ -94,38 +160,15 @@ export default function Blog({ theme, data, html }) {
                         max-width: 80vw;
                         margin-inline: auto;
                     }
+                    article blockquote::before {
+                        line-height: 0.5em;
+                    }
                 }
-                article blockquote:before {
-                    content: "„";
-                    position: absolute;
-                    font-size: 10rem;
-                    left: 0;
-                    top: 0;
-                    color: grey;
-                }
-                article blockquote {
-                    position: relative;
-                    font-family: "Helvetica", serif;
-                    padding: 1rem 1rem 1rem 5rem;
-                    margin: 0;
-                    font-style: italic;
-                    font-size: 1.5rem;
-                    font-weight: 100;
-                }
-                blockquote p {
-                    margin: 0;
-                }
-                article ul {
-                    list-style-type: square;
-                }
-                ul li {
-                    margin: 0.8rem auto;
-                }
-                @media (max-width: 640px) {
+                @media only screen and (max-width: 640px) {
                     article pre {
-                        font-size: 1rem;
-                        line-height: 2rem;
-                        padding: 0.5rem;
+                        font-size: 1em;
+                        line-height: 2em;
+                        padding: 0.5em;
                     }
                 }
             `}</style>

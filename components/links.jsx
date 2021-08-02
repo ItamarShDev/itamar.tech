@@ -1,6 +1,6 @@
 import { LinkCard } from "components";
 
-function Links(props) {
+function Links() {
     return (
         <div>
             <LinkCard

@@ -1,10 +1,10 @@
 import Image from "components/image";
-
+import AvatarImg from "public/images/me.png";
 export default function Avatar() {
     return (
         <span className="avatar">
             <Image
-                src={`images/me.png`}
+                image={AvatarImg}
                 alt="my picture"
                 size="inherit"
                 objectFit="cover"

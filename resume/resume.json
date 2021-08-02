@@ -8,7 +8,14 @@
                 "logo": "logos/jce.png",
                 "website": "https://www.jce.ac.il"
             },
-            "tags": ["Angular.js", "Scrum", "Node.js", "Javascript", "CSS", "Teaching"],
+            "tags": [
+                "Angular.js",
+                "Scrum",
+                "Node.js",
+                "Javascript",
+                "CSS",
+                "Teaching"
+            ],
             "description": "Teaching Assistant;\nTeaching the MEAN stack and acting as a Scrum Master.",
             "elaborated_description": "Teaching and helping students to build a full project and deploy it in one semester.\n Helping students to create a production ready project for NPOs for extra credit"
         },

@@ -4,7 +4,7 @@ import css from "styled-jsx/css";
 export function grid({
     cols = 2,
     rows = 2,
-    gap = 0,
+    gap = "0",
     height = "auto",
     width = "auto",
 }) {
