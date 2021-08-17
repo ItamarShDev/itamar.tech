@@ -5,7 +5,6 @@ import { FilterJobs } from "components/filter-jobs";
 
 export default function Resume({ theme, resumeData }) {
     const [jobs, setJobs] = useState([]);
-    console.log(resumeData);
     return (
         <section>
             <FilterJobs jobs={resumeData.jobs} updateJobs={setJobs} />
