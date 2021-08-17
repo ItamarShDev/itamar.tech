@@ -1,5 +1,4 @@
-import { useScreenSize, useScrollObserver } from "lib/hooks";
-import { useState } from "react";
+import { useScreenSize, useScrollObserver, useUrlHash } from "lib/hooks";
 
 function generateLinkMarkup($contentElement) {
     const headings = [...$contentElement.querySelectorAll("h2, h3")];
@@ -14,10 +13,12 @@ function generateLinkMarkup($contentElement) {
 }
 
 function HeaderTitle({ header }) {
+    const isCurrentTitle = useUrlHash(header.id);
+    const titleClass = isCurrentTitle ? "bold" : "dim";
     const AnchorLink = <a href={`#${header.id}`}>{header.title}</a>;
-    let title = <dt>{AnchorLink}</dt>;
+    let title = <dt className={titleClass}>{AnchorLink}</dt>;
     if (header.depth > 1) {
-        title = <dd>{AnchorLink}</dd>;
+        title = <dd className={titleClass}>{AnchorLink}</dd>;
     }
     return title;
 }
@@ -30,7 +31,6 @@ export function HeadlineSidebar({ article }) {
     const headings = headers.map((header) => (
         <HeaderTitle key={header.id} header={header} />
     ));
-
     return (
         <aside>
             <div className="container">
@@ -111,6 +111,13 @@ export function HeadlineSidebar({ article }) {
                 }
             `}</style>
             <style jsx global>{`
+                .bold {
+                    font-weight: bold;
+                }
+                .dim {
+                    color: gray;
+                    filter: opacity(0.8);
+                }
                 dt {
                     font-size: 1.4rem;
                 }

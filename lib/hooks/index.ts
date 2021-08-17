@@ -6,6 +6,7 @@ import useTrackVisibility from "./useTrackVisibility";
 import useScrollbarOnBody from "./useBodyScroll";
 import useScreenSize from "lib/hooks/useScreenSize";
 import useScrollObserver from "lib/hooks/useScrollObserver";
+import useUrlHash from "lib/hooks/useUrlHash";
 export {
     useTheme,
     ThemeContext,
@@ -16,4 +17,5 @@ export {
     useTelegramComments,
     useScrollbarOnBody,
     useScrollObserver,
+    useUrlHash,
 };
