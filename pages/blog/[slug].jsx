@@ -8,7 +8,7 @@ import EmailMeFooter from "components/email-footer";
 export default function Blog({ theme, data, html }) {
     const [articleDOM, setArticleDOM] = useState(null);
     const articleRef = useRef(null);
-    useTelegramComments("blog-post");
+    useTelegramComments("blog-footer");
     const emailTitle = `Re: ${encodeURI(data?.title)}`;
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function Blog({ theme, data, html }) {
     return (
         <div id="blog-post">
             <HeadlineSidebar article={articleDOM} />
-            <div className="blog-wrapper">
+            <div className="blog-wrapper" id="blog-footer">
                 <h1 className="post-title">{data?.title}</h1>
                 <article
                     ref={articleRef}

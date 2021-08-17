@@ -18,6 +18,7 @@ export default function Image({
                 layout={layout}
                 key={alt}
                 src={image}
+                blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
                 alt={alt}
                 objectFit={objectFit}
                 objectPosition="50% 50%"
