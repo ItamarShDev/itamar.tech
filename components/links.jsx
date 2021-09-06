@@ -10,7 +10,7 @@ function Links() {
             />
             <LinkCard
                 route="/blog"
-                title="Blog"
+                title="Thoughts Log"
                 subTitle="My Development Journy"
             />
             <style jsx>{`
