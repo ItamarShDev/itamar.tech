@@ -6,9 +6,7 @@
         "dev": "NODE_OPTIONS='--inspect' next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "storybook": "start-storybook -p 6006 --no-dll",
-        "build-storybook": "build-storybook --no-dll"
+        "lint": "next lint"
     },
     "dependencies": {
         "chart.js": "^2.9.4",
@@ -24,10 +22,6 @@
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@next/bundle-analyzer": "^11.0.1",
-        "@storybook/addon-actions": "^6.0.28",
-        "@storybook/addon-essentials": "^6.0.28",
-        "@storybook/addon-links": "^6.0.28",
-        "@storybook/react": "^6.0.28",
         "babel-loader": "^8.1.0",
         "babel-plugin-macros": "^2.8.0",
         "babel-plugin-preval": "^5.0.0",
