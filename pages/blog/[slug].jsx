@@ -46,7 +46,7 @@ export default function Blog({ theme, data, html }) {
                     color: ${theme.headerText};
                     font-weight: 200;
                 }
-                @media only screen and (max-width: 640px) {
+                @media only screen and (max-width: 968px) {
                     #blog-post {
                         font-size: 16px;
                         display: block;
@@ -54,6 +54,7 @@ export default function Blog({ theme, data, html }) {
                     .blog-wrapper {
                         max-width: 100%;
                         margin: 0 auto;
+                        padding: 0;
                     }
                 }
             `}</style>
@@ -105,7 +106,7 @@ export default function Blog({ theme, data, html }) {
                     padding: 3px;
                 }
                 article {
-                    font-weight: 300;
+                    font-weight: 400;
                     font-size: 1em;
                     letter-spacing: 0.5px;
                     color: ${theme.paragraph};
@@ -155,6 +156,13 @@ export default function Blog({ theme, data, html }) {
                     margin: 0.8em auto;
                 }
                 @media only screen and (max-width: 968px) {
+                    article {
+                        font-weight: 600;
+                    }
+                    article blockquote {
+                        font-size: 1em;
+                        font-weight: 300;
+                    }
                     h1.post-title,
                     article > :not(pre, iframe) {
                         max-width: 80vw;
