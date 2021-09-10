@@ -34,7 +34,7 @@ function MatchCalculator({ properties }) {
             </section>
             <section>
                 <Fireworks percentage={percentage} />
-                {percentage >= 90 && <CallMe percentage={percentage} />}
+                {percentage >= 90 && <CallMe />}
             </section>
             <style jsx>{`
                 div {
