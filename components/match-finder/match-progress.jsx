@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 // @ts-ignore
-import RankJson from "../../resume/technologies.json";
+import RankJson from "../../static-props/technologies.json";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../../lib/hooks";
 

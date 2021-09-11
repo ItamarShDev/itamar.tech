@@ -1,6 +1,6 @@
 import MatchCalculator from "components/match-finder/match-calculator";
 import HOC from "stories/story-hoc";
-import json from "../resume/technologies.json";
+import json from "../static-props/technologies.json";
 
 const Comp = (props) => HOC(MatchCalculator, props);
 export const MatchFinderComp = Comp.bind({});

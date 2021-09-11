@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAttributesData, getResumeData } from "lib/resume";
+import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { Job } from "components";
 import { FilterJobs } from "components/filter-jobs";
 

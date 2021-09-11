@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import Modal from "components/modal";
 import MatchCalculator from "components/match-finder/match-calculator";
 // @ts-ignore
-import Json from "../resume/technologies.json";
+import Json from "../static-props/technologies.json";
 
 function MatchModal(props) {
     return (
