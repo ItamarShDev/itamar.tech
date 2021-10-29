@@ -35,48 +35,63 @@ export default function FloatingQuotes(props: Props) {
     const quotes = extractQuotesByPerson(props.quotes);
     const _randomNumber = Math.floor(Math.random() * 100);
     const [randomNumber, setRandomNumber] = useState(_randomNumber);
-    const { isMobile } = useScreenSize();
     const { theme } = useThemeContext();
     useEffect(() => {
-        if (isMobile) return;
         const interval = setInterval(() => {
             const randomNumber = Math.floor(Math.random() * 100);
             setRandomNumber(randomNumber);
-        }, 13000);
+        }, 15000);
         return () => {
             clearInterval(interval);
         };
     }, []);
     const idx = randomNumber % quotes.length;
-    if (isMobile) return null;
+
     return (
-        <>
-            <div>{quotes[idx].quote}</div>
+        <div>
+            <p>{quotes[idx].quote}</p>
             <style jsx>{`
                 div {
-                    color: ${theme.subText};
-                    position: fixed;
-                    max-width: 200px;
-                    word-break: normal
-                    font-size: 1.3em;
-                    font-style: italic;
-                    left: ${randomNumber}%;
-                    animation: fadeInAndOut 13s linear infinite;
+                    padding: 2rem;
                 }
+                p {
+                    color: ${theme.subText};
+                    word-break: normal;
+                    font-size: 1.5rem;
+                    font-style: italic;
+                    animation: fadeInAndOut 15s linear infinite;
+                    line-height: 2rem;
+                    font-family: cursive;
+                    position: relative;
+                    padding-inline-start: 3rem;
+                }
+
+                p:before {
+                    content: "„";
+                    position: absolute;
+                    font-size: 4em;
+                    left: 0;
+                    top: 0;
+                    color: grey;
+                    line-height: 0;
+                }
+
                 @keyframes fadeInAndOut {
                     0% {
-                        top: 100vh;
                         opacity: 0;
                     }
                     50% {
                         opacity: 1;
                     }
+
+                    80% {
+                        opacity: 1;
+                    }
                     100% {
-                        top: 30vh;
                         opacity: 0;
                     }
                 }
             `}</style>
-        </>
+        </div>
     );
 }

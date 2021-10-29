@@ -4,14 +4,8 @@ import json from "../static-props/quotes.json";
 const Comp = (props) => HOC(FloatingQuotes, props);
 export const FloatingQuotesComp = Comp.bind({});
 FloatingQuotesComp.args = { quotes: json };
-export default {
+const story = {
     title: "Components/Floating Quotes",
     component: FloatingQuotes,
-    decorators: [
-        (Story) => (
-            <div style={{ width: `200px` }}>
-                <Story />
-            </div>
-        ),
-    ],
 };
+export default story;

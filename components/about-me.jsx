@@ -1,6 +1,8 @@
 import { SocialRefs } from "components";
+import FloatingQuotes from "components/floating-quotes";
+import React from "react";
 
-function AboutMe() {
+function AboutMe({ quotes }) {
     return (
         <div className="about-me">
             <div className="summary">
@@ -10,6 +12,7 @@ function AboutMe() {
                     <i>Geek. Joker. Coder.</i>
                 </p>
                 <SocialRefs />
+                <FloatingQuotes quotes={quotes} />
             </div>
             <style jsx>{`
                 .about-me {
@@ -19,6 +22,7 @@ function AboutMe() {
                     flex-direction: row;
                     align-items: center;
                     position: relative;
+                    padding: 1rem;
                 }
 
                 a {

@@ -1,4 +1,3 @@
-import FloatingQuotes from "components/floating-quotes";
 import HomeBackground from "layouts/home-background";
 import HomePage from "layouts/home-page";
 import { getQuotesData } from "lib/get-data-methods";
@@ -8,8 +7,7 @@ export default function Home({ quotes }) {
     return (
         <>
             <HomeBackground />
-            <FloatingQuotes quotes={quotes} />
-            <HomePage />
+            <HomePage quotes={quotes} />
         </>
     );
 }

@@ -2,7 +2,7 @@ import { Links, Stats, Avatar, AboutMe } from "components";
 import FloatingButton from "components/floating-button";
 import { useTrackVisibility } from "lib/hooks";
 import React from "react";
-export default function HomePage() {
+export default function HomePage({ quotes }) {
     const [ref, { isVisible, wasEverVisible }] = useTrackVisibility();
     const showStats = isVisible || wasEverVisible;
     return (
@@ -12,7 +12,7 @@ export default function HomePage() {
                     <Avatar />
                 </section>
                 <section className="about-me">
-                    <AboutMe />
+                    <AboutMe quotes={quotes} />
                 </section>
                 <section className="stats" ref={ref}>
                     {showStats && <Stats />}
