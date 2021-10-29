@@ -115,7 +115,7 @@ export default function ChartsCommunicationExample() {
             <style jsx>{`
                 section {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                     grid-template-rows: repeat(auto-fit, 1fr);
                     gap: 10px;
                 }
