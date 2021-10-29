@@ -13,6 +13,11 @@ function Links() {
                 title="Thoughts Log"
                 subTitle="My Development Journy"
             />
+            <LinkCard
+                route="/example-projects"
+                title="Examples"
+                subTitle="Project examples recreated"
+            />
             <style jsx>{`
                 div {
                     display: flex;

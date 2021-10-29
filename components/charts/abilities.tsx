@@ -1,11 +1,11 @@
 import { Radar } from "react-chartjs-2";
-import useChartSettings from "./chart-settings";
+import useChartSettings, { ChartSettings } from "./chart-settings";
 import PropTypes from "prop-types";
 /**
  * Shows a Radar chart with given data
  */
 const Abilities = ({ labels, values, ...props }) => {
-    const { data, radarOptions } = useChartSettings({
+    const { data, radarOptions }: ChartSettings = useChartSettings({
         labels,
         values,
         title: "Abilities",

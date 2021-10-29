@@ -96,11 +96,16 @@ function themedLineSettings(title, theme) {
         },
     };
 }
+export type ChartSettings = {
+    data?: object;
+    radarOptions?: object;
+    lineOptions?: object;
+};
 export default function useChartSettings({
     title = "Empty",
     values = [],
     labels = [{}],
-}) {
+}): ChartSettings {
     const [settings, setSettings] = useState({});
     const { theme } = useContext(ThemeContext);
     const datasets = themedDatasets(values, theme);
@@ -112,7 +117,7 @@ export default function useChartSettings({
         const radarOptions = themedRadarSettings(title, theme);
         const lineOptions = themedLineSettings(title, theme);
         setSettings({ lineOptions, radarOptions, data });
-    }, [theme]);
+    }, [theme, values]);
 
     return settings;
 }

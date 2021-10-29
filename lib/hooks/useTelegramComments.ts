@@ -15,7 +15,7 @@ const useTelegramComments = (elementId = "blog-post") => {
         if (post) post.appendChild(script);
 
         return () => {
-            post.removeChild(script);
+            if (post) post.removeChild(script);
         };
     }, [elementId]);
 };

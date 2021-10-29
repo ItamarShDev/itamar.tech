@@ -1,6 +1,5 @@
 import { Line } from "react-chartjs-2";
-import useChartSettings from "./chart-settings";
-import PropTypes from "prop-types";
+import useChartSettings, { ChartSettings } from "./chart-settings";
 
 export const socialData = {
     title: "Progess Over Time",
@@ -28,7 +27,7 @@ export const socialData = {
  * Shows a Line chart with given data
  */
 const SocialAffect = () => {
-    const { data, lineOptions } = useChartSettings(socialData);
+    const { data, lineOptions }: ChartSettings = useChartSettings(socialData);
     if (data) {
         return <Line data={data} options={lineOptions} />;
     }

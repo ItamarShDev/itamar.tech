@@ -1,4 +1,5 @@
 import { useScreenSize } from "lib/hooks";
+import { useThemeContext } from "lib/hooks/useTheme";
 import { useEffect, useState } from "react";
 
 interface quoteData {
@@ -35,6 +36,7 @@ export default function FloatingQuotes(props: Props) {
     const _randomNumber = Math.floor(Math.random() * 100);
     const [randomNumber, setRandomNumber] = useState(_randomNumber);
     const { isMobile } = useScreenSize();
+    const { theme } = useThemeContext();
     useEffect(() => {
         if (isMobile) return;
         const interval = setInterval(() => {
@@ -52,12 +54,13 @@ export default function FloatingQuotes(props: Props) {
             <div>{quotes[idx].quote}</div>
             <style jsx>{`
                 div {
+                    color: ${theme.subText};
                     position: fixed;
                     max-width: 200px;
                     word-break: normal
                     font-size: 1.3em;
                     font-style: italic;
-                    left: 10px;
+                    left: ${randomNumber}%;
                     animation: fadeInAndOut 13s linear infinite;
                 }
                 @keyframes fadeInAndOut {
