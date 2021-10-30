@@ -27,7 +27,7 @@ export default function Image({
             <style jsx>{`
                 div {
                     position: relative;
-                    overflow: hidden;
+                    overflow: visible;
                     height: ${size};
                     border-radius: ${circle ? "50%" : 0};
                     text-align: center;
