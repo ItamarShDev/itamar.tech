@@ -8,9 +8,7 @@ function AboutMe({ quotes }) {
             <div className="summary">
                 <h1>Itamar.</h1>
                 <h2>Software Engineer</h2>
-                <p>
-                    <i>Geek. Joker. Coder.</i>
-                </p>
+
                 <SocialRefs />
                 <FloatingQuotes quotes={quotes} />
             </div>

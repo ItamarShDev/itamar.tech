@@ -5,13 +5,14 @@ export default function Avatar() {
     const { isMobile } = useScreenSize();
     let imageProps = {
         size: "inherit",
-        layout: "responsive",
+        layout: "fill",
+        objectFit: "cover",
     };
     if (isMobile) {
         imageProps = {
             ...imageProps,
-            layout: "fill",
-            objectFit: "cover",
+            objectFit: "contain",
+            objectPosition: "0% 50%",
         };
     }
     return (
