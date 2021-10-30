@@ -4,6 +4,7 @@ const withPlugins = require("next-compose-plugins");
 module.exports = withPlugins([], {
     experimental: {
         jsconfigPaths: true,
+        serverComponents: true,
     },
     i18n: {
         locales: ["en"],
