@@ -1,8 +1,6 @@
-import { ThemeContext } from "lib/hooks";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function FilterJobs({ jobs, updateJobs }) {
-    const { theme } = useContext(ThemeContext);
     const [resultCount, setResultCount] = useState(null);
     useEffect(() => {
         const _jobs = jobs.slice(0).reverse();
@@ -47,21 +45,21 @@ export function FilterJobs({ jobs, updateJobs }) {
                     label {
                         display: flex;
                         flex-direction: column;
-                        color: ${theme.text};
+                        color: var(--colors-text);
                         font-size: 1rem;
                         padding-block-start: 2rem;
                         padding-inline-start: 5px;
                         margin: 2rem 0;
                     }
                     input.job-filter {
-                        color: ${theme.text};
+                        color: var(--colors-text);
                         line-height: 4rem;
                         padding: 0 2rem;
                         font-size: 1.5rem;
                         display: flex;
                         align-items: start;
                         flex-direction: column;
-                        background-color: ${theme.inputs};
+                        background-color: var(--colors-inputs);
                         opacity: 0.5;
                         border-radius: 1.5rem;
                         margin-block-start: 1rem;

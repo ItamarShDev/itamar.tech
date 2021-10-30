@@ -3,7 +3,7 @@ import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { Job } from "components";
 import { FilterJobs } from "components/filter-jobs";
 
-export default function Resume({ theme, resumeData }) {
+export default function Resume({ resumeData }) {
     const [jobs, setJobs] = useState([]);
     return (
         <section>
@@ -28,7 +28,7 @@ export default function Resume({ theme, resumeData }) {
                     content: "";
                     width: 0.3rem;
                     height: 100%;
-                    background: ${theme.subText};
+                    background: var(--colors-subText);
                     position: absolute;
                     top: 0;
                     left: 0.5rem;

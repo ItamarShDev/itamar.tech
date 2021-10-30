@@ -1,5 +1,4 @@
-import { ThemeContext } from "lib/hooks";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Modal from "components/modal";
 import MatchCalculator from "components/match-finder/match-calculator";
 // @ts-ignore
@@ -19,7 +18,6 @@ function MatchModal(props) {
 }
 function FloatingButton() {
     const [opened, setOpened] = useState(false);
-    const { theme } = useContext(ThemeContext);
     const openModal = () => {
         setOpened(!opened);
     };
@@ -40,8 +38,8 @@ function FloatingButton() {
                         font-size: 30px;
                         bottom: 20px;
                         right: 20px;
-                        border: 1px solid ${theme.decorations};
-                        background-color: ${theme.bg};
+                        border: 1px solid var(--colors-decorations);
+                        background-color: var(--colors-bg);
                         z-index: 10;
                     }
 
@@ -51,15 +49,15 @@ function FloatingButton() {
                         text-align: center;
                         font-size: 1.5rem;
                         line-height: 3rem;
-                        color: ${theme.decorations};
+                        color: var(--colors-decorations);
                     }
 
                     .container:hover .floating-button {
-                        color: ${theme.bg};
+                        color: var(--colors-bg);
                     }
                     .container:hover {
-                        border-color: ${theme.hoverDecorations};
-                        background-color: ${theme.decorations};
+                        border-color: var(--colors-hoverDecorations);
+                        background-color: var(--colors-decorations);
                         transition: all 0.2s linear;
                     }
                 `}

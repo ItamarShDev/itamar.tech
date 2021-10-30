@@ -1,5 +1,3 @@
-import { ThemeContext } from "lib/hooks";
-import { useContext } from "react";
 import Link from "next/link";
 
 export default function LinkCard({
@@ -10,7 +8,6 @@ export default function LinkCard({
     date = null,
     children = null,
 }) {
-    const { theme } = useContext(ThemeContext);
     return (
         <Link href={routeRef || route} as={route} passHref>
             <dl>
@@ -33,17 +30,17 @@ export default function LinkCard({
                         cursor: pointer;
                     }
                     dl:hover {
-                        outline: 1px solid ${theme.decorations};
+                        outline: 1px solid var(--colors-decorations);
                     }
 
                     dt {
                         margin: 0 0 1em 0;
                         font-size: 3rem;
                         font-weight: 500;
-                        color: ${theme.headerText};
+                        color: var(--colors-headerText);
                     }
                     dd {
-                        color: ${theme.subText};
+                        color: var(--colors-subText);
                         margin: 0 10px;
                         font-size: 1.5em;
                         line-height: 1.5;
@@ -59,7 +56,7 @@ export default function LinkCard({
                         dl:hover a {
                             transition: all 0.2s linear;
                             text-decoration: underline double 1px
-                                ${theme.headerText};
+                                var(--colors-headerText);
                         }
                     }
                 `}</style>

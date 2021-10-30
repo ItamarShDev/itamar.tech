@@ -1,7 +1,38 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Theme from "../../theme/theme";
-export const ThemeContext = createContext(Theme.light);
 
+export function getCurrentThemeName() {
+    if (process.browser) return document.body.dataset.theme;
+    return "light";
+}
+export const setTheme = (newTheme: string) => {
+    if (process.browser) {
+        document.body.dataset.theme = newTheme;
+        localStorage.setItem("theme", newTheme);
+    }
+};
+export function isDarkTheme() {
+    const currentTheme = getCurrentThemeName();
+    return currentTheme !== "light";
+}
+export function toggleDarkMode() {
+    const newTheme = getCurrentThemeName() !== "light" ? "light" : "dark";
+    setTheme(newTheme);
+}
+
+export const toggleTheme = () => {
+    const schemes: string[] = Object.keys(Theme);
+    const newThemeIndex =
+        (schemes.indexOf(getCurrentThemeName()) + 1) % schemes.length;
+    const newTheme = schemes[newThemeIndex];
+    setTheme(newTheme);
+};
+
+export const getAvailableThemes = () => Object.keys(Theme);
+export function getCurrentTheme() {
+    const currentTheme = getCurrentThemeName();
+    return Theme[currentTheme];
+}
 /**
  * uses System define theme
  * @param {Function} setTheme
@@ -28,57 +59,30 @@ function setThemeFromSystem(setTheme: Function) {
 }
 
 export default function useTheme(currentTheme: string = "light") {
-    const [theme, setTheme] = useState(currentTheme);
+    const [theme, setThemeName] = useState(currentTheme);
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme && Theme.hasOwnProperty(savedTheme)) {
-            setTheme(savedTheme);
+            setThemeName(savedTheme);
         } else {
             if (process.browser) {
-                setThemeFromSystem(setTheme);
+                setThemeFromSystem(setThemeName);
             }
         }
-    }, []);
-    const getAvailableThemes = () => Object.keys(Theme);
-    const toggleTheme = () => {
-        const schemes: string[] = Object.keys(Theme);
-        const newThemeIndex = (schemes.indexOf(theme) + 1) % schemes.length;
-        const newTheme = schemes[newThemeIndex];
-        localStorage.setItem("theme", newTheme);
-        setTheme(newTheme);
-    };
-    const setNewTheme = (newTheme: string) => {
-        localStorage.setItem("theme", newTheme);
-        setTheme(newTheme);
-    };
+        const listener = (e) => {
+            console.log(document.body.dataset.theme);
 
-    const toggleDarkMode = () => {
-        const newTheme = theme !== "light" ? "light" : "dark";
-        localStorage.setItem("theme", newTheme);
-        setTheme(newTheme);
-    };
-    const setSystemTheme = () => {
-        localStorage.removeItem("theme");
-        setTheme(null);
-        if (process.browser) {
-            setThemeFromSystem(setTheme);
-        }
-    };
+            setThemeName(document.body.dataset.theme);
+        };
+        document.body.addEventListener("dataset", listener);
+        return () => {
+            document.body.removeEventListener("dataset", listener);
+        };
+    }, []);
 
     return {
         currentThemeName: theme,
         theme: Theme[theme],
-        ThemeContext,
-        toggleTheme,
-        toggleDarkMode,
-        setSystemTheme,
-        getAvailableThemes,
-        setTheme: setNewTheme,
-        isDark: theme != "light",
         isSystemTheme: theme === null,
     };
-}
-
-export function useThemeContext() {
-    return useContext(ThemeContext);
 }

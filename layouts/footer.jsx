@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import { ThemeContext } from "lib/hooks";
 import TwitterLogo from "images/TwitterLogo";
 import GithubLogo from "images/GithubLogo";
 import MediumLogo from "images/MediumLogo";
 
 const Footer = () => {
-    const { theme } = useContext(ThemeContext);
     return (
         <footer>
             <a
@@ -44,7 +41,7 @@ const Footer = () => {
                 footer {
                     width: 100%;
                     height: 100px;
-                    border-top: 1px solid ${theme.decorations};
+                    border-top: 1px solid var(--colors-decorations);
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -58,7 +55,7 @@ const Footer = () => {
                     display: flex;
                     margin: 5px;
                     font-size: 1em;
-                    color: ${theme.text};
+                    color: var(--colors-text);
                     justify-content: center;
                     align-items: center;
                     filter: grayscale(100%) opacity(0.5);
@@ -66,7 +63,7 @@ const Footer = () => {
 
                 @media (hover: hover) {
                     a:hover {
-                        color: ${theme.decorations};
+                        color: var(--colors-decorations);
                         filter: none;
                     }
                 }

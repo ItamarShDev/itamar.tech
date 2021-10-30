@@ -1,7 +1,9 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { generateCSSThemeSelectors } from "theme/styles";
 
 export default class MyDocument extends Document {
     render() {
+        const themes = generateCSSThemeSelectors();
         return (
             <Html len="en">
                 <Head>
@@ -85,6 +87,7 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap"
                         rel="stylesheet"
                     />
+                    <style>{themes}</style>
                 </Head>
                 <body>
                     <Main />

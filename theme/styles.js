@@ -1,5 +1,6 @@
 /* styles.js */
 import css from "styled-jsx/css";
+import Theme from "theme/theme";
 
 export function grid({
     cols = 2,
@@ -53,4 +54,29 @@ export function centered({
             gap: ${gap}px;
         }
     `;
+}
+
+export function generateCSSThemeSelectors() {
+    let selectors = ``;
+    for (const [themeName, theme] of Object.entries(Theme)) {
+        selectors += `
+
+        body[data-theme=${themeName}] {
+            --colors-bg: ${theme.bg};
+            --colors-modalBg: ${theme.modalBg};
+            --colors-main: ${theme.main};
+            --colors-text: ${theme.text};
+            --colors-subText: ${theme.subText};
+            --colors-headerText: ${theme.headerText};
+            --colors-header: ${theme.header};
+            --colors-paragraph: ${theme.paragraph};
+            --colors-decorations: ${theme.decorations};
+            --colors-hoverDecorations: ${theme.hoverDecorations};
+            --colors-inputs: ${theme.inputs};
+            --colors-link: ${theme.link};
+            --colors-charts: ${theme.charts};
+        }
+    `;
+    }
+    return selectors;
 }

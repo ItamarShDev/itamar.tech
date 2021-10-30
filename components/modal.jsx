@@ -1,9 +1,7 @@
-import { ThemeContext, useScrollbarOnBody, usePortal } from "lib/hooks";
-import { useState, useContext, useEffect } from "react";
+import { useScrollbarOnBody, usePortal } from "lib/hooks";
+import { useState, useEffect } from "react";
 
 function ModalComponent({ open, setOpened, title, children, footer = null }) {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <div className={`container ${open ? "opened" : "closed"}`}>
             <div className="modal-wrapper">
@@ -24,7 +22,7 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                                 >
                                     <path
                                         d="M1.5 1.5l12 12m-12 0l12-12"
-                                        stroke={theme.text}
+                                        stroke={"var(--colors-text)"}
                                         strokeWidth="2px"
                                     ></path>
                                 </svg>
@@ -66,11 +64,11 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                     width: 600px;
                     display: grid;
                     grid-template-rows: 6rem 1fr;
-                    background-color: ${theme.modalBg};
-                    border: 1px solid ${theme.decorations};
+                    background-color: var(--colors-modalBg);
+                    border: 1px solid var(--colors-decorations);
                     border-radius: 1rem;
                     padding: 1rem;
-                    box-shadow: 0 0 10em -3em ${theme.decorations};
+                    box-shadow: 0 0 10em -3em var(--colors-decorations);
                     transform-origin: center;
                 }
                 @media screen and (max-width: 768px) and (orientation: portrait) {
@@ -115,7 +113,7 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                     text-align: center;
                     line-height: 6rem;
                     cursor: pointer;
-                    color: ${theme.text};
+                    color: var(--colors-text);
                     justify-content: center;
                     align-items: center;
                 }

@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import { ThemeContext } from "lib/hooks";
 import Link from "next/link";
 import { ThemedIcon } from "../components/themed-icon";
 import GithubLogo from "../components/icons/github";
 
 const Header = (props) => {
-    const { theme } = useContext(ThemeContext);
     const { title } = props;
     return (
         <nav>
@@ -30,24 +27,24 @@ const Header = (props) => {
                     grid-template-columns: 6rem 1fr 6rem;
                     text-align: center;
                     align-items: center;
-                    border-bottom: 1px solid ${theme.decorations};
+                    border-bottom: 1px solid var(--colors-decorations);
                     position: sticky;
                     top: 0;
                     z-index: 10;
-                    background-color: ${theme.bg};
+                    background-color: var(--colors-bg);
                 }
                 .divider {
-                    color: ${theme.header};
+                    color: var(--colors-header);
                 }
                 .name {
                     font-size: 2em;
                     font-weight: 400;
-                    color: ${theme.headerText};
+                    color: var(--colors-headerText);
                 }
                 .title {
                     font-size: 1.5em;
                     font-family: cascadia, serif;
-                    color: ${theme.headerText};
+                    color: var(--colors-headerText);
                     font-style: italic;
                 }
                 .github-link {

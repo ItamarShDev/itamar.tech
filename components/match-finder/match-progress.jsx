@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 // @ts-ignore
 import RankJson from "../../static-props/technologies.json";
-import { useContext, useEffect } from "react";
-import { ThemeContext } from "../../lib/hooks";
+import { useEffect } from "react";
 
 /**
  * @param {ArrayLike<any>} attributes
@@ -37,7 +36,6 @@ const MatchProgress = ({
     setPercentage,
     percentage,
 }) => {
-    const { theme } = useContext(ThemeContext);
     useEffect(() => {
         const newPercentage = calculateMatch(selectedSkills);
         setQualificationText(getQualificationText(newPercentage));
@@ -71,7 +69,7 @@ const MatchProgress = ({
                 }
                 .match-text {
                     font-style: italic;
-                    color: ${theme.text};
+                    color: var(--colors-text);
                 }
             `}</style>
         </div>

@@ -1,5 +1,11 @@
-import { useContext, useState } from "react";
-import { ThemeContext } from "lib/hooks";
+import { useEffect, useState } from "react";
+import useTheme, {
+    isDarkTheme,
+    setTheme,
+    getCurrentThemeName,
+    getAvailableThemes,
+    toggleDarkMode,
+} from "lib/hooks/useTheme";
 export function getIconClassAndAction(isDark) {
     if (isDark) {
         return "dark-icon";
@@ -7,13 +13,11 @@ export function getIconClassAndAction(isDark) {
         return "light-icon";
     }
 }
-function ThemeItem({ currentTheme }) {
-    const { setTheme, theme, currentThemeName } = useContext(ThemeContext);
+function ThemeItem({ currentTheme, currentThemeName, setTheme }) {
+    const isSelected = currentThemeName === currentTheme;
+
     return (
-        <li
-            key={currentTheme}
-            className={currentThemeName === currentTheme ? "selected" : ""}
-        >
+        <li key={currentTheme} className={isSelected ? "selected" : ""}>
             <button onClick={() => setTheme(currentTheme)}>
                 {currentTheme}
             </button>
@@ -23,13 +27,14 @@ function ThemeItem({ currentTheme }) {
                         all: unset;
                         font-size: 1.4rem;
                         width: 100%;
+                        text-transform: capitalize;
                     }
                     li:hover {
-                        background-color: ${theme.hoverDecorations};
+                        background-color: var(--colors-hoverDecorations);
                     }
                     li.selected {
-                        background-color: ${theme.decorations};
-                        color: ${theme.text};
+                        background-color: var(--colors-decorations);
+                        color: var(--colors-text);
                     }
                     li.selected button,
                     li:hover button {
@@ -37,7 +42,7 @@ function ThemeItem({ currentTheme }) {
                     }
                     li button {
                         all: unset;
-                        color: ${theme.text};
+                        color: var(--colors-text);
                         padding: 1rem 2rem;
                     }
                 `}
@@ -47,14 +52,22 @@ function ThemeItem({ currentTheme }) {
 }
 
 function ThemeList() {
-    const { getAvailableThemes, theme } = useContext(ThemeContext);
     const availableThemes = getAvailableThemes();
-
+    const currentThemeName = getCurrentThemeName();
+    const [currentTheme, setCurrentTheme] = useState(currentThemeName);
+    useEffect(() => {
+        setTheme(currentTheme);
+    }, [currentTheme]);
     return (
         <div className="container">
             <ul>
                 {availableThemes.map((theme) => (
-                    <ThemeItem key={theme} currentTheme={theme} />
+                    <ThemeItem
+                        key={theme}
+                        currentTheme={theme}
+                        currentThemeName={currentTheme}
+                        setTheme={setCurrentTheme}
+                    />
                 ))}
             </ul>
             <style jsx>{`
@@ -69,8 +82,8 @@ function ThemeList() {
                     margin-block-start: 1rem;
                     cursor: default;
                     list-style: none;
-                    background-color: ${theme.modalBg};
-                    border: 1px solid ${theme.decorations};
+                    background-color: var(--colors-modalBg);
+                    border: 1px solid var(--colors-decorations);
                     border-radius: 0.5rem;
                     display: flex;
                     flex-direction: column;
@@ -81,7 +94,8 @@ function ThemeList() {
     );
 }
 export const ThemedIcon = () => {
-    const { toggleDarkMode, isDark, theme } = useContext(ThemeContext);
+    const isDark = isDarkTheme();
+
     const [isHovered, setIsHovered] = useState(false);
     const iconClass = getIconClassAndAction(isDark);
     const title = `Toggle ${isDark ? "light" : "dark"} mode`;
@@ -92,7 +106,7 @@ export const ThemedIcon = () => {
             onMouseLeave={() => setIsHovered(false)}
         >
             <button
-                onClick={() => toggleDarkMode()}
+                onClick={toggleDarkMode}
                 className={`icon ${iconClass}`}
                 title={title}
             ></button>
@@ -107,7 +121,7 @@ export const ThemedIcon = () => {
                     width: 60px;
                     font-size: 1.2em;
                     font-style: normal;
-                    background-color: ${theme.headerText};
+                    background-color: var(--colors-headerText);
                     mask-size: 20px;
                     mask-position: 1rem center;
                     mask-repeat: no-repeat;

@@ -1,8 +1,4 @@
-import { useContext } from "react";
-import { ThemeContext } from "lib/hooks";
-
 export default function Job({ job }) {
-    const { theme } = useContext(ThemeContext);
     const tags = job.tags.join(", ");
     return (
         <dl>
@@ -55,7 +51,7 @@ export default function Job({ job }) {
                     height: 1.5rem;
                     display: flex;
                     color: #ffffff;
-                    background-color: ${theme.decorations};
+                    background-color: var(--colors-decorations);
                     border: 0.2rem solid white;
                     border-radius: 50%;
                 }
@@ -67,7 +63,7 @@ export default function Job({ job }) {
                 }
 
                 dd {
-                    background-color: ${theme.hoverDecorations};
+                    background-color: var(--colors-hoverDecorations);
                     border-radius: 1em;
                     padding: 1.5em;
                     margin-left: 0.5em;
@@ -93,15 +89,15 @@ export default function Job({ job }) {
                 }
                 .company a {
                     filter: opacity(0.9);
-                    color: ${theme.subText};
+                    color: var(--colors-subText);
                     text-decoration: none;
                 }
                 @media (hover: hover) {
                     .company:hover {
-                        color: ${theme.decorations};
+                        color: var(--colors-decorations);
                     }
                     .company:hover a {
-                        color: ${theme.decorations};
+                        color: var(--colors-decorations);
                         text-decoration: underline double;
                     }
                 }

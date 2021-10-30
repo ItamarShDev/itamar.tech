@@ -5,7 +5,7 @@ import { useTelegramComments } from "lib/hooks";
 import { useEffect, useRef, useState } from "react";
 import EmailMeFooter from "components/email-footer";
 
-export default function Blog({ theme, data, html }) {
+export default function Blog({ data, html }) {
     const [articleDOM, setArticleDOM] = useState(null);
     const articleRef = useRef(null);
     useTelegramComments("blog-footer");
@@ -43,7 +43,7 @@ export default function Blog({ theme, data, html }) {
                 }
                 h1.post-title {
                     padding-bottom: 1em;
-                    color: ${theme.headerText};
+                    color: var(--colors-headerText);
                     font-weight: 200;
                 }
                 @media only screen and (max-width: 968px) {
@@ -101,7 +101,7 @@ export default function Blog({ theme, data, html }) {
                     gap: 10px;
                 }
                 code {
-                    background-color: ${theme.inputs};
+                    background-color: var(--colors-inputs);
                     font-size: 0.75em;
                     padding: 3px;
                 }
@@ -109,7 +109,7 @@ export default function Blog({ theme, data, html }) {
                     font-weight: 400;
                     font-size: 1em;
                     letter-spacing: 0.5px;
-                    color: ${theme.paragraph};
+                    color: var(--colors-paragraph);
                     font-family: "Quicksand", sans-serif;
                 }
                 article > p {
@@ -121,7 +121,7 @@ export default function Blog({ theme, data, html }) {
                     padding: 1em;
                     overflow-y: auto;
                     overflow-x: auto;
-                    border-left: 3px ${theme.decorations} solid;
+                    border-left: 3px var(--colors-decorations} soli);
                     font-family: "Fira Code", monospace;
                 }
 

@@ -6,13 +6,11 @@ import HTMLLogo from "public/logos/html-5.svg";
 import ReactLogo from "public/logos/react-logo.png";
 import JupyterLogo from "public/logos/jupyter.png";
 import MobXLogo from "public/logos/mobx.png";
-import { useContext } from "react";
-import { ThemeContext } from "lib/hooks";
 import { invertByTheme } from "theme/styles";
 import { Image } from "components";
 
 export default function LibrariesAndLanguagesLogos() {
-    const { isDark } = useContext(ThemeContext);
+    const { isDark } = isDarkTheme();
 
     const { className: inverted, styles: invertedStyle } = invertByTheme(
         isDark

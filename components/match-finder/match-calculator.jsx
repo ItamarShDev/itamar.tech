@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { ThemeContext } from "lib/hooks";
 import PropertiesSelect from "components/match-finder/properties-select";
 import MatchProgress from "components/match-finder/match-progress";
 import Fireworks from "components/match-finder/fireworks";
@@ -11,7 +10,6 @@ MatchCalculator.propTypes = {
 };
 
 function MatchCalculator({ properties }) {
-    const { theme } = useContext(ThemeContext);
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [qualificationText, setQualificationText] = useState("");
     const [percentage, setPercentage] = useState(0);
@@ -20,7 +18,6 @@ function MatchCalculator({ properties }) {
         <div>
             <section>
                 <PropertiesSelect
-                    theme={theme}
                     setSelectedSkills={setSelectedSkills}
                     qualificationText={qualificationText}
                     properties={properties}

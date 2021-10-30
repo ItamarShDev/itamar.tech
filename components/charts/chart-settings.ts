@@ -1,7 +1,7 @@
+import { getCurrentTheme } from "lib/hooks/useTheme";
 import { hexToHSL } from "lib/utils";
-import { ThemeContext } from "lib/hooks";
 
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 function themedDatasets(values, theme) {
     return values.map((item, index) => {
         const [h, s, l] = hexToHSL(theme.charts, index);
@@ -107,7 +107,7 @@ export default function useChartSettings({
     labels = [{}],
 }): ChartSettings {
     const [settings, setSettings] = useState({});
-    const { theme } = useContext(ThemeContext);
+    const theme = getCurrentTheme();
     const datasets = themedDatasets(values, theme);
     useEffect(() => {
         const data = {

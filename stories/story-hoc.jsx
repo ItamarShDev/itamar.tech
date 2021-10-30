@@ -1,12 +1,10 @@
-import { useTheme } from "lib/hooks";
+import { toggleTheme } from "lib/hooks/useTheme";
 const HOC = (Comp, props) => {
-    const { theme, toggleTheme, ThemeContext, isDark } = useTheme();
-
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme, isDark }}>
+        <>
             <button onClick={toggleTheme}>Toggle theme</button>
             <Comp {...props} />
-        </ThemeContext.Provider>
+        </>
     );
 };
 

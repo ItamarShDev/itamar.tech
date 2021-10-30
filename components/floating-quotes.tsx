@@ -1,5 +1,3 @@
-import { useScreenSize } from "lib/hooks";
-import { useThemeContext } from "lib/hooks/useTheme";
 import { useEffect, useState } from "react";
 
 interface quoteData {
@@ -31,11 +29,10 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
     }
     return quotesResult;
 }
-export default function FloatingQuotes(props: Props) {
+export default function RandomQuotes(props: Props) {
     const quotes = extractQuotesByPerson(props.quotes);
     const _randomNumber = Math.floor(Math.random() * 100);
     const [randomNumber, setRandomNumber] = useState(_randomNumber);
-    const { theme } = useThemeContext();
     useEffect(() => {
         const interval = setInterval(() => {
             const randomNumber = Math.floor(Math.random() * 100);
@@ -55,15 +52,17 @@ export default function FloatingQuotes(props: Props) {
                     padding: 2rem;
                 }
                 p {
-                    color: ${theme.subText};
+                    color: var(--colors-subText);
                     word-break: normal;
-                    font-size: 1.5rem;
+                    font-size: 1.8rem;
                     font-style: italic;
                     animation: fadeInAndOut 15s linear infinite;
-                    line-height: 2rem;
+                    line-height: 2.5rem;
                     font-family: cursive;
                     position: relative;
                     padding-inline-start: 3rem;
+                    min-height: 100px;
+                    max-height: 200px;
                 }
 
                 p:before {
@@ -80,11 +79,10 @@ export default function FloatingQuotes(props: Props) {
                     0% {
                         opacity: 0;
                     }
-                    50% {
+                    10% {
                         opacity: 1;
                     }
-
-                    80% {
+                    90% {
                         opacity: 1;
                     }
                     100% {

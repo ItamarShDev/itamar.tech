@@ -1,9 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "lib/hooks";
-
 const Link = () => {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <a
             href="https://github.com/ItamarShDev/personal-website"
@@ -21,7 +16,7 @@ const Link = () => {
                     left: "0.5em",
                     transform: "scale(-1, 1) rotate(-45deg)",
                     fill: "transparent",
-                    color: theme.headerText,
+                    color: "var(--colors-headerText)",
                 }}
                 aria-hidden="true"
             >

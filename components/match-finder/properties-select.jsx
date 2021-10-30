@@ -25,7 +25,6 @@ export default function PropertiesSelect({
     properties,
     setSelectedSkills,
     qualificationText,
-    theme,
 }) {
     const [filteredSkills, setFilteredSkills] = useState([]);
     const [hovered, setHovered] = useState(0);
@@ -163,7 +162,7 @@ export default function PropertiesSelect({
             <style jsx>{`
                 label {
                     display: block;
-                    color: ${theme.text};
+                    color: var(--colors-text);
                     font-size: 1.5rem;
                     margin-block-end: 0.5rem;
                 }
@@ -175,7 +174,7 @@ export default function PropertiesSelect({
                 input {
                     line-height: 3rem;
                     background-color: transparent;
-                    color: ${theme.text};
+                    color: var(--colors-text);
                     font-size: 1.5rem;
                 }
 
@@ -189,7 +188,7 @@ export default function PropertiesSelect({
                 }
 
                 .input-container {
-                    border: 1px dashed ${theme.decorations};
+                    border: 1px dashed var(--colors-decorations);
                     padding: 0.5rem;
                 }
 
@@ -199,14 +198,14 @@ export default function PropertiesSelect({
                     overflow: auto;
                 }
                 .tag {
-                    box-shadow: 0 0s 1px 1px ${theme.decorations};
+                    box-shadow: 0 0s 1px 1px var(--colors-decorations);
                     font-size: 1.3rem;
                     line-height: 3rem;
                     height: 3rem;
                     margin: 0.5rem;
                     padding: 0 0.8rem;
                     border-radius: 0.5rem;
-                    background-color: ${theme.decorations};
+                    background-color: var(--colors-decorations);
                     color: white;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -231,18 +230,18 @@ export default function PropertiesSelect({
                     list-style-type: none;
                     padding: 0.5rem;
                     margin: 0;
-                    box-shadow: 0 2px 5px 0 ${theme.decorations};
-                    background-color: ${theme.bg};
-                    color: ${theme.text};
+                    box-shadow: 0 2px 5px 0 var(--colors-decorations);
+                    background-color: var(--colors-bg);
+                    color: var(--colors-text);
                     text-transform: capitalize;
                 }
                 li {
                     cursor: default;
                     padding: 0.5rem;
-                    border: 1px dotted ${theme.hoverDecorations};
+                    border: 1px dotted var(--colors-hoverDecorations);
                 }
                 li.selected {
-                    background-color: ${theme.decorations};
+                    background-color: var(--colors-decorations);
                     color: white;
                 }
                 @keyframes fade-in {

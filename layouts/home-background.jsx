@@ -1,4 +1,3 @@
-import { useThemeContext } from "lib/hooks/useTheme";
 import React from "react";
 
 function getNarrowAngle() {
@@ -8,7 +7,6 @@ function getNarrowAngle() {
 }
 function HomeBackground() {
     const randomDegree = getNarrowAngle();
-    const { theme } = useThemeContext();
     return (
         <>
             <div className="bg"></div>
@@ -19,8 +17,8 @@ function HomeBackground() {
                     animation: slide 20s ease-in-out 2 alternate;
                     background-image: linear-gradient(
                         -${randomDegree}deg,
-                        ${theme.bg} 50%,
-                        ${theme.hoverDecorations} 50%
+                        var(--colors-bg) 50%,
+                        var(--colors-hoverDecorations) 50%
                     );
                     bottom: 0;
                     left: -50%;

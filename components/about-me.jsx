@@ -1,5 +1,5 @@
 import { SocialRefs } from "components";
-import FloatingQuotes from "components/floating-quotes";
+import RandomQuotes from "components/floating-quotes";
 import React from "react";
 
 function AboutMe({ quotes }) {
@@ -10,7 +10,7 @@ function AboutMe({ quotes }) {
                 <h2>Software Engineer</h2>
 
                 <SocialRefs />
-                <FloatingQuotes quotes={quotes} />
+                <RandomQuotes quotes={quotes} />
             </div>
             <style jsx>{`
                 .about-me {
@@ -21,8 +21,11 @@ function AboutMe({ quotes }) {
                     align-items: center;
                     position: relative;
                     padding: 1rem;
+                    color: var(--colors-text);
                 }
-
+                h2 {
+                    font-family: "Codystar", Arial, Helvetica, sans-serif;
+                }
                 a {
                     font-size: 0.7em;
                 }
