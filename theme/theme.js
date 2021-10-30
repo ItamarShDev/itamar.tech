@@ -14,6 +14,36 @@ const darkTheme = {
     charts: "#00fff5",
 };
 
+const monokaiTheme = {
+    bg: "rgb(46, 46, 46)",
+    modalBg: "rgba(46, 46, 46, 0.8)",
+    main: "hsl(214.1, 32.8%, 26.3%)",
+    text: "rgb(214, 214, 214)",
+    subText: "rgba(121, 121, 121m 0.7)",
+    headerText: "rgb(229, 181, 103)",
+    header: "rgb(180, 210, 115)",
+    paragraph: "rgba(214, 214, 214, 0.8)",
+    decorations: "rgb(180, 210, 115)",
+    hoverDecorations: "rgba(232, 125, 62, 0.2)",
+    inputs: "rgba(158, 134, 200, 0.2)",
+    link: "rgb(176, 82, 121)",
+    charts: "#6c99bb",
+};
+const cobalt2Theme = {
+    bg: "#15232D",
+    modalBg: "#193549",
+    main: "#9EFFFF",
+    text: "white",
+    subText: "rgba(255, 255, 255, 0.7)",
+    headerText: "#ffc600",
+    header: "#FF9D00",
+    paragraph: "#9EFFFF",
+    decorations: "#2AFFDF",
+    hoverDecorations: "#0D3A58",
+    inputs: "#35434d",
+    link: "#FB94FF",
+    charts: "#FB94FF",
+};
 const lightTheme = {
     bg: "hsla(0,0%,96%, 0.8)",
     modalBg: "hsla(0, 0%, 96.1%)",
@@ -28,11 +58,11 @@ const lightTheme = {
     inputs: "hsla(215,91%,62%,0.2)",
     link: "hsl(0, 0%, 0%)",
     charts: "#448ef6",
-    // mainPageBg: "hsla()",
-    // secondaryPageBg: "hsla()",
 };
 const Theme = {
     light: lightTheme,
     dark: darkTheme,
+    monokai: monokaiTheme,
+    cobalt2: cobalt2Theme,
 };
 export default Theme;

@@ -5,7 +5,7 @@ import { centered } from "theme/styles";
 import Head from "next/head";
 import React from "react";
 function App({ Component, pageProps }) {
-    const { theme, toggleTheme, ThemeContext, isDark } = useTheme();
+    const { ThemeContext, theme, ...rest } = useTheme();
     const title = pageProps.headerTitle;
 
     const { className: centerClassName, styles: centerStyle } = centered({
@@ -23,7 +23,7 @@ function App({ Component, pageProps }) {
             <Head>
                 <title>{_title}</title>
             </Head>
-            <ThemeContext.Provider value={{ theme, toggleTheme, isDark }}>
+            <ThemeContext.Provider value={{ theme, ...rest }}>
                 <Header title={title} />
 
                 <main className={mainClassName}>

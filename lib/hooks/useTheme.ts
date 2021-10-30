@@ -27,7 +27,7 @@ function setThemeFromSystem(setTheme: Function) {
     }
 }
 
-export default function useTheme(currentTheme: String = "light") {
+export default function useTheme(currentTheme: string = "light") {
     const [theme, setTheme] = useState(currentTheme);
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
@@ -39,13 +39,24 @@ export default function useTheme(currentTheme: String = "light") {
             }
         }
     }, []);
-
+    const getAvailableThemes = () => Object.keys(Theme);
     const toggleTheme = () => {
-        const newTheme = theme == "light" ? "dark" : "light";
+        const schemes: string[] = Object.keys(Theme);
+        const newThemeIndex = (schemes.indexOf(theme) + 1) % schemes.length;
+        const newTheme = schemes[newThemeIndex];
+        localStorage.setItem("theme", newTheme);
+        setTheme(newTheme);
+    };
+    const setNewTheme = (newTheme: string) => {
         localStorage.setItem("theme", newTheme);
         setTheme(newTheme);
     };
 
+    const toggleDarkMode = () => {
+        const newTheme = theme !== "light" ? "light" : "dark";
+        localStorage.setItem("theme", newTheme);
+        setTheme(newTheme);
+    };
     const setSystemTheme = () => {
         localStorage.removeItem("theme");
         setTheme(null);
@@ -55,11 +66,15 @@ export default function useTheme(currentTheme: String = "light") {
     };
 
     return {
+        currentThemeName: theme,
         theme: Theme[theme],
         ThemeContext,
         toggleTheme,
+        toggleDarkMode,
         setSystemTheme,
-        isDark: theme == "dark",
+        getAvailableThemes,
+        setTheme: setNewTheme,
+        isDark: theme != "light",
         isSystemTheme: theme === null,
     };
 }
