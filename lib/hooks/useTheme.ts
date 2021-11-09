@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Theme from "../../theme/theme";
 
 export function getCurrentThemeName() {
-    if (process.browser) return document.body.dataset.theme;
+    if (process.browser && document.body.dataset.theme)
+        return document.body.dataset.theme;
     return "light";
 }
 export const setTheme = (newTheme: string) => {
@@ -70,8 +71,6 @@ export default function useTheme(currentTheme: string = "light") {
             }
         }
         const listener = (e) => {
-            console.log(document.body.dataset.theme);
-
             setThemeName(document.body.dataset.theme);
         };
         document.body.addEventListener("dataset", listener);
@@ -79,9 +78,18 @@ export default function useTheme(currentTheme: string = "light") {
             document.body.removeEventListener("dataset", listener);
         };
     }, []);
+    useEffect(() => {
+        setTheme(theme);
+    }, [theme]);
 
     return {
         currentThemeName: theme,
+        setThemeName,
+        isDarkTheme: theme === "dark",
+        toggleDarkMode: () => {
+            const newTheme = theme !== "light" ? "light" : "dark";
+            setThemeName(newTheme);
+        },
         theme: Theme[theme],
         isSystemTheme: theme === null,
     };

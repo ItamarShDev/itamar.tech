@@ -13,9 +13,7 @@ export function getIconClassAndAction(isDark) {
         return "light-icon";
     }
 }
-function ThemeItem({ currentTheme, currentThemeName, setTheme }) {
-    const isSelected = currentThemeName === currentTheme;
-
+function ThemeItem({ currentTheme, isSelected, setTheme }) {
     return (
         <li key={currentTheme} className={isSelected ? "selected" : ""}>
             <button onClick={() => setTheme(currentTheme)}>
@@ -51,13 +49,8 @@ function ThemeItem({ currentTheme, currentThemeName, setTheme }) {
     );
 }
 
-function ThemeList() {
+function ThemeList({ currentThemeName, setThemeName }) {
     const availableThemes = getAvailableThemes();
-    const currentThemeName = getCurrentThemeName();
-    const [currentTheme, setCurrentTheme] = useState(currentThemeName);
-    useEffect(() => {
-        setTheme(currentTheme);
-    }, [currentTheme]);
     return (
         <div className="container">
             <ul>
@@ -65,8 +58,8 @@ function ThemeList() {
                     <ThemeItem
                         key={theme}
                         currentTheme={theme}
-                        currentThemeName={currentTheme}
-                        setTheme={setCurrentTheme}
+                        isSelected={currentThemeName === theme}
+                        setTheme={setThemeName}
                     />
                 ))}
             </ul>
@@ -77,6 +70,7 @@ function ThemeList() {
                     transform: translateX(-50%);
                     left: 0;
                 }
+
                 ul {
                     all: unset;
                     margin-block-start: 1rem;
@@ -94,26 +88,37 @@ function ThemeList() {
     );
 }
 export const ThemedIcon = () => {
-    const isDark = isDarkTheme();
+    const {
+        currentThemeName,
+        setThemeName,
+        isDarkTheme,
+        toggleDarkMode,
+    } = useTheme();
 
-    const [isHovered, setIsHovered] = useState(false);
-    const iconClass = getIconClassAndAction(isDark);
-    const title = `Toggle ${isDark ? "light" : "dark"} mode`;
+    const iconClass = getIconClassAndAction(isDarkTheme);
+    const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
     return (
-        <div
-            className="container"
-            onMouseOver={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="container">
             <button
                 onClick={toggleDarkMode}
                 className={`icon ${iconClass}`}
                 title={title}
             ></button>
-            {isHovered && <ThemeList />}
+            <div className="list">
+                <ThemeList
+                    currentThemeName={currentThemeName}
+                    setThemeName={setThemeName}
+                />
+            </div>
             <style jsx>{`
                 .container {
                     position: relative;
+                }
+                .list {
+                    display: none;
+                }
+                .container:hover .list {
+                    display: block;
                 }
                 .icon {
                     all: unset;
