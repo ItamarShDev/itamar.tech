@@ -1,16 +1,31 @@
 import { SocialRefs } from "components";
 import RandomQuotes from "components/floating-quotes";
+import { useScreenSize } from "lib/hooks";
+import { useTranslation } from "lib/hooks/useTranslation";
 import React from "react";
+const translations = {
+    en: {
+        title: "Itamar.",
+        subtitle: "Software Engineer",
+    },
+    he: { title: "איתמר.", subtitle: "מהנדס תוכנה" },
+};
+type Transtlations = {
+    title: string;
+    subtitle: string;
+};
 
 function AboutMe({ quotes }) {
+    const texts: Transtlations = useTranslation(translations);
+    const { isMobile } = useScreenSize();
     return (
         <div className="about-me">
             <div className="summary">
-                <h1>Itamar.</h1>
-                <h2>Software Engineer</h2>
+                <h1>{texts.title}</h1>
+                <h2>{texts.subtitle}</h2>
 
                 <SocialRefs />
-                <RandomQuotes quotes={quotes} />
+                {!isMobile && <RandomQuotes quotes={quotes} />}
             </div>
             <style jsx>{`
                 .about-me {

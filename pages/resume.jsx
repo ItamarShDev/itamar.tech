@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { Job } from "components";
 import { FilterJobs } from "components/filter-jobs";
+import { useIsRTL } from "lib/hooks/useTranslation";
 
 export default function Resume({ resumeData }) {
+    const isRTL = useIsRTL();
     const [jobs, setJobs] = useState([]);
     return (
         <section>
@@ -21,7 +23,7 @@ export default function Resume({ resumeData }) {
                     -webkit-transition: all 0.4s ease;
                     transition: all 0.4s ease;
                     position: relative;
-                    padding-left: 2.2rem;
+                    padding-inline-start: 2.2rem;
                     margin: 0 auto;
                 }
                 .timeline::before {
@@ -31,7 +33,7 @@ export default function Resume({ resumeData }) {
                     background: var(--colors-subText);
                     position: absolute;
                     top: 0;
-                    left: 0.5rem;
+                    left: ${isRTL ? "calc(100% - 0.5rem)" : "0.5rem"};
                     border-radius: 4rem 4rem;
                 }
             `}</style>
@@ -39,8 +41,8 @@ export default function Resume({ resumeData }) {
     );
 }
 
-export async function getStaticProps({ params }) {
-    const resumeData = await getResumeData();
+export async function getStaticProps({ params, locale }) {
+    const resumeData = await getResumeData(locale);
     const attributesData = await getAttributesData();
     return {
         props: {

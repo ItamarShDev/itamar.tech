@@ -6,8 +6,8 @@ module.exports = withPlugins([], {
         jsconfigPaths: true,
     },
     i18n: {
-        locales: ["en"],
-        defaultLocale: "en",
+        locales: ["default", "en", "he"],
+        defaultLocale: "default",
     },
     images: {
         domains: ["media.giphy.com"],

@@ -6,6 +6,7 @@ import useTheme, {
     getAvailableThemes,
     toggleDarkMode,
 } from "lib/hooks/useTheme";
+import { useIsRTL } from "lib/hooks/useTranslation";
 export function getIconClassAndAction(isDark) {
     if (isDark) {
         return "dark-icon";
@@ -50,6 +51,7 @@ function ThemeItem({ currentTheme, isSelected, setTheme }) {
 }
 
 function ThemeList({ currentThemeName, setThemeName }) {
+    const isRTL = useIsRTL();
     const availableThemes = getAvailableThemes();
     return (
         <div className="container">
@@ -67,7 +69,7 @@ function ThemeList({ currentThemeName, setThemeName }) {
                 .container {
                     position: absolute;
                     top: 100%;
-                    transform: translateX(-50%);
+                    transform: translateX(${isRTL ? "0%" : "-50%"});
                     left: 0;
                 }
 

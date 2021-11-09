@@ -1,17 +1,6 @@
 import { getSortedPostsData } from "../lib/posts";
 import { LinkCard } from "components";
 
-export function getStaticProps() {
-    const allPostsData = getSortedPostsData();
-    return {
-        props: {
-            allPostsData,
-            headerTitle: "Blog",
-            title: "Blog",
-            isCentered: true,
-        },
-    };
-}
 function Blog({ post }) {
     return (
         <LinkCard
@@ -33,4 +22,15 @@ export default function Blogs({ allPostsData }) {
             ))}
         </div>
     );
+}
+export function getStaticProps({ locale }) {
+    const allPostsData = getSortedPostsData(locale);
+    return {
+        props: {
+            allPostsData,
+            headerTitle: "Blog",
+            title: "Blog",
+            isCentered: true,
+        },
+    };
 }

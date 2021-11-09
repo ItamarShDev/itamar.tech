@@ -24,7 +24,7 @@ export default function LinkCard({
                         display: block;
                         margin: 1rem;
                         padding: 2rem;
-                        text-align: left;
+                        text-align: start;
                         flex-grow: 1;
                         text-decoration: none;
                         cursor: pointer;

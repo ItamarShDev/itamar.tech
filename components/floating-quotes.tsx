@@ -1,3 +1,4 @@
+import { useIsRTL } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 
 interface quoteData {
@@ -30,6 +31,7 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
     return quotesResult;
 }
 export default function RandomQuotes(props: Props) {
+    const isRTL = useIsRTL();
     const quotes = extractQuotesByPerson(props.quotes);
     const _randomNumber = Math.floor(Math.random() * 100);
     const [randomNumber, setRandomNumber] = useState(_randomNumber);
@@ -69,7 +71,7 @@ export default function RandomQuotes(props: Props) {
                     content: "„";
                     position: absolute;
                     font-size: 4em;
-                    left: 0;
+                    left: ${isRTL ? "100%" : 0};
                     top: 0;
                     color: grey;
                     line-height: 0;

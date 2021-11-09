@@ -1,4 +1,7 @@
+import { useIsRTL } from "lib/hooks/useTranslation";
+
 export default function Job({ job }) {
+    const isRTL = useIsRTL();
     const tags = job.tags.join(", ");
     return (
         <dl>
@@ -46,7 +49,7 @@ export default function Job({ job }) {
                 dl::before {
                     content: "";
                     position: absolute;
-                    left: -2.25rem;
+                    left: ${isRTL ? "calc(100% + 1.1rem)" : "-2.25rem"};
                     width: 1.5rem;
                     height: 1.5rem;
                     display: flex;
@@ -66,7 +69,7 @@ export default function Job({ job }) {
                     background-color: var(--colors-hoverDecorations);
                     border-radius: 1em;
                     padding: 1.5em;
-                    margin-left: 0.5em;
+                    margin-inline-start: 0.5em;
                     display: flex;
                     flex-direction: column;
                     line-height: 2rem;

@@ -4,7 +4,9 @@ import { Header } from "layouts";
 import { centered } from "theme/styles";
 import Head from "next/head";
 import React, { useEffect } from "react";
+import { useLanguageDirection } from "lib/hooks/useTranslation";
 function App({ Component, pageProps }) {
+    const direction = useLanguageDirection();
     const { currentThemeName } = useTheme();
     const title = pageProps.headerTitle;
     const { className: centerClassName, styles: centerStyle } = centered({
@@ -21,7 +23,7 @@ function App({ Component, pageProps }) {
     }, [currentThemeName]);
 
     return (
-        <div id="main-view">
+        <div id="main-view" style={{ ...direction }}>
             <Head>
                 <title>{_title}</title>
             </Head>

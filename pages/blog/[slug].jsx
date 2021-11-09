@@ -13,7 +13,7 @@ export default function Blog({ data, html }) {
 
     useEffect(() => {
         setArticleDOM(articleRef.current);
-    }, [articleRef]);
+    }, [html]);
     if (!data) return null;
     return (
         <div id="blog-post">
@@ -184,8 +184,8 @@ export default function Blog({ data, html }) {
     );
 }
 
-export async function getStaticProps({ params }) {
-    const { data, content } = getPostData(params.slug);
+export async function getStaticProps({ params, locale }) {
+    const { data, content } = getPostData(params.slug, locale);
     const html = renderMarkdown(content);
     return {
         props: {

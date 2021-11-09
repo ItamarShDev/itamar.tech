@@ -1,4 +1,8 @@
+import { useIsRTL } from "lib/hooks/useTranslation";
+
 const Link = () => {
+    const isRTL = useIsRTL();
+    const position = { [isRTL ? "right" : "left"]: "0.5em" };
     return (
         <a
             href="https://github.com/ItamarShDev/personal-website"
@@ -13,10 +17,11 @@ const Link = () => {
                     position: "absolute",
                     top: "1em",
                     border: 0,
-                    left: "0.5em",
+
                     transform: "scale(-1, 1) rotate(-45deg)",
                     fill: "transparent",
                     color: "var(--colors-headerText)",
+                    ...position,
                 }}
                 aria-hidden="true"
             >

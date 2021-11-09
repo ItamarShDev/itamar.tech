@@ -1,4 +1,6 @@
 import { useScreenSize, useScrollObserver, useUrlHash } from "lib/hooks";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 function generateLinkMarkup($contentElement) {
     const headings = [...$contentElement.querySelectorAll("h2, h3")];
@@ -22,6 +24,55 @@ function HeaderTitle({ header }) {
     }
     return title;
 }
+function LocalesLinks() {
+    const { locales, locale, asPath } = useRouter();
+    return (
+        <>
+            <span>Translations</span>
+            <ul>
+                {locales.map((_locale) => {
+                    if (_locale === "default") return null;
+                    return (
+                        <li
+                            key={_locale}
+                            className={_locale === locale ? "active" : ""}
+                        >
+                            <Link href={`${asPath}`} locale={_locale}>
+                                {_locale}
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
+
+            <style jsx>{`
+                span {
+                    font-weight: bold;
+                }
+                ul {
+                    margin: 0;
+                    padding-inline: 3rem;
+                }
+                li.active {
+                    font-weight: bold;
+                }
+                li {
+                    font-size: 1.4rem;
+                }
+            `}</style>
+            <style jsx global>
+                {`
+                    li a {
+                        text-decoration: none;
+                    }
+                    li:hover a {
+                        text-decoration: underline;
+                    }
+                `}
+            </style>
+        </>
+    );
+}
 
 export function HeadlineSidebar({ article }) {
     const scrollPercentage = useScrollObserver();
@@ -38,6 +89,7 @@ export function HeadlineSidebar({ article }) {
                     <h5>Headlines</h5>
                     <dl>{headings}</dl>
                 </div>
+                <LocalesLinks />
                 <span className="line"></span>
             </div>
             <style jsx>{`
