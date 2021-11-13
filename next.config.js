@@ -6,7 +6,7 @@ module.exports = withPlugins([], {
         jsconfigPaths: true,
     },
     i18n: {
-        locales: [,l"en", "he"],
+        locales: [en", "he"],
         defaultLocale: "en",
     },
     images: {
