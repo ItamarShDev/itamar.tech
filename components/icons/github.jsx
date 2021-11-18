@@ -44,7 +44,7 @@ const Link = () => {
                         animation: octocat-wave 560ms ease-in-out;
                     }
                     @keyframes octocat-wave {
-                        0 %,
+                        0%,
                         100% {
                             transform: rotate(0);
                         }

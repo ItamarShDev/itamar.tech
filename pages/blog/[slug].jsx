@@ -121,7 +121,7 @@ export default function Blog({ data, html }) {
                     padding: 1em;
                     overflow-y: auto;
                     overflow-x: auto;
-                    border-left: 3px var(--colors-decorations} soli);
+                    border-left: 3px var(--colors-decorations) solid;
                     font-family: "Fira Code", monospace;
                 }
 
