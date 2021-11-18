@@ -27,9 +27,8 @@ export default function HomePage({ quotes }) {
             <style jsx>
                 {`
                     article {
-                        height: 100%;
                         display: grid;
-                        grid-template-rows: 1fr 1fr 1fr 0;
+                        grid-template-row   s: 1fr 1fr 1fr 0;
                         grid-template-columns: 2fr 3fr;
                         grid-template-areas: "image about-me" "image links" "image stats" "footer footer";
                     }
@@ -40,7 +39,7 @@ export default function HomePage({ quotes }) {
                     .image {
                         grid-area: image;
                         display: block;
-                        height: inherit;
+                        height: 100%;
                     }
                     .about-me {
                         grid-area: about-me;
