@@ -6,7 +6,7 @@ import { grid } from "theme/styles";
 function SocialRefs({ withTitle = false }) {
     const { className: gridClass, styles: gridStyle } = grid({
         rows: 1,
-        cols: 3,
+        cols: 2,
         gap: 20,
     });
 
@@ -32,15 +32,7 @@ function SocialRefs({ withTitle = false }) {
                 >
                     <GithubLogo />
                 </a>
-                <a
-                    href="https://medium.com/@itamarsharify"
-                    target="_blank"
-                    className="item medium"
-                    rel="noreferrer noopener"
-                    title="Medium"
-                >
-                    <MediumLogo />
-                </a>
+
                 {gridStyle}
             </div>
             <style jsx>{`

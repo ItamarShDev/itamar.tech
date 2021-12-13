@@ -1,12 +1,17 @@
 import useChartSettings, {
     ChartSettings,
 } from "components/charts/chart-settings";
-import React, { useEffect } from "react";
+import { Input } from "components/input";
+import React, { useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
 
 class CustomEventHandler {
     subscribe(eventName: any, cb: any) {
         window.addEventListener(eventName, cb);
+    }
+
+    unsubscribe(eventName: any, cb: any) {
+        window.removeEventListener(eventName, cb);
     }
 
     emit(eventName: any, payload: any) {
@@ -63,12 +68,16 @@ function randomChartData(id: number) {
 }
 export class EventRouter {
     eventHandler: CustomEventHandler;
+    interval: NodeJS.Timeout = null;
     constructor() {
         this.eventHandler = EventHandler;
     }
 
     fetchChartsData(chartIds: number[]) {
-        setInterval(() => {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+        this.interval = setInterval(() => {
             chartIds.forEach((id: number) => {
                 this.eventHandler.emit(id + "::data", {
                     data: randomChartData(id),
@@ -81,14 +90,17 @@ export class EventRouter {
 function Chart({ chartId }) {
     const [chartData, setChartData] = React.useState(randomChartData(chartId));
     const { data, lineOptions }: ChartSettings = useChartSettings(chartData);
-
+    function chartEventHadler(event) {
+        if (event.detail.data) {
+            setChartData(event.detail.data);
+        }
+    }
     useEffect(() => {
-        EventHandler.subscribe(chartId + "::data", (event) => {
-            if (event.detail.data) {
-                setChartData(event.detail.data);
-            }
-        });
-    }, []);
+        EventHandler.subscribe(chartId + "::data", chartEventHadler);
+        return () => {
+            EventHandler.unsubscribe(chartId + "::data", chartEventHadler);
+        };
+    }, [chartId]);
     if (data) {
         return <Line data={data} options={lineOptions} />;
     }
@@ -96,15 +108,31 @@ function Chart({ chartId }) {
 }
 
 export default function ChartsCommunicationExample() {
-    const chartIds = [1, 2, 3, 4, 5];
+    const [numberOfCharts, setNumberOfCharts] = useState(5);
+    const chart_ids = Array.from(Array(numberOfCharts).keys());
+    const [chartIds, setChartIds] = useState(chart_ids);
+    const router = useMemo(() => new EventRouter(), []);
 
     useEffect(() => {
-        const router = new EventRouter();
+        setChartIds(Array.from(Array(numberOfCharts).keys()));
+    }, [numberOfCharts]);
+
+    useEffect(() => {
         router.fetchChartsData(chartIds);
-    }, []);
+    }, [chartIds]);
 
     return (
         <>
+            <section>
+                <Input
+                    label="Set number of charts"
+                    type="number"
+                    name="Number of charts"
+                    id="charts-number"
+                    defaultValue={numberOfCharts}
+                    onChange={(e) => setNumberOfCharts(Number(e.target.value))}
+                />
+            </section>
             <section>
                 {chartIds.map((id) => (
                     <div className="chart" key={id}>

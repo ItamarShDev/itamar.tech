@@ -5,11 +5,12 @@ import { useTranslation } from "lib/hooks/useTranslation";
 import React from "react";
 const translations = {
     en: {
-        title: "Itamar.",
+        title: "Itamar Sharify",
         subtitle: "Software Engineer",
     },
-    he: { title: "איתמר.", subtitle: "מהנדס תוכנה" },
+    he: { title: "איתמר שריפי", subtitle: "מהנדס תוכנה" },
 };
+
 type Transtlations = {
     title: string;
     subtitle: string;

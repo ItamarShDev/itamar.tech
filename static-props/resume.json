@@ -38,7 +38,7 @@
                     "CSS"
                 ],
                 "description": "Creating the company main website from scratch, Building live map user tracking and live chat between users",
-                "elaborated_description": ""
+                "elaborated_description": "Bootstrap the company main site from 0 to hero"
             },
             {
                 "title": "Full-stack developer",
@@ -87,7 +87,7 @@
                     "logo": "logos/imubit.svg",
                     "website": "https://www.imubit.com/"
                 },
-                "tags": ["Python", "JupyterLab", "CSS"],
+                "tags": ["Python", "JupyterLab", "Javascript", "CSS"],
                 "description": "Building internal tools for the company field engineers",
                 "elaborated_description": ""
             }
@@ -190,7 +190,7 @@
                     "logo": "logos/imubit.svg",
                     "website": "https://www.imubit.com/"
                 },
-                "tags": ["Python", "JupyterLab", "CSS"],
+                "tags": ["Python", "JupyterLab", "Javascript", "CSS"],
                 "description": "בניית כלי חקירת מידע פנימיים עבור עובדי החברה",
                 "elaborated_description": ""
             }

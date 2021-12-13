@@ -1,6 +1,13 @@
+import { Tags } from "components/jobs/tags";
 import { useIsRTL } from "lib/hooks/useTranslation";
+import { Job as JobType } from "lib/types/jobs";
 
-export default function Job({ job }) {
+type Props = {
+    job: JobType;
+    updateFilterText: (filterText: string) => void;
+    filterText?: string;
+};
+export default function Job({ job, updateFilterText, filterText }: Props) {
     const isRTL = useIsRTL();
     const tags = job.tags.join(", ");
     return (
@@ -37,7 +44,11 @@ export default function Job({ job }) {
                             ))}
                     </p>
                 </div>
-                <p className="tags">{tags}</p>
+                <Tags
+                    tagsString={tags}
+                    filterText={filterText}
+                    onClick={updateFilterText}
+                />
             </dd>
             <style jsx>{`
                 dl {
@@ -125,11 +136,6 @@ export default function Job({ job }) {
                     font-family: "Roboto", sans-serif;
                 }
 
-                .tags {
-                    font-size: 1rem;
-                    font-style: italic;
-                    filter: opacity(0.7);
-                }
                 @media only screen and (max-width: 968px) {
                     .title {
                         font-size: 2rem;

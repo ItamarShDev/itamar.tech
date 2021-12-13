@@ -1,5 +1,5 @@
 import LinkCard from "./link-card";
-import Job from "./job";
+import Job from "./jobs/job";
 import Avatar from "./avatar";
 import AboutMe from "./about-me";
 import SocialRefs from "./social-refs";

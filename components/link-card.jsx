@@ -13,7 +13,7 @@ export default function LinkCard({
             <dl>
                 <dt>{title}</dt>
                 <dd>
-                    <p>{subTitle}</p>
+                    <span>{subTitle}</span>
                     <span>{date}</span>
                 </dd>
                 {children}
@@ -29,19 +29,20 @@ export default function LinkCard({
                         text-decoration: none;
                         cursor: pointer;
                     }
-                    dl:hover {
-                        outline: 1px solid var(--colors-decorations);
+                    dl:hover > dt {
+                        text-decoration: underline 1px solid
+                            var(--colors-decorations);
                     }
 
                     dt {
-                        margin: 0 0 1em 0;
+                        margin: 0;
                         font-size: 3rem;
                         font-weight: 500;
                         color: var(--colors-headerText);
                     }
                     dd {
                         color: var(--colors-subText);
-                        margin: 0 10px;
+                        margin: 0 5px;
                         font-size: 1.5em;
                         line-height: 1.5;
                     }

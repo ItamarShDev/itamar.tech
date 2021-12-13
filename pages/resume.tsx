@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { Job } from "components";
-import { FilterJobs } from "components/filter-jobs";
+import { FilterJobs } from "components/jobs/filter-jobs";
 import { useIsRTL } from "lib/hooks/useTranslation";
+import { filterJobsByText } from "lib/job-utils";
 
 export default function Resume({ resumeData }) {
     const isRTL = useIsRTL();
-    const [jobs, setJobs] = useState([]);
+    const [filterText, setFilterText] = useState("");
+    const [jobs, setJobs] = useState(resumeData.jobs);
+    useEffect(() => {
+        const _jobs = filterJobsByText(resumeData.jobs, filterText);
+        setJobs(_jobs);
+    }, [filterText, resumeData]);
+
     return (
         <section>
-            <FilterJobs jobs={resumeData.jobs} updateJobs={setJobs} />
+            <FilterJobs
+                filterText={filterText}
+                jobs={jobs}
+                updateFilterText={setFilterText}
+            />
             <div className="timeline">
                 {jobs.map((job, index) => (
-                    <Job key={index} job={job} />
+                    <Job
+                        key={index}
+                        job={job}
+                        updateFilterText={setFilterText}
+                    />
                 ))}
             </div>
             <style jsx>{`
@@ -41,7 +56,7 @@ export default function Resume({ resumeData }) {
     );
 }
 
-export async function getStaticProps({ params, locale }) {
+export async function getStaticProps({ locale }) {
     const resumeData = await getResumeData(locale);
     const attributesData = await getAttributesData();
     return {

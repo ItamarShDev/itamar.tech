@@ -5,7 +5,7 @@ import Theme from "theme/theme";
 export function grid({
     cols = 2,
     rows = 2,
-    gap = "0",
+    gap = 0,
     height = "auto",
     width = "auto",
 }) {

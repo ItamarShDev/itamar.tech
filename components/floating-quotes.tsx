@@ -70,9 +70,9 @@ export default function RandomQuotes(props: Props) {
                 p:before {
                     content: "„";
                     position: absolute;
-                    font-size: 4em;
+                    font-size: 3em;
                     left: ${isRTL ? "100%" : 0};
-                    top: 0;
+                    top: -5px;
                     color: grey;
                     line-height: 0;
                 }

@@ -4,7 +4,7 @@ export default function ChartsCommunications() {
     if (process.browser)
         return (
             <>
-                <h1>These chart are upadaed once with EventListeners</h1>
+                <h1>These charts are upadaed together with EventListeners</h1>
                 <section>
                     <ChartsCommunicationExample />
                 </section>
