@@ -88,10 +88,14 @@ export default function Blog({ data, html }) {
                 h4 {
                     scroll-margin-top: 7.5rem;
                 }
-                h1 > a,
-                h2 > a,
-                h4 > a,
-                h3 > a {
+                h1 >
+                 a,
+                h2 >
+                 a,
+                h4 >
+                 a,
+                h3 >
+                 a {
                     filter: brightness(225%);
                     font-weight: 300;
                     text-decoration: none;

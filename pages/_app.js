@@ -72,7 +72,10 @@ function App({ Component, pageProps }) {
                     min-height: 100vh;
                     grid-template-rows: 6rem 1fr;
                 }
-
+                ::selection {
+                    background-color: var(--colors-decorations);
+                    color: var(--colors-bg);
+                }
                 a {
                     color: var(--colors-link);
                     scroll-margin-top: 6.5rem;
