@@ -24,7 +24,7 @@ const Header = (props) => {
             <ThemedIcon />
             <style jsx>{`
                 nav {
-                    height: 6rem;
+                    height: var(--header-height);
                     width: 100%;
                     display: grid;
                     grid-template-columns: 6rem 1fr 6rem 6rem;

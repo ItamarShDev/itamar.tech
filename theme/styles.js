@@ -76,6 +76,9 @@ export function generateCSSThemeSelectors() {
             --colors-link: ${theme.link};
             --colors-charts: ${theme.charts};
         }
+        body {
+            --header-height: 6rem;
+        }
     `;
     }
     return selectors;

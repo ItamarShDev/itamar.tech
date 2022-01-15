@@ -6,8 +6,10 @@ const Link = () => {
     return (
         <a
             href="https://github.com/ItamarShDev/personal-website"
+            target="_blank"
             className="github-corner"
             aria-label="View source on GitHub"
+            rel="noreferrer"
         >
             <svg
                 width="60"

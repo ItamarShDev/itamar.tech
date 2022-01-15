@@ -28,7 +28,8 @@ export default function HomePage({ quotes }) {
                 {`
                     article {
                         display: grid;
-                        grid-template-row   s: 1fr 1fr 1fr 0;
+                        height: calc(100vh - var(--header-height));
+                        grid-template-rows: 1fr 1fr 1fr 0;
                         grid-template-columns: 2fr 3fr;
                         grid-template-areas: "image about-me" "image links" "image stats" "footer footer";
                     }

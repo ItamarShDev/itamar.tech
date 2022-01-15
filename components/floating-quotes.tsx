@@ -58,7 +58,6 @@ export default function RandomQuotes(props: Props) {
                     word-break: normal;
                     font-size: 1.8rem;
                     font-style: italic;
-                    animation: fadeInAndOut 15s linear infinite;
                     line-height: 2.5rem;
                     font-family: cursive;
                     position: relative;
@@ -75,21 +74,6 @@ export default function RandomQuotes(props: Props) {
                     top: -5px;
                     color: grey;
                     line-height: 0;
-                }
-
-                @keyframes fadeInAndOut {
-                    0% {
-                        opacity: 0;
-                    }
-                    10% {
-                        opacity: 1;
-                    }
-                    90% {
-                        opacity: 1;
-                    }
-                    100% {
-                        opacity: 0;
-                    }
                 }
             `}</style>
         </div>
