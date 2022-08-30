@@ -29,8 +29,8 @@ function randomChartData(id: number) {
         labels: ["1 week", "1 month", "4 months", "6 months", "1 year"],
         values: [
             {
-                title: "Learning",
-                values: [
+                label: "Learning",
+                data: [
                     Math.random() * 100,
                     Math.random() * 100,
                     Math.random() * 100,
@@ -40,8 +40,8 @@ function randomChartData(id: number) {
                 settings: { fill: false },
             },
             {
-                title: "Mingeling",
-                values: [
+                label: "Mingeling",
+                data: [
                     Math.random() * 100,
                     Math.random() * 100,
                     Math.random() * 100,
@@ -51,8 +51,8 @@ function randomChartData(id: number) {
                 settings: { fill: false },
             },
             {
-                title: "Involvement",
-                values: [
+                label: "Involvement",
+                data: [
                     Math.random() * 100,
                     Math.random() * 100,
                     Math.random() * 100,
@@ -119,7 +119,7 @@ export default function ChartsCommunicationExample() {
 
     useEffect(() => {
         router.fetchChartsData(chartIds);
-    }, [chartIds]);
+    }, [chartIds, router]);
 
     return (
         <>

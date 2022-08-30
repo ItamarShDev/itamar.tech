@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     render() {
         const themes = generateCSSThemeSelectors();
         return (
-            <Html len="en">
+            <Html lang="en">
                 <Head>
                     <link rel="icon" href="/favicon.ico" />
                     <meta name="title" content="Itamar Sharify" />
@@ -55,7 +55,7 @@ export default class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin="true"
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Codystar&display=swap"
@@ -68,7 +68,7 @@ export default class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin="true"
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,400;0,500;1,400&family=Codystar&display=swap"
@@ -81,7 +81,7 @@ export default class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin="true"
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap"

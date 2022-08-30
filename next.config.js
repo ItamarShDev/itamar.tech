@@ -1,11 +1,6 @@
-// next.config.js
-const withPlugins = require("next-compose-plugins");
-
-module.exports = withPlugins([], {
+module.exports = {
     swcMinify: true,
-    experimental: {
-        jsconfigPaths: true,
-    },
+
     i18n: {
         locales: ["en", "he"],
         defaultLocale: "en",
@@ -16,4 +11,4 @@ module.exports = withPlugins([], {
     typescript: {
         ignoreBuildErrors: true,
     },
-});
+};
