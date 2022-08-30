@@ -33,13 +33,12 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
 export default function RandomQuotes(props: Props) {
     const isRTL = useIsRTL();
     const quotes = extractQuotesByPerson(props.quotes);
-    const _randomNumber = Math.floor(Math.random() * 100);
-    const [randomNumber, setRandomNumber] = useState(_randomNumber);
+    const [randomNumber, setRandomNumber] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => {
             const randomNumber = Math.floor(Math.random() * 100);
             setRandomNumber(randomNumber);
-        }, 15000);
+        }, 4000);
         return () => {
             clearInterval(interval);
         };

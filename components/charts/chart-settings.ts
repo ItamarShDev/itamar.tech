@@ -2,12 +2,35 @@ import { getCurrentTheme } from "lib/hooks/useTheme";
 import { hexToHSL } from "lib/utils";
 
 import { useState, useEffect } from "react";
+import {
+    Chart as ChartJS,
+    LineElement,
+    PointElement,
+    LinearScale,
+    RadialLinearScale,
+    CategoryScale,
+    Title,
+    Filler,
+    Legend,
+} from "chart.js";
+
+ChartJS.register(
+    LineElement,
+    PointElement,
+    RadialLinearScale,
+    CategoryScale,
+    LinearScale,
+    Title,
+    Filler,
+    Legend
+);
+
 function themedDatasets(values, theme) {
     return values.map((item, index) => {
         const [h, s, l] = hexToHSL(theme.charts, index);
         const dataset = {
-            label: item.title,
-            data: item.values,
+            label: item.label,
+            data: item.data,
             borderWidth: 2,
             backgroundColor: `hsla(${h}, ${s}%, ${l}%, 0.2)`,
             borderColor: `hsl(${h}, ${s}%, ${l}%)`,
@@ -26,25 +49,22 @@ function themedRadarSettings(title, theme) {
         tooltips: {
             enabled: false,
         },
-        title: {
-            display: true,
-            text: title,
-            fontColor: theme.text,
+        plugins: {
+            title: {
+                display: true,
+                text: title,
+                color: theme.text,
+            },
+            legend: { display: false },
         },
-        legend: { display: false },
-        scale: {
-            angleLines: { color: theme.text },
-            gridLines: {
-                drawTicks: false,
-                drawOnChartArea: false,
-                color: theme.headerText,
+        scales: {
+            r: {
+                pointLabels: { color: theme.text },
+                ticks: {
+                    display: false,
+                    maxTicksLimit: 1,
+                },
             },
-            labels: { fontColor: theme.text },
-            ticks: {
-                display: false,
-                maxTicksLimit: 1,
-            },
-            pointLabels: { fontColor: theme.text },
         },
     };
 }
@@ -53,51 +73,49 @@ function themedLineSettings(title, theme) {
     return {
         maintainAspectRatio: false,
         aspectRatio: 1,
-
-        legend: {
-            position: "top",
-            fullWidth: true,
-            labels: {
-                boxWidth: 5,
-                fontColor: theme.text,
+        spanGaps: false,
+        plugins: {
+            legend: {
+                position: "top",
+                fullWidth: true,
+                labels: {
+                    boxWidth: 5,
+                    color: theme.text,
+                },
+            },
+            title: {
+                display: true,
+                text: title,
+                color: theme.text,
             },
         },
-        spanGaps: false,
         tooltips: {
             enabled: false,
         },
-        title: {
-            display: true,
-            text: title,
-            fontColor: theme.text,
-        },
         scales: {
-            xAxes: [
-                {
-                    ticks: { fontColor: theme.text },
-                    gridLines: {
-                        drawTicks: false,
-                        drawOnChartArea: false,
-                        color: theme.headerText,
-                    },
+            xAxis: {
+                ticks: { color: theme.text },
+                gridLines: {
+                    drawTicks: false,
+                    drawOnChartArea: false,
+                    color: theme.headerText,
                 },
-            ],
-            yAxes: [
-                {
-                    display: true,
-                    ticks: { display: false },
-                    gridLines: {
-                        drawTicks: false,
-                        drawOnChartArea: false,
-                        color: theme.headerText,
-                    },
+            },
+
+            yAxis: {
+                display: true,
+                ticks: { display: false },
+                gridLines: {
+                    drawTicks: false,
+                    drawOnChartArea: false,
+                    color: theme.headerText,
                 },
-            ],
+            },
         },
     };
 }
 export type ChartSettings = {
-    data?: object;
+    data?: { datasets: object[]; labels: string[] };
     radarOptions?: object;
     lineOptions?: object;
 };
@@ -111,8 +129,8 @@ export default function useChartSettings({
     const datasets = themedDatasets(values, theme);
     useEffect(() => {
         const data = {
-            labels: labels,
-            datasets: datasets,
+            labels,
+            datasets,
         };
         const radarOptions = themedRadarSettings(title, theme);
         const lineOptions = themedLineSettings(title, theme);

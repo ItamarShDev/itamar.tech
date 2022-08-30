@@ -5,7 +5,7 @@ import json from "../static-props/technologies.json";
 const Comp = (props) => HOC(MatchCalculator, props);
 export const MatchFinderComp = Comp.bind({});
 MatchFinderComp.args = { properties: json };
-export default {
+const story = {
     title: "Components/Match Calculator",
     component: MatchCalculator,
     decorators: [
@@ -16,3 +16,4 @@ export default {
         ),
     ],
 };
+export default story;

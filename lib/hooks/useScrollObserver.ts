@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useScrollObserver() {
     const [percentage, setPercentage] = useState(0);
-    if (process.browser)
+    useEffect(() => {
         window.onscroll = () => {
             const winScroll =
                 document.body.scrollTop || document.documentElement.scrollTop;
@@ -12,5 +12,6 @@ export default function useScrollObserver() {
             const scrolled = (winScroll / height) * 100;
             setPercentage(scrolled);
         };
+    });
     return percentage;
 }

@@ -2,6 +2,7 @@
 const withPlugins = require("next-compose-plugins");
 
 module.exports = withPlugins([], {
+    swcMinify: true,
     experimental: {
         jsconfigPaths: true,
     },

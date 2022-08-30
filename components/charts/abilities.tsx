@@ -1,6 +1,7 @@
 import { Radar } from "react-chartjs-2";
 import useChartSettings, { ChartSettings } from "./chart-settings";
 import PropTypes from "prop-types";
+
 /**
  * Shows a Radar chart with given data
  */

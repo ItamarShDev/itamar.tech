@@ -10,9 +10,9 @@ const SocialAffect = dynamic(() => import("components/charts/social"), {
     loading: () => <div>Loading...</div>,
 });
 
-function Stats(props) {
+function Stats() {
     const labels = ["Python", "Node.js", "Javascript", "CSS", "React.js"];
-    const values = [{ title: "Abilities", values: [70, 30, 90, 90, 80] }];
+    const values = [{ label: "Abilities", data: [70, 30, 90, 90, 80] }];
     return (
         <div>
             <div className="flex">

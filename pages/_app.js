@@ -5,6 +5,7 @@ import { centered } from "theme/styles";
 import Head from "next/head";
 import React, { useEffect } from "react";
 import { useLanguageDirection } from "lib/hooks/useTranslation";
+import ErrorBoundary from "layouts/error-boundary";
 function App({ Component, pageProps }) {
     const direction = useLanguageDirection();
     const { currentThemeName } = useTheme();
@@ -30,7 +31,9 @@ function App({ Component, pageProps }) {
             <Header title={title} />
 
             <main className={mainClassName}>
-                <Component {...pageProps} />
+                <ErrorBoundary>
+                    <Component {...pageProps} />
+                </ErrorBoundary>
                 {centerStyle}
             </main>
             <style jsx>{`

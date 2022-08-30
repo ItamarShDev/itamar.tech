@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 export default function useUrlHash(hash) {
-    const [currentUrlHash, setCurrentUrlHash] = useState();
+    const [currentUrlHash, setCurrentUrlHash] = useState<string>();
     function updateCurrentHash() {
         if (location.hash != currentUrlHash) {
             setCurrentUrlHash(location.hash);
