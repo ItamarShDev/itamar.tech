@@ -23,6 +23,18 @@ export default function ExampleProjects() {
                     subTitle={example.summary}
                 />
             ))}
+            <LinkCard
+                key={"mayeshbeze"}
+                route={`https://mayeshbeze.tech`}
+                title={"מה יש בזה?"}
+                subTitle={"אתר פרטי לפודקאסט"}
+            />
+            <LinkCard
+                key={"hakapit"}
+                route={`https://hakapit.tech`}
+                title="הכפית"
+                subTitle={"אתר פרטי לפודקאסט"}
+            />
         </div>
     );
 }
