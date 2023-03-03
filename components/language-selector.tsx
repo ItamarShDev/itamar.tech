@@ -25,7 +25,7 @@ export default function LanguageSelector() {
                                     }
                                     onClick={() => setShowSelection(false)}
                                 >
-                                    <Link href={`${asPath}`} locale={_locale}>
+                                    <Link href={`${asPath}`} locale={_locale} legacyBehavior>
                                         {_locale}
                                     </Link>
                                 </li>

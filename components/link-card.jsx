@@ -9,7 +9,7 @@ export default function LinkCard({
     children = null,
 }) {
     return (
-        <Link href={routeRef || route} as={route} passHref>
+        <Link href={routeRef || route} as={route} passHref legacyBehavior>
             <dl>
                 <dt>{title}</dt>
                 <dd>

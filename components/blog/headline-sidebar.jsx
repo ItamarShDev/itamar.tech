@@ -26,52 +26,50 @@ function HeaderTitle({ header }) {
 }
 function LocalesLinks() {
     const { locales, locale, asPath } = useRouter();
-    return (
-        <>
-            <span>Translations</span>
-            <ul>
-                {locales.map((_locale) => {
-                    if (_locale === "default") return null;
-                    return (
-                        <li
-                            key={_locale}
-                            className={_locale === locale ? "active" : ""}
-                        >
-                            <Link href={`${asPath}`} locale={_locale}>
-                                {_locale}
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
+    return <>
+        <span>Translations</span>
+        <ul>
+            {locales.map((_locale) => {
+                if (_locale === "default") return null;
+                return (
+                    <li
+                        key={_locale}
+                        className={_locale === locale ? "active" : ""}
+                    >
+                        <Link href={`${asPath}`} locale={_locale} legacyBehavior>
+                            {_locale}
+                        </Link>
+                    </li>
+                );
+            })}
+        </ul>
 
-            <style jsx>{`
-                span {
-                    font-weight: bold;
+        <style jsx>{`
+            span {
+                font-weight: bold;
+            }
+            ul {
+                margin: 0;
+                padding-inline: 3rem;
+            }
+            li.active {
+                font-weight: bold;
+            }
+            li {
+                font-size: 1.4rem;
+            }
+        `}</style>
+        <style jsx global>
+            {`
+                li a {
+                    text-decoration: none;
                 }
-                ul {
-                    margin: 0;
-                    padding-inline: 3rem;
+                li:hover a {
+                    text-decoration: underline;
                 }
-                li.active {
-                    font-weight: bold;
-                }
-                li {
-                    font-size: 1.4rem;
-                }
-            `}</style>
-            <style jsx global>
-                {`
-                    li a {
-                        text-decoration: none;
-                    }
-                    li:hover a {
-                        text-decoration: underline;
-                    }
-                `}
-            </style>
-        </>
-    );
+            `}
+        </style>
+    </>;
 }
 
 export function HeadlineSidebar({ article }) {

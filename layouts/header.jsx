@@ -9,7 +9,7 @@ const Header = (props) => {
     return (
         <nav>
             <GithubLogo />
-            <Link href="/">
+            <Link href="/" legacyBehavior>
                 <a title="Click to go home">
                     <span className="name">Itamar Sharify</span>
                     {title && (
