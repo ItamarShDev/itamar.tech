@@ -81,7 +81,7 @@
             },
             {
                 "title": "Python Developer",
-                "duration": { "from": 2020, "to": "Present" },
+                "duration": { "from": 2020, "to": 2022 },
                 "company": {
                     "name": "Imubit",
                     "logo": "logos/imubit.svg",
@@ -89,6 +89,38 @@
                 },
                 "tags": ["Python", "JupyterLab", "Javascript", "CSS"],
                 "description": "Building internal tools for the company field engineers",
+                "elaborated_description": ""
+            },
+            {
+                "title": "Full-stack developer",
+                "duration": { "from": 2022, "to": "Present" },
+                "company": {
+                    "name": "Imubit",
+                    "logo": "logos/imubit.svg",
+                    "website": "https://www.imubit.com/"
+                },
+                "tags": [
+                    "Python",
+                    "Go",
+                    "JupyterLab",
+                    "Javascript",
+                    "Typescript",
+                    "React",
+                    "CSS"
+                ],
+                "description": "Building the next generation of the company customer facing application",
+                "elaborated_description": ""
+            },
+            {
+                "title": "Frontend guild leader",
+                "duration": { "from": 2023, "to": "Present" },
+                "company": {
+                    "name": "Imubit",
+                    "logo": "logos/imubit.svg",
+                    "website": "https://www.imubit.com/"
+                },
+                "tags": ["Go", "Javascript", "Typescript", "React", "CSS"],
+                "description": "Managing the frontend guild and pushing the frontend need forward",
                 "elaborated_description": ""
             }
         ],
