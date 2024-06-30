@@ -1,3 +1,4 @@
+'use client'
 import { useIsRTL } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 

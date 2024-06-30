@@ -1,6 +1,6 @@
+import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
 type Metadata = {
 	id: string;
 	title: string;
@@ -52,6 +52,7 @@ export function getAllPostIds(locale = "en") {
 		const { data } = matter(fileContents);
 
 		return {
+			fileName,
 			params: {
 				...data,
 			},

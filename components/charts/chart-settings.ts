@@ -1,4 +1,6 @@
-import { getCurrentTheme } from "lib/hooks/useTheme";
+
+"use client";
+import { useCurrentTheme } from "lib/hooks/useTheme";
 import { hexToHSL } from "lib/utils";
 
 import {
@@ -12,7 +14,7 @@ import {
 	RadialLinearScale,
 	Title,
 } from "chart.js";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 ChartJS.register(
 	LineElement,
@@ -125,8 +127,8 @@ export default function useChartSettings({
 	labels = [{}],
 }): ChartSettings {
 	const [settings, setSettings] = useState({});
-	const theme = getCurrentTheme();
-	const datasets = themedDatasets(values, theme);
+	const theme = useCurrentTheme();
+	const datasets = useMemo(() => themedDatasets(values, theme), [values, theme]);
 	useEffect(() => {
 		const data = {
 			labels,

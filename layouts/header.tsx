@@ -5,21 +5,21 @@ import { ThemedIcon } from "../components/themed-icon";
 import LanguageSelector from "../components/language-selector";
 
 const Header = (props) => {
-	const { title } = props;
-	return (
-		<nav>
-			<GithubLogo />
-			<Link href="/" legacyBehavior>
-				{/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
-				<a title="Click to go home">
-					<span className="name">Itamar Sharify</span>
-					{title && <span className="divider">&nbsp;&nbsp;›&nbsp;&nbsp;</span>}
-					<span className="title">{title}</span>
-				</a>
-			</Link>
-			<LanguageSelector />
-			<ThemedIcon />
-			<style jsx>{`
+    const { title } = props;
+    return (
+        <nav>
+            <GithubLogo />
+            <Link href="/" legacyBehavior>
+                {/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+                <a title="Click to go home">
+                    <span className="name">Itamar Sharify</span>
+                    {title && <span className="divider">&nbsp;&nbsp;›&nbsp;&nbsp;</span>}
+                    <span className="title">{title}</span>
+                </a>
+            </Link>
+            <LanguageSelector />
+            <ThemedIcon />
+            <style jsx>{`
                 nav {
                     height: var(--header-height);
                     width: 100%;
@@ -60,8 +60,8 @@ const Header = (props) => {
                     text-decoration: none;
                 }
             `}</style>
-		</nav>
-	);
+        </nav>
+    );
 };
 
 export default Header;

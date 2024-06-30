@@ -1,5 +1,7 @@
+"use client";
 import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
 import { useIsRTL } from "lib/hooks/useTranslation";
+import { useEffect } from "react";
 export function getIconClassAndAction(isDark) {
 	if (isDark) {
 		return "dark-icon";
@@ -45,6 +47,7 @@ function ThemeItem({ currentTheme, isSelected, setTheme }) {
 function ThemeList({ currentThemeName, setThemeName }) {
 	const isRTL = useIsRTL();
 	const availableThemes = getAvailableThemes();
+
 	return (
 		<div className="container">
 			<ul>
@@ -84,7 +87,9 @@ function ThemeList({ currentThemeName, setThemeName }) {
 export const ThemedIcon = () => {
 	const { currentThemeName, setThemeName, isDarkTheme, toggleDarkMode } =
 		useTheme();
-
+	useEffect(() => {
+		document.body.dataset.theme = currentThemeName;
+	}, [currentThemeName]);
 	const iconClass = getIconClassAndAction(isDarkTheme);
 	const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
 	return (

@@ -1,7 +1,6 @@
 import { AboutMe, Avatar, Links, Stats } from "components";
 import FloatingButton from "components/floating-button";
 import { useTrackVisibility } from "lib/hooks";
-import React from "react";
 export default function HomePage({ quotes }) {
 	const [ref, { isVisible, wasEverVisible }] = useTrackVisibility();
 	const showStats = isVisible || wasEverVisible;

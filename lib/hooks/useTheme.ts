@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect, useMemo, useState } from "react";
 import Theme from "../../theme/theme";
 
 export function getCurrentThemeName() {
@@ -30,8 +31,8 @@ export const toggleTheme = () => {
 };
 
 export const getAvailableThemes = () => Object.keys(Theme);
-export function getCurrentTheme() {
-	const currentTheme = getCurrentThemeName();
+export function useCurrentTheme() {
+	const currentTheme = useMemo(() => getCurrentThemeName(), []);
 	return Theme[currentTheme];
 }
 /**

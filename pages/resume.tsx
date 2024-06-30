@@ -25,7 +25,7 @@ export default function Resume({ resumeData }) {
 			<div className="timeline">
 				{jobs.map((job) => (
 					<Job
-						key={job.company.name}
+						key={`${job.duration.from} - ${job.duration.to} - ${job.company.name}`}
 						job={job}
 						updateFilterText={setFilterText}
 					/>

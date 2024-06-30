@@ -1,13 +1,13 @@
 import { Header } from "layouts";
 import ErrorBoundary from "layouts/error-boundary";
 import { useTheme } from "lib/hooks";
-import { useLanguageDirection } from "lib/hooks/useTranslation";
+import { getLanguageDirection } from "lib/hooks/useTranslation";
 import Head from "next/head";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { centered } from "theme/styles";
 function App({ Component, pageProps }) {
-	const direction = useLanguageDirection();
+	const direction = getLanguageDirection();
 	const { currentThemeName } = useTheme();
 	const title = pageProps.headerTitle;
 	const { className: centerClassName, styles: centerStyle } = centered({
