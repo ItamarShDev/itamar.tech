@@ -1,24 +1,24 @@
 import Link from "next/link";
 
 export default function LinkCard({
-    route,
-    title,
-    subTitle,
-    routeRef = null,
-    date = null,
-    children = null,
+	route,
+	title,
+	subTitle,
+	routeRef = null,
+	date = null,
+	children = null,
 }) {
-    return (
-        <Link href={routeRef || route} as={route} passHref legacyBehavior>
-            <dl>
-                <dt>{title}</dt>
-                <dd>
-                    <span>{subTitle}</span>
-                    <span>{date}</span>
-                </dd>
-                {children}
+	return (
+		<Link href={routeRef || route} as={route} passHref legacyBehavior>
+			<dl>
+				<dt>{title}</dt>
+				<dd>
+					<span>{subTitle}</span>
+					<span>{date}</span>
+				</dd>
+				{children}
 
-                <style jsx>{`
+				<style jsx>{`
                     dl {
                         border-radius: 2rem;
                         display: block;
@@ -47,7 +47,7 @@ export default function LinkCard({
                         line-height: 1.5;
                     }
                 `}</style>
-                <style jsx>{`
+				<style jsx>{`
                     @media only screen and (max-width: 968px) {
                         dl {
                             text-align: center;
@@ -61,7 +61,7 @@ export default function LinkCard({
                         }
                     }
                 `}</style>
-            </dl>
-        </Link>
-    );
+			</dl>
+		</Link>
+	);
 }

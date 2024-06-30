@@ -4,38 +4,38 @@ import TwitterLogo from "images/TwitterLogo";
 import { grid } from "theme/styles";
 
 function SocialRefs({ withTitle = false }) {
-    const { className: gridClass, styles: gridStyle } = grid({
-        rows: 1,
-        cols: 2,
-        gap: 20,
-    });
+	const { className: gridClass, styles: gridStyle } = grid({
+		rows: 1,
+		cols: 2,
+		gap: 20,
+	});
 
-    return (
-        <div className="row">
-            {withTitle && <h5>Feel free to contact me here:</h5>}
-            <div className={`${gridClass} refs`}>
-                <a
-                    className="item twitter"
-                    href="https://twitter.com/ISharify"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    title="Twitter"
-                >
-                    <TwitterLogo />
-                </a>
-                <a
-                    className="item github"
-                    href="https://www.github.com/ItamarShDev"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    title="Github"
-                >
-                    <GithubLogo />
-                </a>
+	return (
+		<div className="row">
+			{withTitle && <h5>Feel free to contact me here:</h5>}
+			<div className={`${gridClass} refs`}>
+				<a
+					className="item twitter"
+					href="https://twitter.com/ISharify"
+					target="_blank"
+					rel="noreferrer noopener"
+					title="Twitter"
+				>
+					<TwitterLogo />
+				</a>
+				<a
+					className="item github"
+					href="https://www.github.com/ItamarShDev"
+					target="_blank"
+					rel="noreferrer noopener"
+					title="Github"
+				>
+					<GithubLogo />
+				</a>
 
-                {gridStyle}
-            </div>
-            <style jsx>{`
+				{gridStyle}
+			</div>
+			<style jsx>{`
                 .item {
                     background-size: 30px;
                     height: 30px;
@@ -52,8 +52,8 @@ function SocialRefs({ withTitle = false }) {
                     }
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 export default SocialRefs;

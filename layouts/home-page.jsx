@@ -1,31 +1,31 @@
-import { Links, Stats, Avatar, AboutMe } from "components";
+import { AboutMe, Avatar, Links, Stats } from "components";
 import FloatingButton from "components/floating-button";
 import { useTrackVisibility } from "lib/hooks";
 import React from "react";
 export default function HomePage({ quotes }) {
-    const [ref, { isVisible, wasEverVisible }] = useTrackVisibility();
-    const showStats = isVisible || wasEverVisible;
-    return (
-        <>
-            <article>
-                <section className="image">
-                    <Avatar />
-                </section>
-                <section className="about-me">
-                    <AboutMe quotes={quotes} />
-                </section>
-                <section className="stats" ref={ref}>
-                    {showStats && <Stats />}
-                </section>
-                <section className="links">
-                    <Links />
-                </section>
-                <footer>
-                    <FloatingButton />
-                </footer>
-            </article>
-            <style jsx>
-                {`
+	const [ref, { isVisible, wasEverVisible }] = useTrackVisibility();
+	const showStats = isVisible || wasEverVisible;
+	return (
+		<>
+			<article>
+				<section className="image">
+					<Avatar />
+				</section>
+				<section className="about-me">
+					<AboutMe quotes={quotes} />
+				</section>
+				<section className="stats" ref={ref}>
+					{showStats && <Stats />}
+				</section>
+				<section className="links">
+					<Links />
+				</section>
+				<footer>
+					<FloatingButton />
+				</footer>
+			</article>
+			<style jsx>
+				{`
                     article {
                         display: grid;
                         height: calc(100vh - var(--header-height));
@@ -71,7 +71,7 @@ export default function HomePage({ quotes }) {
                         }
                     }
                 `}
-            </style>
-        </>
-    );
+			</style>
+		</>
+	);
 }

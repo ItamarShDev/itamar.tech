@@ -1,42 +1,42 @@
-import PropTypes from "prop-types";
-import { useTheme } from "lib/hooks";
 import { Header } from "layouts";
-import { centered } from "theme/styles";
-import Head from "next/head";
-import React, { useEffect } from "react";
-import { useLanguageDirection } from "lib/hooks/useTranslation";
 import ErrorBoundary from "layouts/error-boundary";
+import { useTheme } from "lib/hooks";
+import { useLanguageDirection } from "lib/hooks/useTranslation";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { centered } from "theme/styles";
 function App({ Component, pageProps }) {
-    const direction = useLanguageDirection();
-    const { currentThemeName } = useTheme();
-    const title = pageProps.headerTitle;
-    const { className: centerClassName, styles: centerStyle } = centered({
-        selector: "main",
-        isColumns: true,
-    });
-    const { isCentered, maxWidth = "80vw", width = "120rem" } = pageProps;
-    const mainClassName = isCentered ? centerClassName : "";
-    const _title = title
-        ? `Itamar Sharify - ${pageProps.title}`
-        : "Itamar Sharify";
-    useEffect(() => {
-        document.body.dataset.theme = currentThemeName;
-    }, [currentThemeName]);
+	const direction = useLanguageDirection();
+	const { currentThemeName } = useTheme();
+	const title = pageProps.headerTitle;
+	const { className: centerClassName, styles: centerStyle } = centered({
+		selector: "main",
+		isColumns: true,
+	});
+	const { isCentered, maxWidth = "80vw", width = "120rem" } = pageProps;
+	const mainClassName = isCentered ? centerClassName : "";
+	const _title = title
+		? `Itamar Sharify - ${pageProps.title}`
+		: "Itamar Sharify";
+	useEffect(() => {
+		document.body.dataset.theme = currentThemeName;
+	}, [currentThemeName]);
 
-    return (
-        <div id="main-view" style={{ ...direction }}>
-            <Head>
-                <title>{_title}</title>
-            </Head>
-            <Header title={title} />
+	return (
+		<div id="main-view" style={{ ...direction }}>
+			<Head>
+				<title>{_title}</title>
+			</Head>
+			<Header title={title} />
 
-            <main className={mainClassName}>
-                <ErrorBoundary>
-                    <Component {...pageProps} />
-                </ErrorBoundary>
-                {centerStyle}
-            </main>
-            <style jsx>{`
+			<main className={mainClassName}>
+				<ErrorBoundary>
+					<Component {...pageProps} />
+				</ErrorBoundary>
+				{centerStyle}
+			</main>
+			<style jsx>{`
                 main {
                     max-width: ${maxWidth};
                     width: ${width};
@@ -46,7 +46,7 @@ function App({ Component, pageProps }) {
                 }
             `}</style>
 
-            <style jsx global>{`
+			<style jsx global>{`
                 *,
                 *::before,
                 *::after {
@@ -107,14 +107,14 @@ function App({ Component, pageProps }) {
                     height: 1rem;
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 App.propTypes = {
-    pageProps: PropTypes.shape({
-        headerTitle: PropTypes.string,
-    }),
+	pageProps: PropTypes.shape({
+		headerTitle: PropTypes.string,
+	}),
 };
 
 export default App;

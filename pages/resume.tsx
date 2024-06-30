@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { Job } from "components";
 import { FilterJobs } from "components/jobs/filter-jobs";
+import { getAttributesData, getResumeData } from "lib/get-data-methods";
 import { useIsRTL } from "lib/hooks/useTranslation";
 import { filterJobsByText } from "lib/job-utils";
+import type { Job as JobType } from "lib/types/jobs";
+import { useEffect, useState } from "react";
 
 export default function Resume({ resumeData }) {
-    const isRTL = useIsRTL();
-    const [filterText, setFilterText] = useState("");
-    const [jobs, setJobs] = useState(resumeData.jobs);
-    useEffect(() => {
-        const _jobs = filterJobsByText(resumeData.jobs, filterText);
-        setJobs(_jobs);
-    }, [filterText, resumeData]);
+	const isRTL = useIsRTL();
+	const [filterText, setFilterText] = useState("");
+	const [jobs, setJobs] = useState<JobType[]>(resumeData.jobs);
+	useEffect(() => {
+		const _jobs = filterJobsByText(resumeData.jobs, filterText);
+		setJobs(_jobs);
+	}, [filterText, resumeData]);
 
-    return (
-        <section>
-            <FilterJobs
-                filterText={filterText}
-                jobs={jobs}
-                updateFilterText={setFilterText}
-            />
-            <div className="timeline">
-                {jobs.map((job, index) => (
-                    <Job
-                        key={index}
-                        job={job}
-                        updateFilterText={setFilterText}
-                    />
-                ))}
-            </div>
-            <style jsx>{`
+	return (
+		<section>
+			<FilterJobs
+				filterText={filterText}
+				jobs={jobs}
+				updateFilterText={setFilterText}
+			/>
+			<div className="timeline">
+				{jobs.map((job) => (
+					<Job
+						key={job.company.name}
+						job={job}
+						updateFilterText={setFilterText}
+					/>
+				))}
+			</div>
+			<style jsx>{`
                 .timeline {
                     display: grid;
                     grid-gap: 1.5rem;
@@ -52,19 +53,19 @@ export default function Resume({ resumeData }) {
                     border-radius: 4rem 4rem;
                 }
             `}</style>
-        </section>
-    );
+		</section>
+	);
 }
 
 export async function getStaticProps({ locale }) {
-    const resumeData = await getResumeData(locale);
-    const attributesData = await getAttributesData();
-    return {
-        props: {
-            resumeData,
-            attributesData,
-            headerTitle: "Resume",
-            title: "CV",
-        },
-    };
+	const resumeData = await getResumeData(locale);
+	const attributesData = await getAttributesData();
+	return {
+		props: {
+			resumeData,
+			attributesData,
+			headerTitle: "Resume",
+			title: "CV",
+		},
+	};
 }

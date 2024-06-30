@@ -1,50 +1,48 @@
 import { useScreenSize, useScrollObserver, useUrlHash } from "lib/hooks";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function generateLinkMarkup($contentElement) {
-    const headings = [...$contentElement.querySelectorAll("h2, h3")];
-    const parsedHeadings = headings.map((heading) => {
-        return {
-            title: heading.innerText,
-            depth: heading.nodeName.replace(/\D/g, "") - 1,
-            id: heading.getAttribute("id"),
-        };
-    });
-    return parsedHeadings;
+	const headings = [...$contentElement.querySelectorAll("h2, h3")];
+	const parsedHeadings = headings.map((heading) => {
+		return {
+			title: heading.innerText,
+			depth: heading.nodeName.replace(/\D/g, "") - 1,
+			id: heading.getAttribute("id"),
+		};
+	});
+	return parsedHeadings;
 }
 
 function HeaderTitle({ header }) {
-    const isCurrentTitle = useUrlHash(header.id);
-    const titleClass = isCurrentTitle ? "bold" : "dim";
-    const AnchorLink = <a href={`#${header.id}`}>{header.title}</a>;
-    let title = <dt className={titleClass}>{AnchorLink}</dt>;
-    if (header.depth > 1) {
-        title = <dd className={titleClass}>{AnchorLink}</dd>;
-    }
-    return title;
+	const isCurrentTitle = useUrlHash(header.id);
+	const titleClass = isCurrentTitle ? "bold" : "dim";
+	const AnchorLink = <a href={`#${header.id}`}>{header.title}</a>;
+	let title = <dt className={titleClass}>{AnchorLink}</dt>;
+	if (header.depth > 1) {
+		title = <dd className={titleClass}>{AnchorLink}</dd>;
+	}
+	return title;
 }
 function LocalesLinks() {
-    const { locales, locale, asPath } = useRouter();
-    return <>
-        <span>Translations</span>
-        <ul>
-            {locales.map((_locale) => {
-                if (_locale === "default") return null;
-                return (
-                    <li
-                        key={_locale}
-                        className={_locale === locale ? "active" : ""}
-                    >
-                        <Link href={`${asPath}`} locale={_locale} legacyBehavior>
-                            {_locale}
-                        </Link>
-                    </li>
-                );
-            })}
-        </ul>
+	const { locales, locale, asPath } = useRouter();
+	return (
+		<>
+			<span>Translations</span>
+			<ul>
+				{locales.map((_locale) => {
+					if (_locale === "default") return null;
+					return (
+						<li key={_locale} className={_locale === locale ? "active" : ""}>
+							<Link href={`${asPath}`} locale={_locale} legacyBehavior>
+								{_locale}
+							</Link>
+						</li>
+					);
+				})}
+			</ul>
 
-        <style jsx>{`
+			<style jsx>{`
             span {
                 font-weight: bold;
             }
@@ -59,8 +57,8 @@ function LocalesLinks() {
                 font-size: 1.4rem;
             }
         `}</style>
-        <style jsx global>
-            {`
+			<style jsx global>
+				{`
                 li a {
                     text-decoration: none;
                 }
@@ -68,29 +66,30 @@ function LocalesLinks() {
                     text-decoration: underline;
                 }
             `}
-        </style>
-    </>;
+			</style>
+		</>
+	);
 }
 
 export function HeadlineSidebar({ article }) {
-    const scrollPercentage = useScrollObserver();
-    const { isMobile } = useScreenSize();
-    if (isMobile || !article) return <></>;
-    const headers = generateLinkMarkup(article);
-    const headings = headers.map((header) => (
-        <HeaderTitle key={header.id} header={header} />
-    ));
-    return (
-        <aside>
-            <div className="container">
-                <div>
-                    <h5>Headlines</h5>
-                    <dl>{headings}</dl>
-                </div>
-                <LocalesLinks />
-                <span className="line"></span>
-            </div>
-            <style jsx>{`
+	const scrollPercentage = useScrollObserver();
+	const { isMobile } = useScreenSize();
+	if (isMobile || !article) return <></>;
+	const headers = generateLinkMarkup(article);
+	const headings = headers.map((header) => (
+		<HeaderTitle key={header.id} header={header} />
+	));
+	return (
+		<aside>
+			<div className="container">
+				<div>
+					<h5>Headlines</h5>
+					<dl>{headings}</dl>
+				</div>
+				<LocalesLinks />
+				<span className="line" />
+			</div>
+			<style jsx>{`
                 .container {
                     position: sticky;
                     top: 9rem;
@@ -160,7 +159,7 @@ export function HeadlineSidebar({ article }) {
                     }
                 }
             `}</style>
-            <style jsx global>{`
+			<style jsx global>{`
                 .bold {
                     font-weight: bold;
                 }
@@ -187,6 +186,6 @@ export function HeadlineSidebar({ article }) {
                     text-decoration: underline;
                 }
             `}</style>
-        </aside>
-    );
+		</aside>
+	);
 }

@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 import { BACKSPACE, DOWN, ENTER, ESC, UP } from "utils/key-codes";
 
 PropertiesSelect.propTypes = {
-    skills: PropTypes.arrayOf(PropTypes.string),
-    theme: PropTypes.object,
-    updateSelectedJobs: PropTypes.func,
+	skills: PropTypes.arrayOf(PropTypes.string),
+	theme: PropTypes.object,
+	updateSelectedJobs: PropTypes.func,
 };
 
 /**
@@ -14,152 +14,147 @@ PropertiesSelect.propTypes = {
  * @param {string} text
  */
 function filterSkills(skills, tags, text) {
-    return Array.from(skills).filter(
-        (item) =>
-            item.toLowerCase().includes(text.toLowerCase()) &&
-            !tags.includes(item)
-    );
+	return Array.from(skills).filter(
+		(item) =>
+			item.toLowerCase().includes(text.toLowerCase()) && !tags.includes(item),
+	);
 }
 
 export default function PropertiesSelect({
-    properties,
-    setSelectedSkills,
-    qualificationText,
+	properties,
+	setSelectedSkills,
+	qualificationText,
 }) {
-    const [filteredSkills, setFilteredSkills] = useState([]);
-    const [hovered, setHovered] = useState(0);
-    const [inputText, setInputText] = useState("");
-    const [tags, setTags] = useState([]);
-    const [showResults, setShowResults] = useState(false);
-    const inputEl = useRef(null);
+	const [filteredSkills, setFilteredSkills] = useState([]);
+	const [hovered, setHovered] = useState(0);
+	const [inputText, setInputText] = useState("");
+	const [tags, setTags] = useState([]);
+	const [showResults, setShowResults] = useState(false);
+	const inputEl = useRef(null);
 
-    const skills = Object.keys(properties);
-    useEffect(() => {
-        setFilteredSkills(filterSkills(skills, tags, inputText));
-        const shouldShowResults =
-            filteredSkills.length > 0 && inputText.length > 0;
-        setShowResults(shouldShowResults);
-        setHovered(0);
-    }, [inputText, tags]);
-    useEffect(() => {
-        setSelectedSkills(tags);
-    }, [tags]);
-    /**
-     * @param {any} skill
-     */
-    const addToResults = (skill) => {
-        setShowResults(false);
-        setTags([...tags, skill]);
-        setInputText("");
-    };
-    function focusInput() {
-        inputEl?.current?.focus();
-        setShowResults(true);
-    }
+	const skills = Object.keys(properties);
+	useEffect(() => {
+		setFilteredSkills(filterSkills(skills, tags, inputText));
+		const shouldShowResults = filteredSkills.length > 0 && inputText.length > 0;
+		setShowResults(shouldShowResults);
+		setHovered(0);
+	}, [inputText, tags, skills, filteredSkills]);
 
-    /**
-     * @param {{ keyCode: any; }} e
-     */
-    function moveSelection(e) {
-        const code = parseInt(e.keyCode);
-        if (code === DOWN) {
-            if (!showResults) {
-                setShowResults(true);
-                return;
-            }
-            setHovered((hovered + 1) % filteredSkills.length);
-        } else if (code === UP) {
-            if (!showResults) {
-                setShowResults(true);
-                return;
-            }
-            const newItem = hovered === 0 ? filteredSkills.length : hovered;
-            setHovered((newItem - 1) % filteredSkills.length);
-        } else if (code === ENTER) {
-            const current = filteredSkills[hovered];
-            if (current && showResults) addToResults(current);
-        } else if (code === ESC) {
-            setInputText("");
-        } else if (code === BACKSPACE && inputText === "") {
-            removeLastTag();
-        }
-    }
-    function removeLastTag() {
-        const _tags = [...tags];
-        _tags.pop();
-        setTags(_tags);
-    }
+	useEffect(() => {
+		setSelectedSkills(tags);
+	}, [tags, setSelectedSkills]);
+	/**
+	 * @param {any} skill
+	 */
+	const addToResults = (skill) => {
+		setShowResults(false);
+		setTags([...tags, skill]);
+		setInputText("");
+	};
+	function focusInput() {
+		inputEl?.current?.focus();
+		setShowResults(true);
+	}
 
-    /**
-     * @param {any} tagName
-     */
-    function removeTag(tagName) {
-        setTags(tags.filter((tag) => tag !== tagName));
-    }
+	/**
+	 * @param {{ keyCode: any; }} e
+	 */
+	function moveSelection(e) {
+		const code = Number.parseInt(e.keyCode);
+		if (code === DOWN) {
+			if (!showResults) {
+				setShowResults(true);
+				return;
+			}
+			setHovered((hovered + 1) % filteredSkills.length);
+		} else if (code === UP) {
+			if (!showResults) {
+				setShowResults(true);
+				return;
+			}
+			const newItem = hovered === 0 ? filteredSkills.length : hovered;
+			setHovered((newItem - 1) % filteredSkills.length);
+		} else if (code === ENTER) {
+			const current = filteredSkills[hovered];
+			if (current && showResults) addToResults(current);
+		} else if (code === ESC) {
+			setInputText("");
+		} else if (code === BACKSPACE && inputText === "") {
+			removeLastTag();
+		}
+	}
+	function removeLastTag() {
+		const _tags = [...tags];
+		_tags.pop();
+		setTags(_tags);
+	}
 
-    return (
-        <div className="matcher">
-            <label htmlFor="search-technologies">
-                Search for tech
-                {qualificationText && (
-                    <span className="match-text"> - {qualificationText}</span>
-                )}
-            </label>
-            <div className="container">
-                <div
-                    className="input-container"
-                    onFocus={focusInput}
-                    onClick={focusInput}
-                    onBlur={() => setShowResults(false)}
-                >
-                    <div className="tags">
-                        {tags.map((tag) => (
-                            <div className="tag" key={tag}>
-                                {tag}
-                                <span
-                                    className="remove-tag"
-                                    onClick={() => removeTag(tag)}
-                                >
-                                    x
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                    <input
-                        type="text"
-                        autoFocus
-                        id="search-technologies"
-                        list="technologies"
-                        ref={inputEl}
-                        placeholder="search"
-                        onChange={(e) => setInputText(e.target.value)}
-                        onKeyDown={moveSelection}
-                        value={inputText}
-                    />
-                </div>
-                <div className="results-container">
-                    {showResults && filteredSkills.length > 0 && (
-                        <ul id="technologies" className="results">
-                            {filteredSkills.map((skill, index) => (
-                                <li
-                                    key={skill}
-                                    className={
-                                        index === hovered ? "selected" : ""
-                                    }
-                                    onMouseEnter={() => setHovered(index)}
-                                    onMouseDown={(e) => {
-                                        addToResults(skill);
-                                        e.stopPropagation();
-                                    }}
-                                >
-                                    {skill}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </div>
-            <style jsx>{`
+	/**
+	 * @param {any} tagName
+	 */
+	function removeTag(tagName) {
+		setTags(tags.filter((tag) => tag !== tagName));
+	}
+
+	return (
+		<div className="matcher">
+			<label htmlFor="search-technologies">
+				Search for tech
+				{qualificationText && (
+					<span className="match-text"> - {qualificationText}</span>
+				)}
+			</label>
+			<div className="container">
+				<div
+					className="input-container"
+					onFocus={focusInput}
+					onClick={focusInput}
+					onBlur={() => setShowResults(false)}
+				>
+					<div className="tags">
+						{tags.map((tag) => (
+							<div className="tag" key={tag}>
+								{tag}
+								<span className="remove-tag" onClick={() => removeTag(tag)}>
+									x
+								</span>
+							</div>
+						))}
+					</div>
+					<input
+						type="text"
+						// biome-ignore lint/a11y/noAutofocus: I want it
+						autoFocus
+						id="search-technologies"
+						list="technologies"
+						ref={inputEl}
+						placeholder="search"
+						onChange={(e) => setInputText(e.target.value)}
+						onKeyDown={moveSelection}
+						value={inputText}
+					/>
+				</div>
+				<div className="results-container">
+					{showResults && filteredSkills.length > 0 && (
+						<ul id="technologies" className="results">
+							{filteredSkills.map((skill, index) => (
+								<li
+									key={skill}
+									className={index === hovered ? "selected" : ""}
+									onMouseEnter={() => setHovered(index)}
+									onMouseDown={(e) => {
+										addToResults(skill);
+										e.stopPropagation();
+									}}
+								>
+									{skill}
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
+			</div>
+			<style jsx>{`
                 label {
                     display: block;
                     color: var(--colors-text);
@@ -261,6 +256,6 @@ export default function PropertiesSelect({
                     }
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }

@@ -1,14 +1,14 @@
 import { useContext } from "react";
 
 const EmailMeFooter = ({ text, title }) => {
-    const mailTo = `mailto:itamarsharifytech@gmail.com?subject=${title}`;
-    return (
-        <address>
-            <div>
-                {text}
-                <a href={mailTo}>here</a>
-            </div>
-            <style jsx>{`
+	const mailTo = `mailto:itamarsharifytech@gmail.com?subject=${title}`;
+	return (
+		<address>
+			<div>
+				{text}
+				<a href={mailTo}>here</a>
+			</div>
+			<style jsx>{`
                 address {
                     color: var(--colors-paragraph);
                     font-size: 1.5rem;
@@ -20,7 +20,7 @@ const EmailMeFooter = ({ text, title }) => {
                     margin-inline-start: 5px;
                 }
             `}</style>
-        </address>
-    );
+		</address>
+	);
 };
 export default EmailMeFooter;

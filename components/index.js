@@ -1,20 +1,20 @@
-import LinkCard from "./link-card";
-import Job from "./jobs/job";
-import Avatar from "./avatar";
 import AboutMe from "./about-me";
-import SocialRefs from "./social-refs";
-import LanguagesList from "./language-list";
+import Avatar from "./avatar";
 import Image from "./image";
-import Stats from "./stats";
+import Job from "./jobs/job";
+import LanguagesList from "./language-list";
+import LinkCard from "./link-card";
 import Links from "./links";
+import SocialRefs from "./social-refs";
+import Stats from "./stats";
 export {
-    Stats,
-    Image,
-    Links,
-    LinkCard,
-    Job,
-    Avatar,
-    AboutMe,
-    SocialRefs,
-    LanguagesList,
+	Stats,
+	Image,
+	Links,
+	LinkCard,
+	Job,
+	Avatar,
+	AboutMe,
+	SocialRefs,
+	LanguagesList,
 };

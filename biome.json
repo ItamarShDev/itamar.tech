@@ -4,9 +4,19 @@
 		"enabled": true
 	},
 	"linter": {
+		"ignore": ["**/node_modules/*", ".next/*", "public/*", ".vscode/*"],
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": {
+				"useKeyWithClickEvents": {
+					"level": "info"
+				}
+			}
 		}
+	},
+	"formatter": {
+		"enabled": true,
+		"ignore": ["**/node_modules/*", ".next/*", "public/*", ".vscode/*"]
 	}
 }

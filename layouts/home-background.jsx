@@ -1,18 +1,16 @@
-import React from "react";
-
 function getNarrowAngle() {
-    const degree = Math.random() * 360;
-    if (degree % 60 > 30) return degree + 30;
-    return degree;
+	const degree = Math.random() * 360;
+	if (degree % 60 > 30) return degree + 30;
+	return degree;
 }
 function HomeBackground() {
-    const randomDegree = getNarrowAngle();
-    return (
-        <>
-            <div className="bg"></div>
-            <div className="bg bg2"></div>
-            <div className="bg bg3"></div>
-            <style jsx>{`
+	const randomDegree = getNarrowAngle();
+	return (
+		<>
+			<div className="bg" />
+			<div className="bg bg2" />
+			<div className="bg bg3" />
+			<style jsx>{`
                 .bg {
                     animation: slide 20s ease-in-out 2 alternate;
                     background-image: linear-gradient(
@@ -46,8 +44,8 @@ function HomeBackground() {
                     }
                 }
             `}</style>
-        </>
-    );
+		</>
+	);
 }
 
 export default HomeBackground;

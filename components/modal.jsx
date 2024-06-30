@@ -1,40 +1,42 @@
-import { useScrollbarOnBody, usePortal } from "lib/hooks";
-import { useState, useEffect } from "react";
+import { usePortal, useScrollbarOnBody } from "lib/hooks";
+import { useEffect, useState } from "react";
 
 function ModalComponent({ open, setOpened, title, children, footer = null }) {
-    return (
-        <div className={`container ${open ? "opened" : "closed"}`}>
-            <div className="modal-wrapper">
-                <div className={`modal ${open ? "opened" : "closed"}`}>
-                    {title && (
-                        <div className="header">
-                            <span className="title">{title}</span>
-                            <a
-                                className="close"
-                                onClick={() => setOpened(false)}
-                            >
-                                <svg
-                                    viewBox="0 0 15 15"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="15"
-                                    height="15"
-                                >
-                                    <path
-                                        d="M1.5 1.5l12 12m-12 0l12-12"
-                                        stroke={"var(--colors-text)"}
-                                        strokeWidth="2px"
-                                    ></path>
-                                </svg>
-                            </a>
-                        </div>
-                    )}
-                    <div className="body">{children}</div>
-                    {footer && <div className="footer">{footer}</div>}
-                </div>
-            </div>
+	return (
+		<div className={`container ${open ? "opened" : "closed"}`}>
+			<div className="modal-wrapper">
+				<div className={`modal ${open ? "opened" : "closed"}`}>
+					{title && (
+						<div className="header">
+							<span className="title">{title}</span>
+							<button
+								type="button"
+								className="close"
+								onClick={() => setOpened(false)}
+							>
+								<svg
+									viewBox="0 0 15 15"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									width="15"
+									height="15"
+								>
+									<title>open modal</title>
+									<path
+										d="M1.5 1.5l12 12m-12 0l12-12"
+										stroke={"var(--colors-text)"}
+										strokeWidth="2px"
+									/>
+								</svg>
+							</button>
+						</div>
+					)}
+					<div className="body">{children}</div>
+					{footer && <div className="footer">{footer}</div>}
+				</div>
+			</div>
 
-            <style jsx>{`
+			<style jsx>{`
                 .container {
                     transition: backdrop-filter 1s ease-in-out;
                     z-index: 10;
@@ -124,51 +126,52 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
                     transform-origin: center center;
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 function Modal({
-    open,
-    setOpened,
-    refreshOnRender,
-    title,
-    children,
-    footer = null,
-    parentEl = null,
+	open,
+	setOpened,
+	refreshOnRender,
+	title,
+	children,
+	footer = null,
+	parentEl = null,
 }) {
-    const [_, setScrollingOnBody] = useScrollbarOnBody(!open);
-    useEffect(() => {
-        setScrollingOnBody(!open);
-    }, [open]);
-    const [root, setRoot] = useState(null);
-    useEffect(() => {
-        if (parentEl) {
-            setRoot(parentEl);
-        } else {
-            const elm = document.querySelector("body");
-            setRoot(elm);
-        }
-    }, []);
-    const modal = (
-        <ModalComponent
-            open={open}
-            setOpened={setOpened}
-            title={title}
-            footer={footer}
-        >
-            {children}
-        </ModalComponent>
-    );
-    const portal = usePortal(modal, root);
+	const [_, setScrollingOnBody] = useScrollbarOnBody(!open);
+	useEffect(() => {
+		setScrollingOnBody(!open);
+	}, [open, setScrollingOnBody]);
+	const [root, setRoot] = useState(null);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (parentEl) {
+			setRoot(parentEl);
+		} else {
+			const elm = document.querySelector("body");
+			setRoot(elm);
+		}
+	}, []);
+	const modal = (
+		<ModalComponent
+			open={open}
+			setOpened={setOpened}
+			title={title}
+			footer={footer}
+		>
+			{children}
+		</ModalComponent>
+	);
+	const portal = usePortal(modal, root);
 
-    if (!process.browser) return null;
-    if (!root) return null;
+	if (!process.browser) return null;
+	if (!root) return null;
 
-    if (refreshOnRender) {
-        return open ? portal : null;
-    }
-    return portal;
+	if (refreshOnRender) {
+		return open ? portal : null;
+	}
+	return portal;
 }
 
 export default Modal;

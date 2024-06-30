@@ -6,9 +6,9 @@ import ReactDOM from "react-dom";
  * @param {HTMLElement} parent
  */
 export default function usePortal(component, parent) {
-    if (process.browser) {
-        const elm = parent || document.getElementsByTagName("body")[0];
-        return ReactDOM.createPortal(component, elm);
-    }
-    return component;
+	if (process.browser) {
+		const elm = parent || document.getElementsByTagName("body")[0];
+		return ReactDOM.createPortal(component, elm);
+	}
+	return component;
 }

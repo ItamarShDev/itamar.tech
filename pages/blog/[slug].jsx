@@ -1,35 +1,31 @@
-import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
+import EmailMeFooter from "components/email-footer";
+import { useTelegramComments } from "lib/hooks";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
-import { useTelegramComments } from "lib/hooks";
 import { useEffect, useRef, useState } from "react";
-import EmailMeFooter from "components/email-footer";
+import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
 
 export default function Blog({ data, html }) {
-    const [articleDOM, setArticleDOM] = useState(null);
-    const articleRef = useRef(null);
-    useTelegramComments("blog-footer");
-    const emailTitle = `Re: ${encodeURI(data?.title)}`;
+	const [articleDOM, setArticleDOM] = useState(null);
+	const articleRef = useRef(null);
+	useTelegramComments("blog-footer");
+	const emailTitle = `Re: ${encodeURI(data?.title)}`;
 
-    useEffect(() => {
-        setArticleDOM(articleRef.current);
-    }, [html]);
-    if (!data) return null;
-    return (
-        <div id="blog-post">
-            <HeadlineSidebar article={articleDOM} />
-            <div className="blog-wrapper" id="blog-footer">
-                <h1 className="post-title">{data?.title}</h1>
-                <article
-                    ref={articleRef}
-                    dangerouslySetInnerHTML={{ __html: html }}
-                />
-                <EmailMeFooter
-                    title={emailTitle}
-                    text="Having thoughts? email me"
-                />
-            </div>
-            <style jsx>{`
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		setArticleDOM(articleRef.current);
+	}, [html]);
+	if (!data) return null;
+	return (
+		<div id="blog-post">
+			<HeadlineSidebar article={articleDOM} />
+			<div className="blog-wrapper" id="blog-footer">
+				<h1 className="post-title">{data?.title}</h1>
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				<article ref={articleRef} dangerouslySetInnerHTML={{ __html: html }} />
+				<EmailMeFooter title={emailTitle} text="Having thoughts? email me" />
+			</div>
+			<style jsx>{`
                 #blog-post {
                     display: flex;
                     justify-content: center;
@@ -58,7 +54,7 @@ export default function Blog({ data, html }) {
                     }
                 }
             `}</style>
-            <style jsx global>{`
+			<style jsx global>{`
                 p {
                     filter: brightness(150%);
                     margin: 0 0 0 0;
@@ -180,29 +176,29 @@ export default function Blog({ data, html }) {
                     }
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 export async function getStaticProps({ params, locale }) {
-    const { data, content } = getPostData(params.slug, locale);
-    const html = renderMarkdown(content);
-    return {
-        props: {
-            data,
-            title: "Blog",
-            html: html,
-            headerTitle: "Blog",
-            width: "100vw",
-            maxWidth: "100vw",
-        },
-    };
+	const { data, content } = getPostData(params.slug, locale);
+	const html = renderMarkdown(content);
+	return {
+		props: {
+			data,
+			title: "Blog",
+			html: html,
+			headerTitle: "Blog",
+			width: "100vw",
+			maxWidth: "100vw",
+		},
+	};
 }
 export async function getStaticPaths() {
-    // Return a list of possible value for id
-    const paths = getAllPostIds();
-    return {
-        paths,
-        fallback: true,
-    };
+	// Return a list of possible value for id
+	const paths = getAllPostIds();
+	return {
+		paths,
+		fallback: true,
+	};
 }

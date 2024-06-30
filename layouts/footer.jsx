@@ -1,43 +1,43 @@
-import TwitterLogo from "images/TwitterLogo";
 import GithubLogo from "images/GithubLogo";
 import MediumLogo from "images/MediumLogo";
+import TwitterLogo from "images/TwitterLogo";
 
 const Footer = () => {
-    return (
-        <footer>
-            <a
-                href="https://twitter.com/ISharify"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="twitter"
-            >
-                <div>
-                    <TwitterLogo center />
-                </div>
-                Twitter
-            </a>
-            <a
-                href="https://www.github.com/ItamarShDev"
-                target="_blank"
-                rel="noreferrer noopener"
-            >
-                <div>
-                    <GithubLogo center />
-                </div>
-                Github
-            </a>
-            <a
-                href="https://medium.com/@itamarsharify"
-                target="_blank"
-                className="medium"
-                rel="noreferrer noopener"
-            >
-                <div>
-                    <MediumLogo center />
-                </div>
-                Medium
-            </a>
-            <style jsx>{`
+	return (
+		<footer>
+			<a
+				href="https://twitter.com/ISharify"
+				target="_blank"
+				rel="noreferrer noopener"
+				className="twitter"
+			>
+				<div>
+					<TwitterLogo center />
+				</div>
+				Twitter
+			</a>
+			<a
+				href="https://www.github.com/ItamarShDev"
+				target="_blank"
+				rel="noreferrer noopener"
+			>
+				<div>
+					<GithubLogo center />
+				</div>
+				Github
+			</a>
+			<a
+				href="https://medium.com/@itamarsharify"
+				target="_blank"
+				className="medium"
+				rel="noreferrer noopener"
+			>
+				<div>
+					<MediumLogo center />
+				</div>
+				Medium
+			</a>
+			<style jsx>{`
                 footer {
                     width: 100%;
                     height: 100px;
@@ -81,8 +81,8 @@ const Footer = () => {
                     width: 1.5em;
                 }
             `}</style>
-        </footer>
-    );
+		</footer>
+	);
 };
 
 export default Footer;

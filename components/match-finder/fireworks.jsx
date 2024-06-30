@@ -1,9 +1,9 @@
 function Fireworks(props) {
-    return (
-        <div className={props.percentage >= 90 ? "pyro" : ""}>
-            <div className="before"></div>
-            <div className="after"></div>
-            <style jsx>{`
+	return (
+		<div className={props.percentage >= 90 ? "pyro" : ""}>
+			<div className="before" />
+			<div className="after" />
+			<style jsx>{`
                 .pyro > .before,
                 .pyro > .after {
                     position: absolute;
@@ -108,8 +108,8 @@ function Fireworks(props) {
                     }
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 export default Fireworks;

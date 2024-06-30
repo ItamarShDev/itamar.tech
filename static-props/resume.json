@@ -1,239 +1,227 @@
 {
-    "en": {
-        "jobs": [
-            {
-                "title": "Software Engineering T.A. (part time)",
-                "duration": { "from": 2015, "to": 2016 },
-                "company": {
-                    "name": "Azrieli College of Engineering",
-                    "logo": "logos/jce.png",
-                    "website": "https://www.jce.ac.il"
-                },
-                "tags": [
-                    "Angular.js",
-                    "Scrum",
-                    "Node.js",
-                    "Javascript",
-                    "CSS",
-                    "Teaching"
-                ],
-                "description": "Teaching Assistant; Teaching the MEAN stack and acting as a Scrum Master.",
-                "elaborated_description": "Teaching and helping students to build a full project and deploy it in one semester. Helping students to create a production ready project for NPOs for extra credit"
-            },
-            {
-                "title": "Web Developer (part time)",
-                "duration": { "from": 2015, "to": 2016 },
-                "company": {
-                    "name": "WishTrip",
-                    "logo": "logos/wishtrip.jpeg",
+	"en": {
+		"jobs": [
+			{
+				"title": "Software Engineering T.A. (part time)",
+				"duration": { "from": 2015, "to": 2016 },
+				"company": {
+					"name": "Azrieli College of Engineering",
+					"logo": "logos/jce.png",
+					"website": "https://www.jce.ac.il"
+				},
+				"tags": [
+					"Angular.js",
+					"Scrum",
+					"Node.js",
+					"Javascript",
+					"CSS",
+					"Teaching"
+				],
+				"description": "Teaching Assistant; Teaching the MEAN stack and acting as a Scrum Master.",
+				"elaborated_description": "Teaching and helping students to build a full project and deploy it in one semester. Helping students to create a production ready project for NPOs for extra credit"
+			},
+			{
+				"title": "Web Developer (part time)",
+				"duration": { "from": 2015, "to": 2016 },
+				"company": {
+					"name": "WishTrip",
+					"logo": "logos/wishtrip.jpeg",
 
-                    "website": "https://www.wishtrip.com/"
-                },
-                "tags": [
-                    "Angular.js",
-                    "OpenMaps",
-                    "Socket.io",
-                    "Node.js",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": "Creating the company main website from scratch, Building live map user tracking and live chat between users",
-                "elaborated_description": "Bootstrap the company main site from 0 to hero"
-            },
-            {
-                "title": "Full-stack developer",
-                "duration": { "from": 2016, "to": 2019 },
+					"website": "https://www.wishtrip.com/"
+				},
+				"tags": [
+					"Angular.js",
+					"OpenMaps",
+					"Socket.io",
+					"Node.js",
+					"Javascript",
+					"CSS"
+				],
+				"description": "Creating the company main website from scratch, Building live map user tracking and live chat between users",
+				"elaborated_description": "Bootstrap the company main site from 0 to hero"
+			},
+			{
+				"title": "Full-stack developer",
+				"duration": { "from": 2016, "to": 2019 },
 
-                "company": {
-                    "name": "Koalys",
-                    "logo": "logos/audyx.png",
-                    "website": "http://www.koalys.com/"
-                },
-                "tags": [
-                    "React.js",
-                    "ClojureScript",
-                    "Ruby On Rails",
-                    "WebRTC",
-                    "Socket.io",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": " 2 PWA applications  help designing and creating tools for internal use",
-                "elaborated_description": ""
-            },
-            {
-                "title": "Full-stack Developer",
-                "duration": { "from": 2019, "to": 2020 },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": [
-                    "React.js",
-                    "Python",
-                    "GitLab CI",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": "Helping to build the company customer facing application Help recruiting new wev-devs to the team",
-                "elaborated_description": ""
-            },
-            {
-                "title": "Python Developer",
-                "duration": { "from": 2020, "to": 2022 },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": ["Python", "JupyterLab", "Javascript", "CSS"],
-                "description": "Building internal tools for the company field engineers",
-                "elaborated_description": ""
-            },
-            {
-                "title": "Full-stack developer",
-                "duration": { "from": 2022, "to": "Present" },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": [
-                    "Python",
-                    "Go",
-                    "JupyterLab",
-                    "Javascript",
-                    "Typescript",
-                    "React",
-                    "CSS"
-                ],
-                "description": "Building the next generation of the company customer facing application",
-                "elaborated_description": ""
-            },
-            {
-                "title": "Frontend guild leader",
-                "duration": { "from": 2023, "to": "Present" },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": ["Go", "Javascript", "Typescript", "React", "CSS"],
-                "description": "Managing the frontend guild and pushing the frontend need for˜ward",
-                "elaborated_description": ""
-            }
-        ],
-        "properties": [
-            "Go-getter",
-            "Friendly",
-            "communicative",
-            "eagerness",
-            "auto deduct"
-        ],
-        "education": ["BC.s. Software engineering"]
-    },
+				"company": {
+					"name": "Koalys",
+					"logo": "logos/audyx.png",
+					"website": "http://www.koalys.com/"
+				},
+				"tags": [
+					"React.js",
+					"ClojureScript",
+					"Ruby On Rails",
+					"WebRTC",
+					"Socket.io",
+					"Javascript",
+					"CSS"
+				],
+				"description": " 2 PWA applications  help designing and creating tools for internal use",
+				"elaborated_description": ""
+			},
+			{
+				"title": "Full-stack Developer",
+				"duration": { "from": 2019, "to": 2020 },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": ["React.js", "Python", "GitLab CI", "Javascript", "CSS"],
+				"description": "Helping to build the company customer facing application Help recruiting new wev-devs to the team",
+				"elaborated_description": ""
+			},
+			{
+				"title": "Python Developer",
+				"duration": { "from": 2020, "to": 2022 },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": ["Python", "JupyterLab", "Javascript", "CSS"],
+				"description": "Building internal tools for the company field engineers",
+				"elaborated_description": ""
+			},
+			{
+				"title": "Full-stack developer",
+				"duration": { "from": 2022, "to": "Present" },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": [
+					"Python",
+					"Go",
+					"JupyterLab",
+					"Javascript",
+					"Typescript",
+					"React",
+					"CSS"
+				],
+				"description": "Building the next generation of the company customer facing application",
+				"elaborated_description": ""
+			},
+			{
+				"title": "Frontend guild leader",
+				"duration": { "from": 2023, "to": "Present" },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": ["Go", "Javascript", "Typescript", "React", "CSS"],
+				"description": "Managing the frontend guild and pushing the frontend need for˜ward",
+				"elaborated_description": ""
+			}
+		],
+		"properties": [
+			"Go-getter",
+			"Friendly",
+			"communicative",
+			"eagerness",
+			"auto deduct"
+		],
+		"education": ["BC.s. Software engineering"]
+	},
 
-    "he": {
-        "jobs": [
-            {
-                "title": "מתרגל קורס הנדסת תוכנה",
-                "duration": { "from": 2015, "to": 2016 },
-                "company": {
-                    "name": "המכללה להנדסה עזריאלי",
-                    "logo": "logos/jce.png",
-                    "website": "https://www.jce.ac.il"
-                },
-                "tags": [
-                    "Angular.js",
-                    "Scrum",
-                    "Node.js",
-                    "Javascript",
-                    "CSS",
-                    "Teaching"
-                ],
-                "description": "מתרגל. הדרכה ותרגול של mean ומטודולוגית סקראם",
-                "elaborated_description": "לימוד והובלת צוותים בבנית פרוייקט פול סטאק. תמיכה בבניית מוצרים עבור עמותות בשביל נקודות זכות"
-            },
-            {
-                "title": "מפתח ווב במשרה חלקית",
-                "duration": { "from": 2015, "to": 2016 },
-                "company": {
-                    "name": "WishTrip",
-                    "logo": "logos/wishtrip.jpeg",
+	"he": {
+		"jobs": [
+			{
+				"title": "מתרגל קורס הנדסת תוכנה",
+				"duration": { "from": 2015, "to": 2016 },
+				"company": {
+					"name": "המכללה להנדסה עזריאלי",
+					"logo": "logos/jce.png",
+					"website": "https://www.jce.ac.il"
+				},
+				"tags": [
+					"Angular.js",
+					"Scrum",
+					"Node.js",
+					"Javascript",
+					"CSS",
+					"Teaching"
+				],
+				"description": "מתרגל. הדרכה ותרגול של mean ומטודולוגית סקראם",
+				"elaborated_description": "לימוד והובלת צוותים בבנית פרוייקט פול סטאק. תמיכה בבניית מוצרים עבור עמותות בשביל נקודות זכות"
+			},
+			{
+				"title": "מפתח ווב במשרה חלקית",
+				"duration": { "from": 2015, "to": 2016 },
+				"company": {
+					"name": "WishTrip",
+					"logo": "logos/wishtrip.jpeg",
 
-                    "website": "https://www.wishtrip.com/"
-                },
-                "tags": [
-                    "Angular.js",
-                    "OpenMaps",
-                    "Socket.io",
-                    "Node.js",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": "בניית אתר החברה מאפס. יצירת מנוע ניווט על מפות וצ׳אט בין משתמשים בזמן אמת",
-                "elaborated_description": ""
-            },
-            {
-                "title": "מפתח פול-סטאק",
-                "duration": { "from": 2016, "to": 2019 },
+					"website": "https://www.wishtrip.com/"
+				},
+				"tags": [
+					"Angular.js",
+					"OpenMaps",
+					"Socket.io",
+					"Node.js",
+					"Javascript",
+					"CSS"
+				],
+				"description": "בניית אתר החברה מאפס. יצירת מנוע ניווט על מפות וצ׳אט בין משתמשים בזמן אמת",
+				"elaborated_description": ""
+			},
+			{
+				"title": "מפתח פול-סטאק",
+				"duration": { "from": 2016, "to": 2019 },
 
-                "company": {
-                    "name": "Koalys",
-                    "logo": "logos/audyx.png",
-                    "website": "http://www.koalys.com/"
-                },
-                "tags": [
-                    "React.js",
-                    "ClojureScript",
-                    "Ruby On Rails",
-                    "WebRTC",
-                    "Socket.io",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": "הובלה בבניית מוצר הדגל של החברה, ובניית מוצר חדש לגמרי",
-                "elaborated_description": ""
-            },
-            {
-                "title": "מפתח פול-סטאק",
-                "duration": { "from": 2019, "to": 2020 },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": [
-                    "React.js",
-                    "Python",
-                    "GitLab CI",
-                    "Javascript",
-                    "CSS"
-                ],
-                "description": "בנייה ותחזוקה של אתר הדגל של החברה. חלק מצוות הגיוס בחברה",
-                "elaborated_description": ""
-            },
-            {
-                "title": "מפתח פייתון",
-                "duration": { "from": 2020, "to": "Present" },
-                "company": {
-                    "name": "Imubit",
-                    "logo": "logos/imubit.svg",
-                    "website": "https://www.imubit.com/"
-                },
-                "tags": ["Python", "JupyterLab", "Javascript", "CSS"],
-                "description": "בניית כלי חקירת מידע פנימיים עבור עובדי החברה",
-                "elaborated_description": ""
-            }
-        ],
-        "properties": [
-            "Go-getter",
-            "Friendly",
-            "communicative",
-            "eagerness",
-            "auto deduct"
-        ],
-        "education": ["BC.s. Software engineering"]
-    }
+				"company": {
+					"name": "Koalys",
+					"logo": "logos/audyx.png",
+					"website": "http://www.koalys.com/"
+				},
+				"tags": [
+					"React.js",
+					"ClojureScript",
+					"Ruby On Rails",
+					"WebRTC",
+					"Socket.io",
+					"Javascript",
+					"CSS"
+				],
+				"description": "הובלה בבניית מוצר הדגל של החברה, ובניית מוצר חדש לגמרי",
+				"elaborated_description": ""
+			},
+			{
+				"title": "מפתח פול-סטאק",
+				"duration": { "from": 2019, "to": 2020 },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": ["React.js", "Python", "GitLab CI", "Javascript", "CSS"],
+				"description": "בנייה ותחזוקה של אתר הדגל של החברה. חלק מצוות הגיוס בחברה",
+				"elaborated_description": ""
+			},
+			{
+				"title": "מפתח פייתון",
+				"duration": { "from": 2020, "to": "Present" },
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": ["Python", "JupyterLab", "Javascript", "CSS"],
+				"description": "בניית כלי חקירת מידע פנימיים עבור עובדי החברה",
+				"elaborated_description": ""
+			}
+		],
+		"properties": [
+			"Go-getter",
+			"Friendly",
+			"communicative",
+			"eagerness",
+			"auto deduct"
+		],
+		"education": ["BC.s. Software engineering"]
+	}
 }

@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
-import useTheme, {
-    isDarkTheme,
-    setTheme,
-    getCurrentThemeName,
-    getAvailableThemes,
-    toggleDarkMode,
-} from "lib/hooks/useTheme";
+import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
 import { useIsRTL } from "lib/hooks/useTranslation";
 export function getIconClassAndAction(isDark) {
-    if (isDark) {
-        return "dark-icon";
-    } else {
-        return "light-icon";
-    }
+	if (isDark) {
+		return "dark-icon";
+	}
+	return "light-icon";
 }
 function ThemeItem({ currentTheme, isSelected, setTheme }) {
-    return (
-        <li key={currentTheme} className={isSelected ? "selected" : ""}>
-            <button onClick={() => setTheme(currentTheme)}>
-                {currentTheme}
-            </button>
-            <style jsx>
-                {`
+	return (
+		<li key={currentTheme} className={isSelected ? "selected" : ""}>
+			<button type="button" onClick={() => setTheme(currentTheme)}>
+				{currentTheme}
+			</button>
+			<style jsx>
+				{`
                     li {
                         all: unset;
                         font-size: 1.4rem;
@@ -45,27 +37,27 @@ function ThemeItem({ currentTheme, isSelected, setTheme }) {
                         padding: 1rem 2rem;
                     }
                 `}
-            </style>
-        </li>
-    );
+			</style>
+		</li>
+	);
 }
 
 function ThemeList({ currentThemeName, setThemeName }) {
-    const isRTL = useIsRTL();
-    const availableThemes = getAvailableThemes();
-    return (
-        <div className="container">
-            <ul>
-                {availableThemes.map((theme) => (
-                    <ThemeItem
-                        key={theme}
-                        currentTheme={theme}
-                        isSelected={currentThemeName === theme}
-                        setTheme={setThemeName}
-                    />
-                ))}
-            </ul>
-            <style jsx>{`
+	const isRTL = useIsRTL();
+	const availableThemes = getAvailableThemes();
+	return (
+		<div className="container">
+			<ul>
+				{availableThemes.map((theme) => (
+					<ThemeItem
+						key={theme}
+						currentTheme={theme}
+						isSelected={currentThemeName === theme}
+						setTheme={setThemeName}
+					/>
+				))}
+			</ul>
+			<style jsx>{`
                 .container {
                     position: absolute;
                     top: 100%;
@@ -86,33 +78,30 @@ function ThemeList({ currentThemeName, setThemeName }) {
                     overflow: hidden;
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 export const ThemedIcon = () => {
-    const {
-        currentThemeName,
-        setThemeName,
-        isDarkTheme,
-        toggleDarkMode,
-    } = useTheme();
+	const { currentThemeName, setThemeName, isDarkTheme, toggleDarkMode } =
+		useTheme();
 
-    const iconClass = getIconClassAndAction(isDarkTheme);
-    const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
-    return (
-        <div className="container">
-            <button
-                onClick={toggleDarkMode}
-                className={`icon ${iconClass}`}
-                title={title}
-            ></button>
-            <div className="list">
-                <ThemeList
-                    currentThemeName={currentThemeName}
-                    setThemeName={setThemeName}
-                />
-            </div>
-            <style jsx>{`
+	const iconClass = getIconClassAndAction(isDarkTheme);
+	const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
+	return (
+		<div className="container">
+			<button
+				type="button"
+				onClick={toggleDarkMode}
+				className={`icon ${iconClass}`}
+				title={title}
+			/>
+			<div className="list">
+				<ThemeList
+					currentThemeName={currentThemeName}
+					setThemeName={setThemeName}
+				/>
+			</div>
+			<style jsx>{`
                 .container {
                     position: relative;
                 }
@@ -140,6 +129,6 @@ export const ThemedIcon = () => {
                     mask-image: url(/icons/moon.svg);
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 };

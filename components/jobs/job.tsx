@@ -1,56 +1,54 @@
 import { Tags } from "components/jobs/tags";
 import { useIsRTL } from "lib/hooks/useTranslation";
-import { Job as JobType } from "lib/types/jobs";
+import type { Job as JobType } from "lib/types/jobs";
 
 type Props = {
-    job: JobType;
-    updateFilterText: (filterText: string) => void;
-    filterText?: string;
+	job: JobType;
+	updateFilterText: (filterText: string) => void;
+	filterText?: string;
 };
 export default function Job({ job, updateFilterText, filterText }: Props) {
-    const isRTL = useIsRTL();
-    const tags = job.tags.join(", ");
-    return (
-        <dl>
-            <dt>
-                {job?.duration?.from} - {job?.duration?.to}
-            </dt>
-            <dd className="box">
-                <div className="job">
-                    <h3 className="title">{job.title}</h3>
-                    <span className="company">
-                        <a
-                            href={job.company.website}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                        >
-                            {job.company.name}
-                        </a>
-                    </span>
-                </div>
-                <div className="summary">
-                    <p>
-                        {job.description.split("\n").map((text, idx) => (
-                            <span key={idx}>{text}</span>
-                        ))}
-                    </p>
-                </div>
-                <div className="extra">
-                    <p>
-                        {job.elaborated_description
-                            .split("\n")
-                            .map((text, idx) => (
-                                <span key={idx}>{text}</span>
-                            ))}
-                    </p>
-                </div>
-                <Tags
-                    tagsString={tags}
-                    filterText={filterText}
-                    onClick={updateFilterText}
-                />
-            </dd>
-            <style jsx>{`
+	const isRTL = useIsRTL();
+	const tags = job.tags.join(", ");
+	return (
+		<dl>
+			<dt>
+				{job?.duration?.from} - {job?.duration?.to}
+			</dt>
+			<dd className="box">
+				<div className="job">
+					<h3 className="title">{job.title}</h3>
+					<span className="company">
+						<a
+							href={job.company.website}
+							target="_blank"
+							rel="noreferrer noopener"
+						>
+							{job.company.name}
+						</a>
+					</span>
+				</div>
+				<div className="summary">
+					<p>
+						{job.description.split("\n").map((text, idx) => (
+							<span key={text}>{text}</span>
+						))}
+					</p>
+				</div>
+				<div className="extra">
+					<p>
+						{job.elaborated_description.split("\n").map((text, idx) => (
+							<span key={text}>{text}</span>
+						))}
+					</p>
+				</div>
+				<Tags
+					tagsString={tags}
+					filterText={filterText}
+					onClick={updateFilterText}
+				/>
+			</dd>
+			<style jsx>{`
                 dl {
                     position: relative;
                 }
@@ -148,6 +146,6 @@ export default function Job({ job, updateFilterText, filterText }: Props) {
                     }
                 }
             `}</style>
-        </dl>
-    );
+		</dl>
+	);
 }

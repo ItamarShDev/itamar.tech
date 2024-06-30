@@ -1,40 +1,38 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function LanguageSelector() {
-    const { locales, locale, asPath } = useRouter();
+	const { locales, locale, asPath } = useRouter();
 
-    const [showSelection, setShowSelection] = useState(false);
-    const restLocales = locales.filter((l) => l !== locale);
-    return (
-        <nav>
-            <button onClick={() => setShowSelection(!showSelection)}>
-                {locale}
-            </button>
-            {showSelection && (
-                <div className="container">
-                    <ul>
-                        {restLocales.map((_locale) => {
-                            if (_locale === "default") return null;
-                            return (
-                                <li
-                                    key={_locale}
-                                    className={
-                                        _locale === locale ? "active" : ""
-                                    }
-                                    onClick={() => setShowSelection(false)}
-                                >
-                                    <Link href={`${asPath}`} locale={_locale} legacyBehavior>
-                                        {_locale}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-            )}
-            <style jsx>{`
+	const [showSelection, setShowSelection] = useState(false);
+	const restLocales = locales.filter((l) => l !== locale);
+	return (
+		<nav>
+			<button type="button" onClick={() => setShowSelection(!showSelection)}>
+				{locale}
+			</button>
+			{showSelection && (
+				<div className="container">
+					<ul>
+						{restLocales.map((_locale) => {
+							if (_locale === "default") return null;
+							return (
+								<li
+									key={_locale}
+									className={_locale === locale ? "active" : ""}
+									onClick={() => setShowSelection(false)}
+								>
+									<Link href={`${asPath}`} locale={_locale} legacyBehavior>
+										{_locale}
+									</Link>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			)}
+			<style jsx>{`
                 nav {
                     font-size: 1.5rem;
                 }
@@ -65,6 +63,6 @@ export default function LanguageSelector() {
                     padding: 1rem 2rem;
                 }
             `}</style>
-        </nav>
-    );
+		</nav>
+	);
 }

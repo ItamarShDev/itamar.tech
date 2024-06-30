@@ -4,19 +4,19 @@ import { getQuotesData } from "lib/get-data-methods";
 import React from "react";
 
 export default function Home({ quotes }) {
-    return (
-        <>
-            <HomeBackground />
-            <HomePage quotes={quotes} />
-        </>
-    );
+	return (
+		<>
+			<HomeBackground />
+			<HomePage quotes={quotes} />
+		</>
+	);
 }
 export async function getStaticProps({ params }) {
-    const quotes = await getQuotesData();
-    return {
-        props: {
-            isCentered: false,
-            quotes,
-        },
-    };
+	const quotes = await getQuotesData();
+	return {
+		props: {
+			isCentered: false,
+			quotes,
+		},
+	};
 }

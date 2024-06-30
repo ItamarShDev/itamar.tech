@@ -4,31 +4,31 @@ import { useScreenSize } from "lib/hooks";
 import { useTranslation } from "lib/hooks/useTranslation";
 import React from "react";
 const translations = {
-    en: {
-        title: "Itamar Sharify",
-        subtitle: "Software Engineer",
-    },
-    he: { title: "איתמר שריפי", subtitle: "מהנדס תוכנה" },
+	en: {
+		title: "Itamar Sharify",
+		subtitle: "Software Engineer",
+	},
+	he: { title: "איתמר שריפי", subtitle: "מהנדס תוכנה" },
 };
 
 type Transtlations = {
-    title: string;
-    subtitle: string;
+	title: string;
+	subtitle: string;
 };
 
 function AboutMe({ quotes }) {
-    const texts: Transtlations = useTranslation(translations);
-    const { isMobile } = useScreenSize();
-    return (
-        <div className="about-me">
-            <div className="summary">
-                <h1>{texts.title}</h1>
-                <h2>{texts.subtitle}</h2>
+	const texts: Transtlations = useTranslation(translations);
+	const { isMobile } = useScreenSize();
+	return (
+		<div className="about-me">
+			<div className="summary">
+				<h1>{texts.title}</h1>
+				<h2>{texts.subtitle}</h2>
 
-                <SocialRefs />
-                {!isMobile && <RandomQuotes quotes={quotes} />}
-            </div>
-            <style jsx>{`
+				<SocialRefs />
+				{!isMobile && <RandomQuotes quotes={quotes} />}
+			</div>
+			<style jsx>{`
                 .about-me {
                     height: 100%;
                     width: 100%;
@@ -64,8 +64,8 @@ function AboutMe({ quotes }) {
                     margin-block-end: 0;
                 }
             `}</style>
-        </div>
-    );
+		</div>
+	);
 }
 
 export default AboutMe;
