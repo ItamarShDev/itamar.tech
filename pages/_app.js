@@ -4,8 +4,8 @@ import { useTheme } from "lib/hooks";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import "../globals.css";
 import styles from "./App.module.css";
-import "./globals.css";
 
 function App({ Component, pageProps }) {
 	const { currentThemeName } = useTheme();

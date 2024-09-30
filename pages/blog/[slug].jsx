@@ -5,7 +5,6 @@ import renderMarkdown from "lib/render-markdown";
 import { useEffect, useRef, useState } from "react";
 import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
 import styles from "./Blog.module.css";
-import "./styles.css";
 export default function Blog({ data, html }) {
 	const [articleDOM, setArticleDOM] = useState(null);
 	const articleRef = useRef(null);
