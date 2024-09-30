@@ -1,15 +1,8 @@
 .emailFooter {
     margin-top: 2rem;
     padding: 1rem;
-    background-color: var(--colors-bg);
-    border: 1px solid var(--colors-decorations);
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-.emailFooter h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
 }
 
 .emailFooter p {
@@ -18,9 +11,5 @@
 
 .emailFooter a {
     color: var(--colors-link);
-    text-decoration: none;
-}
-
-.emailFooter a:hover {
-    text-decoration: underline;
+    font-size: 1.5rem;
 }
