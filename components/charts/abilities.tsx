@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import type { ChartData } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import useChartSettings, { type ChartSettings } from "./chart-settings";
 
@@ -11,12 +11,15 @@ const Abilities = ({ labels, values, ...props }) => {
 		values,
 		title: "Abilities",
 	});
-	if (data) return <Radar {...props} data={data} options={radarOptions} />;
+	if (data)
+		return (
+			<Radar
+				{...props}
+				data={data as ChartData<"radar">}
+				options={radarOptions}
+			/>
+		);
 	return null;
-};
-Abilities.propTypes = {
-	labels: PropTypes.arrayOf(PropTypes.string),
-	values: PropTypes.arrayOf(PropTypes.object),
 };
 Abilities.defaultProps = {
 	labels: [{}],

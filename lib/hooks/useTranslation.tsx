@@ -1,9 +1,9 @@
 export function useTranslation(translations) {
 	return translations.he;
 }
-export function getLanguageDirection(lang?: string): object {
+export function getLanguageDirection(lang?: string) {
 	return { direction: lang === "he" ? "rtl" : "ltr" };
 }
 export function useIsRTL(): boolean {
-	return true;
+	return getLanguageDirection().direction === "rtl";
 }

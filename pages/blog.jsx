@@ -5,7 +5,6 @@ function Blog({ post }) {
 	return (
 		<LinkCard
 			key={post.id}
-			routeRef="/blog/[slug]"
 			route={`/blog/${post.slug}`}
 			title={post.title}
 			subTitle={post.summary}

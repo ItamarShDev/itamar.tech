@@ -1,14 +1,13 @@
-"use client";
 import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
 import { useIsRTL } from "lib/hooks/useTranslation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ThemedIcon.module.css";
 
 export function getIconClassAndAction(isDark) {
 	if (isDark) {
-		return "dark-icon";
+		return "darkIcon";
 	}
-	return "light-icon";
+	return "lightIcon";
 }
 
 function ThemeItem({ currentTheme, isSelected, setTheme }) {
@@ -52,8 +51,8 @@ function ThemeList({ currentThemeName, setThemeName }) {
 }
 
 export const ThemedIcon = () => {
-	const { currentThemeName, setThemeName, isDarkTheme, toggleDarkMode } =
-		useTheme();
+	const { currentThemeName, setThemeName, isDarkTheme } = useTheme();
+	const [isOpen, setIsOpen] = useState(false);
 	useEffect(() => {
 		document.body.dataset.theme = currentThemeName;
 	}, [currentThemeName]);
@@ -63,11 +62,16 @@ export const ThemedIcon = () => {
 		<div className={styles.container}>
 			<button
 				type="button"
-				onClick={toggleDarkMode}
+				onClick={() => {
+					setIsOpen(!isOpen);
+				}}
 				className={`${styles.icon} ${styles[iconClass]}`}
 				title={title}
 			/>
-			<div className={styles.list}>
+			<div
+				className={styles.list}
+				style={{ display: isOpen ? "block" : "none" }}
+			>
 				<ThemeList
 					currentThemeName={currentThemeName}
 					setThemeName={setThemeName}

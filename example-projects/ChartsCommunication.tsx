@@ -1,6 +1,9 @@
-import useChartSettings from "components/charts/chart-settings";
+import type { ChartData } from "chart.js";
+import useChartSettings, {
+	randomChartData,
+} from "components/charts/chart-settings";
 import { Input } from "components/input";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "./ChartsCommunication.module.css";
 
@@ -12,7 +15,6 @@ class CustomEventHandler {
 	unsubscribe(eventName: string, cb: (value: unknown) => void) {
 		window.removeEventListener(eventName, cb);
 	}
-
 	emit(eventName: string, payload: unknown) {
 		window.dispatchEvent(new CustomEvent(eventName, { detail: payload }));
 	}
@@ -22,52 +24,9 @@ const EventHandler = new CustomEventHandler();
 
 // mimic response
 
-function randomChartData(id: number) {
-	const socialData = {
-		title: `Chart #${id}`,
-		labels: ["1 week", "1 month", "4 months", "6 months", "1 year"],
-		values: [
-			{
-				label: "Learning",
-				data: [
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-				],
-				settings: { fill: false },
-			},
-			{
-				label: "Mingeling",
-				data: [
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-				],
-				settings: { fill: false },
-			},
-			{
-				label: "Involvement",
-				data: [
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-					Math.random() * 100,
-				],
-				settings: { fill: false },
-			},
-		],
-	};
-
-	return socialData;
-}
 export class EventRouter {
 	eventHandler: CustomEventHandler;
-	interval: NodeJS.Timeout = null;
+	interval: NodeJS.Timeout | null = null;
 	constructor() {
 		this.eventHandler = EventHandler;
 	}
@@ -87,7 +46,7 @@ export class EventRouter {
 }
 
 function Chart({ chartId }) {
-	const [chartData, setChartData] = React.useState(randomChartData(chartId));
+	const [chartData, setChartData] = useState(randomChartData(chartId));
 	const { data, lineOptions } = useChartSettings(chartData);
 	const chartEventHandler = useCallback((event) => {
 		if (event.detail.data) {
@@ -102,7 +61,7 @@ function Chart({ chartId }) {
 	}, [chartId, chartEventHandler]);
 
 	if (data) {
-		return <Line data={data} options={lineOptions} />;
+		return <Line data={data as ChartData<"line">} options={lineOptions} />;
 	}
 	return null;
 }
@@ -135,7 +94,7 @@ export default function ChartsCommunicationExample() {
 			</section>
 			<section className={styles.chartsSection}>
 				{chartIds.map((id) => (
-					<div className={styles.chart} key={id}>
+					<div key={id}>
 						<Chart chartId={id} />
 					</div>
 				))}

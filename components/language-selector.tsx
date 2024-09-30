@@ -8,7 +8,7 @@ export default function LanguageSelector() {
 	const { locales, locale, asPath } = useRouter();
 
 	const [showSelection, setShowSelection] = useState(false);
-	const restLocales = locales.filter((l) => l !== locale);
+	const restLocales = locales?.filter((l) => l !== locale);
 	return (
 		<nav className={styles.nav}>
 			<button
@@ -21,7 +21,7 @@ export default function LanguageSelector() {
 			{showSelection && (
 				<div className={styles.container}>
 					<ul className={styles.ul}>
-						{restLocales.map((_locale) => {
+						{restLocales?.map((_locale) => {
 							if (_locale === "default") return null;
 							return (
 								<li

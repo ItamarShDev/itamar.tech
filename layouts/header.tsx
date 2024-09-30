@@ -9,15 +9,14 @@ const Header = (props) => {
 	return (
 		<nav className={styles.nav}>
 			<GithubLogo />
-			<Link href="/" legacyBehavior>
-				{/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
-				<a title="Click to go home" className={styles.link}>
+			<Link href="/" title="Click to go home" className={styles.link}>
+				<>
 					<span className={styles.name}>Itamar Sharify</span>
 					{title && (
 						<span className={styles.divider}>&nbsp;&nbsp;›&nbsp;&nbsp;</span>
 					)}
 					<span className={styles.title}>{title}</span>
-				</a>
+				</>
 			</Link>
 			<LanguageSelector />
 			<ThemedIcon />

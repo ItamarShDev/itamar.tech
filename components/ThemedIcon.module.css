@@ -6,9 +6,6 @@
     display: none;
 }
 
-.container:hover .list {
-    display: block;
-}
 
 .icon {
     all: unset;
@@ -41,7 +38,7 @@
     background-color: var(--colors-hoverDecorations);
 }
 
-.themeItem.selected {
+.selected {
     background-color: var(--colors-decorations);
     color: var(--colors-text);
 }

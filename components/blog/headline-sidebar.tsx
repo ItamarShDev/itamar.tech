@@ -18,7 +18,11 @@ function generateLinkMarkup($contentElement) {
 function HeaderTitle({ header }) {
 	const isCurrentTitle = useUrlHash(header.id);
 	const titleClass = isCurrentTitle ? styles.bold : styles.dim;
-	const AnchorLink = <a href={`#${header.id}`}>{header.title}</a>;
+	const AnchorLink = (
+		<a href={`#${header.id}`} className={styles.link}>
+			{header.title}
+		</a>
+	);
 	let title = <dt className={titleClass}>{AnchorLink}</dt>;
 	if (header.depth > 1) {
 		title = <dd className={titleClass}>{AnchorLink}</dd>;

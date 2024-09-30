@@ -1,5 +1,5 @@
 "use client";
-import { useCurrentTheme } from "lib/hooks/useTheme";
+import { useChartTheme } from "lib/hooks/useTheme";
 import { hexToHSL } from "lib/utils";
 
 import {
@@ -26,7 +26,7 @@ ChartJS.register(
 	Legend,
 );
 
-function themedDatasets(values, theme) {
+function themedDatasets(values, theme: ReturnType<typeof useChartTheme>) {
 	return values.map((item, index) => {
 		const [h, s, l] = hexToHSL(theme.charts, index);
 		const dataset = {
@@ -35,6 +35,8 @@ function themedDatasets(values, theme) {
 			borderWidth: 2,
 			backgroundColor: `hsla(${h}, ${s}%, ${l}%, 0.2)`,
 			borderColor: `hsl(${h}, ${s}%, ${l}%)`,
+			yAxisID: 'yAxis',
+			xAxisID: 'xAxis',
 		};
 		if (Object.hasOwn(item, "settings")) {
 			return { ...dataset, ...item.settings };
@@ -43,7 +45,7 @@ function themedDatasets(values, theme) {
 	});
 }
 
-function themedRadarSettings(title, theme) {
+function themedRadarSettings(title, theme: ReturnType<typeof useChartTheme>) {
 	return {
 		maintainAspectRatio: false,
 		aspectRatio: 1,
@@ -70,7 +72,7 @@ function themedRadarSettings(title, theme) {
 	};
 }
 
-function themedLineSettings(title, theme) {
+function themedLineSettings(title, theme: ReturnType<typeof useChartTheme>) {
 	return {
 		maintainAspectRatio: false,
 		aspectRatio: 1,
@@ -115,6 +117,50 @@ function themedLineSettings(title, theme) {
 		},
 	};
 }
+
+export function randomChartData(id: number) {
+	const socialData = {
+		title: `Chart #${id}`,
+		labels: ["1 week", "1 month", "4 months", "6 months", "1 year"],
+		values: [
+			{
+				label: "Learning",
+				data: [
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+				],
+				settings: { fill: false },
+			},
+			{
+				label: "Mingeling",
+				data: [
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+				],
+				settings: { fill: false },
+			},
+			{
+				label: "Involvement",
+				data: [
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+					Math.random() * 100,
+				],
+				settings: { fill: false },
+			},
+		],
+	};
+
+	return socialData;
+}
 export type ChartSettings = {
 	data?: { datasets: object[]; labels: string[] };
 	radarOptions?: object;
@@ -123,14 +169,14 @@ export type ChartSettings = {
 export default function useChartSettings({
 	title = "Empty",
 	values = [],
-	labels = [{}],
-}): ChartSettings {
+	labels = ["Empty"],
+}: ReturnType<typeof randomChartData>): ChartSettings {
 	const [settings, setSettings] = useState({});
-	const theme = useCurrentTheme();
+	const theme = useChartTheme();
 	const datasets = useMemo(
 		() => themedDatasets(values, theme),
 		[values, theme],
-	);
+	)
 	useEffect(() => {
 		const data = {
 			labels,

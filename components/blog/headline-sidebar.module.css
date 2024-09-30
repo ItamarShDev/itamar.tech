@@ -39,6 +39,8 @@
 .headlinesList {
     margin: 0;
     padding: 0;
+    font-size: 1.4rem;
+    text-decoration: none;
 }
 
 .bold {
@@ -46,7 +48,9 @@
 }
 
 .dim {
-    opacity: 0.7;
+    margin-block: 10px;
+    filter: opacity(0.7) grayscale(0.4);
+
 }
 
 .translationsTitle {
@@ -86,4 +90,9 @@
     width: 3px;
     background-color: var(--colors-decorations);
     transition: height 0.1s ease-out;
+}
+
+.link {
+    text-decoration: none;
+    color: var(--colors-text);
 }

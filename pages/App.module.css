@@ -13,3 +13,14 @@
 .logo {
     height: 1rem;
 }
+
+.centered {
+    display: flex;
+    width: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: start;
+    gap: 0px;
+}
