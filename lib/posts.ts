@@ -63,10 +63,8 @@ export function getAllPostIds(locale = "en") {
 export function getPostData(slug, locale) {
 	const fullPath = path.join(postsDirectory, locale, `${slug}.mdx`);
 	const fileContents = fs.readFileSync(fullPath, "utf8");
-
 	// Use gray-matter to parse the post metadata section
 	const { data, content } = matter(fileContents);
-
 	return {
 		content,
 		data,

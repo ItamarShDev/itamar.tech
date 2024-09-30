@@ -6,7 +6,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 const renderer = new Renderer();
 
 renderer.heading = ({ text, depth }) => {
-	const id = btoa(text).replace(/=/g, "");
+	const id = crypto.randomUUID();
 	const Component = `h${depth}`;
 
 	return renderToStaticMarkup(
