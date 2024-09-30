@@ -1,7 +1,7 @@
 import GithubLogo from "images/GithubLogo";
-import MediumLogo from "images/MediumLogo";
 import TwitterLogo from "images/TwitterLogo";
 import { grid } from "theme/styles";
+import styles from "./SocialRefs.module.css";
 
 function SocialRefs({ withTitle = false }) {
 	const { className: gridClass, styles: gridStyle } = grid({
@@ -11,11 +11,11 @@ function SocialRefs({ withTitle = false }) {
 	});
 
 	return (
-		<div className="row">
+		<div className={styles.row}>
 			{withTitle && <h5>Feel free to contact me here:</h5>}
-			<div className={`${gridClass} refs`}>
+			<div className={`${gridClass} ${styles.refs}`}>
 				<a
-					className="item twitter"
+					className={`${styles.item} ${styles.twitter}`}
 					href="https://twitter.com/ISharify"
 					target="_blank"
 					rel="noreferrer noopener"
@@ -24,7 +24,7 @@ function SocialRefs({ withTitle = false }) {
 					<TwitterLogo />
 				</a>
 				<a
-					className="item github"
+					className={`${styles.item} ${styles.github}`}
 					href="https://www.github.com/ItamarShDev"
 					target="_blank"
 					rel="noreferrer noopener"
@@ -35,23 +35,6 @@ function SocialRefs({ withTitle = false }) {
 
 				{gridStyle}
 			</div>
-			<style jsx>{`
-                .item {
-                    background-size: 30px;
-                    height: 30px;
-                    margin: 0 5px;
-                    font-size: 0;
-                    width: 30px;
-                }
-                .refs {
-                    justify-content: start;
-                }
-                @media screen and (max-width: 768px) {
-                    .refs {
-                        justify-content: center;
-                    }
-                }
-            `}</style>
 		</div>
 	);
 }

@@ -1,4 +1,3 @@
-
 "use client";
 import { useCurrentTheme } from "lib/hooks/useTheme";
 import { hexToHSL } from "lib/utils";
@@ -128,7 +127,10 @@ export default function useChartSettings({
 }): ChartSettings {
 	const [settings, setSettings] = useState({});
 	const theme = useCurrentTheme();
-	const datasets = useMemo(() => themedDatasets(values, theme), [values, theme]);
+	const datasets = useMemo(
+		() => themedDatasets(values, theme),
+		[values, theme],
+	);
 	useEffect(() => {
 		const data = {
 			labels,

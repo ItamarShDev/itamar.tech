@@ -1,0 +1,15 @@
+.mainView {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 6rem 1fr;
+}
+
+.main {
+    margin: 0 auto;
+    display: block;
+    transition: filter 0.5s linear;
+}
+
+.logo {
+    height: 1rem;
+}

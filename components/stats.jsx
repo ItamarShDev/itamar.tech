@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import styles from "./Stats.module.css";
 
 const Abilities = dynamic(() => import("components/charts/abilities"), {
 	ssr: true,
@@ -15,7 +16,7 @@ function Stats() {
 	const values = [{ label: "Abilities", data: [70, 30, 90, 90, 80] }];
 	return (
 		<div>
-			<div className="flex">
+			<div className={styles.flex}>
 				<span>
 					<Abilities labels={labels} values={values} />
 				</span>
@@ -23,13 +24,6 @@ function Stats() {
 					<SocialAffect />
 				</span>
 			</div>
-			<style jsx>{`
-                .flex {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                }
-            `}</style>
 		</div>
 	);
 }

@@ -1,0 +1,30 @@
+.container {
+    padding: 2rem;
+}
+
+.quote {
+    color: var(--colors-subText);
+    word-break: normal;
+    font-size: 1.8rem;
+    font-style: italic;
+    line-height: 2.5rem;
+    font-family: cursive;
+    position: relative;
+    padding-inline-start: 3rem;
+    min-height: 100px;
+    max-height: 200px;
+}
+
+.quote::before {
+    content: "„";
+    position: absolute;
+    font-size: 3em;
+    left: 0;
+    top: -5px;
+    color: grey;
+    line-height: 0;
+}
+
+.rtl.quote::before {
+    left: 100%;
+}

@@ -1,0 +1,60 @@
+/* Global styles */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 10px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--colors-bg);
+    color: var(--colors-text);
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+::selection {
+    background-color: var(--colors-decorations);
+    color: var(--colors-bg);
+}
+
+a {
+    color: var(--colors-link);
+    scroll-margin-top: 6.5rem;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2.5rem;
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+h5 {
+    font-size: 1.8rem;
+}
+
+h6 {
+    font-size: 1.2rem;
+}
+
+
+
+/* Font imports */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");

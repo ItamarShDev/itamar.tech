@@ -1,0 +1,77 @@
+.container {
+    position: relative;
+}
+
+.list {
+    display: none;
+}
+
+.container:hover .list {
+    display: block;
+}
+
+.icon {
+    all: unset;
+    height: 60px;
+    width: 60px;
+    font-size: 1.2em;
+    font-style: normal;
+    background-color: var(--colors-headerText);
+    mask-size: 20px;
+    mask-position: 1rem center;
+    mask-repeat: no-repeat;
+}
+
+.darkIcon {
+    mask-image: url(/icons/sun.svg);
+}
+
+.lightIcon {
+    mask-image: url(/icons/moon.svg);
+}
+
+.themeItem {
+    all: unset;
+    font-size: 1.4rem;
+    width: 100%;
+    text-transform: capitalize;
+}
+
+.themeItem:hover {
+    background-color: var(--colors-hoverDecorations);
+}
+
+.themeItem.selected {
+    background-color: var(--colors-decorations);
+    color: var(--colors-text);
+}
+
+.themeItem.selected .themeButton,
+.themeItem:hover .themeButton {
+    mix-blend-mode: difference;
+}
+
+.themeButton {
+    all: unset;
+    color: var(--colors-text);
+    padding: 1rem 2rem;
+}
+
+.themeListContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.themeList {
+    all: unset;
+    margin-block-start: 1rem;
+    cursor: default;
+    list-style: none;
+    background-color: var(--colors-modalBg);
+    border: 1px solid var(--colors-decorations);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}

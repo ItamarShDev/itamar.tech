@@ -1,5 +1,7 @@
 import { LinkCard } from "components";
 import { useTranslation } from "lib/hooks/useTranslation";
+import styles from "./Links.module.css";
+
 const transtions = {
 	en: {
 		resume: {
@@ -30,10 +32,11 @@ const transtions = {
 		},
 	},
 };
+
 function Links() {
 	const translation = useTranslation(transtions);
 	return (
-		<div>
+		<div className={styles.container}>
 			<LinkCard
 				route="/resume"
 				title={translation.resume.title}
@@ -49,17 +52,6 @@ function Links() {
 				title={translation.examples.title}
 				subTitle={translation.examples.subTitle}
 			/>
-			<style jsx>{`
-                div {
-                    display: flex;
-                    flex-direction: row;
-                }
-                @media only screen and (max-width: 968px) {
-                    div {
-                        flex-direction: column;
-                    }
-                }
-            `}</style>
 		</div>
 	);
 }

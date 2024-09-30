@@ -1,0 +1,17 @@
+.item {
+    background-size: 30px;
+    height: 30px;
+    margin: 0 5px;
+    font-size: 0;
+    width: 30px;
+}
+
+.refs {
+    justify-content: start;
+}
+
+@media screen and (max-width: 768px) {
+    .refs {
+        justify-content: center;
+    }
+}

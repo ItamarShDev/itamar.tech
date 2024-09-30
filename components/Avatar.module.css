@@ -1,0 +1,5 @@
+.avatar {
+    z-index: -1;
+    height: inherit;
+    width: auto;
+}

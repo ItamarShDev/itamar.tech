@@ -1,6 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import { generateCSSThemeSelectors } from "theme/styles";
- 
 
 export default class MyDocument extends Document {
 	render() {

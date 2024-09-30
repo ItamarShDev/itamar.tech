@@ -1,15 +1,13 @@
 // @ts-nocheck
 import { Renderer, marked } from "marked";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import scheme from "prism-react-renderer/themes/shadesOfPurple";
+import { Highlight, defaultProps, themes } from "prism-react-renderer";
 import { renderToStaticMarkup } from "react-dom/server";
-
 
 const renderer = new Renderer();
 
-renderer.heading = (text, level, raw, slugger) => {
-	const id = slugger.slug(text);
-	const Component = `h${level}`;
+renderer.heading = ({ text, depth }) => {
+	const id = btoa(text).replace(/=/g, "");
+	const Component = `h${depth}`;
 
 	return renderToStaticMarkup(
 		<Component id={id}>
@@ -25,7 +23,7 @@ renderer.heading = (text, level, raw, slugger) => {
 renderer.link = (href, _, text) =>
 	`<a href=${href} target="_blank" rel="noopener noreferrer"">${text}</a>`;
 
-renderer.listitem = (text, task, checked) => {
+renderer.listitem = ({ checked, text, task }) => {
 	if (task) {
 		return `<li class="reset"><span class="check">&#8203;<input type="checkbox" disabled ${
 			checked ? "checked" : ""
@@ -34,17 +32,16 @@ renderer.listitem = (text, task, checked) => {
 
 	return `<li>${text}</li>`;
 };
-renderer.code = (code, options) => {
-	const opts = options.split(" ").map((o) => o.trim());
-	const language = opts[0];
+renderer.code = ({ text, raw, lang }) => {
+	const opts = raw.split(" ").map((o) => o.trim());
+	const language = lang?.split(" ")[0];
 	const highlight = opts
 		.filter((o) => o.startsWith("highlight="))
 		.pop()
 		?.replace("highlight=", "")
 		.trim();
-	const raw = options.includes("raw");
 	return renderToStaticMarkup(
-		<Code language={language} code={code} highlight={highlight} />,
+		<Code language={language} code={text} highlight={highlight} />,
 	);
 };
 
@@ -72,15 +69,16 @@ const Code = ({ code, language, highlight, ...props }) => {
 						.map((_, i) => i + start);
 					return lines.concat(x);
 				}
+				lines.push(Number(h));
 
-				return lines.push(Number(h));
+				return lines;
 			}, [])
 		: [];
 
 	return (
 		<Highlight
 			{...defaultProps}
-			theme={scheme}
+			theme={themes.shadesOfPurple}
 			code={code.trim()}
 			language={language}
 		>

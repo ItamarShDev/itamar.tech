@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 // @ts-ignore
 import RankJson from "../../static-props/technologies.json";
+import styles from "./MatchProgress.module.css";
 
 /**
  * @param {ArrayLike<any>} attributes
@@ -43,35 +44,17 @@ const MatchProgress = ({
 		setPercentage(boundedPercentage);
 	}, [selectedSkills, setPercentage, setQualificationText]);
 	return (
-		<div className="progress">
-			<div className="range">{percentage}% Match</div>
-
-			<style jsx>{`
-                .progress {
-                    position: relative;
-                    height: 2rem;
-                    width: inherit;
-                    border-radius: 0 0 1rem 1rem;
-                    font-size: 1rem;
-                    line-height: 2rem;
-                    overflow: hidden;
-                }
-
-                .range {
-                    width: ${percentage}%;
-                    height: inherit;
-                    color: hsl(0, 0%, ${100 - percentage}%);
-                    text-overflow: clip;
-                    text-align: center;
-                    overflow: hidden;
-                    background-color: hsl(${percentage}, 100%, 50%);
-                    transition: width 0.2s linear;
-                }
-                .match-text {
-                    font-style: italic;
-                    color: var(--colors-text);
-                }
-            `}</style>
+		<div className={styles.progress}>
+			<div
+				className={styles.range}
+				style={{
+					width: `${percentage}%`,
+					backgroundColor: `hsl(${percentage}, 100%, 50%)`,
+					color: `hsl(0, 0%, ${100 - percentage}%)`,
+				}}
+			>
+				{percentage}% Match
+			</div>
 		</div>
 	);
 };

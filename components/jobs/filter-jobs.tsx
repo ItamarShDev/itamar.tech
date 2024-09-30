@@ -2,6 +2,7 @@ import { Input } from "components/input";
 import type { Job } from "lib/types/jobs";
 import type { InputChangeEvent } from "lib/types/react";
 import { useEffect, useState } from "react";
+import styles from "./FilterJobs.module.css";
 
 type Props = {
 	jobs: Job[];
@@ -23,7 +24,7 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
 		updateFilterText(text);
 	};
 	return (
-		<div className="container">
+		<div className={styles.container}>
 			<Input
 				label="Filter jobs"
 				className="job-filter"
@@ -32,23 +33,10 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
 				onChange={filterJobs}
 				autoComplete="off"
 			>
-				<span className="results">
+				<span className={styles.results}>
 					{resultCount > 0 && `${resultCount} results found`}
 				</span>
 			</Input>
-
-			<style jsx>
-				{`
-                    .results {
-                        color: gray;
-                        font-style: italic;
-                        font-size: 1rem;
-                        height: 2rem;
-                        line-height: 2rem;
-                        padding-inline-start: 2rem;
-                    }
-                `}
-			</style>
 		</div>
 	);
 }

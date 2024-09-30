@@ -2,6 +2,7 @@ import useChartSettings from "components/charts/chart-settings";
 import { Input } from "components/input";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
+import styles from "./ChartsCommunication.module.css";
 
 class CustomEventHandler {
 	subscribe(eventName: string, cb: (value: unknown) => void) {
@@ -122,7 +123,7 @@ export default function ChartsCommunicationExample() {
 
 	return (
 		<>
-			<section>
+			<section className={styles.inputSection}>
 				<Input
 					label="Set number of charts"
 					type="number"
@@ -132,21 +133,13 @@ export default function ChartsCommunicationExample() {
 					onChange={(e) => setNumberOfCharts(Number(e.target.value))}
 				/>
 			</section>
-			<section>
+			<section className={styles.chartsSection}>
 				{chartIds.map((id) => (
-					<div className="chart" key={id}>
+					<div className={styles.chart} key={id}>
 						<Chart chartId={id} />
 					</div>
 				))}
 			</section>
-			<style jsx>{`
-                section {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    grid-template-rows: repeat(auto-fit, 1fr);
-                    gap: 10px;
-                }
-            `}</style>
 		</>
 	);
 }

@@ -1,0 +1,22 @@
+.progress {
+    position: relative;
+    height: 2rem;
+    width: inherit;
+    border-radius: 0 0 1rem 1rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    overflow: hidden;
+}
+
+.range {
+    height: inherit;
+    text-overflow: clip;
+    text-align: center;
+    overflow: hidden;
+    transition: width 0.2s linear;
+}
+
+.matchText {
+    font-style: italic;
+    color: var(--colors-text);
+}

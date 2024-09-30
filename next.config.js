@@ -1,6 +1,4 @@
 module.exports = {
-	swcMinify: true,
-
 	i18n: {
 		locales: ["en", "he"],
 		defaultLocale: "en",

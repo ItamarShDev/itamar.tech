@@ -1,0 +1,49 @@
+.container {
+    cursor: pointer;
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    font-size: 30px;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid var(--colors-decorations);
+    background-color: var(--colors-bg);
+    z-index: 10;
+}
+
+.floatingButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--colors-decorations);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: background-color 0.3s ease;
+}
+
+.floatingButton:hover {
+    background-color: var(--colors-hoverDecorations);
+}
+
+.icon {
+    transform: translateY(-2px);
+}
+
+.container:hover .floatingButton {
+    color: var(--colors-bg);
+}
+
+.container:hover {
+    border-color: var(--colors-hoverDecorations);
+    background-color: var(--colors-decorations);
+    transition: all 0.2s linear;
+}

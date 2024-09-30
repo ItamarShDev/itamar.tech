@@ -1,6 +1,8 @@
 import Image from "components/image";
 import { useScreenSize } from "lib/hooks";
 import AvatarImg from "public/images/me.png";
+import styles from "./Avatar.module.css";
+
 export default function Avatar() {
 	const { isMobile } = useScreenSize();
 	let imageProps = {
@@ -16,20 +18,13 @@ export default function Avatar() {
 		};
 	}
 	return (
-		<span className="avatar">
+		<span className={styles.avatar}>
 			<Image
 				image={AvatarImg}
 				alt="my picture"
 				title="Me, preparing for my wedding"
 				{...imageProps}
 			/>
-			<style jsx>{`
-                .avatar {
-                    z-index: -1;
-                    height: inherit;
-                    width: auto;
-                }
-            `}</style>
 		</span>
 	);
 }

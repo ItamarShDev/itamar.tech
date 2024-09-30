@@ -52,7 +52,7 @@ export function getAllPostIds(locale = "en") {
 		const { data } = matter(fileContents);
 
 		return {
-			fileName,
+			// fileName,
 			params: {
 				...data,
 			},
