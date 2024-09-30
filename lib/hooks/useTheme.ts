@@ -64,7 +64,7 @@ export default function useTheme() {
 	const [theme, setThemeConfig] = useState<CSSStyleDeclaration | undefined>();
 	useEffect(() => {
 		const savedTheme = localStorage.getItem("theme");
-		if (savedTheme && savedTheme in SCHEMES) {
+		if (savedTheme) {
 			setThemeName(savedTheme);
 		} else {
 			if (process.browser) {
@@ -87,6 +87,7 @@ export default function useTheme() {
 		};
 	}, []);
 	useEffect(() => {
+		if (!themeName) return;
 		setTheme(themeName);
 		setThemeConfig(getComputedStyle(document.body))
 	}, [themeName]);

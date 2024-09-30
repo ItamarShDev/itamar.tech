@@ -19,7 +19,7 @@ function App({ Component, pageProps }) {
 		? `Itamar Sharify - ${pageProps.title}`
 		: "Itamar Sharify";
 	useEffect(() => {
-		document.body.dataset.theme = currentThemeName;
+		if (currentThemeName) document.body.dataset.theme = currentThemeName;
 	}, [currentThemeName]);
 
 	return (

@@ -74,7 +74,10 @@ export const ThemedIcon = () => {
 			>
 				<ThemeList
 					currentThemeName={currentThemeName}
-					setThemeName={setThemeName}
+					setThemeName={(theme) => {
+						setThemeName(theme);
+						setIsOpen(false);
+					}}
 				/>
 			</div>
 		</div>
