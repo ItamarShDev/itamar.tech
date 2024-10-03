@@ -2,7 +2,7 @@ import { LinkCard } from "components";
 import { useTranslation } from "lib/hooks/useTranslation";
 import styles from "./Links.module.css";
 
-const transtions = {
+const translations = {
 	en: {
 		resume: {
 			title: "Career",
@@ -34,7 +34,7 @@ const transtions = {
 };
 
 function Links() {
-	const translation = useTranslation(transtions);
+	const translation = useTranslation(translations);
 	return (
 		<div className={styles.container}>
 			<LinkCard

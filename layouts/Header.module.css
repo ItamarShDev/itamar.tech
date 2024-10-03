@@ -1,8 +1,9 @@
 .nav {
     height: var(--header-height);
-    width: 100%;
+    width: 100vw;
     display: grid;
-    grid-template-columns: 6rem 1fr 6rem 6rem;
+    padding-inline: 1rem;
+    grid-template-columns: auto auto 1fr 5rem;
     text-align: center;
     align-items: center;
     border-bottom: 1px solid var(--colors-decorations);

@@ -1,7 +1,6 @@
 import HomeBackground from "layouts/home-background";
 import HomePage from "layouts/home-page";
 import { getQuotesData } from "lib/get-data-methods";
-import React from "react";
 
 export default function Home({ quotes }) {
 	return (

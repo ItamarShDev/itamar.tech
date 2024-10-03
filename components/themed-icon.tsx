@@ -45,24 +45,43 @@ function ThemeList({ currentThemeName, setThemeName }) {
 	);
 }
 
+function ThemeSwitch() {
+	const { toggleDarkMode, isDarkTheme } = useTheme();
+	return (
+		<label htmlFor="theme-switch" className={styles.themeSwitch}>
+			<input
+				type="checkbox"
+				name="theme-switch"
+				id="theme-switch"
+				checked={isDarkTheme}
+				onChange={() => toggleDarkMode()}
+			/>
+			<span className={styles.slider} />
+		</label>
+	);
+}
 export const ThemedIcon = () => {
 	const { currentThemeName, setThemeName, isDarkTheme } = useTheme();
 	const [isOpen, setIsOpen] = useState(false);
 	useEffect(() => {
 		document.body.dataset.theme = currentThemeName;
 	}, [currentThemeName]);
-	const iconClass = getIconClassAndAction(isDarkTheme);
 	const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
 	return (
 		<div className={styles.container}>
-			<button
-				type="button"
-				onClick={() => {
-					setIsOpen(!isOpen);
-				}}
-				className={`${styles.icon} ${styles[iconClass]}`}
-				title={title}
-			/>
+			<div className={styles.iconContainer}>
+				<ThemeSwitch />
+				<button
+					type="button"
+					onClick={() => {
+						setIsOpen(!isOpen);
+					}}
+					className={styles.icon}
+					title={title}
+				>
+					^
+				</button>
+			</div>
 			<div
 				className={styles.list}
 				style={{ display: isOpen ? "block" : "none" }}

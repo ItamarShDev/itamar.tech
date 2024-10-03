@@ -1,3 +1,7 @@
+import { useRouter } from "next/router";
+
 export function useTranslation(translations) {
-	return translations.he;
+	const { locale } = useRouter();
+	if (!locale) return translations.en;
+	return translations[locale];
 }

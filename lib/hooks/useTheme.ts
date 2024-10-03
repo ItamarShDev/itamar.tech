@@ -1,13 +1,12 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-const SCHEMES = ["light", "dark", 'monokai', 'cobalt2'];
+const SCHEMES = ["light", "dark", "monokai", "cobalt2"];
 
 export function getCurrentThemeName() {
 	if (process.browser && document.body.dataset.theme)
 		return document.body.dataset.theme;
 	return SCHEMES[0];
 }
-
 
 export const setTheme = (newTheme?: string) => {
 	if (process.browser && newTheme) {
@@ -24,19 +23,17 @@ export function toggleDarkMode() {
 	setTheme(newTheme);
 }
 export const toggleTheme = () => {
-	const currentTheme = getCurrentThemeName()
+	const currentTheme = getCurrentThemeName();
 	if (currentTheme in SCHEMES) {
-		const newThemeIndex =
-			(SCHEMES.indexOf(currentTheme) + 1) % SCHEMES.length;
+		const newThemeIndex = (SCHEMES.indexOf(currentTheme) + 1) % SCHEMES.length;
 		const newTheme = SCHEMES[newThemeIndex];
 		setTheme(newTheme);
-	}
-	else {
+	} else {
 		toggleDarkMode();
 	}
 };
 
-export const getAvailableThemes = () => SCHEMES
+export const getAvailableThemes = () => SCHEMES;
 /**
  * uses System define theme
  * @param {Function} setTheme
@@ -73,14 +70,17 @@ export default function useTheme() {
 		}
 		const observer = new MutationObserver((mutations) => {
 			for (const mutation of mutations) {
-				if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "data-theme"
+				) {
 					setThemeName(document.body.dataset.theme);
 				}
-			};
+			}
 		});
 		observer.observe(document.body, {
 			attributes: true,
-			attributeFilter: ['data-theme'],
+			attributeFilter: ["data-theme"],
 		});
 		return () => {
 			observer.disconnect();
@@ -89,14 +89,14 @@ export default function useTheme() {
 	useEffect(() => {
 		if (!themeName) return;
 		setTheme(themeName);
-		setThemeConfig(getComputedStyle(document.body))
+		setThemeConfig(getComputedStyle(document.body));
 	}, [themeName]);
 
 	return {
 		currentThemeName: themeName,
 		setThemeName,
 		theme,
-		isDarkTheme: themeName === "dark",
+		isDarkTheme: themeName !== "light",
 		toggleDarkMode: () => {
 			const newTheme = themeName !== "light" ? "light" : "dark";
 			setThemeName(newTheme);
@@ -111,9 +111,9 @@ export function useChartTheme() {
 		if (!theme) {
 			return {
 				charts: "#448ef6",
-				text: 'hsl(204.2, 100%, 28.6%)',
-				headerText: 'hsl(204.2, 100%, 28.6%)',
-			}
+				text: "hsl(204.2, 100%, 28.6%)",
+				headerText: "hsl(204.2, 100%, 28.6%)",
+			};
 		}
 		return {
 			charts: theme.getPropertyValue("--colors-charts"),
@@ -121,5 +121,4 @@ export function useChartTheme() {
 			headerText: theme.getPropertyValue("--colors-headerText"),
 		};
 	}, [theme]);
-
 }

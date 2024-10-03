@@ -6,26 +6,23 @@
     display: none;
 }
 
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 70px;
+}
 
 .icon {
     all: unset;
-    height: 60px;
-    width: 60px;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-style: normal;
-    background-color: var(--colors-headerText);
-    mask-size: 20px;
-    mask-position: 1rem center;
-    mask-repeat: no-repeat;
+    rotate: 180deg;
+    cursor: pointer;
+    color: var(var(--colors-paragraph));
 }
 
-.darkIcon {
-    mask-image: url(/icons/sun.svg);
-}
-
-.lightIcon {
-    mask-image: url(/icons/moon.svg);
-}
 
 .themeItem {
     all: unset;
@@ -57,7 +54,7 @@
 .themeListContainer {
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
 }
 
 .themeList {
@@ -71,4 +68,71 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+.themeSwitch {
+    --height: 25px;
+    --width: 40px;
+    --size: calc(var(--height) - 6px);
+    --move: calc(var(--width) - var(--size) - 4px);
+    position: relative;
+    display: inline-block;
+    width: var(--width);
+    height: var(--height);
+
+
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--colors-inputs);
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: var(--size);
+        width: var(--size);
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+        mask-size: 20px;
+        mask-position: center center;
+        mask-repeat: no-repeat;
+        mask-image: url(/icons/sun.svg);
+        background-color: var(--colors-decorations);
+    }
+
+    & input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    & input:checked+.slider {
+        background-color: var(--colors-inputs);
+    }
+
+    & input:focus+.slider {
+        box-shadow: 0 0 1px var(--colors-inputs);
+    }
+
+    & input:checked+.slider:before {
+        -webkit-transform: translateX(var(--move));
+        -ms-transform: translateX(var(--move));
+        transform: translateX(var(--move));
+        mask-image: url(/icons/moon.svg);
+    }
+
+
 }

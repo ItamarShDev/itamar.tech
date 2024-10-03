@@ -8,7 +8,8 @@ const Header = (props) => {
 	const { title } = props;
 	return (
 		<nav className={styles.nav}>
-			<GithubLogo />
+			<LanguageSelector />
+			<ThemedIcon />
 			<Link href="/" title="Click to go home" className={styles.link}>
 				<>
 					<span className={styles.name}>Itamar Sharify</span>
@@ -18,8 +19,7 @@ const Header = (props) => {
 					<span className={styles.title}>{title}</span>
 				</>
 			</Link>
-			<LanguageSelector />
-			<ThemedIcon />
+			<GithubLogo />
 		</nav>
 	);
 };

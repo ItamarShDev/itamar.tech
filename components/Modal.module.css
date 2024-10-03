@@ -80,6 +80,7 @@
 }
 
 .header .close {
+    all: unset;
     font-size: 3rem;
     display: flex;
     text-align: center;

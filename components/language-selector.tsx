@@ -1,43 +1,22 @@
 "use client";
-import Link from "next/link";
+import { Switch } from "components/switch";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import styles from "./LanguageSelector.module.css";
 
 export default function LanguageSelector() {
-	const { locales, locale, asPath } = useRouter();
+	const { locale, asPath, replace } = useRouter();
 
-	const [showSelection, setShowSelection] = useState(false);
-	const restLocales = locales?.filter((l) => l !== locale);
 	return (
 		<nav className={styles.nav}>
-			<button
-				type="button"
-				onClick={() => setShowSelection(!showSelection)}
-				className={styles.button}
-			>
-				{locale}
-			</button>
-			{showSelection && (
-				<div className={styles.container}>
-					<ul className={styles.ul}>
-						{restLocales?.map((_locale) => {
-							if (_locale === "default") return null;
-							return (
-								<li
-									key={_locale}
-									className={`${styles.li} ${_locale === locale ? styles.active : ""}`}
-									onClick={() => setShowSelection(false)}
-								>
-									<Link href={`${asPath}`} locale={_locale} legacyBehavior>
-										{_locale}
-									</Link>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			)}
+			<Switch
+				id="language-selector"
+				checked={locale === "en"}
+				onChange={() => {
+					replace(asPath, asPath, { locale: locale === "en" ? "he" : "en" });
+				}}
+				selectedText={"En"}
+				unselectedText={"עב"}
+			/>
 		</nav>
 	);
 }
