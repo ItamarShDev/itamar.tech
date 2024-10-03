@@ -43,7 +43,7 @@ function LocalesLinks() {
 							key={_locale}
 							className={_locale === locale ? styles.active : ""}
 						>
-							<Link href={`${asPath}`} locale={_locale} legacyBehavior>
+							<Link href={`${asPath}`} locale={_locale}>
 								{_locale}
 							</Link>
 						</li>

@@ -1,5 +1,4 @@
 import { Tags } from "components/jobs/tags";
-import { useIsRTL } from "lib/hooks/useTranslation";
 import type { Job as JobType } from "lib/types/jobs";
 import styles from "./Job.module.css";
 
@@ -10,10 +9,9 @@ type Props = {
 };
 
 export default function Job({ job, updateFilterText, filterText }: Props) {
-	const isRTL = useIsRTL();
 	const tags = job.tags.join(", ");
 	return (
-		<dl className={`${styles.jobContainer} ${isRTL ? styles.rtl : ""}`}>
+		<dl className={styles.jobContainer}>
 			<dt className={styles.duration}>
 				{job?.duration?.from} - {job?.duration?.to}
 			</dt>

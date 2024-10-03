@@ -1,9 +1,6 @@
-import { useIsRTL } from "lib/hooks/useTranslation";
 import styles from "./Github.module.css";
 
 const Link = () => {
-	const isRTL = useIsRTL();
-	const position = { [isRTL ? "right" : "left"]: "0.5em" };
 	return (
 		// biome-ignore lint/a11y/useAnchorContent: <explanation>
 		<a
@@ -25,7 +22,6 @@ const Link = () => {
 					transform: "scale(-1, 1) rotate(-45deg)",
 					fill: "transparent",
 					color: "var(--colors-headerText)",
-					...position,
 				}}
 				aria-hidden="true"
 			>

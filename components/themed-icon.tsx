@@ -1,5 +1,4 @@
 import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
-import { useIsRTL } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 import styles from "./ThemedIcon.module.css";
 
@@ -28,14 +27,10 @@ function ThemeItem({ currentTheme, isSelected, setTheme }) {
 }
 
 function ThemeList({ currentThemeName, setThemeName }) {
-	const isRTL = useIsRTL();
 	const availableThemes = getAvailableThemes();
 
 	return (
-		<div
-			className={styles.themeListContainer}
-			style={{ transform: `translateX(${isRTL ? "0%" : "-50%"})` }}
-		>
+		<div className={styles.themeListContainer}>
 			<ul className={styles.themeList}>
 				{availableThemes.map((theme) => (
 					<ThemeItem

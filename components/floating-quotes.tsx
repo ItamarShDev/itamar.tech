@@ -1,5 +1,4 @@
 "use client";
-import { useIsRTL } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 import styles from "./FloatingQuotes.module.css";
 
@@ -33,7 +32,6 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
 	return quotesResult;
 }
 export default function RandomQuotes(props: Props) {
-	const isRTL = useIsRTL();
 	const quotes = extractQuotesByPerson(props.quotes);
 	const [randomNumber, setRandomNumber] = useState(0);
 	useEffect(() => {
@@ -49,9 +47,7 @@ export default function RandomQuotes(props: Props) {
 
 	return (
 		<div className={styles.container}>
-			<p className={`${styles.quote} ${isRTL ? styles.rtl : ""}`}>
-				{quotes[idx].quote}
-			</p>
+			<p className={styles.quote}>{quotes[idx].quote}</p>
 		</div>
 	);
 }

@@ -2,12 +2,13 @@ import { Header } from "layouts";
 import ErrorBoundary from "layouts/error-boundary";
 import { useTheme } from "lib/hooks";
 import Head from "next/head";
-import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import "../globals.css";
 import styles from "./App.module.css";
 
 function App({ Component, pageProps }) {
+	const { locale } = useRouter();
 	const { currentThemeName } = useTheme();
 	const title = pageProps.headerTitle;
 
@@ -23,7 +24,12 @@ function App({ Component, pageProps }) {
 	}, [currentThemeName]);
 
 	return (
-		<div id="main-view" className={styles.mainView}>
+		<div
+			id="main-view"
+			className={styles.mainView}
+			lang={locale}
+			dir={locale === "he" ? "rtl" : "ltr"}
+		>
 			<Head>
 				<title>{_title}</title>
 			</Head>
@@ -37,11 +43,5 @@ function App({ Component, pageProps }) {
 		</div>
 	);
 }
-
-App.propTypes = {
-	pageProps: PropTypes.shape({
-		headerTitle: PropTypes.string,
-	}),
-};
 
 export default App;

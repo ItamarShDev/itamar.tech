@@ -1,14 +1,12 @@
 import { Job } from "components";
 import { FilterJobs } from "components/jobs/filter-jobs";
 import { getAttributesData, getResumeData } from "lib/get-data-methods";
-import { useIsRTL } from "lib/hooks/useTranslation";
 import { filterJobsByText } from "lib/job-utils";
 import type { Job as JobType } from "lib/types/jobs";
 import { useEffect, useState } from "react";
 import styles from "./Resume.module.css";
 
 export default function Resume({ resumeData }) {
-	const isRTL = useIsRTL();
 	const [filterText, setFilterText] = useState("");
 	const [jobs, setJobs] = useState<JobType[]>(resumeData.jobs);
 	useEffect(() => {

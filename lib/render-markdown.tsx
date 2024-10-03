@@ -83,7 +83,7 @@ const Code = ({ code, language, highlight, ...props }) => {
 			language={language}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
-				<pre className={className} style={style}>
+				<pre dir="ltr" className={className} style={style}>
 					{tokens.map((line, i) => (
 						<div
 							key={line}

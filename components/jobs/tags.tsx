@@ -1,5 +1,4 @@
 "use client";
-import { useIsRTL } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 import styles from "./Tags.module.css";
 
@@ -27,13 +26,12 @@ type TagsProps = {
 
 export function Tags({ tagsString, filterText, onClick }: TagsProps) {
 	const [tags, setTags] = useState<string[]>([]);
-	const isRTL = useIsRTL();
 	useEffect(() => {
 		setTags(tagsString.split(", "));
 	}, [tagsString]);
 
 	return (
-		<div className={`${styles.tags} ${isRTL ? styles.rtl : ""}`}>
+		<div className={styles.tags}>
 			{tags.map((tag) => (
 				<Tag key={tag} tag={tag} filterText={filterText} onClick={onClick} />
 			))}

@@ -10,12 +10,12 @@ type Props = {
 	filterText: string;
 };
 export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
-	const [resultCount, setResultCount] = useState(null);
+	const [resultCount, setResultCount] = useState<number>(0);
 	useEffect(() => {
 		if (filterText) {
 			setResultCount(jobs.length);
 		} else {
-			setResultCount(null);
+			setResultCount(0);
 		}
 	}, [filterText, jobs]);
 
@@ -23,8 +23,10 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
 		const text = e.target.value;
 		updateFilterText(text);
 	};
+
+	const hasResults = resultCount > 0;
 	return (
-		<div className={styles.container}>
+		<div>
 			<Input
 				label="Filter jobs"
 				className="job-filter"
@@ -34,7 +36,7 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
 				autoComplete="off"
 			>
 				<span className={styles.results}>
-					{resultCount > 0 && `${resultCount} results found`}
+					{hasResults && `${resultCount} results found`}
 				</span>
 			</Input>
 		</div>
