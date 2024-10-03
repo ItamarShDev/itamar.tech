@@ -3,7 +3,7 @@ import { useTelegramComments } from "lib/hooks";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
 import { useEffect, useRef, useState } from "react";
-import { HeadlineSidebar } from "./../../components/blog/headline-sidebar";
+import { HeadlineSidebar } from "../../components/blog/headline-sidebar";
 import styles from "./Blog.module.css";
 export default function Blog({ data, html }) {
 	const [articleDOM, setArticleDOM] = useState(null);

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from "./FloatingQuotes.module.css";
+import styles from "./RandomQuotes.module.css";
 
 interface quoteData {
 	role: string;

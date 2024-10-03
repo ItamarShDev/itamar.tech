@@ -42,11 +42,13 @@ export default function Job({ job, updateFilterText, filterText }: Props) {
 						))}
 					</p>
 				</div>
-				<Tags
-					tagsString={tags}
-					filterText={filterText}
-					onClick={updateFilterText}
-				/>
+				{filterText && (
+					<Tags
+						tagsString={tags}
+						filterText={filterText}
+						onClick={updateFilterText}
+					/>
+				)}
 			</dd>
 		</dl>
 	);
