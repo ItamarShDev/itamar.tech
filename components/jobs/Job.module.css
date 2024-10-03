@@ -5,7 +5,6 @@
 .jobContainer::before {
     content: "";
     position: absolute;
-    left: -2.75rem;
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
@@ -15,9 +14,14 @@
     border-radius: 50%;
 }
 
-.rtl::before {
-    left: calc(100% + 1.1rem);
+[dir="ltr"] .jobContainer::before {
+    left: -2.25rem;
 }
+
+[dir="rtl"] .jobContainer::before {
+    left: calc(100% + 0.75rem);
+}
+
 
 .duration {
     font-size: 1.5rem;
