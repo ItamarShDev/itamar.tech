@@ -26,7 +26,7 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
 									width="15"
 									height="15"
 								>
-									<title>open modal</title>
+									<title>close modal</title>
 									<path
 										d="M1.5 1.5l12 12m-12 0l12-12"
 										stroke={"var(--colors-text)"}

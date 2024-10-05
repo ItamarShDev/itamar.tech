@@ -74,18 +74,20 @@
     background-color: var(--colors-bg);
     color: var(--colors-text);
     text-transform: capitalize;
+
+    & li {
+        cursor: default;
+        padding: 0.5rem;
+        border: 1px dotted var(--colors-hoverDecorations);
+    }
+
+    & .selected {
+        background-color: var(--colors-decorations);
+        color: white;
+        color: black;
+    }
 }
 
-.results li {
-    cursor: default;
-    padding: 0.5rem;
-    border: 1px dotted var(--colors-hoverDecorations);
-}
-
-.results li.selected {
-    background-color: var(--colors-decorations);
-    color: white;
-}
 
 @keyframes fadeIn {
     from {

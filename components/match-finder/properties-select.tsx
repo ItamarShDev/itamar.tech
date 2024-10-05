@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
-import { BACKSPACE, DOWN, ENTER, ESC, UP } from "utils/key-codes";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./PropertiesSelect.module.css";
 
 PropertiesSelect.propTypes = {
@@ -9,78 +8,53 @@ PropertiesSelect.propTypes = {
 	updateSelectedJobs: PropTypes.func,
 };
 
-/**
- * @param {Array<string>} skills
- * @param {Array<string>} tags
- * @param {string} text
- */
-function filterSkills(skills, tags, text) {
-	return Array.from(skills).filter(
-		(item) =>
-			item.toLowerCase().includes(text.toLowerCase()) && !tags.includes(item),
+const filterSkills = (skills: string[], tags: string[], text: string) =>
+	skills.filter(
+		(skill) =>
+			skill.toLowerCase().includes(text.toLowerCase()) && !tags.includes(skill),
 	);
-}
 
 export default function PropertiesSelect({
 	properties,
 	setSelectedSkills,
 	qualificationText,
 }) {
-	const [filteredSkills, setFilteredSkills] = useState([]);
-	const [hovered, setHovered] = useState(0);
+	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [inputText, setInputText] = useState("");
-	const [tags, setTags] = useState([]);
-	const [showResults, setShowResults] = useState(false);
-	const inputEl = useRef(null);
+	const [tags, setTags] = useState<string[]>([]);
+	const inputEl = useRef<HTMLInputElement>(null);
 
 	const skills = Object.keys(properties);
-	useEffect(() => {
-		setFilteredSkills(filterSkills(skills, tags, inputText));
-		const shouldShowResults = filteredSkills.length > 0 && inputText.length > 0;
-		setShowResults(shouldShowResults);
-		setHovered(0);
-	}, [inputText, tags, skills, filteredSkills]);
-
+	const filteredSkills = useMemo(
+		() => filterSkills(skills, tags, inputText),
+		[skills, tags, inputText],
+	);
+	const showResults = filteredSkills.length > 0 && inputText !== "";
 	useEffect(() => {
 		setSelectedSkills(tags);
+		setCurrentIndex(0);
 	}, [tags, setSelectedSkills]);
-	/**
-	 * @param {any} skill
-	 */
-	const addToResults = (skill) => {
-		setShowResults(false);
+
+	const addToResults = (skill: string) => {
 		setTags([...tags, skill]);
 		setInputText("");
 	};
 	function focusInput() {
 		inputEl?.current?.focus();
-		setShowResults(true);
 	}
 
-	/**
-	 * @param {{ keyCode: any; }} e
-	 */
-	function moveSelection(e) {
-		const code = Number.parseInt(e.keyCode);
-		if (code === DOWN) {
-			if (!showResults) {
-				setShowResults(true);
-				return;
-			}
-			setHovered((hovered + 1) % filteredSkills.length);
-		} else if (code === UP) {
-			if (!showResults) {
-				setShowResults(true);
-				return;
-			}
-			const newItem = hovered === 0 ? filteredSkills.length : hovered;
-			setHovered((newItem - 1) % filteredSkills.length);
-		} else if (code === ENTER) {
-			const current = filteredSkills[hovered];
+	function moveSelection(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === "ArrowDown") {
+			setCurrentIndex((currentIndex + 1) % filteredSkills.length);
+		} else if (e.key === "ArrowUp") {
+			const newItem = currentIndex === 0 ? filteredSkills.length : currentIndex;
+			setCurrentIndex((newItem - 1) % filteredSkills.length);
+		} else if (e.key === "Enter") {
+			const current = filteredSkills[currentIndex];
 			if (current && showResults) addToResults(current);
-		} else if (code === ESC) {
+		} else if (e.key === "Escape") {
 			setInputText("");
-		} else if (code === BACKSPACE && inputText === "") {
+		} else if (e.key === "Backspace" && inputText === "") {
 			removeLastTag();
 		}
 	}
@@ -90,10 +64,7 @@ export default function PropertiesSelect({
 		setTags(_tags);
 	}
 
-	/**
-	 * @param {any} tagName
-	 */
-	function removeTag(tagName) {
+	function removeTag(tagName: string) {
 		setTags(tags.filter((tag) => tag !== tagName));
 	}
 
@@ -110,7 +81,6 @@ export default function PropertiesSelect({
 					className={styles.inputContainer}
 					onFocus={focusInput}
 					onClick={focusInput}
-					onBlur={() => setShowResults(false)}
 				>
 					<div className={styles.tags}>
 						{tags.map((tag) => (
@@ -127,8 +97,6 @@ export default function PropertiesSelect({
 					</div>
 					<input
 						type="text"
-						// biome-ignore lint/a11y/noAutofocus: <explanation>
-						autoFocus
 						id="search-technologies"
 						list="technologies"
 						ref={inputEl}
@@ -137,26 +105,29 @@ export default function PropertiesSelect({
 						onKeyDown={moveSelection}
 						value={inputText}
 						className={styles.input}
+						autoComplete="off"
 					/>
 				</div>
 				<div className={styles.resultsContainer}>
-					{showResults && filteredSkills.length > 0 && (
-						<ul id="technologies" className={styles.results}>
-							{filteredSkills.map((skill, index) => (
-								<li
-									key={skill}
-									className={index === hovered ? styles.selected : ""}
-									onMouseEnter={() => setHovered(index)}
-									onMouseDown={(e) => {
-										addToResults(skill);
-										e.stopPropagation();
-									}}
-								>
-									{skill}
-								</li>
-							))}
-						</ul>
-					)}
+					<ul
+						id="technologies"
+						className={styles.results}
+						hidden={!showResults}
+					>
+						{filteredSkills.map((skill, index) => (
+							<li
+								key={skill}
+								className={index === currentIndex ? styles.selected : ""}
+								onMouseEnter={() => setCurrentIndex(index)}
+								onMouseDown={(e) => {
+									addToResults(skill);
+									e.stopPropagation();
+								}}
+							>
+								{skill}
+							</li>
+						))}
+					</ul>
 				</div>
 			</div>
 		</div>

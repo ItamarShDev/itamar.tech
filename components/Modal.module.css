@@ -8,17 +8,18 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+
+    &.opened {
+        position: fixed;
+        display: block;
+        backdrop-filter: blur(5px) grayscale(1);
+    }
+
+    &.closed {
+        backdrop-filter: blur(0) grayscale(0);
+    }
 }
 
-.container.opened {
-    position: fixed;
-    display: block;
-    backdrop-filter: blur(5px) grayscale(1);
-}
-
-.container.closed {
-    backdrop-filter: blur(0) grayscale(0);
-}
 
 .modalWrapper {
     position: absolute;
@@ -37,13 +38,23 @@
     padding: 1rem;
     box-shadow: 0 0 10em -3em var(--colors-decorations);
     transform-origin: center;
+
+    &.opened {
+        transition: transform 0.5s ease-in;
+        transform: scale(1);
+    }
+
+    &.closed {
+        transition: transform 0.5s ease-in;
+        transform: scale(0);
+    }
 }
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
     .modalWrapper {
         left: 0;
         right: 0;
-        top: 0;
+        top: 60px;
         transform: translate(0, 0);
     }
 
@@ -52,15 +63,7 @@
     }
 }
 
-.modal.opened {
-    transition: transform 0.5s ease-in;
-    transform: scale(1);
-}
 
-.modal.closed {
-    transition: transform 0.5s ease-in;
-    transform: scale(0);
-}
 
 .header {
     display: grid;

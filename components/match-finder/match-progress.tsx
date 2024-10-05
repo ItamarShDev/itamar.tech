@@ -1,15 +1,11 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
 // @ts-ignore
 import RankJson from "../../static-props/technologies.json";
 import styles from "./MatchProgress.module.css";
 
-/**
- * @param {ArrayLike<any>} attributes
- */
-function calculateMatch(attributes) {
-	return Array.from(attributes).reduce((ret, item) => {
-		const itemRank = RankJson[item.toLowerCase()];
+function calculateMatch(attributes: string[]) {
+	return attributes.reduce((ret, item) => {
+		const itemRank = RankJson[item.toLowerCase()] as number;
 		if (itemRank !== undefined) {
 			return ret + itemRank;
 		}
@@ -36,6 +32,11 @@ const MatchProgress = ({
 	setQualificationText,
 	setPercentage,
 	percentage,
+}: {
+	selectedSkills: string[];
+	setQualificationText: React.Dispatch<React.SetStateAction<string>>;
+	setPercentage: React.Dispatch<React.SetStateAction<number>>;
+	percentage: number;
 }) => {
 	useEffect(() => {
 		const newPercentage = calculateMatch(selectedSkills);
@@ -50,17 +51,13 @@ const MatchProgress = ({
 				style={{
 					width: `${percentage}%`,
 					backgroundColor: `hsl(${percentage}, 100%, 50%)`,
-					color: `hsl(0, 0%, ${100 - percentage}%)`,
+					color: `hsl(0, 0%, ${50 - percentage}%)`,
 				}}
 			>
 				{percentage}% Match
 			</div>
 		</div>
 	);
-};
-
-MatchProgress.propTypes = {
-	attributes: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default MatchProgress;

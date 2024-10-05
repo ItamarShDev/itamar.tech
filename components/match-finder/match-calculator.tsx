@@ -6,7 +6,7 @@ import styles from "./MatchCalculator.module.css";
 import CallMe from "./call-me";
 
 function MatchCalculator({ properties }) {
-	const [selectedSkills, setSelectedSkills] = useState([]);
+	const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 	const [qualificationText, setQualificationText] = useState("");
 	const [percentage, setPercentage] = useState(0);
 
