@@ -2,8 +2,15 @@
     animation: octocat-wave 560ms ease-in-out;
 }
 
-.githubCorner {
-    max-width: 1rem;
+
+.octoArm,
+.octoBody {
+    transform-origin: 130px 106px;
+    transform: rotate(-45deg);
+}
+
+.githubCorner svg {
+    color: var(--colors-headerText);
 }
 
 @keyframes octocat-wave {
@@ -20,7 +27,7 @@
 
     40%,
     80% {
-        transform: rotate(10deg);
+        transform: rotate(-50deg);
     }
 }
 
