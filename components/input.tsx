@@ -6,12 +6,10 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ label, children, ...props }: IProps) {
 	return (
-		<div className={styles.container}>
-			<label className={styles.label}>
-				{label}
-				<input className={styles.input} {...props} />
-				{children}
-			</label>
-		</div>
+		<label className={styles.label}>
+			{label}
+			<input {...props} className={styles.input} />
+			{children}
+		</label>
 	);
 }
