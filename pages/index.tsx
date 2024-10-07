@@ -10,12 +10,12 @@ export default function Home({ quotes }) {
 		</>
 	);
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ locale }) {
 	const quotes = await getQuotesData();
 	return {
 		props: {
 			isCentered: false,
-			quotes,
+			quotes: quotes?.[locale || "en"],
 		},
 	};
 }

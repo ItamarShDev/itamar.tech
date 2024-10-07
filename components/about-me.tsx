@@ -12,13 +12,13 @@ const translations = {
 	he: { title: "איתמר שריפי", subtitle: "מהנדס תוכנה" },
 };
 
-type Transtlations = {
+type Translations = {
 	title: string;
 	subtitle: string;
 };
 
 function AboutMe({ quotes }) {
-	const texts: Transtlations = useTranslation(translations);
+	const texts: Translations = useTranslation(translations);
 	const { isMobile } = useScreenSize();
 	return (
 		<div className={styles.aboutMe}>

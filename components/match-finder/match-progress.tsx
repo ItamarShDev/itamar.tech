@@ -13,18 +13,17 @@ function calculateMatch(attributes: string[]) {
 	}, 0);
 }
 
-/**
- * @param {number} percentage
- */
-function getQualificationText(percentage) {
-	if (percentage === 0) return "";
-	if (percentage < 15) {
-		return "Possibly under qualified :(";
+function getQualificationText(matchPercentage: number): string {
+	switch (true) {
+		case matchPercentage === 0:
+			return "";
+		case matchPercentage < 15:
+			return "Possibly under qualified :(";
+		case matchPercentage >= 90:
+			return "Seems like we're done here";
+		default:
+			return "We're getting there!";
 	}
-	if (percentage >= 90) {
-		return "Seems like we're done here";
-	}
-	return "We're getting there!";
 }
 
 const MatchProgress = ({

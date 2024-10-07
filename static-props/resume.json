@@ -3,7 +3,10 @@
 		"jobs": [
 			{
 				"title": "Software Engineering T.A. (part time)",
-				"duration": { "from": 2015, "to": 2016 },
+				"duration": {
+					"from": 2015,
+					"to": 2016
+				},
 				"company": {
 					"name": "Azrieli College of Engineering",
 					"logo": "logos/jce.png",
@@ -11,7 +14,6 @@
 				},
 				"tags": [
 					"Angular.js",
-					"Scrum",
 					"Node.js",
 					"Javascript",
 					"CSS",
@@ -22,11 +24,13 @@
 			},
 			{
 				"title": "Web Developer (part time)",
-				"duration": { "from": 2015, "to": 2016 },
+				"duration": {
+					"from": 2015,
+					"to": 2016
+				},
 				"company": {
 					"name": "WishTrip",
 					"logo": "logos/wishtrip.jpeg",
-
 					"website": "https://www.wishtrip.com/"
 				},
 				"tags": [
@@ -42,8 +46,10 @@
 			},
 			{
 				"title": "Full-stack developer",
-				"duration": { "from": 2016, "to": 2019 },
-
+				"duration": {
+					"from": 2016,
+					"to": 2019
+				},
 				"company": {
 					"name": "Koalys",
 					"logo": "logos/audyx.png",
@@ -63,31 +69,51 @@
 			},
 			{
 				"title": "Full-stack Developer",
-				"duration": { "from": 2019, "to": 2020 },
+				"duration": {
+					"from": 2019,
+					"to": 2020
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
 					"website": "https://www.imubit.com/"
 				},
-				"tags": ["React.js", "Python", "GitLab CI", "Javascript", "CSS"],
+				"tags": [
+					"React.js",
+					"Python",
+					"GitLab CI",
+					"Javascript",
+					"CSS"
+				],
 				"description": "Helping to build the company customer facing application Help recruiting new wev-devs to the team",
 				"elaborated_description": ""
 			},
 			{
 				"title": "Python Developer",
-				"duration": { "from": 2020, "to": 2022 },
+				"duration": {
+					"from": 2020,
+					"to": 2022
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
 					"website": "https://www.imubit.com/"
 				},
-				"tags": ["Python", "JupyterLab", "Javascript", "CSS"],
+				"tags": [
+					"Python",
+					"JupyterLab",
+					"Javascript",
+					"CSS"
+				],
 				"description": "Building internal tools for the company field engineers",
 				"elaborated_description": ""
 			},
 			{
 				"title": "Full-stack developer",
-				"duration": { "from": 2022, "to": "Present" },
+				"duration": {
+					"from": 2022,
+					"to": "Present"
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
@@ -107,13 +133,22 @@
 			},
 			{
 				"title": "Frontend guild leader",
-				"duration": { "from": 2023, "to": "Present" },
+				"duration": {
+					"from": 2023,
+					"to": "Present"
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
 					"website": "https://www.imubit.com/"
 				},
-				"tags": ["Go", "Javascript", "Typescript", "React", "CSS"],
+				"tags": [
+					"Go",
+					"Javascript",
+					"Typescript",
+					"React",
+					"CSS"
+				],
 				"description": "Managing the frontend guild and pushing the frontend need for˜ward",
 				"elaborated_description": ""
 			}
@@ -125,14 +160,18 @@
 			"eagerness",
 			"auto deduct"
 		],
-		"education": ["BC.s. Software engineering"]
+		"education": [
+			"BC.s. Software engineering"
+		]
 	},
-
 	"he": {
 		"jobs": [
 			{
 				"title": "מתרגל קורס הנדסת תוכנה",
-				"duration": { "from": 2015, "to": 2016 },
+				"duration": {
+					"from": 2015,
+					"to": 2016
+				},
 				"company": {
 					"name": "המכללה להנדסה עזריאלי",
 					"logo": "logos/jce.png",
@@ -151,11 +190,13 @@
 			},
 			{
 				"title": "מפתח ווב במשרה חלקית",
-				"duration": { "from": 2015, "to": 2016 },
+				"duration": {
+					"from": 2015,
+					"to": 2016
+				},
 				"company": {
 					"name": "WishTrip",
 					"logo": "logos/wishtrip.jpeg",
-
 					"website": "https://www.wishtrip.com/"
 				},
 				"tags": [
@@ -171,8 +212,10 @@
 			},
 			{
 				"title": "מפתח פול-סטאק",
-				"duration": { "from": 2016, "to": 2019 },
-
+				"duration": {
+					"from": 2016,
+					"to": 2019
+				},
 				"company": {
 					"name": "Koalys",
 					"logo": "logos/audyx.png",
@@ -192,36 +235,99 @@
 			},
 			{
 				"title": "מפתח פול-סטאק",
-				"duration": { "from": 2019, "to": 2020 },
+				"duration": {
+					"from": 2019,
+					"to": 2020
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
 					"website": "https://www.imubit.com/"
 				},
-				"tags": ["React.js", "Python", "GitLab CI", "Javascript", "CSS"],
+				"tags": [
+					"React.js",
+					"Python",
+					"GitLab CI",
+					"Javascript",
+					"CSS"
+				],
 				"description": "בנייה ותחזוקה של אתר הדגל של החברה. חלק מצוות הגיוס בחברה",
 				"elaborated_description": ""
 			},
 			{
 				"title": "מפתח פייתון",
-				"duration": { "from": 2020, "to": "Present" },
+				"duration": {
+					"from": 2020,
+					"to": 2022
+				},
 				"company": {
 					"name": "Imubit",
 					"logo": "logos/imubit.svg",
 					"website": "https://www.imubit.com/"
 				},
-				"tags": ["Python", "JupyterLab", "Javascript", "CSS"],
-				"description": "בניית כלי חקירת מידע פנימיים עבור עובדי החברה",
+				"tags": [
+					"Python",
+					"JupyterLab",
+					"Javascript",
+					"CSS"
+				],
+				"description": "בניית כלי דאטה סיינס פנימיים",
+				"elaborated_description": ""
+			},
+			{
+				"title": "מפתח פול-סטאק",
+				"duration": {
+					"from": 2022,
+					"to": "Present"
+				},
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": [
+					"Python",
+					"Go",
+					"JupyterLab",
+					"Javascript",
+					"Typescript",
+					"React",
+					"CSS"
+				],
+				"description": "בניית מערכת saas הרשמית של החברה",
+				"elaborated_description": ""
+			},
+			{
+				"title": "Frontend guild leader",
+				"duration": {
+					"from": 2023,
+					"to": "Present"
+				},
+				"company": {
+					"name": "Imubit",
+					"logo": "logos/imubit.svg",
+					"website": "https://www.imubit.com/"
+				},
+				"tags": [
+					"Go",
+					"Javascript",
+					"Typescript",
+					"React",
+					"CSS"
+				],
+				"description": "ניהול גילדת הפרונט החדשה של החברה",
 				"elaborated_description": ""
 			}
 		],
 		"properties": [
-			"Go-getter",
-			"Friendly",
-			"communicative",
-			"eagerness",
-			"auto deduct"
+			"השיגי",
+			"חברתי",
+			"יכולת תקשורת גבוהה",
+			"דחף",
+			"למידה עצמית"
 		],
-		"education": ["BC.s. Software engineering"]
+		"education": [
+			"BC.s. Software engineering"
+		]
 	}
 }

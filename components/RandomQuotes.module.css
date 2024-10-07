@@ -25,6 +25,7 @@
     line-height: 0;
 }
 
-.rtl.quote::before {
+
+[dir="rtl"] .quote::before {
     left: 100%;
 }

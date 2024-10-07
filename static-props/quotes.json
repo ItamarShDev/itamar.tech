@@ -1,18 +1,38 @@
 {
-	"Rohan Sheth": {
-		"role": "Product manager",
-		"profile": "https://www.linkedin.com/in/rohan-r-sheth",
-		"quotes": [
-			"Itamar is hands down the best SW engineer I have ever worked with",
-			"Truly unique in his ability for big picture thinking",
-			"Truly unique in his ability for user-centered design",
-			"Truly unique in his ability to be process oriented",
-			"Most importantly, really fun to be around",
-			"Always comes to meetings with a positive energy",
-			"Shows great initiative in wanting to understand end user",
-			"Actively participate and contribute thoughtful insights during user research studies",
-			"Built the company’s first data analysis tool",
-			"Great at communicating ideas and collaborating with everyone"
-		]
+	"en": {
+		"Rohan Sheth": {
+			"role": "Product manager",
+			"profile": "https://www.linkedin.com/in/rohan-r-sheth",
+			"quotes": [
+				"Itamar is hands down the best SW engineer I have ever worked with",
+				"Truly unique in his ability for big picture thinking",
+				"Truly unique in his ability for user-centered design",
+				"Truly unique in his ability to be process oriented",
+				"Most importantly, really fun to be around",
+				"Always comes to meetings with a positive energy",
+				"Shows great initiative in wanting to understand end user",
+				"Actively participate and contribute thoughtful insights during user research studies",
+				"Built the company’s first data analysis tool",
+				"Great at communicating ideas and collaborating with everyone"
+			]
+		}
+	},
+	"he": {
+		"רוהן שתי": {
+			"role": "מנהל מוצר",
+			"profile": "https://www.linkedin.com/in/rohan-r-sheth",
+			"quotes": [
+				"איתמר הוא ללא ספק המהנדס הטוב ביותר שעבדתי איתו אי פעם",
+				"יחודי ביכולתו לחשיבה רחבה",
+				"יחודי ביכולתו לעיצוב מוכוון משתמש",
+				"יחודי ביכולתו להיות מוכוון תהליך",
+				"הכי חשוב, ממש כיף להיות בסביבתו",
+				"תמיד מגיע לפגישות עם אנרגיה חיובית",
+				"מראה יוזמה גדולה ברצונו להבין את המשתמש",
+				"משתתף באופן פעיל ותורם תובנות מחשבות במהלך מחקרי משתמש",
+				"בנה את כלי הניתוח הראשון של החברה",
+				"מצטיין בהעברת רעיונות ושיתוף פעולה עם כולם"
+			]
+		}
 	}
 }

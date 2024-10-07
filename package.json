@@ -12,9 +12,11 @@
 		"fix": "biome  check --write . --diagnostic-level=error"
 	},
 	"dependencies": {
+		"@vercel/kv": "^3.0.0",
 		"chart.js": "^4.4.3",
 		"eslint-config-next": "^15.0.0-rc.0",
 		"gray-matter": "^4.0.3",
+		"install": "^0.13.0",
 		"next": "^15.0.0-rc.0",
 		"react": "^19.0.0-rc-1eaccd82-20240816",
 		"react-chartjs-2": "^5.2.0",
