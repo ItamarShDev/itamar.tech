@@ -26,6 +26,7 @@ export default function Resume({ resumeData }) {
 					<Job
 						key={`${job.duration.from} - ${job.duration.to} - ${job.company.name}`}
 						job={job}
+						filterText={filterText}
 						updateFilterText={setFilterText}
 					/>
 				))}

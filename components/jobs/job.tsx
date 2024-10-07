@@ -30,7 +30,7 @@ export default function Job({ job, updateFilterText, filterText }: Props) {
 				</div>
 				<div className={styles.summary}>
 					<p>
-						{job.description.split("\n").map((text, idx) => (
+						{job.description.split("\n").map((text) => (
 							<span key={text}>{text}</span>
 						))}
 					</p>
@@ -42,13 +42,11 @@ export default function Job({ job, updateFilterText, filterText }: Props) {
 						))}
 					</p>
 				</div>
-				{filterText && (
-					<Tags
-						tagsString={tags}
-						filterText={filterText}
-						onClick={updateFilterText}
-					/>
-				)}
+				<Tags
+					tagsString={tags}
+					filterText={filterText}
+					onClick={updateFilterText}
+				/>
 			</dd>
 		</dl>
 	);

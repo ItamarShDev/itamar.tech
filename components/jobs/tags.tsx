@@ -1,27 +1,65 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./Tags.module.css";
-
-type TagProps = {
-	tag: string;
+type Base = {
 	onClick: (filterText: string) => void;
-	filterText: string;
+	filterText?: string;
 };
+type TagProps = Base & {
+	tag: string;
+};
+function getSearchedTextCompare(filterText: string, tag: string) {
+	const terms = filterText
+		.toLowerCase()
+		.split(/[\s,]+/)
+		.map(
+			(s) =>
+				[tag.toLowerCase().indexOf(s.trim().toLowerCase()), s.trim()] as [
+					number,
+					string,
+				],
+		)
+		.filter(([t]) => t !== -1)
+		.sort((a, b) => b[1].length - a[1].length);
+
+	if (terms.length === 0) return null;
+	const [index, searchedText] = terms[0];
+	const start = tag.substring(0, index);
+	const found = tag.substring(index, index + searchedText.length);
+	const end = tag.substring(index + searchedText.length);
+	return {
+		start,
+		found,
+		end,
+	};
+}
 
 function Tag({ tag, filterText = "", onClick }: TagProps) {
-	const isActive = filterText.toLowerCase() === tag.toLowerCase();
-	const className = isActive ? `${styles.tag} ${styles.active}` : styles.tag;
+	const searchedTags = useMemo(
+		() => getSearchedTextCompare(filterText, tag),
+		[filterText, tag],
+	);
+	if (!searchedTags) {
+		return (
+			<span className={styles.tag} onClick={() => onClick(tag)}>
+				{tag}
+			</span>
+		);
+	}
+	const { start, found, end } = searchedTags;
 	return (
-		<span className={className} onClick={() => onClick(tag)}>
-			{tag}
+		<span className={styles.tag} onClick={() => onClick(tag)}>
+			<span key={start + found + end}>
+				{start}
+				<span className={styles.highlight}>{found}</span>
+				{end}
+			</span>
 		</span>
 	);
 }
 
-type TagsProps = {
+type TagsProps = Base & {
 	tagsString: string;
-	filterText: string;
-	onClick: (filterText: string) => void;
 };
 
 export function Tags({ tagsString, filterText, onClick }: TagsProps) {

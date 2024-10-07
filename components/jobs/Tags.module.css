@@ -6,10 +6,6 @@
     text-decoration: dotted underline;
 }
 
-.active {
-    background-color: var(--colors-decorations);
-}
-
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -24,4 +20,11 @@
 
 .rtl {
     flex-direction: row-reverse;
+}
+
+.highlight {
+    font-style: normal;
+    font-weight: bold;
+    color: var(--colors-decorations);
+    border-radius: 0.5rem;
 }

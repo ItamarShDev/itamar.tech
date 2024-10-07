@@ -5,13 +5,16 @@ export function filterJobsByText(jobs: Job[], text = ""): Job[] {
 		.slice(0)
 		.reverse()
 		.filter((item) => {
-			const lc_text = text.toLowerCase();
-			const hasTag = item.tags.some((tag) =>
-				tag.toLowerCase().includes(lc_text),
-			);
-			const hasTitle = item.title.toLowerCase().includes(lc_text);
-			const hasDescription = item.description.toLowerCase().includes(lc_text);
+			const terms = text.split(/[\s,]+/).map((s) => s.trim());
 
-			return hasTag || hasTitle || hasDescription;
+			return terms.some((term) => {
+				const lc_text = term.toLowerCase();
+				const hasTag = item.tags.some((tag) =>
+					tag.toLowerCase().includes(lc_text),
+				);
+				const hasTitle = item.title.toLowerCase().includes(lc_text);
+				const hasDescription = item.description.toLowerCase().includes(lc_text);
+				return hasTag || hasTitle || hasDescription;
+			});
 		});
 }
