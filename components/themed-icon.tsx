@@ -1,6 +1,7 @@
 import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
 import { useEffect, useState } from "react";
 import styles from "./ThemedIcon.module.css";
+import { useTranslation } from "lib/hooks/useTranslation";
 
 export function getIconClassAndAction(isDark) {
 	if (isDark) {
@@ -47,6 +48,14 @@ function ThemeList({ currentThemeName, setThemeName }) {
 
 function ThemeSwitch() {
 	const { toggleDarkMode, isDarkTheme } = useTheme();
+	const text = useTranslation({
+		en: {
+			title: `Toggle ${isDarkTheme ? "light" : "dark"} mode`,
+		},
+		he: {
+			title: `החלפה למצב ${isDarkTheme ? "בהיר" : "כהה"}`,
+		},
+	});
 	return (
 		<label htmlFor="theme-switch" className={styles.themeSwitch}>
 			<input
@@ -55,6 +64,7 @@ function ThemeSwitch() {
 				id="theme-switch"
 				checked={isDarkTheme}
 				onChange={() => toggleDarkMode()}
+				title={text.title}
 			/>
 			<span className={styles.slider} />
 		</label>
@@ -63,10 +73,19 @@ function ThemeSwitch() {
 export const ThemedIcon = () => {
 	const { currentThemeName, setThemeName, isDarkTheme } = useTheme();
 	const [isOpen, setIsOpen] = useState(false);
+	const text = useTranslation({
+		en: {
+			title: "Select theme",
+		},
+		he: {
+			title: "בחר ערכת נושא",
+		},
+	});
 	useEffect(() => {
-		document.body.dataset.theme = currentThemeName;
+		if (currentThemeName !== "undefined") {
+			document.body.dataset.theme = currentThemeName;
+		}
 	}, [currentThemeName]);
-	const title = `Toggle ${isDarkTheme ? "light" : "dark"} mode`;
 	return (
 		<div className={styles.container}>
 			<div className={styles.iconContainer}>
@@ -77,7 +96,7 @@ export const ThemedIcon = () => {
 						setIsOpen(!isOpen);
 					}}
 					className={styles.icon}
-					title={title}
+					title={text.title}
 				>
 					^
 				</button>

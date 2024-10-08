@@ -9,7 +9,7 @@ export function getCurrentThemeName() {
 }
 
 export const setTheme = (newTheme?: string) => {
-	if (process.browser && newTheme) {
+	if (newTheme) {
 		document.body.dataset.theme = newTheme;
 		localStorage.setItem("theme", newTheme);
 	}
@@ -34,25 +34,12 @@ export const toggleTheme = () => {
 };
 
 export const getAvailableThemes = () => SCHEMES;
-/**
- * uses System define theme
- * @param {Function} setTheme
- */
+
 function setThemeFromSystem(setTheme: (theme: string) => void) {
 	if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
 		setTheme("dark");
 	} else {
 		setTheme("light");
-	}
-	const sysTheme = window.matchMedia("(prefers-color-scheme: dark)");
-	if (sysTheme.addListener) {
-		sysTheme.addListener((e) => {
-			setTheme(e.matches ? "dark" : "light");
-		});
-	} else if (sysTheme.addEventListener) {
-		sysTheme.addEventListener("change", (e) => {
-			setTheme(e.matches ? "dark" : "light");
-		});
 	}
 }
 
@@ -61,18 +48,19 @@ export default function useTheme() {
 	const [theme, setThemeConfig] = useState<CSSStyleDeclaration | undefined>();
 	useEffect(() => {
 		const savedTheme = localStorage.getItem("theme");
+
 		if (savedTheme) {
 			setThemeName(savedTheme);
 		} else {
-			if (process.browser) {
-				setThemeFromSystem(setThemeName);
-			}
+			setThemeFromSystem(setThemeName);
 		}
+
 		const observer = new MutationObserver((mutations) => {
 			for (const mutation of mutations) {
 				if (
 					mutation.type === "attributes" &&
-					mutation.attributeName === "data-theme"
+					mutation.attributeName === "data-theme" &&
+					document.body.dataset.theme !== undefined
 				) {
 					setThemeName(document.body.dataset.theme);
 				}
@@ -86,6 +74,7 @@ export default function useTheme() {
 			observer.disconnect();
 		};
 	}, []);
+
 	useEffect(() => {
 		if (!themeName) return;
 		setTheme(themeName);
