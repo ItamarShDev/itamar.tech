@@ -9,7 +9,6 @@ function MatchCalculator({ properties }) {
 	const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 	const [qualificationText, setQualificationText] = useState("");
 	const [percentage, setPercentage] = useState(0);
-
 	return (
 		<div className={styles.container}>
 			<section>

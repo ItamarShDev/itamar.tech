@@ -5,7 +5,7 @@ import styles from "./MatchProgress.module.css";
 
 function calculateMatch(attributes: string[]) {
 	return attributes.reduce((ret, item) => {
-		const itemRank = RankJson[item.toLowerCase()] as number;
+		const itemRank = RankJson[item] as number;
 		if (itemRank !== undefined) {
 			return ret + itemRank;
 		}

@@ -12,8 +12,16 @@ const SocialAffect = dynamic(() => import("components/charts/social"), {
 });
 
 function Stats() {
-	const labels = ["Python", "Node.js", "Javascript", "CSS", "React.js"];
-	const values = [{ label: "Abilities", data: [70, 30, 90, 90, 80] }];
+	const labels = [
+		"Python",
+		"Node.js",
+		"JavaScript",
+		"CSS",
+		"React",
+		"Go",
+		"TypeScript",
+	];
+	const values = [{ label: "Abilities", data: [70, 50, 90, 90, 80, 30, 90] }];
 	return (
 		<div>
 			<div className={styles.flex}>

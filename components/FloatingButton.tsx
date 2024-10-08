@@ -1,6 +1,6 @@
 import MatchCalculator from "components/match-finder/match-calculator";
 import Modal from "components/modal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Json from "../static-props/technologies.json";
 import styles from "./FloatingButton.module.css";
 
@@ -17,8 +17,24 @@ function MatchModal(props) {
 	);
 }
 
+const EMOJIS = ["🤩", "🫶", "🫵", "👋", "🙏🏼"];
+function useRandomEmoji() {
+	const [emoji, setEmoji] = useState("🤩");
+	const indexRef = useRef<number>(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			indexRef.current = (indexRef.current + 1) % EMOJIS.length;
+			setEmoji(EMOJIS[indexRef.current]);
+		}, 5000);
+		return () => clearInterval(interval);
+	});
+	return emoji;
+}
+
 function FloatingButton() {
 	const [opened, setOpened] = useState(false);
+	const emoji = useRandomEmoji();
 	const openModal = () => {
 		setOpened(!opened);
 	};
@@ -28,8 +44,9 @@ function FloatingButton() {
 				type="button"
 				className={styles.floatingButton}
 				onClick={openModal}
+				key={emoji}
 			>
-				?
+				{emoji}
 			</button>
 			<MatchModal open={opened} setOpened={setOpened} />
 		</div>
