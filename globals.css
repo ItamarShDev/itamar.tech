@@ -107,7 +107,8 @@ body[data-theme='cobalt2'] {
     --colors-charts: #FB94FF;
 }
 
-body[data-theme='light'] {
+body[data-theme='light'],
+body {
     --colors-bg: hsla(0, 0%, 96%, 0.8);
     --colors-modalBg: hsla(0, 0%, 96.1%);
     --colors-main: hsla(193.9, 100%, 50%, 0.9);

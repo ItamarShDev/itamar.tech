@@ -48,8 +48,7 @@ export default function useTheme() {
 	const [theme, setThemeConfig] = useState<CSSStyleDeclaration | undefined>();
 	useEffect(() => {
 		const savedTheme = localStorage.getItem("theme");
-
-		if (savedTheme) {
+		if (savedTheme && savedTheme !== "undefined") {
 			setThemeName(savedTheme);
 		} else {
 			setThemeFromSystem(setThemeName);
@@ -60,6 +59,7 @@ export default function useTheme() {
 				if (
 					mutation.type === "attributes" &&
 					mutation.attributeName === "data-theme" &&
+					document.body.dataset.theme !== "undefined" &&
 					document.body.dataset.theme !== undefined
 				) {
 					setThemeName(document.body.dataset.theme);
