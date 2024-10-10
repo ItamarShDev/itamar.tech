@@ -3,12 +3,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./headline-sidebar.module.css";
 
-function generateLinkMarkup($contentElement) {
-	const headings = [...$contentElement.querySelectorAll("h2, h3")];
+function generateLinkMarkup($contentElement: HTMLElement | null) {
+	if (!$contentElement) return [];
+	const headingsElements = $contentElement.querySelectorAll(
+		"h2, h3",
+	) as NodeListOf<HTMLHeadingElement>;
+	const headings = Array.from(headingsElements);
+
 	const parsedHeadings = headings.map((heading) => {
 		return {
 			title: heading.innerText,
-			depth: heading.nodeName.replace(/\D/g, "") - 1,
+			depth: Number(heading.nodeName.replace(/\D/g, "")) - 1,
 			id: heading.getAttribute("id"),
 		};
 	});
@@ -54,7 +59,7 @@ function LocalesLinks() {
 	);
 }
 
-export function HeadlineSidebar({ article }) {
+export function HeadlineSidebar({ article }: { article: HTMLElement | null }) {
 	const scrollPercentage = useScrollObserver();
 	const headers = generateLinkMarkup(article);
 	const headings = headers.map((header) => (

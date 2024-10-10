@@ -1,5 +1,4 @@
 import usePortal from "./usePortal";
-export {
-	usePortal
-};
-
+import useScrollObserver from "./useScrollObserver";
+import useUrlHash from "./useUrlHash";
+export { usePortal, useScrollObserver, useUrlHash };

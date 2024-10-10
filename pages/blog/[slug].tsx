@@ -1,5 +1,5 @@
 import EmailMeFooter from "components/email-footer";
-import { useTelegramComments } from "lib/hooks";
+import useTelegramComments from "lib/hooks/useTelegramComments";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
 import { useEffect, useRef, useState } from "react";
