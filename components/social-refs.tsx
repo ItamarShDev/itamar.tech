@@ -19,7 +19,6 @@ function SocialRefs({ withTitle = false }) {
 				</a>
 				<a
 					className={styles.item}
-					s
 					href="https://www.github.com/ItamarShDev"
 					target="_blank"
 					rel="noreferrer noopener"
@@ -29,7 +28,6 @@ function SocialRefs({ withTitle = false }) {
 				</a>
 				<a
 					className={styles.item}
-					s
 					href="https://www.linkedin.com/in/itamar-sharify-362289149"
 					target="_blank"
 					rel="noreferrer noopener"
