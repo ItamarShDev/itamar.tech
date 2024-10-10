@@ -8,6 +8,13 @@
     scrollbar-color: var(--colors-decorations) transparent;
 }
 
+@media screen and (max-width: 968px) {
+    .sidebar {
+        display: none;
+
+    }
+}
+
 .sidebar::-webkit-scrollbar {
     width: 6px;
 }

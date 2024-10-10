@@ -1,4 +1,4 @@
-import { usePortal, useScrollbarOnBody } from "lib/hooks";
+import { usePortal } from "lib/hooks";
 import { useEffect, useState } from "react";
 import styles from "./Modal.module.css";
 
@@ -59,10 +59,6 @@ function Modal({
 	footer = null,
 	parentEl = null,
 }) {
-	const [_, setScrollingOnBody] = useScrollbarOnBody(!open);
-	useEffect(() => {
-		setScrollingOnBody(!open);
-	}, [open, setScrollingOnBody]);
 	const [root, setRoot] = useState<HTMLElement | null>(null);
 	useEffect(() => {
 		if (parentEl) {

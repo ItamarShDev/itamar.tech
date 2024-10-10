@@ -1,4 +1,4 @@
-import { useScreenSize, useScrollObserver, useUrlHash } from "lib/hooks";
+import { useScrollObserver, useUrlHash } from "lib/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./headline-sidebar.module.css";
@@ -56,8 +56,6 @@ function LocalesLinks() {
 
 export function HeadlineSidebar({ article }) {
 	const scrollPercentage = useScrollObserver();
-	const { isMobile } = useScreenSize();
-	if (isMobile || !article) return <></>;
 	const headers = generateLinkMarkup(article);
 	const headings = headers.map((header) => (
 		<HeaderTitle key={header.id} header={header} />

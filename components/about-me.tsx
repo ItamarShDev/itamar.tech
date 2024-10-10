@@ -1,6 +1,5 @@
 import { SocialRefs } from "components";
 import RandomQuotes from "components/floating-quotes";
-import { useScreenSize } from "lib/hooks";
 import { useTranslation } from "lib/hooks/useTranslation";
 import styles from "./AboutMe.module.css";
 
@@ -19,7 +18,6 @@ type Translations = {
 
 function AboutMe({ quotes }) {
 	const texts: Translations = useTranslation(translations);
-	const { isMobile } = useScreenSize();
 	return (
 		<div className={styles.aboutMe}>
 			<div className={styles.summary}>
@@ -27,7 +25,7 @@ function AboutMe({ quotes }) {
 				<h2>{texts.subtitle}</h2>
 
 				<SocialRefs />
-				{!isMobile && <RandomQuotes quotes={quotes} />}
+				<RandomQuotes quotes={quotes} />
 			</div>
 		</div>
 	);

@@ -2,6 +2,12 @@
     padding: 2rem;
 }
 
+@media screen and (max-width: 968px) {
+    .container {
+        display: none;
+    }
+}
+
 .quote {
     color: var(--colors-subText);
     word-break: normal;
