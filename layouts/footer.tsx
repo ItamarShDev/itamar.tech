@@ -1,5 +1,4 @@
 import GithubLogo from "images/GithubLogo";
-import MediumLogo from "images/MediumLogo";
 import TwitterLogo from "images/TwitterLogo";
 import styles from "./Footer.module.css";
 
@@ -28,17 +27,7 @@ const Footer = () => {
 				</div>
 				Github
 			</a>
-			<a
-				href="https://medium.com/@itamarsharify"
-				target="_blank"
-				className={`${styles.link} ${styles.medium}`}
-				rel="noreferrer noopener"
-			>
-				<div className={styles.iconWrapper}>
-					<MediumLogo center />
-				</div>
-				Medium
-			</a>
+			
 		</footer>
 	);
 };

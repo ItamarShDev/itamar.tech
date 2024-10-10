@@ -1,10 +1,6 @@
 .row {
     display: grid;
-
-    grid-template-columns: repeat(2, auto);
-
-    grid-template-rows: repeat(1, auto);
-
+    grid-template-columns: repeat(auto-fit, 35px);
     grid-gap: 20;
     justify-content: center;
     align-items: center;
