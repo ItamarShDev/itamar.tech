@@ -6,6 +6,12 @@ function ModalComponent({ open, setOpened, title, children, footer = null }) {
 	return (
 		<div
 			className={`${styles.container} ${open ? styles.opened : styles.closed}`}
+			onClick={(e) => {
+				if (e.target === e.currentTarget) {
+					e.preventDefault();
+					setOpened(false);
+				}
+			}}
 		>
 			<div className={styles.modalWrapper}>
 				<div

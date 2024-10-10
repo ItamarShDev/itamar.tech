@@ -28,6 +28,17 @@
     align-items: center;
     font-size: 24px;
     transition: all 0.3s ease;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% {
+        font-size: 0;
+    }
+
+    100% {
+        font-size: 24px;
+    }
 }
 
 .floatingButton:hover {

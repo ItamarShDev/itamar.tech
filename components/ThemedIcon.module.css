@@ -113,6 +113,11 @@
         background-color: var(--colors-decorations);
     }
 
+    .slider:hover:before {
+        transform: rotate(30deg);
+        transition: all 0.2s linear;
+    }
+
     & input {
         opacity: 0;
         width: 0;
@@ -132,6 +137,11 @@
         -ms-transform: translateX(var(--move));
         transform: translateX(var(--move));
         mask-image: url(/icons/moon.svg);
+    }
+
+    & input:checked+.slider:hover:before {
+        background-color: var(--colors-link);
+        transition: all 0.2s linear;
     }
 
 

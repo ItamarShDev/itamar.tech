@@ -33,12 +33,17 @@
         width: var(--size);
         left: 3px;
         bottom: 3px;
-        background-color: white;
         -webkit-transition: .4s;
         transition: .4s;
         border-radius: 50%;
         background-color: var(--colors-decorations);
         font-weight: bold;
+
+
+    }
+
+    .slider:hover:before {
+        color: white;
     }
 
     & input {
