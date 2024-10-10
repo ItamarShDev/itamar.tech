@@ -1,5 +1,5 @@
 .bg {
-    animation: slide 20s ease-in-out 2 alternate;
+    animation: slide 20s ease-in-out infinite alternate;
     bottom: 0;
     left: -50%;
     opacity: 0.5;
@@ -7,6 +7,12 @@
     right: -50%;
     top: 0;
     z-index: -1;
+}
+
+@media (prefers-reduced-motion) {
+    .bg {
+        animation: none;
+    }
 }
 
 .bg2 {
