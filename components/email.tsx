@@ -3,6 +3,7 @@ export interface EmailTemplateProps {
 	lastName: string;
 	email: string;
 	message: string;
+	title: string;
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = (

@@ -37,7 +37,7 @@ function sendMail(payload: EmailTemplateProps) {
 	const mailOptions = {
 		to: mail,
 		from: payload.email,
-		subject: "New Job Offer",
+		subject: payload.title,
 		text: payload.message,
 	};
 

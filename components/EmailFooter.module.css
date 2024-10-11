@@ -18,18 +18,21 @@
     color: var(--colors-link);
     font-size: 1.5rem;
 }
+
 .actions {
     display: flex;
     gap: 1rem;
     align-items: baseline;
-    
 }
 
 .sendMessageButton {
     color: var(--colors-text);
+    background-color: var(--colors-bg);
+    text-decoration: underline;
     border: none;
     width: max-content;
     cursor: pointer;
+    padding: 0;
 }
 
 .form {
@@ -38,22 +41,27 @@
     width: 100%;
     gap: 1rem;
 }
+
 .details {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr;
 }
-.form input,.form textarea {
+
+.form input,
+.form textarea {
     all: unset;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
     color: var(--colors-text);
     background-color: var(--colors-inputs);
+
     &:focus {
         outline: 1px solid var(--colors-decorations);
     }
 }
+
 .submit {
     background-color: var(--colors-decorations);
     color: var(--colors-bg);

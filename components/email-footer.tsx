@@ -11,7 +11,7 @@ const EmailFooter = ({ title, text }) => {
 			text: "Send me a message or a proposal",
 			email: "Email",
 			message: "Message",
-			or: "OR",
+			or: "or",
 			submit: "Send",
 			firstName: "First Name",
 			lastName: "Last Name",
@@ -36,7 +36,9 @@ const EmailFooter = ({ title, text }) => {
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-		const value = {};
+		const value = {
+			title,
+		};
 		for (const entry of formData.entries()) {
 			value[entry[0]] = entry[1];
 		}
