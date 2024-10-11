@@ -1,5 +1,6 @@
 import EmailMeFooter from "components/email-footer";
 import useTelegramComments from "lib/hooks/useTelegramComments";
+import { useTranslation } from "lib/hooks/useTranslation";
 import { getAllPostIds, getPostData } from "lib/posts";
 import renderMarkdown from "lib/render-markdown";
 import { useEffect, useRef, useState } from "react";
@@ -10,8 +11,15 @@ export default function Blog({ data, html }) {
 	const articleRef = useRef(null);
 	useTelegramComments("blog-footer");
 	const emailTitle = `Re: ${encodeURI(data?.title)}`;
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	const translations = useTranslation({
+		en: {
+			footerTitle: "Having thoughts? email me",
+		},
+		he: {
+			footerTitle: "מחשבות? שלחו לי אימייל",
+		},
+	});
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Update ref only when html changes
 	useEffect(() => {
 		setArticleDOM(articleRef.current);
 	}, [html]);
@@ -21,7 +29,7 @@ export default function Blog({ data, html }) {
 			<HeadlineSidebar article={articleDOM} />
 			<div className={`${styles.blogWrapper} blog-wrapper`} id="blog-footer">
 				<h1 className={`${styles.postTitle} post-title`}>{data?.title}</h1>
-				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: We need this to render html */}
 				<article ref={articleRef} dangerouslySetInnerHTML={{ __html: html }} />
 				<EmailMeFooter title={emailTitle} text="Having thoughts? email me" />
 			</div>
@@ -44,7 +52,6 @@ export async function getStaticProps({ params, locale }) {
 	};
 }
 export async function getStaticPaths() {
-	// Return a list of possible value for id
 	const paths = getAllPostIds();
 	return {
 		paths,
