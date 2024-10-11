@@ -1,7 +1,7 @@
 import useTheme, { getAvailableThemes } from "lib/hooks/useTheme";
+import { useTranslation } from "lib/hooks/useTranslation";
 import { useEffect, useState } from "react";
 import styles from "./ThemedIcon.module.css";
-import { useTranslation } from "lib/hooks/useTranslation";
 
 export function getIconClassAndAction(isDark) {
 	if (isDark) {

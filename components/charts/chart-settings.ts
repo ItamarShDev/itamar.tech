@@ -35,8 +35,8 @@ function themedDatasets(values, theme: ReturnType<typeof useChartTheme>) {
 			borderWidth: 2,
 			backgroundColor: `hsla(${h}, ${s}%, ${l}%, 0.2)`,
 			borderColor: `hsl(${h}, ${s}%, ${l}%)`,
-			yAxisID: 'yAxis',
-			xAxisID: 'xAxis',
+			yAxisID: "yAxis",
+			xAxisID: "xAxis",
 		};
 		if (Object.hasOwn(item, "settings")) {
 			return { ...dataset, ...item.settings };
@@ -176,7 +176,7 @@ export default function useChartSettings({
 	const datasets = useMemo(
 		() => themedDatasets(values, theme),
 		[values, theme],
-	)
+	);
 	useEffect(() => {
 		const data = {
 			labels,

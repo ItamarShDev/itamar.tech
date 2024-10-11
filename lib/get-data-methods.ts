@@ -1,6 +1,6 @@
-import { kv } from "@vercel/kv";
 import fs from "node:fs";
 import path from "node:path";
+import { kv } from "@vercel/kv";
 const directory = path.join(process.cwd(), "static-props");
 export type JsonType = Record<"en" | "he", Record<string, string>>;
 export async function getResume() {
