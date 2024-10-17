@@ -1,3 +1,7 @@
+/* Font imports */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
+
 /* Global styles */
 *,
 *::before,
@@ -55,9 +59,6 @@ h6 {
 
 
 
-/* Font imports */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
 
 body[data-theme='dark'] {
     --colors-bg: hsl(216, 18.1%, 16.3%);

@@ -17,7 +17,6 @@ export default function ExampleProjects() {
 			{examples.map((example) => (
 				<LinkCard
 					key={example.slug}
-					routeRef="/example-projects/[slug]"
 					route={`/example-projects/${example.slug}`}
 					title={example.title}
 					subTitle={example.summary}
@@ -26,6 +25,7 @@ export default function ExampleProjects() {
 
 			<LinkCard
 				key={"hakapit"}
+				newTab
 				route={"https://hakapit.online"}
 				title="הכפית"
 				subTitle={"אתר פרטי לפודקאסט"}

@@ -20,7 +20,7 @@
     font-style: normal;
     rotate: 180deg;
     cursor: pointer;
-    color: var(var(--colors-paragraph));
+    color: var(--colors-paragraph);
 }
 
 
