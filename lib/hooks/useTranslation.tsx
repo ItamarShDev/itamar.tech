@@ -5,7 +5,7 @@ export function useTranslation(
 ) {
 	const { locale } = useRouter();
 	if (!locale) return translations.en;
-	return translations[locale];
+	return translations[locale as "en" | "he"];
 }
 export function useDirection() {
 	const { locale } = useRouter();

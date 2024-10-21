@@ -11,6 +11,11 @@ export default function ExampleProjects() {
 			title: "Chart Communications",
 			summary: "A simple example of a chart communications app.",
 		},
+		{
+			slug: "generator-traffic",
+			title: "Generator Traffic",
+			summary: "A simple example of a traffic cross app using generators.",
+		},
 	];
 	return (
 		<div>
