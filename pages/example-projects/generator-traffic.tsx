@@ -4,7 +4,6 @@ import {
 	TrafficProvider,
 } from "components/generator-traffic/provider";
 import { useTranslation } from "lib/hooks/useTranslation";
-import styles from "./style.module.css";
 
 export default function Page() {
 	const texts = useTranslation({
@@ -21,13 +20,13 @@ export default function Page() {
 		<>
 			<h1>{texts.title}</h1>
 			<h3>{texts.subtitle}</h3>
-			<section className={styles.traffic}>
-				<TrafficProvider>
+			<TrafficProvider>
+				<>
 					{IDS.map((id) => (
 						<TrafficLight key={id} trafficId={id} />
 					))}
-				</TrafficProvider>
-			</section>
+				</>
+			</TrafficProvider>
 		</>
 	);
 }

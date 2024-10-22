@@ -25,10 +25,9 @@ export const STATES: Record<(typeof IDS)[number], (typeof COLORS)[number]>[] = [
 export async function sleep(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
-export async function* getTrafficLights() {
+export function* getTrafficLights() {
 	let index = 0;
 	while (true) {
-		await sleep(3000);
 		yield STATES[index];
 		index = (index + 1) % STATES.length;
 	}

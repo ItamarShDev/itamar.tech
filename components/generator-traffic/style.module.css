@@ -1,3 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.traffic {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.button {
+    all: unset;
+    padding: 0.5rem;
+    background-color: var(--colors-bg);
+    border: 1px solid var(--colors-decorations);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--colors-decorations);
+    }
+}
+
 .trafficLight {
     display: flex;
     flex-direction: column;
@@ -11,7 +53,7 @@
     height: 50px;
     border-radius: 50%;
     margin: 0.25rem;
-    filter: brightness(30%);
+    filter: brightness(20%);
 
     &.on {
         filter: brightness(100%);
@@ -22,7 +64,7 @@
     }
 
     &.yellow {
-        background-color: yellow;
+        background-color: orange;
     }
 
     &.green {
