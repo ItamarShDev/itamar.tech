@@ -15,14 +15,14 @@
     "@vercel/functions": "^1.4.2",
     "@vercel/kv": "^3.0.0",
     "chart.js": "^4.4.3",
-    "eslint-config-next": "15.0.0-rc.1",
+    "eslint-config-next": "15.0.0",
     "gray-matter": "^4.0.3",
     "install": "^0.13.0",
-    "next": "15.0.0-rc.1",
+    "next": "15.0.0",
     "nodemailer": "^6.9.15",
-    "react": "19.0.0-rc-cd22717c-20241013",
+    "react": "19.0.0-rc-65a56d0e-20241020",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "19.0.0-rc-cd22717c-20241013"
+    "react-dom": "19.0.0-rc-65a56d0e-20241020"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
