@@ -21,6 +21,7 @@ export function Switch({
 				id={id}
 				checked={checked}
 				onChange={onChange}
+				aria-label={checked ? selectedText : unselectedText}
 			/>
 			<span
 				className={styles.slider}

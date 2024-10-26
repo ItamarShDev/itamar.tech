@@ -29,7 +29,6 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
 		<div>
 			<Input
 				label="Filter jobs"
-				className="job-filter"
 				type="text"
 				value={filterText}
 				onChange={filterJobs}
