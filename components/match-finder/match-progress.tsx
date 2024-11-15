@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 // @ts-ignore
 import RankJson from "../../static-props/technologies.json";

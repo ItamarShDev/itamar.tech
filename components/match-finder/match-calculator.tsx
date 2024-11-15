@@ -1,11 +1,14 @@
+"use client";
+
 import Fireworks from "components/match-finder/fireworks";
 import MatchProgress from "components/match-finder/match-progress";
 import PropertiesSelect from "components/match-finder/properties-select";
+import type { Properties } from "components/properies";
 import { useState } from "react";
 import styles from "./MatchCalculator.module.css";
 import CallMe from "./call-me";
 
-function MatchCalculator({ properties }) {
+function MatchCalculator({ properties }: { properties: Properties }) {
 	const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 	const [qualificationText, setQualificationText] = useState("");
 	const [percentage, setPercentage] = useState(0);

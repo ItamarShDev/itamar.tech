@@ -1,3 +1,4 @@
+"use client";
 import type { ChartData } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import useChartSettings, { type ChartSettings } from "./chart-settings";

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev --turbo",
+    "dev": "NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,14 +15,14 @@
     "@vercel/functions": "^1.4.2",
     "@vercel/kv": "^3.0.0",
     "chart.js": "^4.4.3",
-    "eslint-config-next": "15.0.1",
+    "eslint-config-next": "15.0.3",
     "gray-matter": "^4.0.3",
     "install": "^0.13.0",
-    "next": "15.0.1",
+    "next": "15.0.3",
     "nodemailer": "^6.9.15",
-    "react": "19.0.0-rc-69d4b800-20241021",
+    "react": "19.0.0-rc-66855b96-20241106",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "19.0.0-rc-69d4b800-20241021"
+    "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",

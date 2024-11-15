@@ -1,4 +1,5 @@
-import { usePortal } from "lib/hooks";
+"use client";
+import usePortal from "lib/hooks/usePortal";
 import { useEffect, useState } from "react";
 import styles from "./Modal.module.css";
 

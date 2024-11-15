@@ -1,40 +1,9 @@
 import { LinkCard } from "components";
-import { useTranslation } from "lib/hooks/useTranslation";
+import { getTranslationsCache } from "lib/server-cache";
 import styles from "./Links.module.css";
 
-const translations = {
-	en: {
-		resume: {
-			title: "Career",
-			subTitle: "Career Timeline",
-		},
-		blog: {
-			title: "Thoughts Log",
-			subTitle: "My Development Journy",
-		},
-		examples: {
-			title: "Examples",
-			subTitle: "Project examples recreated",
-		},
-	},
-	he: {
-		resume: {
-			title: "קריירה",
-			subTitle: "מסלול הקריירה שלי",
-		},
-		blog: {
-			title: "מחשבות",
-			subTitle: "מחשבות לאורך הדרך",
-		},
-		examples: {
-			title: "דוגמאות",
-			subTitle: "שחזור יצירות עבר",
-		},
-	},
-};
-
-function Links() {
-	const translation = useTranslation(translations);
+async function Links() {
+	const translation = await getTranslationsCache("links");
 	return (
 		<div className={styles.container}>
 			<LinkCard

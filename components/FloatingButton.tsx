@@ -1,8 +1,10 @@
+"use client";
+
 import MatchCalculator from "components/match-finder/match-calculator";
 import Modal from "components/modal";
 import { useEffect, useRef, useState } from "react";
-import Json from "../static-props/technologies.json";
 import styles from "./FloatingButton.module.css";
+import { properties } from "./properies";
 
 function MatchModal(props) {
 	return (
@@ -12,7 +14,7 @@ function MatchModal(props) {
 			title="Are we a match?"
 			refreshOnRender
 		>
-			<MatchCalculator properties={Json} />
+			<MatchCalculator properties={properties} />
 		</Modal>
 	);
 }

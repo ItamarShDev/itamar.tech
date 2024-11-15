@@ -1,23 +1,10 @@
 import { SocialRefs } from "components";
 import RandomQuotes from "components/floating-quotes";
-import { useTranslation } from "lib/hooks/useTranslation";
+import { getTranslationsCache } from "lib/server-cache";
 import styles from "./AboutMe.module.css";
 
-const translations = {
-	en: {
-		title: "Itamar Sharify",
-		subtitle: "Software Engineer",
-	},
-	he: { title: "איתמר שריפי", subtitle: "מהנדס תוכנה" },
-};
-
-type Translations = {
-	title: string;
-	subtitle: string;
-};
-
-function AboutMe({ quotes }) {
-	const texts: Translations = useTranslation(translations);
+async function AboutMe({ quotes }) {
+	const texts = await getTranslationsCache("about_me");
 	return (
 		<div className={styles.aboutMe}>
 			<div className={styles.summary}>

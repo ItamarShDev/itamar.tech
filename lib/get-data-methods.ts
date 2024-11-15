@@ -1,13 +1,14 @@
+import { kv } from "@vercel/kv";
+import type { Job as JobType } from "lib/types/jobs";
 import fs from "node:fs";
 import path from "node:path";
-import { kv } from "@vercel/kv";
 const directory = path.join(process.cwd(), "static-props");
-export type JsonType = Record<"en" | "he", Record<string, string>>;
+export type JsonType = Record<"en" | "he", { jobs: JobType[] }>;
 export async function getResume() {
 	const resume = await getFromKV("resume");
 	return resume;
 }
-export async function getResumeData(locale) {
+export async function getResumeData(locale: "en" | "he") {
 	const resume = await getResume();
 	return resume?.[locale];
 }

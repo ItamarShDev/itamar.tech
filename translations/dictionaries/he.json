@@ -1,0 +1,69 @@
+{
+	"header": {
+		"title": "איתמר שריפי",
+		"selectTheme": "בחר ערכת נושא"
+	},
+	"blog": {
+		"footerTitle": "מחשבות? שלחו לי אימייל"
+	},
+	"generator_traffic": {
+		"title": "רמזורים",
+		"subtitle": "רמזורים עם ג׳נרטור"
+	},
+	"about_me": {
+		"title": "איתמר שריפי",
+		"subtitle": "מהנדס תוכנה"
+	},
+	"links": {
+		"resume": {
+			"title": "קריירה",
+			"subTitle": "מסלול הקריירה שלי"
+		},
+		"blog": {
+			"title": "מחשבות",
+			"subTitle": "מחשבות לאורך הדרך"
+		},
+		"examples": {
+			"title": "דוגמאות",
+			"subTitle": "שחזור יצירות עבר"
+		}
+	},
+	"player": {
+		"restart": "הפעל מחדש",
+		"play": "הפעל",
+		"pause": "השהה"
+	},
+	"email": {
+		"title": "שלחו לי אימייל",
+		"text": "שלחו לי הודעה",
+		"email": "אימייל",
+		"message": "הודעה",
+		"or": "או",
+		"submit": "שלח",
+		"firstName": "שם פרטי",
+		"lastName": "שם משפחה",
+		"sending": "שולח...",
+		"thankYou": "תודה על ההודעה, אגיב בהקדם"
+	},
+	"example_projects": {
+		"links": [
+			{
+				"slug": "charts-communications",
+				"title": "סנכרון גרפים",
+				"summary": "דוגמא פשוטה לאפליקציית תקשורת גרפים."
+			},
+			{
+				"slug": "generator-traffic",
+				"title": "רמזורים",
+				"summary": "דוגמא פשוטה לאפליקציית רמזורים עם ג׳נרטור."
+			}
+		],
+		"websites": {
+			"hakapit": {
+				"title": "הכפית",
+				"summary": "אתר פודקסטים של ליברפול",
+				"link": "https://hakapit.online"
+			}
+		}
+	}
+}

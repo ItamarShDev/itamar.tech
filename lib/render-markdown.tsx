@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { Renderer, marked } from "marked";
-import { Highlight, defaultProps, themes } from "prism-react-renderer";
-import { renderToStaticMarkup } from "react-dom/server";
+import { Highlight, themes } from "prism-react-renderer";
 
 const renderer = new Renderer();
 
@@ -9,19 +8,15 @@ renderer.heading = ({ text, depth }) => {
 	const id = crypto.randomUUID();
 	const Component = `h${depth}`;
 
-	return renderToStaticMarkup(
-		<Component id={id}>
+	return `<h${depth} id='${id}'>
 			<a
-				href={`#${id}`}
+				href='#${id}'
 				className="header-link"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: Needed
-				dangerouslySetInnerHTML={{ __html: text }}
-			/>
-		</Component>,
-	);
+			>${text}</a>
+		</h${depth}>`;
 };
 renderer.link = (href, _, text) =>
-	`<a href=${href} target="_blank" rel="noopener noreferrer"">${text}</a>`;
+	`<a href=${href} target="_blank" rel="noopener noreferrer">${text}</a>`;
 
 renderer.listitem = ({ checked, text, task }) => {
 	if (task) {
@@ -40,9 +35,7 @@ renderer.code = ({ text, raw, lang }) => {
 		.pop()
 		?.replace("highlight=", "")
 		.trim();
-	return renderToStaticMarkup(
-		<Code language={language} code={text} highlight={highlight} />,
-	);
+	return <Code language={language} code={text} highlight={highlight} />;
 };
 
 marked.setOptions({
@@ -77,7 +70,6 @@ const Code = ({ code, language, highlight, ...props }) => {
 
 	return (
 		<Highlight
-			{...defaultProps}
 			theme={themes.shadesOfPurple}
 			code={code.trim()}
 			language={language}

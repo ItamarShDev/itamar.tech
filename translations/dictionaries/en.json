@@ -1,0 +1,73 @@
+{
+	"header": {
+		"title": "Itamar Sharify",
+		"selectTheme": "Select Theme"
+	},
+	"blog": {
+		"footerTitle": "Having thoughts? email me"
+	},
+	"generator_traffic": {
+		"title": "Generators based traffic",
+		"subtitle": "A traffic cross synced with State Machine and Generators"
+	},
+	"about_me": {
+		"title": "Itamar Sharify",
+		"subtitle": "Software Engineer"
+	},
+	"links": {
+		"resume": {
+			"title": "Career",
+			"subTitle": "Career Timeline"
+		},
+		"blog": {
+			"title": "Thoughts Log",
+			"subTitle": "My Development Journey"
+		},
+		"examples": {
+			"title": "Examples",
+			"subTitle": "Project examples recreated"
+		}
+	},
+	"player": {
+		"restart": "Restart",
+		"play": "Play",
+		"pause": "Pause"
+	},
+	"offer_me_job": {
+		"title": "We are a match! let's talk.",
+		"text": "Offer me a job"
+	},
+	"email": {
+		"title": "Send me an email",
+		"text": "Send me a message or a proposal",
+		"email": "Email",
+		"message": "Message",
+		"or": "or",
+		"submit": "Send",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"sending": "Sending...",
+		"thankYou": "Thank you for your message, I will get back to you soon."
+	},
+	"example_projects": {
+		"links": [
+			{
+				"slug": "charts-communications",
+				"title": "Chart Communications",
+				"summary": "A simple example of a chart communications app."
+			},
+			{
+				"slug": "generator-traffic",
+				"title": "Generator Traffic",
+				"summary": "A simple example of a traffic cross app using generators."
+			}
+		],
+		"websites": {
+			"hakapit": {
+				"title": "Hakapit",
+				"summary": "Liverpool fan podcasts",
+				"link": "https://hakapit.online"
+			}
+		}
+	}
+}

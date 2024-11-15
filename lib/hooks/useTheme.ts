@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-const SCHEMES = ["light", "dark", "monokai", "cobalt2"];
+export const SCHEMES = ["light", "dark", "monokai", "cobalt2"];
 
 export function getCurrentThemeName() {
 	if (process.browser && document.body.dataset.theme)
