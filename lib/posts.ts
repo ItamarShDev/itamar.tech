@@ -1,6 +1,6 @@
+import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
 type Metadata = {
 	id: string;
 	title: string;
@@ -10,7 +10,14 @@ type Metadata = {
 	summary: string;
 };
 const postsDirectory = path.join(process.cwd(), "posts");
-function getMDXFileNames(dir, locale = "en") {
+/**
+ * Gets a list of all MDX file names in a directory.
+ *
+ * @param dir - The directory to search in.
+ * @param locale - The locale to search for.
+ * @returns An array of MDX file names.
+ */
+function getMDXFileNames(dir: string, locale = "en"): string[] {
 	const fullPath = path.join(dir, locale);
 	return fs
 		.readdirSync(fullPath)
@@ -45,22 +52,32 @@ export function getSortedPostsData(locale = "en") {
 	});
 }
 
-export function getAllPostIds(locale = "en") {
+/**
+ * Get all post IDs.
+ *
+ * @param locale Post locale.
+ * @returns Array of objects with "params" property containing post metadata.
+ */
+export function getAllPostIds(locale = "en"): { params: Metadata }[] {
 	return getMDXFileNames(postsDirectory, locale).map((fileName) => {
 		const fullPath = path.join(postsDirectory, locale, fileName);
 		const fileContents = fs.readFileSync(fullPath, "utf8");
 		const { data } = matter(fileContents);
 
 		return {
-			// fileName,
-			params: {
-				...data,
-			},
+			params: data as Metadata,
 		};
 	});
 }
 
-export function getPostData(slug, locale) {
+/**
+ * Get post data by slug and locale.
+ *
+ * @param slug Post slug.
+ * @param locale Post locale.
+ * @returns Post data.
+ */
+export function getPostData(slug: string, locale: "en" | "he") {
 	const fullPath = path.join(postsDirectory, locale, `${slug}.mdx`);
 	const fileContents = fs.readFileSync(fullPath, "utf8");
 	// Use gray-matter to parse the post metadata section

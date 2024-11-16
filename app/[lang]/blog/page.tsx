@@ -1,6 +1,6 @@
 import { LinkCard } from "components";
+import { getSortedPostsData } from "lib/posts";
 import type { Metadata } from "next";
-import { getSortedPostsData } from "../../../lib/posts";
 
 export const metadata: Metadata = {
 	title: "Blog",
