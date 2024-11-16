@@ -4,7 +4,14 @@
 		"selectTheme": "Select Theme"
 	},
 	"blog": {
-		"footerTitle": "Having thoughts? email me"
+		"footerTitle": "Having thoughts? email me",
+		"headlines": "Headlines",
+		"backToTop": "Back to top"
+	},
+	"languages": {
+		"title": "Languages",
+		"en": "English",
+		"he": "Hebrew"
 	},
 	"generator_traffic": {
 		"title": "Generators based traffic",

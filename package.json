@@ -25,11 +25,16 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@shikijs/rehype": "^1.23.0",
+		"@shikijs/transformers": "^1.23.0",
 		"@types/node": "18.14.5",
 		"@types/react": "npm:types-react@19.0.0-rc.1",
-		"marked": "^14.1.4",
-		"prism-react-renderer": "^2.4.0",
-		"typescript": "^5.6.3"
+		"rehype-stringify": "^10.0.1",
+		"remark-parse": "^11.0.0",
+		"remark-rehype": "^11.1.1",
+		"shiki": "^1.23.0",
+		"typescript": "^5.6.3",
+		"unified": "^11.0.5"
 	},
 	"overrides": {
 		"@types/react": "npm:types-react@19.0.0-rc.1"

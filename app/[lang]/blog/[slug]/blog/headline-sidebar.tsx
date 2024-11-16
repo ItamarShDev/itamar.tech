@@ -1,5 +1,8 @@
+import { useLocales } from "components/language-selector";
 import useScrollObserver from "lib/hooks/useScrollObserver";
 import useUrlHash from "lib/hooks/useUrlHash";
+import Link from "next/link";
+import { useTranslation } from "translations/hooks";
 import styles from "./headline-sidebar.module.css";
 
 function generateLinkMarkup($contentElement: HTMLElement | null) {
@@ -34,8 +37,34 @@ function HeaderTitle({ header }) {
 	return title;
 }
 
+function LocalesLinks() {
+	const { getRoute, lang } = useLocales();
+	const { translations: languageSelectorText } = useTranslation("languages");
+	return (
+		<>
+			<span className={styles.translationsTitle}>
+				{languageSelectorText?.title}
+			</span>
+			<ul className={styles.localesList}>
+				{["en", "he"]?.map((_locale) => {
+					if (_locale === "default") return null;
+					return (
+						<li key={_locale} className={_locale === lang ? styles.active : ""}>
+							<Link href={getRoute(_locale)} locale={_locale}>
+								{languageSelectorText?.[_locale]}
+							</Link>
+						</li>
+					);
+				})}
+			</ul>
+		</>
+	);
+}
+
 export function HeadlineSidebar({ article }: { article: HTMLElement | null }) {
 	const scrollPercentage = useScrollObserver();
+	const { translations: blogText } = useTranslation("blog");
+
 	const headers = generateLinkMarkup(article);
 	const headings = headers.map((header) => (
 		<HeaderTitle key={header.id} header={header} />
@@ -44,9 +73,10 @@ export function HeadlineSidebar({ article }: { article: HTMLElement | null }) {
 		<aside className={styles.sidebar}>
 			<div className={styles.container}>
 				<div className={styles.headlinesSection}>
-					<h5 className={styles.headlinesTitle}>Headlines</h5>
+					<h5 className={styles.headlinesTitle}>{blogText?.headlines}</h5>
 					<dl className={styles.headlinesList}>{headings}</dl>
 				</div>
+				<LocalesLinks />
 				<span
 					className={styles.line}
 					style={{ height: `${scrollPercentage}%` }}

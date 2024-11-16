@@ -54,16 +54,16 @@ Simple. In our over simplified case, we can see that both `UserImage` an `Avatar
 
 ## Solution
 
-```jsx highlight=4,5,9
+```jsx 
 const UserImage = (props) => <img src={props.userImage} alt={props.userName} />;
 const Avatar = (props) => <img src="images/no-user" alt="Not logged in" />;
 const UserAvatar = (props) => {
-    if (props.isUserLoggedIn) return <UserImage {...props} />;
-    else return <Avatar {...props} />;
+    if (props.isUserLoggedIn) return <UserImage {...props} />; // [!code highlight]
+    else return <Avatar {...props} />; // [!code highlight]
 };
 
 function App(props) {
-    return <UserAvatar {...props} />;
+    return <UserAvatar {...props} />; // [!code highlight]
 }
 ```
 

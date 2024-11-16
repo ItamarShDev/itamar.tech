@@ -43,7 +43,7 @@ This will be easier to debug and use in Python.
 We start with a “proxy” like solution:
 
 ```python
-class StateManager(dict):
+class StateManager(dict): 
 	def __init__(self initial_state: dict):
 		self[‘state’] = initial_state
 

@@ -4,7 +4,14 @@
 		"selectTheme": "בחר ערכת נושא"
 	},
 	"blog": {
-		"footerTitle": "מחשבות? שלחו לי אימייל"
+		"footerTitle": "מחשבות? שלחו לי אימייל",
+		"headlines": "כותרות",
+		"backToTop": "לחזור למעלה"
+	},
+	"languages": {
+		"title": "שפות",
+		"en": "אנגלית",
+		"he": "עברית"
 	},
 	"generator_traffic": {
 		"title": "רמזורים",

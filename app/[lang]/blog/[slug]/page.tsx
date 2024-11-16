@@ -1,5 +1,5 @@
 import { getAllPostIds, getPostData } from "lib/posts";
-import renderMarkdown from "lib/render-markdown";
+import { renderMarkdown } from "lib/render-markdown";
 import { getTranslationsCache } from "lib/server-cache";
 import type { Metadata } from "next";
 import BlogClient from "./blog-client";
@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 interface Props {
 	params: {
 		slug: string;
-		lang: string;
+		lang: "en" | "he";
 	};
 }
 

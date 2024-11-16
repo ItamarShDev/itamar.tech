@@ -1,9 +1,14 @@
 .container {
     position: relative;
+
+    &:hover .list {
+        display: block;
+    }
 }
 
 .list {
     display: none;
+
 }
 
 .iconContainer {
