@@ -21,7 +21,7 @@ export default function LinkCard({
 				<dt className={styles.title}>{title}</dt>
 				<dd className={styles.description}>
 					<span>{subTitle}</span>
-					<span>{date}</span>
+					<span className={styles.date}>{date}</span>
 				</dd>
 				{children}
 			</dl>

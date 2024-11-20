@@ -18,9 +18,9 @@ function BlogCard({ post }) {
 	);
 }
 
-export default async function BlogList() {
+export default async function BlogList({ params }) {
 	// Default to English if no locale is provided
-	const allPostsData = getSortedPostsData("en");
+	const allPostsData = getSortedPostsData((await params.lang) ?? "en");
 
 	return (
 		<div>
