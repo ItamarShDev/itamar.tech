@@ -6,11 +6,11 @@ export const metadata: Metadata = {
 	title: "Blog",
 };
 
-function BlogCard({ post }) {
+function BlogCard({ post, lang }) {
 	return (
 		<LinkCard
 			key={post.id}
-			route={`/blog/${post.slug}`}
+			route={`/${lang}/blog/${post.slug}`}
 			title={post.title}
 			subTitle={post.summary}
 			date={post.date}
@@ -25,7 +25,7 @@ export default async function BlogList({ params }) {
 	return (
 		<div>
 			{allPostsData.map((post) => (
-				<BlogCard key={post.slug} post={post} />
+				<BlogCard key={post.slug} post={post} lang={params.lang} />
 			))}
 		</div>
 	);

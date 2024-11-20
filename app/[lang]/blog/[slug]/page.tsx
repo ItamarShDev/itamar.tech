@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPost({ params }: Props) {
 	const { slug, lang } = await params;
+	console.log(slug, lang);
 	const { data, content } = getPostData(slug, lang);
 	console.log(data);
 	const html = await renderMarkdown(content);
