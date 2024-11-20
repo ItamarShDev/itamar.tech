@@ -15,11 +15,9 @@ export default async function GeneratorTraffic() {
 			<h1>{texts.title}</h1>
 			<h3>{texts.subtitle}</h3>
 			<TrafficProvider texts={playerTexts}>
-				<>
-					{IDS.map((id) => (
-						<TrafficLight key={id} trafficId={id} />
-					))}
-				</>
+				{IDS.map((id) => (
+					<TrafficLight key={id} trafficId={id} />
+				))}
 			</TrafficProvider>
 		</>
 	);

@@ -1,12 +1,12 @@
 ---
-title: רנדור אסינכרוני בריאקט
+title: My Path to AsyncRender in React
 slug: My-Path-to-AsyncRender
 date: Sep 7, 2018
 category: React
-summary: איך נקלעתי למצב שאני מממש רנדור אסינכרוני
+summary: How i stumbled upon a clean async component
 ---
 
-## הקדמה
+## Abstrct
 
 In the past year, we decided to create out new sister app in React.
 Sooner than later, we met on of the most famous issues with React's synchronous rendering:
@@ -32,7 +32,7 @@ class App extends React.Component {
 
 This is not a good solution.
 
-## בעיה מקבילית
+## Problem in every store
 
 In real app there are a lot of asynchronous calls.
 Our application, is a medical application.
@@ -40,7 +40,7 @@ As such, the app needs to maintain and contain a lot of data, that needs to be l
 
 Given that we came from a data-oriented language, Stores are one of the first concept I looked to implement, and after some investigations, arguments and a lot of asking around, I have managed to convince the team to use [MobX](https://mobx.js.org/README.html).
 
-## מפתחים טובים - פרקטיקה טובה
+## Good developers - Good practice
 
 MobX has a great [utils](https://github.com/mobxjs/mobx-utils) library, including `fromPromise()`.
 Though fromPromise is not a new idea, and can be found in other places,
@@ -48,7 +48,7 @@ it's still a great solution to help your app be more reactive.
 
 What fromPromise do generally, is to take a promise call, say fetch, and return a new promise, with state, and value.
 
-### _רגע, מה?_
+### _Wait, what?_
 
 Here's where the magic comes in:
 We return the promise into an observable, meaning it will return again on state change.
@@ -86,7 +86,7 @@ class App extends React.Component {
     @observable promised = fromPromise(getData());
     view = (data) => <div>{JSON.stringify(data)}</div>;
     render() {
-        return viewByState(this.promised, this.props, this.view); // [!code highlight]
+        return viewByState(this.promised, this.props, this.view); 
     }
 }
 ```
@@ -98,17 +98,17 @@ Yet, this is not enough.
 We now have a new problem!
 Actually, two.
 
-### בעיה 1 - הניתוק
+### Problem 1  -  disconnected
 
 When you return the promise results, you loose the connection to any other store.
 this can be easily fixed by returning the props and the result.
 
-### בעיה 2 - קריאות
+### Problem 2  -  Declare Yourself
 
 This method is not declarative.
 and cannot be nested easily.
 
-## תוצאה סופית
+## Final Cut
 
 Enter the declarative AsyncRender:
 

@@ -3,7 +3,7 @@
 import { HeadlineSidebar } from "app/[lang]/blog/[slug]/blog/headline-sidebar";
 import EmailMeFooter from "components/email-footer";
 import { useEffect, useRef, useState } from "react";
-import styles from "./page.module.css";
+import styles from "./blog-client.module.css";
 
 interface BlogClientProps {
 	data: Record<string, string>;

@@ -1,108 +1,107 @@
 .jobContainer {
-    position: relative;
+	position: relative;
 }
 
 .jobContainer::before {
-    content: "";
-    position: absolute;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: flex;
-    color: #ffffff;
-    background-color: var(--colors-decorations);
-    border: 0.2rem solid white;
-    border-radius: 50%;
+	content: "";
+	position: absolute;
+	width: 1.5rem;
+	height: 1.5rem;
+	display: flex;
+	color: #ffffff;
+	background-color: var(--colors-decorations);
+	border: 0.2rem solid white;
+	border-radius: 50%;
 }
 
 [dir="ltr"] .jobContainer::before {
-    left: -2.25rem;
+	left: -2.25rem;
 }
 
 [dir="rtl"] .jobContainer::before {
-    left: calc(100% + 0.75rem);
+	left: calc(100% + 0.75rem);
 }
 
-
 .duration {
-    font-size: 1.5rem;
-    padding: 1rem;
-    transform: translateY(-0.75rem);
+	font-size: 1.5rem;
+	padding: 1rem;
+	transform: translateY(-0.75rem);
 }
 
 .box {
-    background-color: var(--colors-hoverDecorations);
-    border-radius: 1em;
-    padding: 1.5em;
-    margin-inline-start: 0.5em;
-    display: flex;
-    flex-direction: column;
-    line-height: 2rem;
+	background-color: var(--colors-hoverDecorations);
+	border-radius: 1em;
+	padding: 1.5em;
+	margin-inline-start: 0.5em;
+	display: flex;
+	flex-direction: column;
+	line-height: 2rem;
 }
 
 .title {
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    margin-block: 0.5rem;
-    font-weight: bold;
-    font-family: "Codystar", Arial, Helvetica, sans-serif;
+	font-size: 2.5rem;
+	line-height: 2.5rem;
+	margin-block: 0.5rem;
+	font-weight: bold;
+	font-family: "Codystar", Arial, Helvetica, sans-serif;
 }
 
 .company {
-    display: flex;
-    font-size: 1.5rem;
-    font-style: italic;
-    align-items: center;
-    margin-block: 1rem 1.5rem;
+	display: flex;
+	font-size: 1.5rem;
+	font-style: italic;
+	align-items: center;
+	margin-block: 1rem 1.5rem;
 }
 
 .company a {
-    filter: opacity(0.9);
-    color: var(--colors-subText);
-    text-decoration: none;
+	filter: opacity(0.9);
+	color: var(--colors-subText);
+	text-decoration: none;
 }
 
 .company:before {
-    content: "@";
-    font-style: italic;
-    opacity: 0.5;
-    font-size: 1rem;
-    margin: 0 0.5rem;
+	content: "@";
+	font-style: italic;
+	opacity: 0.5;
+	font-size: 1rem;
+	margin: 0 0.5rem;
 }
 
 .summary {
-    font-family: "Quicksand", sans-serif;
-    font-size: 2rem;
-    break-after: always;
-    white-space: wrap;
+	font-family: "Quicksand", sans-serif;
+	font-size: 2rem;
+	break-after: always;
+	white-space: wrap;
 }
 
 .extra {
-    font-size: 1.5rem;
-    filter: opacity(0.9);
-    font-family: "Roboto", sans-serif;
+	font-size: 1.5rem;
+	filter: opacity(0.9);
+	font-family: "Roboto", sans-serif;
 }
 
 @media (hover: hover) {
-    .company:hover {
-        color: var(--colors-decorations);
-    }
+	.company:hover {
+		color: var(--colors-decorations);
+	}
 
-    .company:hover a {
-        color: var(--colors-decorations);
-        text-decoration: underline double;
-    }
+	.company:hover a {
+		color: var(--colors-decorations);
+		text-decoration: underline double;
+	}
 }
 
 @media only screen and (max-width: 968px) {
-    .title {
-        font-size: 2rem;
-    }
+	.title {
+		font-size: 2rem;
+	}
 
-    .summary {
-        font-size: 1.8rem;
-    }
+	.summary {
+		font-size: 1.8rem;
+	}
 
-    .extra {
-        font-size: 1.3rem;
-    }
+	.extra {
+		font-size: 1.3rem;
+	}
 }

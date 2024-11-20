@@ -1,37 +1,37 @@
 .aboutMe {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
-    padding: 1rem;
-    color: var(--colors-text);
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: relative;
+	padding: 1rem;
+	color: var(--colors-text);
 }
 
 .summary h2 {
-    font-family: "Codystar", Arial, Helvetica, sans-serif;
+	font-family: "Codystar", Arial, Helvetica, sans-serif;
 }
 
 .summary a {
-    font-size: 0.7em;
+	font-size: 0.7em;
 }
 
 .summary a:hover,
 .summary a:focus,
 .summary a:active {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-    }
+	.aboutMe {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
 }
 
 .summary h4 {
-    letter-spacing: 0.1em;
-    margin-block-end: 0;
+	letter-spacing: 0.1em;
+	margin-block-end: 0;
 }

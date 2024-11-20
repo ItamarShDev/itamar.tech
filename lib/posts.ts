@@ -1,4 +1,3 @@
-import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
 type Metadata = {
@@ -9,6 +8,55 @@ type Metadata = {
 	category: string;
 	summary: string;
 };
+export type Post = {
+	metadata: Metadata;
+	slug: string;
+	content: string;
+};
+function parseFrontmatter(fileContent: string) {
+	const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
+	const match = frontmatterRegex.exec(fileContent);
+	const frontMatterBlock = match?.[1];
+	const content = fileContent.replace(frontmatterRegex, "").trim();
+	const frontMatterLines = frontMatterBlock?.trim().split("\n");
+	const metadata: Partial<Metadata> = {};
+
+	for (const line of frontMatterLines || []) {
+		const [key, ...valueArr] = line.split(": ");
+		let value = valueArr.join(": ").trim();
+		value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
+		metadata[key.trim() as keyof Metadata] = value;
+	}
+
+	return { metadata: metadata as Metadata, content };
+}
+
+function getMDXFiles(dir) {
+	return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+}
+
+function readMDXFile(filePath) {
+	const rawContent = fs.readFileSync(filePath, "utf-8");
+	return parseFrontmatter(rawContent);
+}
+
+function getMDXData(dir) {
+	const mdxFiles = getMDXFiles(dir);
+	return mdxFiles.map((file) => {
+		const { metadata, content } = readMDXFile(path.join(dir, file));
+		const slug = path.basename(file, path.extname(file));
+
+		return {
+			metadata,
+			slug,
+			content,
+		};
+	});
+}
+export function getBlogPosts(locale = "en") {
+	return getMDXData(path.join(process.cwd(), "app", "blog", "posts", locale));
+}
+
 /**
  * Gets a list of all MDX file names in a directory.
  *
@@ -23,69 +71,49 @@ function getMDXFileNames(dir: string, locale = "en"): string[] {
 		.filter((fileName) => fileName.endsWith(".mdx"));
 }
 export function getSortedPostsData(locale = "en") {
-	const postsDirectory = path.join(process.cwd(), "public", "posts");
-	// Get file names under /posts
-	const allPostsData = getMDXFileNames(postsDirectory, locale).map(
-		(fileName) => {
-			// Remove ".md" from file name to get id
-			const id = fileName.replace(/\.md$/, "");
-			// Read markdown file as string
-			const fullPath = path.join(postsDirectory, locale, fileName);
-			const fileContents = fs.readFileSync(fullPath, "utf8");
-
-			// Use gray-matter to parse the post metadata section
-			const matterResult = matter(fileContents);
-			// Combine the data with the id
-			return {
-				id,
-				...matterResult.data,
-			} as Metadata;
-		},
-	);
-
-	// Sort posts by dateallPostsData
-	return allPostsData.sort((a, b) => {
-		if (Date.parse(a.date) < Date.parse(b.date)) {
+	const posts = getBlogPosts(locale);
+	// Sort posts by date
+	return posts.sort((a, b) => {
+		if (Date.parse(a.metadata.date) < Date.parse(b.metadata.date)) {
 			return 1;
 		}
 		return -1;
 	});
 }
 
-/**
- * Get all post IDs.
- *
- * @param locale Post locale.
- * @returns Array of objects with "params" property containing post metadata.
- */
-export function getAllPostIds(locale = "en"): { params: Metadata }[] {
-	const postsDirectory = path.join(process.cwd(), "public", "posts");
-	return getMDXFileNames(postsDirectory, locale).map((fileName) => {
-		const fullPath = path.join(postsDirectory, locale, fileName);
-		const fileContents = fs.readFileSync(fullPath, "utf8");
-		const { data } = matter(fileContents);
+export function formatDate(_date: string, includeRelative = false) {
+	const currentDate = new Date();
+	let date = _date;
+	if (!date.includes("T")) {
+		date = `${date}T00:00:00`;
+	}
+	const targetDate = new Date(date);
 
-		return {
-			params: data as Metadata,
-		};
+	const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
+	const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
+	const daysAgo = currentDate.getDate() - targetDate.getDate();
+
+	let formattedDate = "";
+
+	if (yearsAgo > 0) {
+		formattedDate = `${yearsAgo}y ago`;
+	} else if (monthsAgo > 0) {
+		formattedDate = `${monthsAgo}mo ago`;
+	} else if (daysAgo > 0) {
+		formattedDate = `${daysAgo}d ago`;
+	} else {
+		formattedDate = "Today";
+	}
+
+	const fullDate = targetDate.toLocaleString("en-us", {
+		month: "long",
+		day: "numeric",
+		year: "numeric",
 	});
-}
 
-/**
- * Get post data by slug and locale.
- *
- * @param slug Post slug.
- * @param locale Post locale.
- * @returns Post data.
- */
-export function getPostData(slug: string, locale: "en" | "he") {
-	const postsDirectory = path.join(process.cwd(), "public", "posts");
-	const fullPath = path.join(postsDirectory, locale, `${slug}.mdx`);
-	const fileContents = fs.readFileSync(fullPath, "utf8");
-	// Use gray-matter to parse the post metadata section
-	const { data, content } = matter(fileContents);
-	return {
-		content,
-		data,
-	};
+	if (!includeRelative) {
+		return fullDate;
+	}
+
+	return `${fullDate} (${formattedDate})`;
 }

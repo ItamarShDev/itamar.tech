@@ -1,6 +1,7 @@
 "use client";
 import { ThemeItem } from "components/theme-switch-client";
 import { setCurrentTheme, toggleDarkTheme } from "lib/headers";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./ThemedIcon.module.css";
 
@@ -13,10 +14,12 @@ export function getIconClassAndAction(isDark: boolean) {
 
 export function ThemeList({ currentThemeName }) {
 	const [selectedTheme, setSelectedTheme] = useState(currentThemeName);
+	const router = useRouter();
 	const setTheme = (theme: string) => {
 		setCurrentTheme(theme);
 		document.body.setAttribute("data-theme", theme);
 		setSelectedTheme(theme);
+		router.refresh();
 	};
 	return (
 		<div className={styles.themeListContainer}>
@@ -36,10 +39,12 @@ export function ThemeList({ currentThemeName }) {
 
 export function ThemeSwitch({ translations, isDarkTheme }) {
 	const [selectedDark, setSelectedDark] = useState(isDarkTheme);
+	const router = useRouter();
 	const toggleMode = async () => {
 		await toggleDarkTheme();
 		setSelectedDark(!selectedDark);
 		document.body.setAttribute("data-theme", selectedDark ? "light" : "dark");
+		router.refresh();
 	};
 	return (
 		<label htmlFor="theme-switch" className={styles.themeSwitch}>

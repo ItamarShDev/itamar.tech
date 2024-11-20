@@ -1,153 +1,147 @@
 .container {
-    position: relative;
+	position: relative;
 
-    &:hover .list {
-        display: block;
-    }
+	&:hover .list {
+		display: block;
+	}
 }
 
 .list {
-    display: none;
-
+	display: none;
 }
 
 .iconContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    width: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	width: 70px;
 }
 
 .icon {
-    all: unset;
-    font-size: 1.5em;
-    font-style: normal;
-    rotate: 180deg;
-    cursor: pointer;
-    color: var(--colors-paragraph);
+	all: unset;
+	font-size: 1.5em;
+	font-style: normal;
+	rotate: 180deg;
+	cursor: pointer;
+	color: var(--colors-paragraph);
 }
 
-
 .themeItem {
-    all: unset;
-    font-size: 1.4rem;
-    width: 100%;
-    text-transform: capitalize;
+	all: unset;
+	font-size: 1.4rem;
+	width: 100%;
+	text-transform: capitalize;
 }
 
 .themeItem:hover {
-    background-color: var(--colors-hoverDecorations);
+	background-color: var(--colors-hoverDecorations);
 }
 
 .selected {
-    background-color: var(--colors-decorations);
-    color: var(--colors-text);
+	background-color: var(--colors-decorations);
+	color: var(--colors-text);
 }
 
 .themeItem.selected .themeButton,
 .themeItem:hover .themeButton {
-    mix-blend-mode: difference;
+	mix-blend-mode: difference;
 }
 
 .themeButton {
-    all: unset;
-    color: var(--colors-text);
-    padding: 1rem 2rem;
+	all: unset;
+	color: var(--colors-text);
+	padding: 1rem 2rem;
 }
 
 .themeListContainer {
-    position: absolute;
-    top: 100%;
-    right: 0;
+	position: absolute;
+	top: 100%;
+	right: 0;
 }
 
 .themeList {
-    all: unset;
-    margin-block-start: 1rem;
-    cursor: default;
-    list-style: none;
-    background-color: var(--colors-modalBg);
-    border: 1px solid var(--colors-decorations);
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+	all: unset;
+	margin-block-start: 1rem;
+	cursor: default;
+	list-style: none;
+	background-color: var(--colors-modalBg);
+	border: 1px solid var(--colors-decorations);
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 .themeSwitch {
-    --height: 25px;
-    --width: 40px;
-    --size: calc(var(--height) - 6px);
-    --move: calc(var(--width) - var(--size) - 4px);
-    position: relative;
-    display: inline-block;
-    width: var(--width);
-    height: var(--height);
+	--height: 25px;
+	--width: 40px;
+	--size: calc(var(--height) - 6px);
+	--move: calc(var(--width) - var(--size) - 4px);
+	position: relative;
+	display: inline-block;
+	width: var(--width);
+	height: var(--height);
 
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: var(--colors-inputs);
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 34px;
+	}
 
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: var(--size);
+		width: var(--size);
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 50%;
+		mask-size: 20px;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+		mask-image: url(/icons/sun.svg);
+		background-color: var(--colors-decorations);
+	}
 
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--colors-inputs);
-        -webkit-transition: .4s;
-        transition: .4s;
-        border-radius: 34px;
-    }
+	.slider:hover:before {
+		transform: rotate(30deg);
+		transition: all 0.2s linear;
+	}
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: var(--size);
-        width: var(--size);
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        border-radius: 50%;
-        mask-size: 20px;
-        mask-position: center center;
-        mask-repeat: no-repeat;
-        mask-image: url(/icons/sun.svg);
-        background-color: var(--colors-decorations);
-    }
+	& input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
 
-    .slider:hover:before {
-        transform: rotate(30deg);
-        transition: all 0.2s linear;
-    }
+	& input:checked + .slider {
+		background-color: var(--colors-inputs);
+	}
 
-    & input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+	& input:focus + .slider {
+		box-shadow: 0 0 1px var(--colors-inputs);
+	}
 
-    & input:checked+.slider {
-        background-color: var(--colors-inputs);
-    }
+	& input:checked + .slider:before {
+		-webkit-transform: translateX(var(--move));
+		-ms-transform: translateX(var(--move));
+		transform: translateX(var(--move));
+		mask-image: url(/icons/moon.svg);
+	}
 
-    & input:focus+.slider {
-        box-shadow: 0 0 1px var(--colors-inputs);
-    }
-
-    & input:checked+.slider:before {
-        -webkit-transform: translateX(var(--move));
-        -ms-transform: translateX(var(--move));
-        transform: translateX(var(--move));
-        mask-image: url(/icons/moon.svg);
-    }
-
-    & input:checked+.slider:hover:before {
-        background-color: var(--colors-link);
-        transition: all 0.2s linear;
-    }
-
-
+	& input:checked + .slider:hover:before {
+		background-color: var(--colors-link);
+		transition: all 0.2s linear;
+	}
 }

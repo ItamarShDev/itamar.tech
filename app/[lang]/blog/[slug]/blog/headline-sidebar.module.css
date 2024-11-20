@@ -1,105 +1,103 @@
 .sidebar {
-    position: sticky;
-    top: 7rem;
-    max-height: calc(100vh - 7rem);
-    overflow-y: auto;
-    padding-inline-end: 2rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--colors-decorations) transparent;
+	position: sticky;
+	top: 7rem;
+	max-height: calc(100vh - 7rem);
+	overflow-y: auto;
+	padding-inline-end: 2rem;
+	scrollbar-width: thin;
+	scrollbar-color: var(--colors-decorations) transparent;
 }
 
 @media screen and (max-width: 968px) {
-    .sidebar {
-        display: none;
-
-    }
+	.sidebar {
+		display: none;
+	}
 }
 
 .sidebar::-webkit-scrollbar {
-    width: 6px;
+	width: 6px;
 }
 
 .sidebar::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: var(--colors-decorations);
-    border-radius: 20px;
-    border: 3px solid transparent;
+	background-color: var(--colors-decorations);
+	border-radius: 20px;
+	border: 3px solid transparent;
 }
 
 .container {
-    position: relative;
-    padding-inline-start: 2rem;
+	position: relative;
+	padding-inline-start: 2rem;
 }
 
 .headlinesSection {
-    margin-block-end: 2rem;
+	margin-block-end: 2rem;
 }
 
 .headlinesTitle {
-    font-size: 1.8rem;
-    margin-block-end: 1rem;
+	font-size: 1.8rem;
+	margin-block-end: 1rem;
 }
 
 .headlinesList {
-    margin: 0;
-    padding: 0;
-    font-size: 1.4rem;
-    text-decoration: none;
+	margin: 0;
+	padding: 0;
+	font-size: 1.4rem;
+	text-decoration: none;
 }
 
 .bold {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .dim {
-    margin-block: 10px;
-    filter: opacity(0.7) grayscale(0.4);
-
+	margin-block: 10px;
+	filter: opacity(0.7) grayscale(0.4);
 }
 
 .translationsTitle {
-    font-weight: bold;
-    font-size: 1.8rem;
-    margin-block-end: 1rem;
+	font-weight: bold;
+	font-size: 1.8rem;
+	margin-block-end: 1rem;
 }
 
 .localesList {
-    margin: 0;
-    padding-inline-start: 2rem;
-    list-style-type: none;
+	margin: 0;
+	padding-inline-start: 2rem;
+	list-style-type: none;
 }
 
 .active {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .localesList li {
-    font-size: 1.4rem;
-    margin-block-end: 0.5rem;
+	font-size: 1.4rem;
+	margin-block-end: 0.5rem;
 }
 
 .localesList li a {
-    text-decoration: none;
-    color: var(--colors-text);
+	text-decoration: none;
+	color: var(--colors-text);
 }
 
 .localesList li:hover a {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .line {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    background-color: var(--colors-decorations);
-    transition: height 0.1s ease-out;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 3px;
+	background-color: var(--colors-decorations);
+	transition: height 0.1s ease-out;
 }
 
 .link {
-    text-decoration: none;
-    color: var(--colors-text);
+	text-decoration: none;
+	color: var(--colors-text);
 }

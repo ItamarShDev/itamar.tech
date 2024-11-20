@@ -1,45 +1,78 @@
-import { getPostData } from "lib/posts";
-import { renderMarkdown } from "lib/render-markdown";
-import { getTranslationsCache } from "lib/server-cache";
-import type { Metadata } from "next";
-import BlogClient from "./blog-client";
+import { CustomMDX } from "components/mdx";
+import { getBlogPosts } from "lib/posts";
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+export async function generateStaticParams() {
+	const posts = getBlogPosts();
 
-interface Props {
-	params: Promise<{
-		slug: string;
-		lang: "en" | "he";
-	}>;
+	return posts.map((post) => ({
+		slug: post.slug,
+	}));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { slug, lang } = await params;
-	const { data } = getPostData(slug, lang);
+export async function generateMetadata({ params }) {
+	const { lang, slug } = await params;
+	const post = getBlogPosts(lang).find((post) => post.slug === slug);
+	if (!post) {
+		return;
+	}
+
+	const { title, summary: description, date: publishedTime } = post.metadata;
+
 	return {
-		title: data?.title,
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			type: "article",
+			publishedTime,
+			url: `itamar.tech/${lang}/blog/${post.slug}`,
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+		},
 	};
 }
 
-export default async function BlogPost({ params }: Props) {
-	const { slug, lang } = await params;
-	console.log(slug, lang);
-	const { data, content } = getPostData(slug, lang);
-	console.log(data);
-	const html = await renderMarkdown(content);
-	console.log("rendered markdown");
-	const translations = await getTranslationsCache("blog");
-	const emailTranslations = await getTranslationsCache("email");
-	console.log("translations");
-	if (!data) return null;
+export default async function Blog({ params }) {
+	const { lang, slug } = await params;
+	const post = getBlogPosts(lang).find((post) => post.slug === slug);
+
+	if (!post) {
+		notFound();
+	}
 
 	return (
-		<div id="blog-post" className={styles.blogPost}>
-			<BlogClient
-				data={data}
-				html={html}
-				translations={translations}
-				emailTranslations={emailTranslations}
+		<section className={styles.blogPost}>
+			<script
+				type="application/ld+json"
+				suppressHydrationWarning
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "BlogPosting",
+						headline: post.metadata.title,
+						datePublished: post.metadata.date,
+						dateModified: post.metadata.date,
+						description: post.metadata.summary,
+						url: `${lang}/blog/${post.slug}`,
+						author: {
+							"@type": "Person",
+							name: "itamar sharify",
+						},
+					}),
+				}}
 			/>
-		</div>
+			<h1 className={styles.title}>{post.metadata.title}</h1>
+			<div className={styles.subTitle}>{post.metadata.summary}</div>
+			<div className={styles.date}>{post.metadata.date}</div>
+			<article>
+				<CustomMDX source={post.content} lang={lang} />
+			</article>
+		</section>
 	);
 }

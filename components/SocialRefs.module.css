@@ -1,25 +1,25 @@
 .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 35px);
-    grid-gap: 20;
-    justify-content: center;
-    align-items: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 35px);
+	grid-gap: 20;
+	justify-content: center;
+	align-items: center;
 }
 
 .item {
-    background-size: 30px;
-    height: 30px;
-    margin: 0 5px;
-    font-size: 0;
-    width: 30px;
+	background-size: 30px;
+	height: 30px;
+	margin: 0 5px;
+	font-size: 0;
+	width: 30px;
 }
 
 .refs {
-    justify-content: start;
+	justify-content: start;
 }
 
 @media screen and (max-width: 768px) {
-    .refs {
-        justify-content: center;
-    }
+	.refs {
+		justify-content: center;
+	}
 }

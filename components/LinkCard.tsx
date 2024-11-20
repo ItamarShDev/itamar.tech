@@ -5,10 +5,18 @@ export default function LinkCard({
 	route,
 	title,
 	subTitle,
-	routeRef = null,
-	date = null,
-	children = null,
+	routeRef,
+	date,
+	children,
 	newTab = false,
+}: {
+	route: string;
+	title: string;
+	subTitle: string;
+	routeRef?: string;
+	date?: string;
+	children?: React.ReactNode;
+	newTab?: boolean;
 }) {
 	return (
 		<Link

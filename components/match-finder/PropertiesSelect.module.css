@@ -1,110 +1,109 @@
 .label {
-    display: block;
-    color: var(--colors-text);
-    font-size: 1.5rem;
-    margin-block-end: 0.5rem;
+	display: block;
+	color: var(--colors-text);
+	font-size: 1.5rem;
+	margin-block-end: 0.5rem;
 }
 
 .input {
-    line-height: 3rem;
-    background-color: transparent;
-    color: var(--colors-text);
-    font-size: 1.5rem;
-    outline: none;
-    border: none;
+	line-height: 3rem;
+	background-color: transparent;
+	color: var(--colors-text);
+	font-size: 1.5rem;
+	outline: none;
+	border: none;
 }
 
 .matcher,
 .container,
 .inputContainer,
 .tags {
-    position: relative;
-    width: 100%;
-    display: block;
+	position: relative;
+	width: 100%;
+	display: block;
 }
 
 .inputContainer {
-    border: 1px dashed var(--colors-decorations);
-    padding: 0.5rem;
+	border: 1px dashed var(--colors-decorations);
+	padding: 0.5rem;
 }
 
 .tags {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
+	overflow: auto;
 }
 
 .tag {
-    box-shadow: 0 0s 1px 1px var(--colors-decorations);
-    font-size: 1.3rem;
-    line-height: 3rem;
-    height: 3rem;
-    margin: 0.5rem;
-    padding: 0 0.8rem;
-    border-radius: 0.5rem;
-    background-color: var(--colors-decorations);
-    color: white;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    animation: fadeIn 0.2s, zoomIn 0.1s;
+	box-shadow: 0 0s 1px 1px var(--colors-decorations);
+	font-size: 1.3rem;
+	line-height: 3rem;
+	height: 3rem;
+	margin: 0.5rem;
+	padding: 0 0.8rem;
+	border-radius: 0.5rem;
+	background-color: var(--colors-decorations);
+	color: white;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	animation: fadeIn 0.2s, zoomIn 0.1s;
 }
 
 .removeTag {
-    cursor: pointer;
-    margin: 0.5rem;
-    font-size: 1.1rem;
+	cursor: pointer;
+	margin: 0.5rem;
+	font-size: 1.1rem;
 }
 
 .resultsContainer {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 }
 
 .results {
-    width: inherit;
-    max-height: 200px;
-    font-size: 1.5rem;
-    overflow-y: auto;
-    position: absolute;
-    z-index: 1;
-    list-style-type: none;
-    padding: 0.5rem;
-    margin: 0;
-    box-shadow: 0 2px 5px 0 var(--colors-decorations);
-    background-color: var(--colors-bg);
-    color: var(--colors-text);
-    text-transform: capitalize;
+	width: inherit;
+	max-height: 200px;
+	font-size: 1.5rem;
+	overflow-y: auto;
+	position: absolute;
+	z-index: 1;
+	list-style-type: none;
+	padding: 0.5rem;
+	margin: 0;
+	box-shadow: 0 2px 5px 0 var(--colors-decorations);
+	background-color: var(--colors-bg);
+	color: var(--colors-text);
+	text-transform: capitalize;
 
-    & li {
-        cursor: default;
-        padding: 0.5rem;
-        border: 1px dotted var(--colors-hoverDecorations);
-    }
+	& li {
+		cursor: default;
+		padding: 0.5rem;
+		border: 1px dotted var(--colors-hoverDecorations);
+	}
 
-    & .selected {
-        background-color: var(--colors-decorations);
-        color: white;
-        color: black;
-    }
+	& .selected {
+		background-color: var(--colors-decorations);
+		color: white;
+		color: black;
+	}
 }
 
-
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+	from {
+		opacity: 0;
+	}
 
-    to {
-        opacity: 1;
-    }
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes zoomIn {
-    from {
-        transform: scale(0);
-    }
+	from {
+		transform: scale(0);
+	}
 
-    to {
-        transform: scale(1);
-    }
+	to {
+		transform: scale(1);
+	}
 }

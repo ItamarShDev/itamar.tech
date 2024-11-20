@@ -1,35 +1,35 @@
 .nav {
-    height: var(--header-height);
-    width: 100vw;
-    display: grid;
-    padding-inline: 1rem;
-    grid-template-columns: auto auto 1fr 5rem;
-    text-align: center;
-    align-items: center;
-    border-bottom: 1px solid var(--colors-decorations);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: var(--colors-bg);
+	height: var(--header-height);
+	width: 100vw;
+	display: grid;
+	padding-inline: 1rem;
+	grid-template-columns: auto auto 1fr 5rem;
+	text-align: center;
+	align-items: center;
+	border-bottom: 1px solid var(--colors-decorations);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background-color: var(--colors-bg);
 }
 
 .divider {
-    color: var(--colors-header);
+	color: var(--colors-header);
 }
 
 .name {
-    font-size: 2em;
-    font-weight: 400;
-    color: var(--colors-headerText);
+	font-size: 2em;
+	font-weight: 400;
+	color: var(--colors-headerText);
 }
 
 .title {
-    font-size: 1.5em;
-    font-family: cascadia, serif;
-    color: var(--colors-headerText);
-    font-style: italic;
+	font-size: 1.5em;
+	font-family: cascadia, serif;
+	color: var(--colors-headerText);
+	font-style: italic;
 }
 
 .link {
-    text-decoration: none;
+	text-decoration: none;
 }

@@ -1,49 +1,49 @@
 .linkCard {
-    border-radius: 2rem;
-    display: block;
-    margin: 1rem;
-    padding: 2rem;
-    text-align: start;
-    flex-grow: 1;
-    text-decoration: none;
-    cursor: pointer;
+	border-radius: 2rem;
+	display: block;
+	margin: 1rem;
+	padding: 2rem;
+	text-align: start;
+	flex-grow: 1;
+	text-decoration: none;
+	cursor: pointer;
 }
 
-.linkCard:hover>.title {
-    text-decoration: underline 1px solid var(--colors-decorations);
+.linkCard:hover > .title {
+	text-decoration: underline 1px solid var(--colors-decorations);
 }
 
 .title {
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 500;
-    color: var(--colors-headerText);
+	margin: 0;
+	font-size: 3rem;
+	font-weight: 500;
+	color: var(--colors-headerText);
 }
 
 .description {
-    display: flex;
-    flex-direction: column;
-    color: var(--colors-subText);
-    margin: 0 5px;
-    font-size: 1.8rem;
-    line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+	color: var(--colors-subText);
+	margin: 0 5px;
+	font-size: 1.8rem;
+	line-height: 1.5;
 }
 
 .date {
-    color: var(--colors-subText);
-    font-size: 1.3rem;
-    filter: brightness(0.5);
+	color: var(--colors-subText);
+	font-size: 1.3rem;
+	filter: brightness(0.5);
 }
 
 @media only screen and (max-width: 968px) {
-    .linkCard {
-        text-align: center;
-    }
+	.linkCard {
+		text-align: center;
+	}
 }
 
 @media (hover: hover) {
-    .linkCard:hover a {
-        transition: all 0.2s linear;
-        text-decoration: underline double 1px var(--colors-headerText);
-    }
+	.linkCard:hover a {
+		transition: all 0.2s linear;
+		text-decoration: underline double 1px var(--colors-headerText);
+	}
 }

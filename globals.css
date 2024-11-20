@@ -6,320 +6,168 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    font-size: 10px;
+	scroll-behavior: smooth;
+	font-size: 10px;
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    --header-height: 6rem;
-    background-color: var(--colors-bg);
-    color: var(--colors-text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	--header-height: 6rem;
+	background-color: var(--colors-bg);
+	color: var(--colors-text);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica Neue, sans-serif;
 }
 
 ::selection {
-    background-color: var(--colors-decorations);
-    color: var(--colors-bg);
+	background-color: var(--colors-decorations);
+	color: var(--colors-bg);
 }
 
 a {
-    color: var(--colors-link);
-    scroll-margin-top: 6.5rem;
+	color: var(--colors-link);
+	scroll-margin-top: 6.5rem;
 }
 
 h1 {
-    font-size: 4rem;
+	font-size: 4rem;
 }
 
 h2 {
-    font-size: 3rem;
+	font-size: 3rem;
 }
 
 h3 {
-    font-size: 2.5rem;
+	font-size: 2.5rem;
 }
 
 h4 {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 h5 {
-    font-size: 1.8rem;
+	font-size: 1.8rem;
 }
 
 h6 {
-    font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
-
-
-
-body[data-theme='dark'] {
-    --colors-bg: hsl(216, 18.1%, 16.3%);
-    --colors-modalBg: hsl(216, 18.1%, 16.3%);
-    --colors-main: hsl(214.1, 32.8%, 26.3%);
-    --colors-text: hsl(0, 0%, 93.3%);
-    --colors-subText: hsla(0, 0%, 93.3%, 0.7);
-    --colors-headerText: hsl(177.6, 100%, 50%);
-    --colors-header: hsl(182.7, 100%, 35.5%);
-    --colors-paragraph: hsl(205.7, 51.9%, 89.4%);
-    --colors-decorations: hsl(182.7, 100%, 35.5%);
-    --colors-hoverDecorations: hsla(182.7, 100%, 35.5%, 0.1);
-    --colors-inputs: hsla(183, 100%, 35%, 0.2);
-    --colors-link: hsl(0, 0%, 100%);
-    --colors-charts: #00fff5;
+pre code {
+	counter-reset: sh-line-number;
 }
 
-body[data-theme='monokai'] {
-    --colors-bg: rgb(46, 46, 46);
-    --colors-modalBg: rgba(46, 46, 46, 0.8);
-    --colors-main: hsl(214.1, 32.8%, 26.3%);
-    --colors-text: rgb(214, 214, 214);
-    --colors-subText: rgba(121, 121, 121, 0.7);
-    --colors-headerText: rgb(229, 181, 103);
-    --colors-header: rgb(180, 210, 115);
-    --colors-paragraph: rgba(214, 214, 214, 0.8);
-    --colors-decorations: rgb(180, 210, 115);
-    --colors-hoverDecorations: rgba(232, 125, 62, 0.2);
-    --colors-inputs: rgba(158, 134, 200, 0.2);
-    --colors-link: rgb(176, 82, 121);
-    --colors-charts: #6c99bb;
+.sh__line::before {
+	counter-increment: sh-line-number 1;
+	content: counter(sh-line-number);
+	margin-right: 24px;
+	text-align: right;
+	color: #a4a4a4;
 }
 
-body[data-theme='cobalt2'] {
-    --colors-bg: #15232D;
-    --colors-modalBg: #193549;
-    --colors-main: #9EFFFF;
-    --colors-text: white;
-    --colors-subText: rgba(255, 255, 255, 0.7);
-    --colors-headerText: #ffc600;
-    --colors-header: #FF9D00;
-    --colors-paragraph: #9EFFFF;
-    --colors-decorations: #2AFFDF;
-    --colors-hoverDecorations: #0D3A58;
-    --colors-inputs: #35434d;
-    --colors-link: #FB94FF;
-    --colors-charts: #FB94FF;
+body[data-theme="dark"] {
+	--colors-bg: hsl(216, 18.1%, 16.3%);
+	--colors-modalBg: hsl(216, 18.1%, 16.3%);
+	--colors-main: hsl(214.1, 32.8%, 26.3%);
+	--colors-text: hsl(0, 0%, 93.3%);
+	--colors-subText: hsla(0, 0%, 93.3%, 0.7);
+	--colors-headerText: hsl(177.6, 100%, 50%);
+	--colors-header: hsl(182.7, 100%, 35.5%);
+	--colors-paragraph: hsl(205.7, 51.9%, 89.4%);
+	--colors-decorations: hsl(182.7, 100%, 35.5%);
+	--colors-hoverDecorations: hsla(182.7, 100%, 35.5%, 0.1);
+	--colors-inputs: hsla(183, 100%, 35%, 0.2);
+	--colors-link: hsl(0, 0%, 100%);
+	--colors-charts: #00fff5;
+	--sh-class: var(--colors-header);
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #249a97;
+	--sh-jsxliterals: #6266d1;
+	--sh-string: #00a99a;
+	--sh-keyword: #f47067;
+	--sh-comment: #a19595;
 }
 
-body[data-theme='light'],
+body[data-theme="monokai"] {
+	--colors-bg: rgb(46, 46, 46);
+	--colors-modalBg: rgba(46, 46, 46, 0.8);
+	--colors-main: hsl(214.1, 32.8%, 26.3%);
+	--colors-text: rgb(214, 214, 214);
+	--colors-subText: hsl(0, 0%, 77.5%);
+	--colors-headerText: rgb(229, 181, 103);
+	--colors-header: rgb(180, 210, 115);
+	--colors-paragraph: rgba(214, 214, 214, 0.8);
+	--colors-decorations: rgb(180, 210, 115);
+	--colors-hoverDecorations: rgba(232, 125, 62, 0.2);
+	--colors-inputs: rgba(158, 134, 200, 0.2);
+	--colors-link: rgb(176, 82, 121);
+	--colors-charts: #6c99bb;
+	--sh-class: var(--colors-header);
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #249a97;
+	--sh-jsxliterals: #6266d1;
+	--sh-string: #00a99a;
+	--sh-keyword: #f47067;
+	--sh-comment: #a19595;
+}
+
+body[data-theme="cobalt2"] {
+	--colors-bg: #15232d;
+	--colors-modalBg: #193549;
+	--colors-main: #9effff;
+	--colors-text: white;
+	--colors-subText: rgba(255, 255, 255, 0.7);
+	--colors-headerText: #ffc600;
+	--colors-header: #ff9d00;
+	--colors-paragraph: #9effff;
+	--colors-decorations: #2affdf;
+	--colors-hoverDecorations: #0d3a58;
+	--colors-inputs: #35434d;
+	--colors-link: #fb94ff;
+	--colors-charts: #fb94ff;
+	--sh-class: var(--colors-header);
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #249a97;
+	--sh-jsxliterals: #6266d1;
+	--sh-string: #00a99a;
+	--sh-keyword: #f47067;
+	--sh-comment: #a19595;
+}
+
+body[data-theme="light"],
 body {
-    --colors-bg: hsla(0, 0%, 96%, 0.8);
-    --colors-modalBg: hsla(0, 0%, 96.1%);
-    --colors-main: hsla(193.9, 100%, 50%, 0.9);
-    --colors-text: hsl(204.2, 100%, 28.6%);
-    --colors-header: hsl(216.5, 100%, 50%);
-    --colors-headerText: hsl(204.2, 100%, 28.6%);
-    --colors-paragraph: hsl(216.9, 10.2%, 24.9%);
-    --colors-subText: hsla(204.2, 100%, 28.6%, 0.7);
-    --colors-decorations: hsl(215.1, 90.8%, 61.6%);
-    --colors-hoverDecorations: hsla(215.1, 90.8%, 61.6%, 0.1);
-    --colors-inputs: hsla(215, 91%, 62%, 0.2);
-    --colors-link: hsl(0, 0%, 0%);
-    --colors-charts: #448ef6;
-}
+	--colors-bg: hsla(0, 0%, 96%, 0.8);
+	--colors-modalBg: hsla(0, 0%, 96.1%);
+	--colors-main: hsla(193.9, 100%, 50%, 0.9);
+	--colors-text: hsl(204.2, 100%, 28.6%);
+	--colors-header: hsl(216.5, 100%, 50%);
+	--colors-headerText: hsl(204.2, 100%, 28.6%);
+	--colors-paragraph: hsl(216.9, 10.2%, 24.9%);
+	--colors-subText: hsla(204.2, 100%, 28.6%, 0.7);
+	--colors-decorations: hsl(215.1, 90.8%, 61.6%);
+	--colors-hoverDecorations: hsla(215.1, 90.8%, 61.6%, 0.1);
+	--colors-inputs: hsla(215, 91%, 62%, 0.2);
+	--colors-link: hsl(0, 0%, 0%);
+	--colors-charts: #448ef6;
 
-[data-theme='monokai'] .shiki,
-[data-theme='monokai'] .shiki span {
-    color: var(--shiki-monokai) !important;
-    background-color: var(--shiki-monokai-bg) !important;
-    /* Optional, if you also want font styles */
-    font-style: var(--shiki-monokai-font-style) !important;
-    font-weight: var(--shiki-monokai-font-weight) !important;
-    text-decoration: var(--shiki-monokai-text-decoration) !important;
-}
-
-[data-theme='cobalt2'] .shiki,
-[data-theme='cobalt2'] .shiki span {
-    color: var(--shiki-cobalt2) !important;
-    background-color: var(--shiki-cobalt2-bg) !important;
-    /* Optional, if you also want font styles */
-    font-style: var(--shiki-cobalt2-font-style) !important;
-    font-weight: var(--shiki-cobalt2-font-weight) !important;
-    text-decoration: var(--shiki-cobalt2-text-decoration) !important;
-}
-
-[data-theme='dark'] .shiki,
-[data-theme='dark'] .shiki span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    /* Optional, if you also want font styles */
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-
-
-#blog-post {
-
-    /* Global styles */
-    p {
-        color: var(--colors-subText);
-        margin: 0 0 0 0;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-
-        font-family: "Alegreya Sans SC", sans-serif;
-        color: var(--colors-text);
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    h3 {
-        font-size: 1.8em;
-    }
-
-    h4 {
-        font-size: 1.5em;
-    }
-
-    h2,
-    h3,
-    h4 {
-        margin-block-end: 0.3em;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        scroll-margin-top: 7.5rem;
-    }
-
-    h1>a,
-    h2>a,
-    h4>a,
-    h3>a {
-        filter: brightness(225%);
-        font-weight: 300;
-        text-decoration: none;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-    }
-
-    code {
-        font-size: 0.75em;
-        padding: 3px;
-
-        & .line {
-            display: inline-block;
-            width: 100%;
-
-            &.highlighted {
-                background-color: var(--colors-inputs);
-                padding-block: 5px;
-            }
-        }
-    }
-
-
-    article {
-        font-weight: 400;
-        font-size: 1em;
-        letter-spacing: 0.5px;
-        color: var(--colors-paragraph);
-        font-family: "Quicksand", sans-serif;
-    }
-
-    article>p {
-        filter: opacity(0.9);
-        line-height: 1.5em;
-    }
-
-    article>pre {
-        font-size: 0.8em;
-        padding: 1em;
-        overflow-y: auto;
-        overflow-x: auto;
-        border-inline-start: 3px var(--colors-decorations) solid;
-        font-family: "Fira Code", monospace;
-    }
-
-    pre div {
-        font-size: 1.4rem;
-        font-weight: 400;
-        line-height: 2.2rem;
-        font-variant-ligatures: normal;
-        font-family: "Fira Code", monospace;
-    }
-
-    article blockquote:before {
-        content: "„";
-        position: absolute;
-        font-size: 5em;
-        left: 0;
-        top: 0;
-        color: grey;
-    }
-
-    article blockquote {
-        position: relative;
-        font-family: "Helvetica", serif;
-        padding: 2.5em 1em 1em 2em;
-        margin: 0;
-        font-style: italic;
-        font-size: 0.8em;
-        font-weight: 100;
-        line-height: 1.4em;
-
-    }
-
-    blockquote p {
-        margin: 0;
-    }
-
-    article ul {
-        font-family: "Roboto", sans-serif;
-        font-size: 0.7em;
-        list-style-type: square;
-    }
-
-    ul li {
-        margin: 0.8em auto;
-    }
-
-    @media only screen and (max-width: 968px) {
-        article {
-            font-weight: 600;
-        }
-
-        article blockquote {
-            font-size: 1em;
-            font-weight: 300;
-        }
-
-        h1.post-title,
-        article> :not(pre, iframe) {
-            max-width: 80vw;
-            margin-inline: auto;
-        }
-
-        article blockquote::before {
-            line-height: 0.5em;
-        }
-    }
-
-    @media only screen and (max-width: 640px) {
-        article pre {
-            font-size: 1em;
-            line-height: 2em;
-            padding: 0.5em;
-        }
-    }
+	--sh-class: var(--colors-header);
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #249a97;
+	--sh-jsxliterals: #6266d1;
+	--sh-string: #00a99a;
+	--sh-keyword: #f47067;
+	--sh-comment: #a19595;
 }
