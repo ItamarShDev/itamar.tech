@@ -20,7 +20,7 @@ body {
     --header-height: 6rem;
     background-color: var(--colors-bg);
     color: var(--colors-text);
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica Neue, sans-serif;
 }
 
 ::selection {
@@ -81,7 +81,7 @@ body[data-theme='monokai'] {
     --colors-modalBg: rgba(46, 46, 46, 0.8);
     --colors-main: hsl(214.1, 32.8%, 26.3%);
     --colors-text: rgb(214, 214, 214);
-    --colors-subText: rgba(121, 121, 121m 0.7);
+    --colors-subText: rgba(121, 121, 121, 0.7);
     --colors-headerText: rgb(229, 181, 103);
     --colors-header: rgb(180, 210, 115);
     --colors-paragraph: rgba(214, 214, 214, 0.8);
@@ -160,7 +160,7 @@ body {
 
     /* Global styles */
     p {
-        filter: brightness(150%);
+        color: var(--colors-subText);
         margin: 0 0 0 0;
     }
 
@@ -172,6 +172,7 @@ body {
     h6 {
 
         font-family: "Alegreya Sans SC", sans-serif;
+        color: var(--colors-text);
     }
 
     h2 {
