@@ -9,7 +9,6 @@ type Metadata = {
 	category: string;
 	summary: string;
 };
-const postsDirectory = path.join(process.cwd(), "posts");
 /**
  * Gets a list of all MDX file names in a directory.
  *
@@ -24,6 +23,7 @@ function getMDXFileNames(dir: string, locale = "en"): string[] {
 		.filter((fileName) => fileName.endsWith(".mdx"));
 }
 export function getSortedPostsData(locale = "en") {
+	const postsDirectory = path.join(process.cwd(), "public", "posts");
 	// Get file names under /posts
 	const allPostsData = getMDXFileNames(postsDirectory, locale).map(
 		(fileName) => {
@@ -59,6 +59,7 @@ export function getSortedPostsData(locale = "en") {
  * @returns Array of objects with "params" property containing post metadata.
  */
 export function getAllPostIds(locale = "en"): { params: Metadata }[] {
+	const postsDirectory = path.join(process.cwd(), "public", "posts");
 	return getMDXFileNames(postsDirectory, locale).map((fileName) => {
 		const fullPath = path.join(postsDirectory, locale, fileName);
 		const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -78,6 +79,7 @@ export function getAllPostIds(locale = "en"): { params: Metadata }[] {
  * @returns Post data.
  */
 export function getPostData(slug: string, locale: "en" | "he") {
+	const postsDirectory = path.join(process.cwd(), "public", "posts");
 	const fullPath = path.join(postsDirectory, locale, `${slug}.mdx`);
 	const fileContents = fs.readFileSync(fullPath, "utf8");
 	// Use gray-matter to parse the post metadata section
