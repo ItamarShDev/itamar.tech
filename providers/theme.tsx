@@ -33,7 +33,9 @@ function useTheme(currentThemeName: Theme) {
 	const toggleMode = async () => {
 		await toggleDarkTheme();
 		const selectedDark = theme !== "light";
-		document.body.setAttribute("data-theme", selectedDark ? "light" : "dark");
+		const newTheme = selectedDark ? "light" : "dark";
+		setTheme(newTheme);
+		document.body.setAttribute("data-theme", newTheme);
 		router.refresh();
 	};
 	return { theme, selectTheme, toggleMode };
