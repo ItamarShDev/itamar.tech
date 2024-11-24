@@ -7,6 +7,7 @@ import {
 	Quicksand,
 	Roboto,
 } from "next/font/google";
+import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import styles from "./layout.module.css";
 
@@ -43,12 +44,14 @@ export default async function RootLayout({
 				rob.className,
 			)}
 		>
-			<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
-				<div id="main-view" className={styles.mainView}>
-					<Header />
-					<main className={styles.main}>{children}</main>
-				</div>
-			</body>
+			<ThemeProvider defaultTheme={theme}>
+				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+					<div id="main-view" className={styles.mainView}>
+						<Header />
+						<main className={styles.main}>{children}</main>
+					</div>
+				</body>
+			</ThemeProvider>
 		</html>
 	);
 }

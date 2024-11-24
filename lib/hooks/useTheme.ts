@@ -1,4 +1,5 @@
 "use client";
+import { useThemeContext } from "providers/theme";
 import { useEffect, useMemo, useState } from "react";
 export const SCHEMES = ["light", "dark", "monokai", "cobalt2"];
 
@@ -44,60 +45,25 @@ function setThemeFromSystem(setTheme: (theme: string) => void) {
 }
 
 export default function useTheme() {
-	const [themeName, setThemeName] = useState<string | undefined>();
-	const [theme, setThemeConfig] = useState<CSSStyleDeclaration | undefined>();
+	const { theme } = useThemeContext();
+	const [themeConfig, setThemeConfig] = useState<CSSStyleDeclaration>(
+		getComputedStyle(document.body),
+	);
 	useEffect(() => {
-		const savedTheme = localStorage.getItem("theme");
-		if (savedTheme && savedTheme !== "undefined") {
-			setThemeName(savedTheme);
-		} else {
-			setThemeFromSystem(setThemeName);
-		}
-
-		const observer = new MutationObserver((mutations) => {
-			for (const mutation of mutations) {
-				if (
-					mutation.type === "attributes" &&
-					mutation.attributeName === "data-theme" &&
-					document.body.dataset.theme !== "undefined" &&
-					document.body.dataset.theme !== undefined
-				) {
-					setThemeName(document.body.dataset.theme);
-				}
-			}
-		});
-		observer.observe(document.body, {
-			attributes: true,
-			attributeFilter: ["data-theme"],
-		});
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
-
-	useEffect(() => {
-		if (!themeName) return;
-		setTheme(themeName);
+		if (!theme) return;
+		setTheme(theme);
 		setThemeConfig(getComputedStyle(document.body));
-	}, [themeName]);
+	}, [theme]);
 
 	return {
-		currentThemeName: themeName,
-		setThemeName,
-		theme,
-		isDarkTheme: themeName !== "light",
-		toggleDarkMode: () => {
-			const newTheme = themeName !== "light" ? "light" : "dark";
-			setThemeName(newTheme);
-		},
-		isSystemTheme: themeName === null,
+		themeConfig,
 	};
 }
 
 export function useChartTheme() {
-	const { theme } = useTheme();
+	const { themeConfig } = useTheme();
 	return useMemo(() => {
-		if (!theme) {
+		if (!themeConfig) {
 			return {
 				charts: "#448ef6",
 				text: "hsl(204.2, 100%, 28.6%)",
@@ -105,9 +71,9 @@ export function useChartTheme() {
 			};
 		}
 		return {
-			charts: theme.getPropertyValue("--colors-charts"),
-			text: theme.getPropertyValue("--colors-text"),
-			headerText: theme.getPropertyValue("--colors-headerText"),
+			charts: themeConfig.getPropertyValue("--colors-charts"),
+			text: themeConfig.getPropertyValue("--colors-text"),
+			headerText: themeConfig.getPropertyValue("--colors-headerText"),
 		};
-	}, [theme]);
+	}, [themeConfig]);
 }

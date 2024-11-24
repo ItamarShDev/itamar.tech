@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
+import type { Theme } from "providers/theme";
 export async function getCurrentLang() {
 	const headersList = await headers();
 	const pathname = headersList.get("x-current-path") || "";
@@ -13,7 +14,7 @@ export async function getCurrentLang() {
 export async function getCurrentTheme() {
 	const cookieCache = await cookies();
 	const theme = cookieCache.get("current-theme")?.value || "dark";
-	return theme;
+	return theme as Theme;
 }
 
 export async function setCurrentTheme(theme: string) {
