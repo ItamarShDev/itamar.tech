@@ -1,0 +1,163 @@
+---
+title: Dynamic Theme Engine in Next.js - A Modern Approach
+slug: theme-engine-implementation
+date: November 26, 2024
+category: Next.js
+summary: A comprehensive guide to implementing a flexible, server-side theme management system in Next.js
+---
+
+## Why Another Theme Management Solution?
+
+When building modern web applications, theme management can quickly become complex:
+- Seamless dark/light mode switching
+- Server-side theme persistence
+- Instant UI updates
+- Accessibility considerations
+- Performance optimization
+
+Our implementation solves these challenges while providing a delightful developer experience.
+
+## The Gist
+
+```typescript
+// Basic usage
+const { theme, selectTheme, toggleMode } = useTheme('light');
+
+// Selecting a specific theme
+selectTheme('dark');
+
+// Toggling between light and dark
+toggleMode();
+```
+
+## Implementation Details
+
+### 1. Theme Hook Design
+
+Our theme management system is built around a flexible and performant hook that handles theme selection, persistence, and UI updates.
+
+```typescript
+function useTheme(currentThemeName: Theme) {
+    const router = useRouter();
+    const [theme, setTheme] = useState<Theme>(currentThemeName);
+
+    const selectTheme = async (theme: Theme) => {
+        // Update body attribute for CSS targeting
+        document.body.setAttribute("data-theme", theme);
+        
+        // Persist theme server-side
+        await setCurrentTheme(theme);
+        
+        // Refresh server-side rendering
+        router.refresh();
+        
+        // Update local state
+        setTheme(theme);
+    };
+
+    const toggleMode = async () => {
+        const selectedDark = theme !== "light";
+        const newTheme = selectedDark ? "light" : "dark";
+        
+        // Update UI immediately
+        document.body.setAttribute("data-theme", newTheme);
+        
+        // Update local state
+        setTheme(newTheme);
+        
+        // Persist theme change
+        await toggleDarkTheme();
+        
+        // Refresh server-side rendering
+        router.refresh();
+    };
+
+    return { theme, selectTheme, toggleMode };
+}
+```
+
+### Key Design Principles
+
+1. **Immediate UI Feedback**
+   - `document.body.setAttribute()` ensures instant visual changes
+   - Local state updates provide responsive UI
+
+2. **Server-Side Persistence**
+   - `setCurrentTheme()` and `toggleDarkTheme()` handle server-side storage
+   - `router.refresh()` ensures server-side rendering reflects the new theme
+
+3. **Async Operations**
+   - Theme changes are handled asynchronously
+   - Prevents blocking of UI interactions
+
+### CSS Integration
+
+```css
+/* theme.css */
+[data-theme='light'] {
+    --background: white;
+    --text: black;
+}
+
+[data-theme='dark'] {
+    --background: black;
+    --text: white;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+```
+
+### Theme List Component
+
+```typescript
+function ThemeList() {
+    const { theme, selectTheme } = useTheme('light');
+    
+    const themes = [
+        { name: 'light', label: 'Light Mode' },
+        { name: 'dark', label: 'Dark Mode' },
+        { name: 'system', label: 'System Preference' }
+    ];
+
+    return (
+        <div className="theme-switcher">
+            {themes.map(({ name, label }) => (
+                <button
+                    key={name}
+                    onClick={() => selectTheme(name)}
+                    aria-pressed={theme === name}
+                >
+                    {label}
+                </button>
+            ))}
+        </div>
+    );
+}
+```
+
+### Performance Considerations
+
+- Minimal state management overhead
+- No unnecessary re-renders
+- Server-side theme persistence
+- Lightweight CSS variable approach
+
+### Accessibility Features
+
+- ARIA attributes for theme buttons
+- Respects user's system preferences
+- Smooth transitions between themes
+
+## Conclusion
+
+Our theme engine provides:
+- Instant theme switching
+- Server-side persistence
+- Minimal performance impact
+- Enhanced user experience
+
+Written with the help of WindSurf's Cascade.

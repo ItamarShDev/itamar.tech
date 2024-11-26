@@ -1,0 +1,163 @@
+---
+title: מנוע ערכות נושא דינמי ב-Next.js: גישה מודרנית
+slug: theme-engine-implementation
+date: November 26, 2024
+category: Next.js
+summary: מדריך מקיף ליישום מערכת ניהול ערכות נושא גמישה ומבוססת שרת ב-Next.js
+---
+
+## למה פתרון נוסף לניהול ערכות נושא?
+
+בבניית יישומי אינטרנט מודרניים, ניהול ערכות נושא יכול במהירות להפוך למורכב:
+- החלפת מצבי כהה/בהיר חלקה
+- שימור ערכת נושא בצד השרת
+- עדכוני ממשק מיידיים
+- שיקולי נגישות
+- אופטימיזציית ביצועים
+
+היישום שלנו פותר אתגרים אלה תוך מתן חווית פיתוח מענגת.
+
+## העיקרון
+
+```typescript
+// שימוש בסיסי
+const { theme, selectTheme, toggleMode } = useTheme('light');
+
+// בחירת ערכת נושא ספציפית
+selectTheme('dark');
+
+// החלפה בין בהיר לכהה
+toggleMode();
+```
+
+## פרטי היישום
+
+### 1. עיצוב Hook ערכת נושא
+
+מערכת ניהול ערכות הנושא שלנו בנויה סביב Hook גמיש ויעיל המטפל בבחירת ערכת נושא, שימור ועדכוני ממשק.
+
+```typescript
+function useTheme(currentThemeName: Theme) {
+    const router = useRouter();
+    const [theme, setTheme] = useState<Theme>(currentThemeName);
+
+    const selectTheme = async (theme: Theme) => {
+        // עדכון מאפיין body למיקוד CSS
+        document.body.setAttribute("data-theme", theme);
+        
+        // שימור ערכת נושא בצד השרת
+        await setCurrentTheme(theme);
+        
+        // רענון עיבוד צד שרת
+        router.refresh();
+        
+        // עדכון מצב מקומי
+        setTheme(theme);
+    };
+
+    const toggleMode = async () => {
+        const selectedDark = theme !== "light";
+        const newTheme = selectedDark ? "light" : "dark";
+        
+        // עדכון ממשק מיידי
+        document.body.setAttribute("data-theme", newTheme);
+        
+        // עדכון מצב מקומי
+        setTheme(newTheme);
+        
+        // שימור שינוי ערכת נושא
+        await toggleDarkTheme();
+        
+        // רענון עיבוד צד שרת
+        router.refresh();
+    };
+
+    return { theme, selectTheme, toggleMode };
+}
+```
+
+### עקרונות עיצוב מרכזיים
+
+1. **משוב ממשק מיידי**
+   - `document.body.setAttribute()` מבטיח שינויים חזותיים מיידיים
+   - עדכוני מצב מקומיים מספקים ממשק מגיב
+
+2. **שימור בצד השרת**
+   - `setCurrentTheme()` ו-`toggleDarkTheme()` מטפלים באחסון בצד השרת
+   - `router.refresh()` מבטיח שעיבוד צד השרת משקף את ערכת הנושא החדשה
+
+3. **פעולות אסינכרוניות**
+   - שינויי ערכות נושא מטופלים באופן אסינכרוני
+   - מונע חסימת אינטראקציות ממשק
+
+### שילוב CSS
+
+```css
+/* theme.css */
+[data-theme='light'] {
+    --background: white;
+    --text: black;
+}
+
+[data-theme='dark'] {
+    --background: black;
+    --text: white;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+```
+
+### רכיב רשימת ערכות נושא
+
+```typescript
+function ThemeList() {
+    const { theme, selectTheme } = useTheme('light');
+    
+    const themes = [
+        { name: 'light', label: 'מצב בהיר' },
+        { name: 'dark', label: 'מצב כהה' },
+        { name: 'system', label: 'העדפת מערכת' }
+    ];
+
+    return (
+        <div className="theme-switcher">
+            {themes.map(({ name, label }) => (
+                <button
+                    key={name}
+                    onClick={() => selectTheme(name)}
+                    aria-pressed={theme === name}
+                >
+                    {label}
+                </button>
+            ))}
+        </div>
+    );
+}
+```
+
+### שיקולי ביצועים
+
+- עומס מינימלי בניהול מצב
+- ללא רינדור מיותר
+- שימור ערכת נושא בצד השרת
+- גישה קלילה של משתני CSS
+
+### תכונות נגישות
+
+- מאפייני ARIA לכפתורי ערכות נושא
+- כיבוד העדפות מערכת המשתמש
+- מעברים חלקים בין ערכות נושא
+
+## סיכום
+
+מנוע ערכות הנושא שלנו מספק:
+- החלפת ערכות נושא מיידית
+- שימור בצד השרת
+- השפעה מינימלית על הביצועים
+- חווית משתמש משופרת
+
+Written and translated with the help of WindSurf's Cascade.
