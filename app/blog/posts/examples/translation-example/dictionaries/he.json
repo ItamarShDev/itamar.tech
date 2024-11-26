@@ -1,0 +1,33 @@
+{
+	"common": {
+		"welcome": "ברוכים הבאים לאפליקציה שלנו",
+		"description": "הירשמו כדי להתחיל",
+		"loading": "טוען..."
+	},
+	"languages": {
+		"english": "אנגלית",
+		"hebrew": "עברית"
+	},
+	"forms": {
+		"labels": {
+			"email": "כתובת אימייל"
+		},
+		"placeholders": {
+			"email": "הכניסו את האימייל שלכם"
+		},
+		"aria": {
+			"email": "שדה קלט אימייל"
+		},
+		"buttons": {
+			"submit": "הרשמה"
+		},
+		"validation": {
+			"password": {
+				"length": "הסיסמה חייבת להכיל לפחות ${length} תווים"
+			}
+		},
+		"errors": {
+			"required": "שדה זה הוא חובה"
+		}
+	}
+}

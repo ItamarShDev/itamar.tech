@@ -15,7 +15,6 @@ export function useTranslation<P extends keyof Dictionary>(key: P) {
 			try {
 				setIsLoading(true);
 				const data = await getTranslations(locale, key);
-				console.log(data);
 				setTranslations(data);
 			} catch (err) {
 				setError(err instanceof Error ? err : new Error("Unknown error"));

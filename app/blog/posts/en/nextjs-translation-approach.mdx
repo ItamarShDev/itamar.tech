@@ -1,0 +1,491 @@
+---
+title: Type-Safe Translations in Next.js - A Modern Approach
+slug: nextjs-translation-approach
+date: November 26, 2024
+category: Next.js
+summary: A comprehensive guide to implementing type-safe translations in Next.js with nested keys and template parameters
+---
+
+## Why Another Translation Hook?
+
+When building multilingual applications in Next.js, we often face several challenges:
+- Type safety across translation keys and paths
+- Template parameter support
+- Prefix support for better organization
+- Easy locale switching
+- Seamless integration with Next.js routing
+
+Our implementation solves these challenges while providing a delightful developer experience.
+
+## The Gist
+
+```typescript
+// Basic usage
+const { t } = useTranslation();
+t('common.welcome');
+
+// With prefix
+const { t } = useTranslation('common');
+t('welcome');
+
+// With template parameters
+t('greeting', { name: 'John' }); // "Hello, John!"
+
+// Switching locale
+const { setLocale } = useTranslation();
+setLocale('fr');
+```
+
+## Implementation Details
+
+Let's break down the implementation step by step:
+
+### 1. Types
+
+Translation management in Next.js applications can be error-prone. Without proper type safety, developers can easily reference non-existent translation keys, miss required template parameters, or break existing translations during refactoring. Our type system addresses these challenges by:
+- Catching missing translations at compile-time rather than runtime
+- Providing autocomplete for all available translation paths
+- Ensuring template parameters match the expected format
+- Making refactoring safer by tracking all translation key dependencies
+- Preventing typos in deeply nested translation keys
+
+```typescript
+import type translation from 'public/assets/locales/en';
+
+// Helper type that extracts all possible paths from a nested object
+// Returns an array of keys for each level of nesting
+type AllPathsProps<T, Acc extends any[] = []> = T extends string
+    ? Acc
+    : {
+          [K in Extract<keyof T, string>]: Acc | AllPathsProps<T[K], [...Acc, K]>;
+      }[Extract<keyof T, string>];
+
+// Helper type that converts an object structure into arrays of path segments
+// e.g., { forms: { errors: { required: string } } } 
+// → ['forms', 'errors', 'required']
+type PathsToStringProps<T> = T extends string
+    ? []
+    : {
+          [K in Extract<keyof T, string>]: [K, ...PathsToStringProps<T[K]>];
+      }[Extract<keyof T, string>];
+
+// Utility type that joins string array with a delimiter
+// e.g., Join<['forms', 'errors', 'required'], '.'> 
+// → 'forms.errors.required'
+type Join<T extends string[], D extends string> = T extends []
+    ? never
+    : T extends [infer F]
+      ? F
+      : T extends [infer F, ...infer R]
+        ? F extends string
+            ? `${F}${D}${Join<Extract<R, string[]>, D>}`
+            : never
+        : string;
+
+// All possible paths in the translation object
+// This creates a union type of all possible dot-notation paths
+export type AllPaths = Join<AllPathsProps<typeof translation>, '.'>;
+
+// Valid translation paths derived from the translation object structure
+// This ensures type safety by only allowing paths that exist in translations
+export type TranslationPath = Join<PathsToStringProps<typeof translation>, '.'>;
+
+// Parameters that can be injected into translation templates
+export type TemplateParams = Record<string, string>;
+
+// The translation function type
+// Paths can be either TranslationPath or a more specific path type
+export type TranslationFunction<Paths extends string = TranslationPath> = (
+    path?: Paths | '',
+    templateParams?: TemplateParams
+) => string;
+
+// Extracts the remaining path after a prefix
+// Used for creating scoped translation functions
+export type PrefixedPath<
+    Paths extends string,
+    Prefix extends string,
+> = Paths extends `${Prefix}.${infer Rest}` ? Rest : never;
+
+// The return type of useTranslation hook
+export type Results<T> = {
+    locale: string;              // Current active locale
+    setLocale: (locale: string) => void;  // Function to change locale
+    t: T;                        // The translation function
+};
+```
+
+This type system provides:
+1. **Full Type Safety**: All translation paths are derived from the actual translation object structure
+2. **Intelligent Path Completion**: TypeScript can suggest valid paths based on your translation structure
+3. **Prefix Support**: Allows for scoped translation functions that maintain type safety
+4. **Template Type Safety**: Ensures template parameters are properly typed
+
+Example of the type inference in action:
+```typescript
+const { t } = useTranslation();
+
+// Valid - path exists in translations
+t('forms.errors.required');
+
+// Error - path doesn't exist in translations
+t('forms.errors.nonexistent');
+
+// With prefix
+const { t: formT } = useTranslation('forms');
+// Valid - shorter path due to prefix
+formT('errors.required');
+```
+
+Let's see how these types resolve with our dictionary structure:
+
+```typescript
+// Given this translation structure:
+const translation = {
+  header: {
+    title: "Welcome to My App",
+    subtitle: "Start your journey",
+    nav: {
+      home: "Home",
+      about: "About",
+      contact: "Contact"
+    }
+  },
+  forms: {
+    validation: {
+      errors: {
+        required: "This field is required",
+        email: "Please enter a valid email",
+        password: {
+          length: "Password must be at least ${length} characters",
+          uppercase: "Password must contain at least one uppercase letter",
+          number: "Password must contain at least one number"
+        }
+      },
+      success: {
+        save: "Successfully saved ${itemName}",
+        delete: "Successfully deleted ${itemName}"
+      }
+    }
+  }
+} as const;
+
+// PathsToStringProps resolves to:
+type PathArrays = PathsToStringProps<typeof translation>;
+/*
+  | ['header']
+  | ['header', 'title']
+  | ['header', 'subtitle']
+  | ['header', 'nav']
+  | ['header', 'nav', 'home']
+  | ['header', 'nav', 'about']
+  | ['header', 'nav', 'contact']
+  | ['forms']
+  | ['forms', 'validation']
+  | ['forms', 'validation', 'errors']
+  | ['forms', 'validation', 'errors', 'required']
+  | ['forms', 'validation', 'errors', 'email']
+  | ['forms', 'validation', 'errors', 'password']
+  | ['forms', 'validation', 'errors', 'password', 'length']
+  | ['forms', 'validation', 'errors', 'password', 'uppercase']
+  | ['forms', 'validation', 'errors', 'password', 'number']
+  | ['forms', 'validation', 'success']
+  | ['forms', 'validation', 'success', 'save']
+  | ['forms', 'validation', 'success', 'delete']
+*/
+```
+
+### 2. Translation Hook
+
+```typescript
+'use client';
+
+// Function overloads to provide correct typing based on usage:
+// 1. No prefix - returns translation function for all paths
+// 2. With prefix - returns translation function for paths under that prefix
+export function useTranslation(): Results<TranslationFunction>;
+export function useTranslation<Partial extends Exclude<AllPaths, TranslationPath>>(
+    prefix: Partial
+): Results<TranslationFunction<PrefixedPath<TranslationPath, Partial>>>;
+
+/**
+ * The useTranslation hook provides a translation function (t) and locale management.
+ * It can be used with or without a prefix for scoped translations.
+ * 
+ * @param {string} [prefix] - Optional prefix for scoped translations.
+ * @returns {Results<TranslationFunction>} - An object containing the translation function (t), 
+ * the current locale, and a function to set the locale.
+ */
+export function useTranslation(prefix?: string) {
+    // Get the current route path for locale persistence
+    const { asPath } = useRouter();
+    
+    // Access and track the current locale from our context/state
+    const locale = useLocale();
+    
+    /**
+     * Function to update the active locale.
+     * This will persist the choice and trigger a re-render.
+     * 
+     * @param {string} locale - The new locale to set.
+     */
+    const setLocale = useCallback(
+        (locale: string) => {
+            setLocaleCookie(locale);
+            router.push(asPath);
+        },
+        [asPath]
+    );
+
+    /**
+     * The main translation function that:
+     * 1. Handles prefixed paths if a prefix was provided
+     * 2. Processes template parameters in the translation string
+     * 3. Falls back gracefully if translation is missing
+     * 
+     * @param {string} path - The translation path.
+     * @param {TemplateParams} [templateParams] - Optional template parameters.
+     * @returns {string} - The translated string.
+     */
+    const t = useCallback(
+        (path: string, templateParams = {}) =>
+            // If prefix provided, automatically prepend it to the path
+            prefix
+                ? getTranslation(`${prefix}.${path}`, locale, templateParams)
+                : getTranslation(path, locale, templateParams),
+        [prefix, locale]
+    );
+
+    // Return the locale state and translation function
+    // This allows components to both translate and control the locale
+    return {
+        locale,
+        setLocale,
+        t,
+    };
+}
+
+// Example usage:
+const Component = () => {
+    // Basic usage - access to all translation paths
+    const { t } = useTranslation();
+    
+    // Prefixed usage for form-related translations
+    const { t: formT } = useTranslation('forms');
+    
+    // Prefixed usage specifically for error messages
+    const { t: errorT } = useTranslation('forms.errors');
+    
+    return (
+        <div className="registration-form">
+            {/* Main header with basic translation */}
+            <h1>{t('common.welcome')}</h1>
+            <p>{t('common.description')}</p>
+            
+            {/* Form section using prefixed translations */}
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="block text-sm font-medium mb-1">
+                        {formT('labels.email')}
+                    </label>
+                    <input 
+                        type="email" 
+                        className="w-full px-3 py-2 border rounded-md"
+                        placeholder={formT('placeholders.email')}
+                        aria-label={formT('aria.email')}
+                    ></input>
+                    {hasError && (
+                        <span className="error-message">
+                            {errorT('required')}
+                        </span>
+                    )}
+                </div>
+                
+                {/* Example with template parameters */}
+                <p className="password-requirement">
+                    {formT('validation.password.length', { length: '8' })}
+                </p>
+                
+                {/* Button with loading state */}
+                <button type="submit">
+                    {isLoading ? t('common.loading') : formT('buttons.submit')}
+                </button>
+            </form>
+            
+            {/* Language switcher */}
+            <div className="language-switcher">
+                <button onClick={() => setLocale('en')}>
+                    {t('languages.english')}
+                </button>
+                <button onClick={() => setLocale('he')}>
+                    {t('languages.hebrew')}
+                </button>
+            </div>
+        </div>
+    );
+};
+```
+
+Here's how this component looks with our translation files:
+
+<details>
+<summary>Translation Files</summary>
+
+
+```json title="en.json"
+{
+  "common": {
+    "welcome": "Welcome to Our App",
+    "description": "Register to get started",
+    "loading": "Loading..."
+  },
+  "languages": {
+    "english": "English",
+    "hebrew": "Hebrew"
+  },
+  "forms": {
+    "labels": {
+      "email": "Email Address"
+    },
+    "placeholders": {
+      "email": "Enter your email"
+    },
+    "aria": {
+      "email": "Email input field"
+    },
+    "buttons": {
+      "submit": "Register"
+    },
+    "validation": {
+      "password": {
+        "length": "Password must be at least ${length} characters"
+      }
+    },
+    "errors": {
+      "required": "This field is required"
+    }
+  }
+}
+```
+
+```json title="he.json"
+{
+  "common": {
+    "welcome": "ברוכים הבאים לאפליקציה שלנו",
+    "description": "הירשמו כדי להתחיל",
+    "loading": "טוען..."
+  },
+  "languages": {
+    "english": "אנגלית",
+    "hebrew": "עברית"
+  },
+  "forms": {
+    "labels": {
+      "email": "כתובת אימייל"
+    },
+    "placeholders": {
+      "email": "הכניסו את האימייל שלכם"
+    },
+    "aria": {
+      "email": "שדה קלט אימייל"
+    },
+    "buttons": {
+      "submit": "הרשמה"
+    },
+    "validation": {
+      "password": {
+        "length": "הסיסמה חייבת להכיל לפחות ${length} תווים"
+      }
+    },
+    "errors": {
+      "required": "שדה זה הוא חובה"
+    }
+  }
+}
+```
+</details>
+
+<RegistrationForm/>
+
+## Features
+
+1. **Type Safety**:
+   - Compile-time validation of translation keys
+   - Autocomplete support
+   - Refactoring safety
+   - Template parameter validation
+
+2. **Developer Experience**:
+   - Intuitive API
+   - Prefix support for better organization
+   - Comprehensive TypeScript support
+   - Detailed error messages
+
+3. **Flexibility**:
+   - Support for nested keys
+   - Template parameters
+   - Multiple translation scopes
+   - String interpolation
+
+4. **Locale Management**:
+   - Easy locale switching
+   - Persistent locale preference
+   - Integration with Next.js routing
+
+## Usage Examples
+
+### Basic Usage
+
+```typescript
+'use client';
+
+function WelcomePage() {
+    const { t } = useTranslation();
+    return <h1>{t('common.welcome')}</h1>;
+}
+```
+
+### With Prefix
+
+```typescript
+'use client';
+
+function AnalysisPage() {
+    const { t } = useTranslation('analysis');
+    return (
+        <div>
+            <h2>{t('title')}</h2>
+            <p>{t('description')}</p>
+        </div>
+    );
+}
+```
+
+### With Template Parameters
+
+```typescript
+'use client';
+
+function Greeting({ name }: { name: string }) {
+    const { t } = useTranslation();
+    return <p>{t('greeting', { name })}</p>;
+}
+```
+
+## Benefits
+
+1. **Productivity**: 
+   - Faster development with autocomplete
+   - Fewer runtime errors
+   - Easy debugging
+
+2. **Maintainability**: 
+   - Organized translations with prefixes
+   - Type-safe refactoring
+   - Clear separation of concerns
+
+The implementation provides a robust foundation for building multilingual applications in Next.js, with strong TypeScript support and a developer-friendly API.
+
+
+
+Written with the help of WindSurf's Cascade.

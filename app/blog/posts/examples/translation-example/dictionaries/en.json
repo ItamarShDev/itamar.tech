@@ -1,0 +1,33 @@
+{
+	"common": {
+		"welcome": "Welcome to Our App",
+		"description": "Register to get started",
+		"loading": "Loading..."
+	},
+	"languages": {
+		"english": "English",
+		"hebrew": "Hebrew"
+	},
+	"forms": {
+		"labels": {
+			"email": "Email Address"
+		},
+		"placeholders": {
+			"email": "Enter your email"
+		},
+		"aria": {
+			"email": "Email input field"
+		},
+		"buttons": {
+			"submit": "Register"
+		},
+		"validation": {
+			"password": {
+				"length": "Password must be at least ${length} characters"
+			}
+		},
+		"errors": {
+			"required": "This field is required"
+		}
+	}
+}

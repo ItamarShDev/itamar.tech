@@ -28,7 +28,6 @@ export default async function BlogList({ params }) {
 	const { lang } = await params;
 	// Default to English if no locale is provided
 	const allPostsData = getSortedPostsData(lang ?? "en");
-	// console.log(allPostsData);
 
 	return (
 		<div>

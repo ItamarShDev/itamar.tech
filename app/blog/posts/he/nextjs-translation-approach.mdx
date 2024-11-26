@@ -1,0 +1,140 @@
+---
+title: תרגום שפות בטיפוס ב-Next.js: גישה מודרנית
+slug: nextjs-translation-approach
+date: November 26, 2024
+category: Next.js
+summary: מדריך מקיף ליישום תרגומים מוטים בטיפוס ב-Next.js עם מפתחות מקוננים ופרמטרי תבנית
+---
+
+## למה הוק נוסף לתרגום?
+
+בבניית יישומים רב-לשוניים ב-Next.js, אנו נתקלים במספר אתגרים:
+- בטיחות טיפוס בכל מפתחות ונתיבי תרגום
+- תמיכה בפרמטרי תבנית
+- תמיכה בקידומות לארגון טוב יותר
+- החלפת שפה קלה
+- שילוב חלק עם ניתוב Next.js
+
+היישום שלנו פותר אתגרים אלה תוך מתן חווית פיתוח מענגת.
+
+## העיקרון
+
+```typescript
+// שימוש בסיסי
+const { t } = useTranslation();
+t('common.welcome');
+
+// עם קידומת
+const { t } = useTranslation('common');
+t('welcome');
+
+// עם פרמטרי תבנית
+t('greeting', { name: 'ג׳ון' }); // "שלום, ג׳ון!"
+
+// החלפת שפה
+const { setLocale } = useTranslation();
+setLocale('he');
+```
+
+## פרטי היישום
+
+בואו נפרק את היישום שלב אחר שלב:
+
+### 1. טיפוסים
+
+ניהול תרגומים ביישומי Next.js יכול להיות מלא בטעויות. ללא בטיחות טיפוס נאותה, מפתחים יכולים בקלות להתייחס למפתחות תרגום לא קיימים, להחסיר פרמטרי תבנית נדרשים, או לשבור תרגומים קיימים תוך כדי שיפור. מערכת הטיפוסים שלנו מטפלת באתגרים אלה על ידי:
+- זיהוי תרגומים חסרים בזמן קימפול ולא בזמן ריצה
+- מתן השלמה אוטומטית עבור כל נתיבי התרגום הזמינים
+- הבטחת התאמת פרמטרי תבנית לפורמט הצפוי
+- הפיכת שיפור קוד לבטוח יותר על ידי מעקב אחר תלויות מפתחות תרגום
+- מניעת שגיאות כתיב במפתחות תרגום מקוננים עמוקים
+
+```typescript
+import type translation from 'public/assets/locales/he';
+
+// סוג עזר שמחלץ את כל הנתיבים האפשריים מאובייקט מקונן
+// מחזיר מערך של מפתחות לכל רמת קינון
+type AllPathsProps<T, Acc extends any[] = []> = T extends string
+    ? Acc
+    : {
+          [K in Extract<keyof T, string>]: Acc | AllPathsProps<T[K], [...Acc, K]>;
+      }[Extract<keyof T, string>];
+
+// סוג עזר שממיר מבנה אובייקט למערכים של מקטעי נתיב
+// למשל, { forms: { errors: { required: string } } } 
+// → ['forms', 'errors', 'required']
+type PathsToStringProps<T> = T extends string
+    ? []
+    : {
+          [K in Extract<keyof T, string>]: [K, ...PathsToStringProps<T[K]>];
+      }[Extract<keyof T, string>];
+
+// סוג עזר שמחבר מערך מחרוזות עם מפריד
+// למשל, Join<['forms', 'errors', 'required'], '.'> 
+// → 'forms.errors.required'
+type Join<T extends string[], D extends string> = T extends []
+    ? never
+    : T extends [infer F]
+      ? F
+      : T extends [infer F, ...infer R]
+        ? F extends string
+            ? `${F}${D}${Join<Extract<R, string[]>, D>}`
+            : never
+        : string;
+
+// כל הנתיבים האפשריים באובייקט התרגום
+// זה יוצר סוג איחוד של כל נתיבי הנקודה האפשריים
+export type AllPaths = Join<AllPathsProps<typeof translation>, '.'>;
+
+// נתיבי תרגום תקפים הנגזרים ממבנה אובייקט התרגום
+// זה מבטיח בטיחות טיפוס על ידי הרשאת נתיבים שקיימים בתרגומים בלבד
+export type TranslationPath = Join<PathsToStringProps<typeof translation>, '.'>;
+
+// פרמטרים שניתן להזריק לתבניות תרגום
+export type TemplateParams = Record<string, string>;
+
+// סוג פונקציית התרגום
+// נתיבים יכולים להיות או TranslationPath או סוג נתיב ספציפי יותר
+export type TranslationFunction<Paths extends string = TranslationPath> = (
+    path?: Paths | '',
+    templateParams?: TemplateParams
+) => string;
+
+// מחלץ את הנתיב הנותר לאחר קידומת
+// משמש ליצירת פונקציות תרגום בטווח
+export type PrefixedPath<
+    Paths extends string,
+    Prefix extends string,
+> = Paths extends `${Prefix}.${infer Rest}` ? Rest : never;
+
+// סוג ההחזרה של Hook התרגום
+export type Results<T> = {
+    locale: string;              // שפה פעילה נוכחית
+    setLocale: (locale: string) => void;  // פונקציה לשינוי שפה
+    t: T;                        // פונקציית התרגום
+};
+```
+
+מערכת הטיפוסים מספקת:
+1. **בטיחות טיפוס מלאה**: כל נתיבי התרגום נגזרים ממבנה אובייקט התרגום בפועל
+2. **השלמת נתיב חכמה**: TypeScript יכול להציע נתיבים תקפים על בסיס מבנה התרגום שלך
+3. **תמיכה בקידומת**: מאפשר פונקציות תרגום בטווח שמשמרות בטיחות טיפוס
+4. **בטיחות טיפוס של תבנית**: מבטיחה שפרמטרי תבנית מוטים בצורה נכונה
+
+דוגמה של היסק הטיפוס בפעולה:
+```typescript
+const { t } = useTranslation();
+
+// תקף - הנתיב קיים בתרגומים
+t('forms.errors.required');
+
+// שגיאה - הנתיב לא קיים בתרגומים
+t('forms.errors.nonexistent');
+
+// עם קידומת
+const { t: formT } = useTranslation('forms');
+// תקף - נתיב קצר יותר בשל הקידומת
+formT('errors.required');
+```
+
+Written and translated with the help of WindSurf's Cascade.

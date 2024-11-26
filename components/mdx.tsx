@@ -1,10 +1,10 @@
+import { RegistrationForm } from "app/blog/posts/examples/translation-example/registration-form";
 import { Code } from "bright";
 import { getCurrentTheme } from "lib/headers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
 function Table({ data }) {
 	const headers = data.headers.map((header) => <th key={header}>{header}</th>);
 	const rows = data.rows.map((row) => (
@@ -49,7 +49,6 @@ function RoundedImage(props) {
 
 function CodeComponent(theme) {
 	return function Component({ children, ...props }) {
-		console.log(props);
 		let codeTheme: typeof Code.theme = "dark-plus";
 		if (theme === "dark") {
 			codeTheme = "dracula";
@@ -119,6 +118,7 @@ export async function CustomMDX(props) {
 		a: CustomLink,
 		code: CodeComponent(theme),
 		Table,
+		RegistrationForm,
 	};
 	return (
 		<MDXRemote
