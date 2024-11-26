@@ -1,5 +1,5 @@
 import { LinkCard } from "components";
-import { type Post, formatDate, getSortedPostsData } from "lib/posts";
+import { type Post, getSortedPostsData } from "lib/posts";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ function BlogCard({
 			route={`/${lang}/blog/${post.slug}`}
 			title={post.metadata.title}
 			subTitle={post.metadata.summary}
-			date={formatDate(post.metadata.date)}
+			date={post.metadata.date}
 		/>
 	);
 }
