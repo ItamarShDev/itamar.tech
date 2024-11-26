@@ -24,18 +24,19 @@ function useTheme(currentThemeName: Theme) {
 	const router = useRouter();
 	const [theme, setTheme] = useState<Theme>(currentThemeName);
 
-	const selectTheme = (theme: Theme) => {
-		setCurrentTheme(theme);
+	const selectTheme = async (theme: Theme) => {
 		document.body.setAttribute("data-theme", theme);
-		setTheme(theme);
+		await setCurrentTheme(theme);
 		router.refresh();
+		setTheme(theme);
 	};
+
 	const toggleMode = async () => {
-		await toggleDarkTheme();
 		const selectedDark = theme !== "light";
 		const newTheme = selectedDark ? "light" : "dark";
-		setTheme(newTheme);
 		document.body.setAttribute("data-theme", newTheme);
+		setTheme(newTheme);
+		await toggleDarkTheme();
 		router.refresh();
 	};
 	return { theme, selectTheme, toggleMode };
