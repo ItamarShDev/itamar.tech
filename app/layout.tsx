@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Header from "layouts/header";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import {
@@ -44,6 +45,7 @@ export default async function RootLayout({
 				rob.className,
 			)}
 		>
+			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
 				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
 					<div id="main-view" className={styles.mainView}>
