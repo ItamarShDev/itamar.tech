@@ -4,7 +4,8 @@ import { getCurrentTheme } from "lib/headers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
+import styles from "./mdx-components.module.css";
 function Table({ data }) {
 	const headers = data.headers.map((header) => <th key={header}>{header}</th>);
 	const rows = data.rows.map((row) => (
@@ -49,6 +50,13 @@ function RoundedImage(props) {
 
 function CodeComponent(theme) {
 	return function Component({ children, ...props }) {
+		if (!props.className) {
+			return (
+				<code {...props} className={styles.inlineCode}>
+					{children}
+				</code>
+			);
+		}
 		let codeTheme: typeof Code.theme = "dark-plus";
 		if (theme === "dark") {
 			codeTheme = "dracula";
@@ -60,14 +68,17 @@ function CodeComponent(theme) {
 			codeTheme = "solarized-dark";
 		}
 		return (
-			<Code
-				lineNumbers
-				theme={codeTheme}
-				lightThemeSelector='[data-theme="light"]'
-				lang={props.className === "language-python" ? "py" : "ts"}
-			>
-				{children}
-			</Code>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Code
+					className={styles.pre}
+					lineNumbers
+					theme={codeTheme}
+					lightThemeSelector='[data-theme="light"]'
+					lang={props.className === "language-python" ? "py" : "ts"}
+				>
+					{children}
+				</Code>
+			</Suspense>
 		);
 	};
 }
@@ -88,15 +99,21 @@ function createHeading(level) {
 		const slug = slugify(children);
 		return React.createElement(
 			`h${level}`,
-			{ id: slug },
+			{
+				id: slug,
+				className: styles[`h${level}`],
+			},
 			[
-				React.createElement("a", {
-					href: `#${slug}`,
-					key: `link-${slug}`,
-					className: "anchor",
-				}),
+				React.createElement(
+					"a",
+					{
+						href: `#${slug}`,
+						key: `link-${slug}`,
+						children,
+					},
+					children,
+				),
 			],
-			children,
 		);
 	};
 
@@ -119,11 +136,18 @@ export async function CustomMDX(props) {
 		code: CodeComponent(theme),
 		Table,
 		RegistrationForm,
+		p: ({ children }) => <p className={styles.p}>{children}</p>,
+		blockquote: ({ children }) => (
+			<blockquote className={styles.blockquote}>{children}</blockquote>
+		),
+		ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
 	};
 	return (
-		<MDXRemote
-			{...props}
-			components={{ ...components, ...(props.components || {}) }}
-		/>
+		<article className={styles.article}>
+			<MDXRemote
+				{...props}
+				components={{ ...components, ...(props.components || {}) }}
+			/>
+		</article>
 	);
 }

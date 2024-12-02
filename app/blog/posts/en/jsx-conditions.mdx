@@ -8,11 +8,11 @@ summary: Why using conditions in JSX is wrong
 
 ## Abstract
 
-With React Hooks craze and the renewed functional programming talk, we need to revisit a mistake we all do in React.
+With React Hooks craze and the renewed functional programming talk, we need to revisit a mistake we all do in React.
 
 Most, if not all, of us have read this quote some time in our professional life:
 
-> In computer science, declarative programming is a programming paradigm - a style of building the structure and elements of computer programs - that expresses the logic of a computation without describing its control flow - Wikipedia
+> In computer science, declarative programming is a programming paradigm a style of building the structure and elements of computer program that expresses the logic of a computation without describing its control flow - Wikipedia
 
 #### So all of us, who uses react, are writing declarative code, right?
 
@@ -23,6 +23,7 @@ Wrong.
 ### Base example
 
 Let's take a look on the following code:
+
 
 ```jsx
 function App(props) {
@@ -54,6 +55,7 @@ Simple. In our over simplified case, we can see that both `UserImage` an `Avatar
 
 ## Solution
 
+
 ```jsx
 const UserImage = (props) => <img src={props.userImage} alt={props.userName} />;
 const Avatar = (props) => <img src="images/no-user" alt="Not logged in" />;
@@ -71,12 +73,12 @@ When we take another look now, we can see that App component should not care how
 
 ## What we gained
 
-### Some more benefits to this approach
+### Some more benefits to this approach
 
 -   We can add tests in a simpler way
 -   We can use the Newspaper code structure approach easily
 -   We can debug better
--   We decouple the logic from the render, minimising those weird an unreadable production errors
+-   We decouple the logic from the render, minimizing those weird an unreadable production errors
 -   It will push us to use component per file approach and prevent us from having those 100 components files
 -   It will prevent us from having those 1000 LoC files that are pain to get into every time we need to debug or add features
 

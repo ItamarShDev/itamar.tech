@@ -31,16 +31,16 @@ function parseFrontmatter(fileContent: string) {
 	return { metadata: metadata as Metadata, content };
 }
 
-function getMDXFiles(dir) {
+function getMDXFiles(dir: string) {
 	return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 }
 
-function readMDXFile(filePath) {
+function readMDXFile(filePath: string) {
 	const rawContent = fs.readFileSync(filePath, "utf-8");
 	return parseFrontmatter(rawContent);
 }
 
-function getMDXData(dir) {
+function getMDXData(dir: string) {
 	const mdxFiles = getMDXFiles(dir);
 	return mdxFiles.map((file) => {
 		const { metadata, content } = readMDXFile(path.join(dir, file));
@@ -53,25 +53,35 @@ function getMDXData(dir) {
 		};
 	});
 }
-export function getBlogPosts(locale = "en") {
-	return getMDXData(path.join(process.cwd(), "app", "blog", "posts", locale));
+function getMDXFileData(dir: string, slug: string) {
+	const mdxFiles = getMDXFiles(dir);
+	const file = mdxFiles.find(
+		(file) => path.basename(file, path.extname(file)) === slug,
+	);
+	if (!file) {
+		return null;
+	}
+	const { metadata, content } = readMDXFile(path.join(dir, file));
+
+	return {
+		metadata,
+		slug,
+		content,
+	};
 }
 
-/**
- * Gets a list of all MDX file names in a directory.
- *
- * @param dir - The directory to search in.
- * @param locale - The locale to search for.
- * @returns An array of MDX file names.
- */
-function getMDXFileNames(dir: string, locale = "en"): string[] {
-	const fullPath = path.join(dir, locale);
-	return fs
-		.readdirSync(fullPath)
-		.filter((fileName) => fileName.endsWith(".mdx"));
+const getPathByLocale = (locale: string) => {
+	return path.join(process.cwd(), "app", "blog", "posts", locale);
+};
+
+export function getBlogPost(locale = "en", slug = "") {
+	return getMDXFileData(getPathByLocale(locale), slug);
+}
+export function getBlogPosts(locale = "en") {
+	return getMDXData(getPathByLocale(locale));
 }
 export function getSortedPostsData(locale = "en") {
-	const posts = getBlogPosts(locale);
+	const posts = getMDXData(getPathByLocale(locale));
 	// Sort posts by date
 	return posts.sort((a, b) => {
 		if (Date.parse(a.metadata.date) < Date.parse(b.metadata.date)) {

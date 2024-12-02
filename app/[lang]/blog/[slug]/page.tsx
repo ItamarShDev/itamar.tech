@@ -1,5 +1,5 @@
-import { CustomMDX } from "components/mdx";
-import { getBlogPosts } from "lib/posts";
+import { getBlogPost, getBlogPosts } from "lib/posts";
+import { CustomMDX } from "mdx-components";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 export async function generateStaticParams() {
@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
 	const { lang, slug } = await params;
-	const post = getBlogPosts(lang).find((post) => post.slug === slug);
+	const post = getBlogPost(lang, slug);
 	if (!post) {
 		return;
 	}
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Blog({ params }) {
 	const { lang, slug } = await params;
-	const post = getBlogPosts(lang).find((post) => post.slug === slug);
+	const post = getBlogPost(lang, slug);
 
 	if (!post) {
 		notFound();
@@ -70,9 +70,7 @@ export default async function Blog({ params }) {
 			<h1 className={styles.title}>{post.metadata.title}</h1>
 			<div className={styles.subTitle}>{post.metadata.summary}</div>
 			<div className={styles.date}>{post.metadata.date}</div>
-			<article>
-				<CustomMDX source={post.content} lang={lang} />
-			</article>
+			<CustomMDX source={post.content} lang={lang} />
 		</section>
 	);
 }
