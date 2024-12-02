@@ -46,9 +46,10 @@ function setThemeFromSystem(setTheme: (theme: string) => void) {
 
 export default function useTheme() {
 	const { theme } = useThemeContext();
-	const [themeConfig, setThemeConfig] = useState<CSSStyleDeclaration>(
-		getComputedStyle(document.body),
-	);
+	const [themeConfig, setThemeConfig] = useState<CSSStyleDeclaration>();
+	useEffect(() => {
+		setThemeConfig(window.getComputedStyle(document.body));
+	}, []);
 	useEffect(() => {
 		if (!theme) return;
 		setTheme(theme);
