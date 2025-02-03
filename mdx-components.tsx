@@ -49,6 +49,15 @@ function RoundedImage(props) {
 }
 
 function CodeComponent(theme) {
+	// Create a more robust theme mapping
+	const themeMap: Record<string, typeof Code.theme> = {
+		dark: "dracula",
+		light: "light-plus",
+		default: "dark-plus",
+		monokai: "monokai",
+		cobalt2: "solarized-dark",
+	};
+
 	return function Component({ children, ...props }) {
 		if (!props.className) {
 			return (
@@ -57,16 +66,10 @@ function CodeComponent(theme) {
 				</code>
 			);
 		}
-		let codeTheme: typeof Code.theme = "dark-plus";
-		if (theme === "dark") {
-			codeTheme = "dracula";
-		} else if (theme === "light") {
-			codeTheme = "light-plus";
-		} else if (theme === "monokai") {
-			codeTheme = "monokai";
-		} else if (theme === "cobalt2") {
-			codeTheme = "solarized-dark";
-		}
+
+		// Use the theme mapping with a fallback to default
+		const codeTheme = themeMap[theme] || themeMap.default;
+
 		return (
 			<Suspense fallback={<div>Loading...</div>}>
 				<Code
