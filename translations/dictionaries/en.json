@@ -57,6 +57,8 @@
 		"thankYou": "Thank you for your message, I will get back to you soon."
 	},
 	"example_projects": {
+		"examplesTitle": "Examples",
+		"externalWebsites": "External Websites",
 		"links": [
 			{
 				"slug": "charts-communications",
@@ -67,6 +69,16 @@
 				"slug": "generator-traffic",
 				"title": "Generator Traffic",
 				"summary": "A simple example of a traffic cross app using generators."
+			},
+			{
+				"slug": "translated-text",
+				"title": "Translated Text",
+				"summary": "A simple example of a traffic cross app using generators."
+			},
+			{
+				"slug": "proxy-state",
+				"title": "Proxy State",
+				"summary": "A simple example of a traffic cross app using generators."
 			}
 		],
 		"websites": {
@@ -76,5 +88,14 @@
 				"link": "https://hakapit.online"
 			}
 		}
+	},
+	"proxy-state": {
+		"title": "Proxy State",
+		"placeholders": {
+			"name": "Name",
+			"firstNumber": "First Number",
+			"secondNumber": "Second Number"
+		},
+		"explanation": "This example shows how to use the Proxy State hook to create a simple calculator."
 	}
 }

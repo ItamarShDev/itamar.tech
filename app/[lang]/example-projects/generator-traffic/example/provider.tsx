@@ -15,6 +15,7 @@ export const TrafficContext = createContext<
 	togglePlay: () => {},
 	isPlaying: true,
 });
+
 export function TrafficLight({
 	trafficId,
 }: {

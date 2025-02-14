@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import styles from "./mdx-components.module.css";
+
 function Table({ data }) {
 	const headers = data.headers.map((header) => <th key={header}>{header}</th>);
 	const rows = data.rows.map((row) => (
@@ -48,7 +49,7 @@ function RoundedImage(props) {
 	return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
-function CodeComponent(theme) {
+export function CodeComponent(theme) {
 	// Create a more robust theme mapping
 	const themeMap: Record<string, typeof Code.theme> = {
 		dark: "dracula",

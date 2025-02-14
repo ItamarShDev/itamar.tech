@@ -53,6 +53,8 @@
 		"thankYou": "תודה על ההודעה, אגיב בהקדם"
 	},
 	"example_projects": {
+		"examplesTitle": "דוגמאות",
+		"externalWebsites": "אתרים",
 		"links": [
 			{
 				"slug": "charts-communications",
@@ -63,6 +65,16 @@
 				"slug": "generator-traffic",
 				"title": "רמזורים",
 				"summary": "דוגמא פשוטה לאפליקציית רמזורים עם ג׳נרטור."
+			},
+			{
+				"slug": "translated-text",
+				"title": "ריבוי שפות",
+				"summary": "דוגמא פשוטה לאפליקציית ריבוי שפות."
+			},
+			{
+				"slug": "proxy-state",
+				"title": "Proxy State",
+				"summary": "A simple example of a traffic cross app using generators."
 			}
 		],
 		"websites": {
@@ -72,5 +84,14 @@
 				"link": "https://hakapit.online"
 			}
 		}
+	},
+	"proxy-state": {
+		"title": "Proxy State",
+		"placeholders": {
+			"name": "Name",
+			"firstNumber": "First Number",
+			"secondNumber": "Second Number"
+		},
+		"explanation": "This example shows how to use the Proxy State hook to create a simple calculator."
 	}
 }
