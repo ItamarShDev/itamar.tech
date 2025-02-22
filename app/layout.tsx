@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { ServiceWorkerProvider } from "app/useServiceWorker";
 import Header from "layouts/header";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import {
@@ -11,7 +12,6 @@ import {
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import styles from "./layout.module.css";
-import useServiceWorker from "./useServiceWorker";
 
 export const metadata = {
 	title: {
@@ -35,7 +35,6 @@ export default async function RootLayout({
 }) {
 	const lang = await getCurrentLang();
 	const theme = await getCurrentTheme();
-	useServiceWorker();
 
 	return (
 		<html
@@ -52,14 +51,16 @@ export default async function RootLayout({
 				<meta name="apple-mobile-web-app-title" content="Itamar sharify" />
 			</head>
 			<Analytics />
-			<ThemeProvider defaultTheme={theme}>
-				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
-					<div id="main-view" className={styles.mainView}>
-						<Header />
-						<main className={styles.main}>{children}</main>
-					</div>
-				</body>
-			</ThemeProvider>
+			<ServiceWorkerProvider>
+				<ThemeProvider defaultTheme={theme}>
+					<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+						<div id="main-view" className={styles.mainView}>
+							<Header />
+							<main className={styles.main}>{children}</main>
+						</div>
+					</body>
+				</ThemeProvider>
+			</ServiceWorkerProvider>
 		</html>
 	);
 }

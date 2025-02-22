@@ -1,11 +1,11 @@
 "use client";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const useServiceWorker = () => {
 	useEffect(() => {
 		if ("serviceWorker" in navigator) {
 			navigator.serviceWorker
-				.register("/service-worker.js")
+				.register("/public/service-worker.js")
 				.then((registration) => {
 					console.log(
 						"Service Worker registered with scope:",
@@ -18,5 +18,15 @@ const useServiceWorker = () => {
 		}
 	}, []);
 };
+const ServiceWorkerContext = React.createContext(null);
 
-export default useServiceWorker;
+export function ServiceWorkerProvider({
+	children,
+}: { children: React.ReactNode }) {
+	useServiceWorker();
+	return (
+		<ServiceWorkerContext.Provider value={null}>
+			{children}
+		</ServiceWorkerContext.Provider>
+	);
+}

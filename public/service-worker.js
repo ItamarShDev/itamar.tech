@@ -22,7 +22,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     // Determine the request type
     const requestUrl = new URL(event.request.url);
-    
+
     // Strategy for different types of requests
     if (requestUrl.origin === location.origin) {
         // For same-origin requests
@@ -47,7 +47,7 @@ self.addEventListener('fetch', (event) => {
                                                 cache.delete(keys[0]);
                                             }
                                         });
-                                        
+
                                         // Cache the response
                                         cache.put(event.request, networkResponse.clone());
                                         return networkResponse;
