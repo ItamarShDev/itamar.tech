@@ -7,7 +7,7 @@ import {
 import { useTranslation } from "translations/hooks";
 import styles from "./styles.module.css";
 
-function ComputedStateExample() {
+function ProxyStateExample() {
 	const { translations } = useTranslation("proxy-state");
 	const name = useProxyState<string>("name");
 	const firstNumber = useProxyState<number>("firstNumber", 0);
@@ -95,7 +95,7 @@ function ComputedStateExample() {
 export function ComputedProxyStateExample() {
 	return (
 		<StateProvider>
-			<ComputedStateExample />
+			<ProxyStateExample />
 		</StateProvider>
 	);
 }

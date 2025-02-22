@@ -11,6 +11,7 @@ import {
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import styles from "./layout.module.css";
+import useServiceWorker from "./useServiceWorker";
 
 export const metadata = {
 	title: {
@@ -34,6 +35,8 @@ export default async function RootLayout({
 }) {
 	const lang = await getCurrentLang();
 	const theme = await getCurrentTheme();
+	useServiceWorker();
+
 	return (
 		<html
 			lang={lang}
@@ -45,6 +48,9 @@ export default async function RootLayout({
 				rob.className,
 			)}
 		>
+			<head>
+				<meta name="apple-mobile-web-app-title" content="Itamar sharify" />
+			</head>
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
 				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
