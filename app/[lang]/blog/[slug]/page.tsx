@@ -2,12 +2,19 @@ import { getBlogPost, getBlogPosts } from "lib/posts";
 import { CustomMDX } from "mdx-components";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+
 export async function generateStaticParams() {
 	const posts = getBlogPosts();
-
-	return posts.map((post) => ({
-		slug: post.slug,
-	}));
+	return posts.flatMap((post) => [
+		{
+			lang: "en",
+			slug: post.slug,
+		},
+		{
+			lang: "he",
+			slug: post.slug,
+		},
+	]);
 }
 
 export async function generateMetadata({ params }) {
