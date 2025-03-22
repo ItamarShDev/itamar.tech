@@ -62,7 +62,6 @@ function getMDXFileData(dir: string, slug: string) {
 		return null;
 	}
 	const { metadata, content } = readMDXFile(path.join(dir, file));
-
 	return {
 		metadata,
 		slug,

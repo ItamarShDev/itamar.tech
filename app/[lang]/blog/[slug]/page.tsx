@@ -4,10 +4,16 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 export async function generateStaticParams() {
 	const posts = getBlogPosts();
-
-	return posts.map((post) => ({
-		slug: post.slug,
-	}));
+	return posts.flatMap((post) => [
+		{
+			lang: "en",
+			slug: post.slug,
+		},
+		{
+			lang: "he",
+			slug: post.slug,
+		},
+	]);
 }
 
 export async function generateMetadata({ params }) {
@@ -40,7 +46,6 @@ export async function generateMetadata({ params }) {
 export default async function Blog({ params }) {
 	const { lang, slug } = await params;
 	const post = getBlogPost(lang, slug);
-
 	if (!post) {
 		notFound();
 	}
