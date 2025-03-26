@@ -3,48 +3,14 @@ import { useThemeContext } from "providers/theme";
 import { useEffect, useMemo, useState } from "react";
 export const SCHEMES = ["light", "dark", "monokai", "cobalt2"];
 
-export function getCurrentThemeName() {
-	if (process.browser && document.body.dataset.theme)
-		return document.body.dataset.theme;
-	return SCHEMES[0];
-}
-
-export const setTheme = (newTheme?: string) => {
+const setTheme = (newTheme?: string) => {
 	if (newTheme) {
 		document.body.dataset.theme = newTheme;
 		localStorage.setItem("theme", newTheme);
 	}
 };
-export function isDarkTheme() {
-	const currentTheme = getCurrentThemeName();
-	return currentTheme !== "light";
-}
-export function toggleDarkMode() {
-	const newTheme = getCurrentThemeName() !== "light" ? "light" : "dark";
-	setTheme(newTheme);
-}
-export const toggleTheme = () => {
-	const currentTheme = getCurrentThemeName();
-	if (currentTheme in SCHEMES) {
-		const newThemeIndex = (SCHEMES.indexOf(currentTheme) + 1) % SCHEMES.length;
-		const newTheme = SCHEMES[newThemeIndex];
-		setTheme(newTheme);
-	} else {
-		toggleDarkMode();
-	}
-};
 
-export const getAvailableThemes = () => SCHEMES;
-
-function setThemeFromSystem(setTheme: (theme: string) => void) {
-	if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
-		setTheme("dark");
-	} else {
-		setTheme("light");
-	}
-}
-
-export default function useTheme() {
+function useTheme() {
 	const { theme } = useThemeContext();
 	const [themeConfig, setThemeConfig] = useState<CSSStyleDeclaration>();
 	useEffect(() => {

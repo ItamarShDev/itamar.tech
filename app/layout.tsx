@@ -1,13 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import Header from "layouts/header";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
-import {
-	Alegreya_Sans_SC,
-	Codystar,
-	Fira_Code,
-	Quicksand,
-	Roboto,
-} from "next/font/google";
+import { fontVariables } from "lib/fonts";
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import styles from "./layout.module.css";
@@ -19,14 +13,7 @@ export const metadata = {
 	},
 };
 
-const alegreya = Alegreya_Sans_SC({ weight: "400", subsets: ["latin"] });
-const fira = Fira_Code({ weight: "400", subsets: ["latin"] });
-const curs = Codystar({ weight: "400", subsets: ["latin"] });
-const quick = Quicksand({ weight: "400", subsets: ["latin"] });
-const rob = Roboto({ weight: "400", subsets: ["latin"] });
-function classes(...names: string[]) {
-	return names.join(" ");
-}
+
 export default async function RootLayout({
 	children,
 }: {
@@ -37,13 +24,7 @@ export default async function RootLayout({
 	return (
 		<html
 			lang={lang}
-			className={classes(
-				alegreya.className,
-				fira.className,
-				curs.className,
-				quick.className,
-				rob.className,
-			)}
+			className={fontVariables}
 		>
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>

@@ -23,14 +23,17 @@ export function useLocales() {
 		}
 		return pathnames.join("/");
 	};
+
 	const goToNextLocale = () => {
 		replace(getRoute(), { scroll: false });
 		refresh();
 	};
+
 	const goToLocale = (locale: string) => {
 		replace(`/${locale}`, { scroll: false });
 		refresh();
 	};
+
 	return { goToNextLocale, goToLocale, getRoute, lang: params?.lang };
 }
 

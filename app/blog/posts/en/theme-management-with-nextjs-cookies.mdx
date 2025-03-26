@@ -1,0 +1,223 @@
+---
+title: Efficient Theme Management in Next.js with Server Actions
+slug: theme-management-with-nextjs-cookies
+date: March 26, 2025
+category: Next.js
+summary: A deep dive into implementing a robust theme management system using Next.js server actions, cookies, and React context
+---
+
+## The Challenge of Theme Management
+
+Modern web applications need to support multiple themes - typically light and dark modes - while ensuring a seamless user experience. An effective theme system should:
+
+- Persist user preferences across sessions
+- Apply theme changes instantly without page reloads
+- Work with server-side rendering
+- Minimize layout shifts during theme transitions
+- Be easily extensible for additional themes
+
+In this post, I'll explain how we implemented our theme management system using Next.js server actions, cookies for persistence, and React context for state management.
+
+## The Architecture
+
+Our theme system consists of three main components:
+
+1. **Server-side storage** - Using Next.js cookies to persist theme preferences
+2. **Theme provider** - A React context to make theme state available throughout the application
+3. **Theme switcher components** - UI elements that allow users to change themes
+
+Let's look at each component in detail.
+
+## Server-Side Theme Storage
+
+The foundation of our theme system is a set of server actions that handle theme persistence. Here's how we implement it:
+
+```typescript
+"use server";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import type { Theme } from "providers/theme";
+
+// Get the current theme from cookies
+export async function getCurrentTheme() {
+  const cookieCache = await cookies();
+  const theme = cookieCache.get("current-theme")?.value || "dark";
+  return theme as Theme;
+}
+
+// Set a new theme in cookies
+export async function setCurrentTheme(theme: string) {
+  const cookieCache = await cookies();
+  cookieCache.set("current-theme", theme);
+  revalidatePath("/", "layout");
+  return theme;
+}
+
+// Toggle between dark and light themes
+export async function toggleDarkTheme() {
+  const theme = await getCurrentTheme();
+  const newTheme = theme === "dark" ? "light" : "dark";
+  await setCurrentTheme(newTheme);
+  return newTheme;
+}
+```
+
+The key function here is `setCurrentTheme`, which:
+
+1. Gets the cookie store using Next.js's `cookies()` API
+2. Sets a cookie named "current-theme" with the new theme value
+3. Calls `revalidatePath("/", "layout")` to revalidate the entire app's layout
+4. Returns the new theme value
+
+This server action approach leverages Next.js's built-in capabilities to handle cookies securely on the server side.
+
+## Theme Provider Context
+
+To make the theme available throughout our application, we use a React context provider:
+
+```tsx
+// providers/theme.tsx
+"use client";
+import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { setCurrentTheme } from "lib/headers";
+
+export type Theme = "light" | "dark" | "system";
+
+// Create the theme context
+const ThemeContext = createContext<{
+  theme: Theme;
+  selectTheme: (theme: Theme) => Promise<void>;
+  toggleMode: () => Promise<void>;
+}>({
+  theme: "dark",
+  selectTheme: async () => {},
+  toggleMode: async () => {},
+});
+
+// Theme provider component
+export function ThemeProvider({ 
+  children, 
+  currentThemeName 
+}: { 
+  children: React.ReactNode; 
+  currentThemeName: Theme;
+}) {
+  const router = useRouter();
+  const [theme, setTheme] = useState<Theme>(currentThemeName);
+
+  // Function to select a specific theme
+  const selectTheme = async (theme: Theme) => {
+    document.body.setAttribute("data-theme", theme);
+    await setCurrentTheme(theme);
+    router.refresh();
+    setTheme(theme);
+  };
+
+  // Function to toggle between light and dark
+  const toggleMode = async () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    await selectTheme(newTheme);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, selectTheme, toggleMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Custom hook to use the theme
+export const useTheme = () => useContext(ThemeContext);
+```
+
+The theme provider does several important things:
+
+1. Maintains the current theme state using React's `useState`
+2. Provides a `selectTheme` function that:
+   - Updates the DOM by setting a `data-theme` attribute on the body
+   - Calls our server action to persist the theme in cookies
+   - Refreshes the router to apply server-side changes
+   - Updates the local state
+3. Offers a convenient `toggleMode` function to switch between dark and light themes
+4. Exposes these functions through a custom `useTheme` hook
+
+## Applying Themes in the UI
+
+With our theme provider in place, we can easily create UI components to change themes:
+
+```tsx
+// components/theme-switcher.tsx
+"use client";
+import { useTheme } from "providers/theme";
+
+export function ThemeSwitcher() {
+  const { theme, toggleMode } = useTheme();
+  
+  return (
+    <button 
+      onClick={toggleMode}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+  );
+}
+```
+
+## The Complete Flow
+
+When a user changes their theme preference, here's what happens:
+
+1. The user clicks a theme toggle button, triggering the `toggleMode` or `selectTheme` function
+2. The function immediately updates the DOM by setting a `data-theme` attribute on the body element
+3. The server action `setCurrentTheme` is called, which:
+   - Stores the new theme preference in a cookie
+   - Revalidates the app's layout to ensure server components reflect the change
+4. The router is refreshed to apply any server-side changes
+5. The local state is updated, causing any components that depend on the theme to re-render
+
+This approach gives us several benefits:
+
+- **Immediate visual feedback** - The theme changes instantly by updating the DOM directly
+- **Persistence across sessions** - Theme preferences are stored in cookies
+- **Server-side rendering support** - The theme is available during SSR through cookies
+- **No layout shifts** - By updating the DOM before server revalidation, we avoid layout shifts
+
+## CSS Implementation
+
+To make this work with CSS, we use CSS variables with different values based on the `data-theme` attribute:
+
+```css
+:root {
+  --background: #ffffff;
+  --text: #000000;
+  /* Other light theme variables */
+}
+
+[data-theme="dark"] {
+  --background: #121212;
+  --text: #ffffff;
+  /* Other dark theme variables */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+```
+
+## Conclusion
+
+This theme management system provides a robust solution for Next.js applications. By combining server actions, cookies, and React context, we've created a system that:
+
+- Persists user preferences
+- Works seamlessly with SSR
+- Provides instant visual feedback
+- Avoids layout shifts
+- Is easily extensible
+
+The use of Next.js server actions makes this approach particularly elegant, as it leverages the framework's built-in capabilities for handling server-side state while maintaining a clean separation of concerns.
+
+Feel free to adapt this approach for your own projects, and let me know if you have any questions or suggestions for improvement!

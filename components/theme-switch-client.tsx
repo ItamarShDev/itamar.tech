@@ -12,7 +12,6 @@ export function ThemeItem({
 }) {
 	return (
 		<li
-			key={currentTheme}
 			className={`${styles.themeItem} ${isSelected ? styles.selected : ""}`}
 		>
 			<button

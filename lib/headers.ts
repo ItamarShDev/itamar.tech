@@ -23,6 +23,7 @@ export async function setCurrentTheme(theme: string) {
 	revalidatePath("/", "layout");
 	return theme;
 }
+
 export async function toggleDarkTheme() {
 	const theme = await getCurrentTheme();
 	const newTheme = theme === "dark" ? "light" : "dark";

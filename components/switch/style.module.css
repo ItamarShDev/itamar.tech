@@ -24,7 +24,8 @@
 	.slider:before {
 		position: absolute;
 		content: attr(data-label);
-		color: var(--colors-main);
+		color: var(--color-lang);
+		filter: brightness(0.7);
 		font-size: 1rem;
 		line-height: var(--size);
 		height: var(--size);
@@ -39,7 +40,8 @@
 	}
 
 	.slider:hover:before {
-		color: white;
+		filter: brightness(1);
+		color: var(--color-lang);
 	}
 
 	& input {

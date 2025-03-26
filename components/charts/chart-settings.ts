@@ -1,5 +1,5 @@
 "use client";
-import { useChartTheme } from "lib/hooks/useTheme";
+import { useChartTheme } from "lib/hooks/useChartTheme";
 import { hexToHSL } from "lib/utils";
 
 import {

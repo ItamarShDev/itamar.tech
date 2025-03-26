@@ -1,0 +1,223 @@
+---
+title: ניהול תמות יעיל ב-Next.js באמצעות Server Actions
+slug: theme-management-with-nextjs-cookies
+date: March 26, 2025
+category: Next.js
+summary: צלילה עמוקה ליישום מערכת ניהול תמות חזקה באמצעות Next.js server actions, עוגיות ו-React context
+---
+
+## האתגר בניהול תמות
+
+אפליקציות ווב מודרניות צריכות לתמוך במספר תמות - בדרך כלל מצבי אור וחושך - תוך הבטחת חווית משתמש חלקה. מערכת תמות יעילה צריכה:
+
+- לשמור העדפות משתמש בין הפעלות
+- להחיל שינויי תמה באופן מיידי ללא טעינת דף מחדש
+- לעבוד עם רינדור בצד שרת
+- למזער שינויי פריסה במעברי תמה
+- להיות קלה להרחבה עבור תמות נוספות
+
+בפוסט זה, אסביר כיצד יישמנו את מערכת ניהול התמות שלנו באמצעות Next.js server actions, עוגיות לשמירה, ו-React context לניהול מצב.
+
+## הארכיטקטורה
+
+מערכת התמות שלנו מורכבת משלושה רכיבים עיקריים:
+
+1. **אחסון בצד שרת** - שימוש בעוגיות של Next.js לשמירת העדפות תמה
+2. **ספק תמה** - React context להנגשת מצב התמה בכל האפליקציה
+3. **רכיבי החלפת תמה** - אלמנטי ממשק משתמש המאפשרים למשתמשים לשנות תמות
+
+הבה נבחן כל רכיב בפירוט.
+
+## אחסון תמה בצד שרת
+
+הבסיס למערכת התמות שלנו הוא סט של פעולות שרת המטפלות בשמירת התמה. כך אנו מיישמים זאת:
+
+```typescript
+"use server";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import type { Theme } from "providers/theme";
+
+// קבלת התמה הנוכחית מהעוגיות
+export async function getCurrentTheme() {
+  const cookieCache = await cookies();
+  const theme = cookieCache.get("current-theme")?.value || "dark";
+  return theme as Theme;
+}
+
+// הגדרת תמה חדשה בעוגיות
+export async function setCurrentTheme(theme: string) {
+  const cookieCache = await cookies();
+  cookieCache.set("current-theme", theme);
+  revalidatePath("/", "layout");
+  return theme;
+}
+
+// החלפה בין תמות כהות ובהירות
+export async function toggleDarkTheme() {
+  const theme = await getCurrentTheme();
+  const newTheme = theme === "dark" ? "light" : "dark";
+  await setCurrentTheme(newTheme);
+  return newTheme;
+}
+```
+
+הפונקציה המרכזית כאן היא `setCurrentTheme`, אשר:
+
+1. מקבלת את מאגר העוגיות באמצעות ה-API `cookies()` של Next.js
+2. מגדירה עוגייה בשם "current-theme" עם ערך התמה החדש
+3. קוראת ל-`revalidatePath("/", "layout")` כדי לתקף מחדש את כל הפריסה של האפליקציה
+4. מחזירה את ערך התמה החדש
+
+גישת פעולת השרת הזו מנצלת את היכולות המובנות של Next.js לטיפול בעוגיות באופן מאובטח בצד השרת.
+
+## Context Provider לתמה
+
+כדי להנגיש את התמה בכל האפליקציה שלנו, אנו משתמשים ב-React context provider:
+
+```tsx
+// providers/theme.tsx
+"use client";
+import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { setCurrentTheme } from "lib/headers";
+
+export type Theme = "light" | "dark" | "system";
+
+// יצירת ה-context לתמה
+const ThemeContext = createContext<{
+  theme: Theme;
+  selectTheme: (theme: Theme) => Promise<void>;
+  toggleMode: () => Promise<void>;
+}>({
+  theme: "dark",
+  selectTheme: async () => {},
+  toggleMode: async () => {},
+});
+
+// רכיב ספק התמה
+export function ThemeProvider({ 
+  children, 
+  currentThemeName 
+}: { 
+  children: React.ReactNode; 
+  currentThemeName: Theme;
+}) {
+  const router = useRouter();
+  const [theme, setTheme] = useState<Theme>(currentThemeName);
+
+  // פונקציה לבחירת תמה ספציפית
+  const selectTheme = async (theme: Theme) => {
+    document.body.setAttribute("data-theme", theme);
+    await setCurrentTheme(theme);
+    router.refresh();
+    setTheme(theme);
+  };
+
+  // פונקציה להחלפה בין אור וחושך
+  const toggleMode = async () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    await selectTheme(newTheme);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, selectTheme, toggleMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// הוק מותאם לשימוש בתמה
+export const useTheme = () => useContext(ThemeContext);
+```
+
+ספק התמה מבצע מספר דברים חשובים:
+
+1. שומר על מצב התמה הנוכחי באמצעות `useState` של React
+2. מספק פונקציית `selectTheme` ש:
+   - מעדכנת את ה-DOM על ידי הגדרת תכונת `data-theme` על גוף הדף
+   - קוראת לפעולת השרת שלנו כדי לשמור את התמה בעוגיות
+   - מרעננת את הנתב כדי להחיל שינויים בצד השרת
+   - מעדכנת את המצב המקומי
+3. מציעה פונקציית `toggleMode` נוחה למעבר בין תמות כהות ובהירות
+4. חושפת פונקציות אלה דרך הוק מותאם `useTheme`
+
+## יישום תמות בממשק המשתמש
+
+עם ספק התמה שלנו במקום, אנחנו יכולים בקלות ליצור רכיבי ממשק משתמש לשינוי תמות:
+
+```tsx
+// components/theme-switcher.tsx
+"use client";
+import { useTheme } from "providers/theme";
+
+export function ThemeSwitcher() {
+  const { theme, toggleMode } = useTheme();
+  
+  return (
+    <button 
+      onClick={toggleMode}
+      aria-label={`עבור למצב ${theme === 'dark' ? 'בהיר' : 'כהה'}`}
+    >
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+  );
+}
+```
+
+## הזרימה המלאה
+
+כאשר משתמש משנה את העדפת התמה שלו, הנה מה שקורה:
+
+1. המשתמש לוחץ על כפתור החלפת תמה, מה שמפעיל את הפונקציה `toggleMode` או `selectTheme`
+2. הפונקציה מעדכנת מיד את ה-DOM על ידי הגדרת תכונת `data-theme` על אלמנט הגוף
+3. פעולת השרת `setCurrentTheme` נקראת, אשר:
+   - מאחסנת את העדפת התמה החדשה בעוגייה
+   - מתקפת מחדש את פריסת האפליקציה כדי להבטיח שרכיבי השרת משקפים את השינוי
+4. הנתב מתרענן כדי להחיל שינויים בצד השרת
+5. המצב המקומי מתעדכן, מה שגורם לרכיבים התלויים בתמה להתרנדר מחדש
+
+גישה זו מעניקה לנו מספר יתרונות:
+
+- **משוב חזותי מיידי** - התמה משתנה באופן מיידי על ידי עדכון ה-DOM ישירות
+- **שמירה בין הפעלות** - העדפות תמה מאוחסנות בעוגיות
+- **תמיכה ברינדור בצד שרת** - התמה זמינה במהלך SSR דרך עוגיות
+- **אין שינויי פריסה** - על ידי עדכון ה-DOM לפני תיקוף מחדש בשרת, אנו נמנעים משינויי פריסה
+
+## יישום CSS
+
+כדי לגרום לזה לעבוד עם CSS, אנו משתמשים במשתני CSS עם ערכים שונים בהתבסס על תכונת `data-theme`:
+
+```css
+:root {
+  --background: #ffffff;
+  --text: #000000;
+  /* משתני תמה בהירה נוספים */
+}
+
+[data-theme="dark"] {
+  --background: #121212;
+  --text: #ffffff;
+  /* משתני תמה כהה נוספים */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+```
+
+## סיכום
+
+מערכת ניהול התמות הזו מספקת פתרון חזק לאפליקציות Next.js. על ידי שילוב של פעולות שרת, עוגיות ו-React context, יצרנו מערכת ש:
+
+- שומרת העדפות משתמש
+- עובדת באופן חלק עם SSR
+- מספקת משוב חזותי מיידי
+- נמנעת משינויי פריסה
+- קלה להרחבה
+
+השימוש בפעולות שרת של Next.js הופך את הגישה הזו לאלגנטית במיוחד, כיוון שהיא מנצלת את היכולות המובנות של המסגרת לטיפול במצב בצד השרת תוך שמירה על הפרדת תחומי אחריות נקייה.
+
+אל תהססו להתאים את הגישה הזו לפרויקטים שלכם, וספרו לי אם יש לכם שאלות או הצעות לשיפור!

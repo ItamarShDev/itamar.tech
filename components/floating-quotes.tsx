@@ -33,21 +33,46 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
 }
 export default function RandomQuotes(props: Props) {
 	const quotes = extractQuotesByPerson(props.quotes);
-	const [randomNumber, setRandomNumber] = useState(0);
+	const [currentQuote, setCurrentQuote] = useState(quotes[0]);
+	const [isVisible, setIsVisible] = useState(true);
+	const [isPaused, setIsPaused] = useState(false);
+
 	useEffect(() => {
+		if (isPaused) return;
+
+		const fadeOutTime = 6000; // Time before starting to fade out
+		const transitionTime = 1000; // Time for fade transition
+		const totalCycleTime = fadeOutTime + transitionTime;
+
 		const interval = setInterval(() => {
-			const randomNumber = Math.floor(Math.random() * 100);
-			setRandomNumber(randomNumber);
-		}, 4000);
+			// Start fade out
+			setIsVisible(false);
+			
+			// After transition completes, change the quote and fade in
+			setTimeout(() => {
+				const randomIndex = Math.floor(Math.random() * quotes.length);
+				setCurrentQuote(quotes[randomIndex]);
+				setIsVisible(true);
+			}, transitionTime);
+			
+		}, totalCycleTime);
+
 		return () => {
 			clearInterval(interval);
 		};
-	}, []);
-	const idx = randomNumber % quotes.length;
+	}, [isPaused, quotes]);
 
 	return (
-		<div className={styles.container}>
-			<p className={styles.quote}>{quotes[idx].quote}</p>
+		<div 
+			className={styles.container}
+			onMouseEnter={() => setIsPaused(true)}
+			onMouseLeave={() => setIsPaused(false)}
+		>
+			<p 
+				className={`${styles.quote} ${isVisible ? styles.visible : styles.hidden}`}
+			>
+				{currentQuote.quote}
+			</p>
 		</div>
 	);
 }

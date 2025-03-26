@@ -10,8 +10,8 @@ export async function ThemedIcon({ translations }: ThemedIconProps) {
 	return (
 		<ThemedIconClient
 			translations={translations}
-			listComponent={<ThemeList />}
-			switchComponent={<ThemeSwitch translations={translations} />}
+			listComponent={<ThemeList key="theme-list" />}
+			switchComponent={<ThemeSwitch key="theme-switch" translations={translations} />}
 		/>
 	);
 }
