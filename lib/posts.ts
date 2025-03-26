@@ -75,7 +75,13 @@ const getPathByLocale = (locale: string) => {
 };
 
 export function getBlogPost(locale = "en", slug = "") {
-	return getMDXFileData(getPathByLocale(locale), slug);
+	try {
+		const postPath = getPathByLocale(locale);
+		return getMDXFileData(postPath, slug);
+	} catch (error) {
+		console.error('Error retrieving blog post:', error);
+		return null;
+	}
 }
 export function getBlogPosts(locale = "en") {
 	return getMDXData(getPathByLocale(locale));
