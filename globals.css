@@ -58,7 +58,6 @@ h6 {
 	font-size: 1.2rem;
 }
 
-
 body[data-theme="dark"] {
 	--colors-bg: hsl(216, 18.1%, 16.3%);
 	--colors-modalBg: hsl(216, 18.1%, 16.3%);

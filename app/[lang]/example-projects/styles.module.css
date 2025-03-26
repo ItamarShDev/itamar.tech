@@ -1,6 +1,6 @@
 .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--colors-headerText);
-    margin-bottom: 0.5rem;
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--colors-headerText);
+	margin-bottom: 0.5rem;
 }

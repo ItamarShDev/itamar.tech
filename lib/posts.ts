@@ -79,7 +79,7 @@ export function getBlogPost(locale = "en", slug = "") {
 		const postPath = getPathByLocale(locale);
 		return getMDXFileData(postPath, slug);
 	} catch (error) {
-		console.error('Error retrieving blog post:', error);
+		console.error("Error retrieving blog post:", error);
 		return null;
 	}
 }

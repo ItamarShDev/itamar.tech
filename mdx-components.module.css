@@ -1,175 +1,174 @@
 .inlineCode {
-    color: var(--colors-headerText);
-    background-color: var(--colors-modalBg);
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
+	color: var(--colors-headerText);
+	background-color: var(--colors-modalBg);
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
 }
 
 .p {
-    color: var(--colors-subText);
-    margin: 0 0 0 0;
+	color: var(--colors-subText);
+	margin: 0 0 0 0;
 }
 
 .h1 {
-    font-family: "Alegreya Sans SC", sans-serif;
-    color: var(--colors-text);
+	font-family: "Alegreya Sans SC", sans-serif;
+	color: var(--colors-text);
 }
 
 .h2 {
-    font-size: 1.6em;
+	font-size: 1.6em;
 }
 
 .h3 {
-    font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 .h4 {
-    font-size: 1.1em;
+	font-size: 1.1em;
 }
 
 .h2,
 .h3,
 .h4 {
-    margin-block-end: 0.3em;
+	margin-block-end: 0.3em;
 }
 
 .h1,
 .h2,
 .h3,
 .h4 {
-    scroll-margin-top: 7.5rem;
+	scroll-margin-top: 7.5rem;
 }
 
-.h1>a,
-.h2>a,
-.h4>a,
-.h3>a {
-    filter: brightness(225%);
-    font-weight: 300;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+.h1 > a,
+.h2 > a,
+.h4 > a,
+.h3 > a {
+	filter: brightness(225%);
+	font-weight: 300;
+	text-decoration: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
 }
 
 .code {
-    font-family: "Fira Code", monospace;
-    font-size: 1em;
+	font-family: "Fira Code", monospace;
+	font-size: 1em;
 }
 
 .article {
-    font-weight: 400;
-    font-size: 1em;
-    letter-spacing: 0.5px;
-    color: var(--colors-paragraph);
-    font-family: "Quicksand", sans-serif;
+	font-weight: 400;
+	font-size: 1em;
+	letter-spacing: 0.5px;
+	color: var(--colors-paragraph);
+	font-family: "Quicksand", sans-serif;
 }
 
-.article>p {
-    filter: opacity(0.9);
-    line-height: 1.5em;
+.article > p {
+	filter: opacity(0.9);
+	line-height: 1.5em;
 }
 
 .pre code div {
-    font-size: 0.8em;
-    overflow-y: auto;
-    overflow-x: auto;
-    border-inline-start: 3px var(--colors-decorations) solid;
-    font-family: "Fira Code", monospace;
+	font-size: 0.8em;
+	overflow-y: auto;
+	overflow-x: auto;
+	border-inline-start: 3px var(--colors-decorations) solid;
+	font-family: "Fira Code", monospace;
 }
 
 .pre {
-    direction: ltr;
-    background-color: var(--colors-modalBg);
+	direction: ltr;
+	background-color: var(--colors-modalBg);
 
-    .div:first-child {
-        margin: 0 !important;
-    }
+	.div:first-child {
+		margin: 0 !important;
+	}
 }
 
 .pre div {
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 2.2rem;
-    font-variant-ligatures: normal;
-    font-family: "Fira Code", monospace;
+	font-size: 1.4rem;
+	font-weight: 400;
+	line-height: 2.2rem;
+	font-variant-ligatures: normal;
+	font-family: "Fira Code", monospace;
 }
 
 .blockquote:before {
-    content: "„";
-    position: absolute;
-    font-size: 5em;
-    left: 0;
-    top: 0;
-    color: grey;
+	content: "„";
+	position: absolute;
+	font-size: 5em;
+	left: 0;
+	top: 0;
+	color: grey;
 }
 
 .blockquote {
-    position: relative;
-    font-family: "Helvetica", serif;
-    padding: 2.5em 1em 1em 2em;
-    margin: 0;
-    font-style: italic;
-    font-size: 0.8em;
-    font-weight: 100;
-    line-height: 1.4em;
+	position: relative;
+	font-family: "Helvetica", serif;
+	padding: 2.5em 1em 1em 2em;
+	margin: 0;
+	font-style: italic;
+	font-size: 0.8em;
+	font-weight: 100;
+	line-height: 1.4em;
 }
 
 .blockquote p {
-    margin: 0;
+	margin: 0;
 }
 
 .ul {
-    font-family: "Roboto", sans-serif;
-    font-size: 0.7em;
-    list-style-type: square;
+	font-family: "Roboto", sans-serif;
+	font-size: 0.7em;
+	list-style-type: square;
 }
 
 .ul li {
-    margin: 0.8em auto;
+	margin: 0.8em auto;
 }
 
 @media only screen and (max-width: 968px) {
-    .blockquote {
-        font-size: 1em;
-        font-weight: 300;
-    }
+	.blockquote {
+		font-size: 1em;
+		font-weight: 300;
+	}
 
-    .h1.post-title,
-    .article> :not(pre, iframe) {
-        max-width: 80vw;
-        margin-inline: auto;
-    }
+	.h1.post-title,
+	.article > :not(pre, iframe) {
+		max-width: 80vw;
+		margin-inline: auto;
+	}
 
-    .blockquote::before {
-        line-height: 0.5em;
-    }
+	.blockquote::before {
+		line-height: 0.5em;
+	}
 }
 
 @media only screen and (max-width: 640px) {
-    .pre {
-        font-size: 1em;
-        line-height: 2em;
-    }
+	.pre {
+		font-size: 1em;
+		line-height: 2em;
+	}
 }
 
-
 .title {
-    font-family: "Alegreya Sans SC", sans-serif;
-    color: var(--colors-text);
-    margin-bottom: 0.5rem;
+	font-family: "Alegreya Sans SC", sans-serif;
+	color: var(--colors-text);
+	margin-bottom: 0.5rem;
 }
 
 .subTitle {
-    font-family: "Alegreya Sans SC", sans-serif;
-    color: var(--colors-subText);
-    opacity: 0.7;
-    font-size: 1.3em;
+	font-family: "Alegreya Sans SC", sans-serif;
+	color: var(--colors-subText);
+	opacity: 0.7;
+	font-size: 1.3em;
 }
 
 .date {
-    color: var(--colors-subText);
-    font-size: 0.8em;
-    filter: brightness(80%);
+	color: var(--colors-subText);
+	font-size: 0.8em;
+	filter: brightness(80%);
 }

@@ -8,7 +8,7 @@
 	cursor: pointer;
 }
 
-.linkCard:hover>.title {
+.linkCard:hover > .title {
 	text-decoration: underline 1px solid var(--colors-decorations);
 }
 
