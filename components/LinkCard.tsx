@@ -23,6 +23,7 @@ export default function LinkCard({
 			href={routeRef || route}
 			as={route}
 			target={newTab ? "_blank" : "_self"}
+			prefetch={true}
 			className={styles.linkCard}
 		>
 			<dl>
