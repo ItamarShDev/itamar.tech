@@ -1,9 +1,28 @@
 "use client";
 import usePortal from "lib/hooks/usePortal";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Modal.module.css";
 
 function ModalComponent({ open, setOpened, title, children, footer = null }) {
+	const abortControllerRef = useRef<AbortController | null>(null);
+	useEffect(() => {
+		if (open) {
+			abortControllerRef.current = new AbortController();
+			document.addEventListener(
+				"keydown",
+				(e) => {
+					if (e.key === "Escape") {
+						e.preventDefault();
+						setOpened(false);
+					}
+				},
+				{ signal: abortControllerRef.current?.signal },
+			);
+		} else {
+			abortControllerRef.current?.abort();
+		}
+	}, [open, setOpened]);
+
 	return (
 		<div
 			className={`${styles.container} ${open ? styles.opened : styles.closed}`}
