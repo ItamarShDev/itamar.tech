@@ -6,9 +6,9 @@ export default function ComputedStateExample() {
 		<div>
 			<ComputedProxyStateExample />
 			<Code theme={"dracula-soft"} lang="tsx">{`// read value from proxy
-const name = useProxyState<string>("name");
-const firstNumber = useProxyState<number>("firstNumber", 0);
-const secondNumber = useProxyState<number>("secondNumber", 1);
+const name = useProxyState("name", "your name here"); // types are inferred
+const firstNumber = useProxyState("firstNumber", 0);
+const secondNumber = useProxyState("secondNumber", 1);
 
 ...
 
