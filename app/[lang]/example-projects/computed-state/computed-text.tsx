@@ -9,9 +9,9 @@ import styles from "./styles.module.css";
 
 function ComputedStateExample() {
 	const { translations } = useTranslation("proxy-state");
-	const name = useProxyState<string>("name");
-	const firstNumber = useProxyState<number>("firstNumber", 0);
-	const secondNumber = useProxyState<number>("secondNumber", 1);
+	const name = useProxyState("name", "your name");
+	const firstNumber = useProxyState("firstNumber", 0);
+	const secondNumber = useProxyState("secondNumber", 1);
 	const result = firstNumber.value + secondNumber.value;
 	return (
 		<>
@@ -67,11 +67,11 @@ function ComputedStateExample() {
 			</div>
 			<section className={styles.codeExplanation}>
 				<code>
-					{'const name = useProxyState<string>("name");'}
+					{'const name = useProxyState("name", "your name");'}
 					<br />
-					{'const firstNumber = useProxyState<number>("firstNumber", 0);'}
+					{'const firstNumber = useProxyState("firstNumber", 0);'}
 					<br />
-					{'const secondNumber = useProxyState<number>("secondNumber", 1);'}
+					{'const secondNumber = useProxyState("secondNumber", 1);'}
 					<br />
 					...
 					<br />
