@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 type State = Record<string, unknown>;
 type Value<T> = { value: T };
 
@@ -11,31 +18,28 @@ const StateContext = createContext<{
 
 export function StateProvider({ children }: { children: React.ReactNode }) {
 	const [state, setState] = useState<State>({});
-	const [, updateState] = useState<unknown>();
-	const forceUpdate = useCallback(() => updateState({}), []);
+	const ref = useRef<State>(state);
 
-	const createProxy = useCallback(
-		(name: string) => {
-			const StateItemProxy = new Proxy(
-				{},
-				{
-					set(target, property, value) {
-						target[property] = { value };
-						forceUpdate();
-						return true;
-					},
-					get(target, property) {
-						return target[property]?.value;
-					},
+	const createProxy = useCallback((name: string) => {
+		const StateItemProxy = new Proxy(
+			{},
+			{
+				set(target, property, value) {
+					target[property] = { value };
+					setState((prev) => ({ ...prev, [name]: StateItemProxy }));
+					return true;
 				},
-			);
-			setState((prev) => ({ ...prev, [name]: StateItemProxy }));
-			return StateItemProxy as Value<unknown>;
-		},
-		[forceUpdate],
-	);
+				get(target, property) {
+					return target[property]?.value;
+				},
+			},
+		);
+		ref.current = { ...ref.current, [name]: StateItemProxy };
+		return ref.current[name] as Value<unknown>;
+	}, []);
+
 	return (
-		<StateContext.Provider value={{ state, createProxy }}>
+		<StateContext.Provider value={{ state: ref.current, createProxy }}>
 			{children}
 		</StateContext.Provider>
 	);
@@ -51,12 +55,16 @@ function useStateContext() {
 
 export function useProxyState<T>(name: string, defaultValue?: T) {
 	const { state, createProxy } = useStateContext();
-	let item = state[name] as Value<T>;
-	if (!state[name]) {
-		item = createProxy(name) as Value<T>;
-	}
-	if (defaultValue !== undefined && item.value === undefined) {
-		item.value = defaultValue;
-	}
+	const item = useMemo(() => {
+		let item = state[name] as Value<T>;
+		if (!state[name]) {
+			item = createProxy(name) as Value<T>;
+			state[name] = item;
+		}
+		if (defaultValue !== undefined && item.value === undefined) {
+			item.value = defaultValue;
+		}
+		return item;
+	}, [state, createProxy, name, defaultValue]);
 	return item;
 }

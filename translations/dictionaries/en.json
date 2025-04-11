@@ -73,12 +73,12 @@
 			{
 				"slug": "translated-text",
 				"title": "Translated Text",
-				"summary": "A simple example of a traffic cross app using generators."
+				"summary": "A simple example of a translated text implementation."
 			},
 			{
 				"slug": "proxy-state",
 				"title": "Proxy State",
-				"summary": "A simple example of a traffic cross app using generators."
+				"summary": "A simple example of a proxy state implementation without using setState."
 			}
 		],
 		"websites": {
