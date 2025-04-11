@@ -1,4 +1,4 @@
-import { getAttributesData, getResumeData } from "lib/get-data-methods";
+import { getFromKV, getResumeDataByLocale } from "lib/get-data-methods";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ResumeClient from "./resume-client";
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 };
 
 async function getData(locale: "en" | "he" = "en") {
-	const resumeData = await getResumeData(locale);
-	const attributesData = await getAttributesData();
+	const resumeData = await getResumeDataByLocale(locale);
+	const attributesData = await getFromKV("attributes");
 	return {
 		resumeData,
 		attributesData,

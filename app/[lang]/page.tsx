@@ -1,14 +1,9 @@
 import HomeBackground from "layouts/home-background";
 import HomePage from "layouts/home-page";
-import { getQuotesData } from "lib/get-data-methods";
-
-async function getData() {
-	const quotes = await getQuotesData();
-	return quotes;
-}
+import { getFromKV } from "lib/get-data-methods";
 
 export default async function Home() {
-	const quotes = await getData();
+	const quotes = await getFromKV("quotes");
 
 	return (
 		<>

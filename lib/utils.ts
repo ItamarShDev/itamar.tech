@@ -1,17 +1,16 @@
-export function hexToRgb(hex) {
-	let c;
+export function hexToRgb(hex: string): [number, number, number] {
 	if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-		c = hex.substring(1).split("");
+		let c = hex.substring(1).split("");
 		if (c.length === 3) {
 			c = [c[0], c[0], c[1], c[1], c[2], c[2]];
 		}
-		c = Number(`0x${c.join("")}`);
-		return [(c >> 16) & 255, (c >> 8) & 255, c & 255];
+		const color = Number(`0x${c.join("")}`);
+		return [(color >> 16) & 255, (color >> 8) & 255, color & 255];
 	}
 	throw new Error("Bad Hex");
 }
 
-export function hexToHSL(H, index = 0) {
+export function hexToHSL(H: string, index = 0): [number, number, number] {
 	// Convert hex to RGB first
 	let r = 0;
 	let g = 0;
