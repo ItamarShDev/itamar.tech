@@ -161,6 +161,7 @@ export function randomChartData(id: number) {
 
 	return socialData;
 }
+
 export type ChartSettings = {
 	data?: { datasets: object[]; labels: string[] };
 	radarOptions?: object;
