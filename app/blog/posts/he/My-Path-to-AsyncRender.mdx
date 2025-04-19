@@ -8,15 +8,16 @@ summary: איך נקלעתי למצב שאני מממש רנדור אסינכר�
 
 ## הקדמה
 
-In the past year, we decided to create out new sister app in React.
-Sooner than later, we met on of the most famous issues with React's synchronous rendering:
-**render component that relies on an asynchronous data.**
+בשנה האחרונה החלטנו לבנות את האפליקציה האחות החדשה שלנו ב‑React.
+לא עבר הרבה זמן עד שנתקלנו באחת הבעיות המפורסמות של רינדור סינכרוני ב‑React:
+**רינדור קומפוננטה שתלויה בנתונים אסינכרוניים.**
 
-When you come from the ClojureScript+cljs/Om, you won't even think this need will raise any issue.
-See, Clojure has its amazing channels, which makes asynchronous calls very easy.
-Furthermore, cljs/Om lets you write you views in the code because, well, Clojure is Lisp, and everything is data.
-To tackle this asynchronous issue, we did what everyone does;
-we used **compoenentDidMount**:
+כשאתה מגיע מעולמות של ClojureScript ו‑cljs/Om, אפילו לא עולה בדעתך שזו יכולה להיות בעיה.
+ראו, ל‑Clojure יש ערוצים (channels) מדהימים, שמאפשרים קריאות אסינכרוניות בקלות.
+יתרה מזאת, cljs/Om מאפשרת לך לכתוב את ה‑views שלך ישירות בקוד, כי בסופו של דבר, Clojure היא Lisp והכול הוא דאטה.
+
+כדי להתמודד עם הבעיה האסינכרונית הזו, עשינו מה שכולם עושים;
+השתמשנו ב‑**componentDidMount**:
 
 ```jsx
 class App extends React.Component {

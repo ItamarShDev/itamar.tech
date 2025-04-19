@@ -8,56 +8,56 @@ summary: איך מימשתי סטייט בשביל אפליקציות פייתו
 
 ## מבוא
 
-I work at a cool company named Imubit.
-This company creates AI solutions for refineries.
+אני עובד בחברה מגניבה בשם Imubit.
+החברה הזו מפתחת פתרונות בינה מלאכותית לבתי זיקוק.
 
-At the beginning of the year, we decided to create a team that will create internal data science and data investigation tools.
-After a lot of discussion, we landed on building those tools in JupyterLab.
+בתחילת השנה החלטנו להקים צוות שיפתח כלים פנימיים למדעני נתונים ולחקירת נתונים.
+לאחר הרבה דיונים, החלטנו לבנות את הכלים האלו ב‑JupyterLab.
 
-My task was (and still is) to create data visualization tools that let the user query big amount of data, modify it and visualize it in charts and heat maps.
+התפקיד שלי היה (ועדיין) ליצור כלים לוויזואליזציה של נתונים, שיאפשרו למשתמש לשאול כמויות גדולות של נתונים, לערוך אותם ולהציג אותם בגרפים ומפות חום.
 
 ## הבעיה
 
-The applications became bigger and bigger, and had components that were used in multiple different applications.
-This created a situation where I needed to find a way to manage and share data between multiple components, across multiple applications.
+האפליקציות הלכו וגדלו, והיו בהן קומפוננטות שנעשה בהן שימוש במספר אפליקציות שונות.
+זה יצר מצב שבו הייתי צריך למצוא דרך לנהל ולשתף נתונים בין כמה קומפוננטות, על פני כמה אפליקציות.
 
 ### ההארה
 
-As a frontend developer I knew what I needed right away: State management.
+בתור מפתח פרונטנד, ידעתי מיד מה אני צריך: ניהול סטייט (State management).
 
-The idea was simple:
-I need a single source of truth to all components, that will hold the current user selections and cache the current queries results.
-This source should be able to notify a component on a data change.
+הרעיון היה פשוט:
+אני צריך מקור אמת יחיד לכל הקומפוננטות, שיחזיק את בחירות המשתמש הנוכחיות ויאחסן את תוצאות השאילתות האחרונות.
+המקור הזה צריך גם לדעת להודיע לקומפוננטה כשיש שינוי בנתונים.
 
-Now, if I was using React for example, I would probably go for MobX, but sadly, it does not exist for Python.
+עכשיו, אם הייתי משתמש ב‑React לדוגמה, כנראה שהייתי בוחר ב‑MobX, אבל לצערי זה לא קיים בפייתון.
 
 ## הפתרון
 
-My solution was a Proxy inspired idea:
-Create a class that inherit dict, and add the option to notify and trigger listeners.
+הפתרון שלי היה רעיון בהשראת Proxy:
+ליצור מחלקה שיורשת מ‑dict, ולהוסיף לה אפשרות להודיע ולתפעל מאזינים (listeners).
 
-Because we are dealing with Python, I did not want to use an Event based mechanism, and preferred to keep is as synchronous is I can.
+מכיוון שמדובר בפייתון, לא רציתי להשתמש במנגנון מבוסס אירועים, והעדפתי להשאיר את זה כמה שיותר סינכרוני.
 
-This will be easier to debug and use in Python.
+כך יהיה קל יותר לדבג ולהשתמש בזה בפייתון.
 
-We start with a “proxy” like solution:
+נתחיל בפתרון דמוי "proxy":
 
 ```python
 class StateManager(dict):
-	def __init__(self initial_state: dict):
-		self[‘state’] = initial_state
+	def __init__(self, initial_state: dict):
+		self['state'] = initial_state
 
-	 # Use getattr and setattr to block direct manipulations
+	 # נשתמש ב-getattr ו-setattr כדי לחסום מניפולציות ישירות
 ```
 
-From there we need to add the state management.
-I chose to use `set_state(*path, value)` and `get_state(*path)`
+מכאן צריך להוסיף את ניהול הסטייט.
+בחרתי להשתמש ב־`set_state(*path, value)` ו־`get_state(*path)`
 
-set_state(\*path, value) - will iterate the path and add the value to that path in self[’state’], will create that path if not exists
+set_state(\*path, value) – תעבור על הנתיב ותכניס את הערך לנתיב הזה בתוך self['state'], תיצור את הנתיב אם לא קיים.
 
-get_state(\*path) - will iterate the path and return the value if exists.
+get_state(\*path) – תעבור על הנתיב ותחזיר את הערך אם קיים.
 
-Now, that we have a state caching, we can add the components update mechanism;
+עכשיו, אחרי שיש לנו קאשינג של סטייט, אפשר להוסיף את מנגנון העדכון של הקומפוננטות:
 
 ```python
 class StateManager(dict):

@@ -11,7 +11,7 @@
 }
 
 .h1 {
-	font-family: "Alegreya Sans SC", sans-serif;
+
 	color: var(--colors-text);
 }
 
@@ -38,12 +38,13 @@
 .h3,
 .h4 {
 	scroll-margin-top: 7.5rem;
+	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
 }
 
-.h1 > a,
-.h2 > a,
-.h4 > a,
-.h3 > a {
+.h1>a,
+.h2>a,
+.h4>a,
+.h3>a {
 	filter: brightness(225%);
 	font-weight: 300;
 	text-decoration: none;
@@ -63,10 +64,10 @@
 	font-size: 1em;
 	letter-spacing: 0.5px;
 	color: var(--colors-paragraph);
-	font-family: "Quicksand", sans-serif;
+	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
 }
 
-.article > p {
+.article>p {
 	filter: opacity(0.9);
 	line-height: 1.5em;
 }
@@ -82,6 +83,7 @@
 .pre {
 	direction: ltr;
 	background-color: var(--colors-modalBg);
+	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
 
 	.div:first-child {
 		margin: 0 !important;
@@ -137,7 +139,7 @@
 	}
 
 	.h1.post-title,
-	.article > :not(pre, iframe) {
+	.article> :not(pre, iframe) {
 		max-width: 80vw;
 		margin-inline: auto;
 	}
@@ -155,13 +157,11 @@
 }
 
 .title {
-	font-family: "Alegreya Sans SC", sans-serif;
 	color: var(--colors-text);
 	margin-bottom: 0.5rem;
 }
 
 .subTitle {
-	font-family: "Alegreya Sans SC", sans-serif;
 	color: var(--colors-subText);
 	opacity: 0.7;
 	font-size: 1.3em;

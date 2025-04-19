@@ -1,9 +1,10 @@
 import {
+	Assistant,
 	Inter,
-	JetBrains_Mono,
 	Lora,
-	Montserrat,
+	Noto_Sans,
 	Playfair_Display,
+	Rubik,
 } from "next/font/google";
 
 // Heading font - elegant, distinctive
@@ -20,11 +21,25 @@ const inter = Inter({
 	variable: "--font-inter",
 });
 
-// Another heading option - geometric, bold
-const montserrat = Montserrat({
+export const notoSans = Noto_Sans({
 	subsets: ["latin"],
+	weight: ["400", "700"],
 	display: "swap",
-	variable: "--font-montserrat",
+	variable: "--font-noto-sans",
+});
+
+export const assistant = Assistant({
+	subsets: ["latin"],
+	weight: ["400", "700"],
+	display: "swap",
+	variable: "--font-assistant",
+});
+
+export const rubik = Rubik({
+	subsets: ["latin"],
+	weight: ["400", "700"],
+	display: "swap",
+	variable: "--font-rubik",
 });
 
 // Body text font - readable serif for long-form content
@@ -35,18 +50,15 @@ const sourceSerif = Lora({
 	variable: "--font-source-serif",
 });
 
-// Code font - optimized for code readability
-const jetbrainsMono = JetBrains_Mono({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-jetbrains",
-});
-
 // Font class variables for use in layout
 export const fontVariables = [
 	playfair.variable,
 	inter.variable,
-	montserrat.variable,
 	sourceSerif.variable,
-	jetbrainsMono.variable,
+	notoSans.variable,
+	assistant.variable,
+	rubik.variable,
 ].join(" ");
+
+// Export a body font class for use in blog/article content
+export const bodyFontClass = `${notoSans.className} ${assistant.className} ${rubik.className}`;

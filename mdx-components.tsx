@@ -1,5 +1,6 @@
 import { RegistrationForm } from "app/blog/posts/examples/translation-example/registration-form";
 import { Code } from "bright";
+import { bodyFontClass } from "lib/fonts";
 import { getCurrentTheme } from "lib/headers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
@@ -74,7 +75,7 @@ export function CodeComponent(theme) {
 		return (
 			<Suspense fallback={<div>Loading...</div>}>
 				<Code
-					className={styles.pre}
+					className={`${styles.pre} ${bodyFontClass}`}
 					lineNumbers
 					theme={codeTheme}
 					lightThemeSelector='[data-theme="light"]'
@@ -113,7 +114,6 @@ function createHeading(level) {
 					{
 						href: `#${slug}`,
 						key: `link-${slug}`,
-						children,
 					},
 					children,
 				),
@@ -149,7 +149,8 @@ export async function CustomMDX(props) {
 	return (
 		<article className={styles.article}>
 			<MDXRemote
-				{...props}
+				source={props.source}
+				options={props.options}
 				components={{ ...components, ...(props.components || {}) }}
 			/>
 		</article>
