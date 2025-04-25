@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import Header from "layouts/header";
-import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import { fontVariables } from "lib/fonts";
+import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import styles from "./layout.module.css";
@@ -13,7 +13,6 @@ export const metadata = {
 	},
 };
 
-
 export default async function RootLayout({
 	children,
 }: {
@@ -21,11 +20,9 @@ export default async function RootLayout({
 }) {
 	const lang = await getCurrentLang();
 	const theme = await getCurrentTheme();
+
 	return (
-		<html
-			lang={lang}
-			className={fontVariables}
-		>
+		<html lang={lang} className={fontVariables}>
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
 				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>

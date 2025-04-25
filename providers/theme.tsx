@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 export const THEMES = ["light", "dark", "monokai", "cobalt2"] as const;
 export type Theme = (typeof THEMES)[number];
+
 type ThemeContextType = {
 	theme: Theme;
 	selectTheme: (theme: Theme) => void;
 	toggleMode: () => void;
 };
+
 const ThemeContext = createContext<ThemeContextType>({
 	theme: "dark",
 	selectTheme: () => {},

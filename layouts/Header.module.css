@@ -1,6 +1,5 @@
 .nav {
 	height: var(--header-height);
-	width: 100vw;
 	display: grid;
 	padding-inline: 1rem;
 	grid-template-columns: auto auto 1fr 5rem;

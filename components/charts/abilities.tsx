@@ -30,7 +30,6 @@ const Abilities = () => {
 		values,
 		title: "Abilities",
 	});
-	console.log(data, radarOptions);
 	if (data)
 		return <Radar data={data as ChartData<"radar">} options={radarOptions} />;
 	return null;
