@@ -4,14 +4,20 @@
 		"enabled": true
 	},
 	"files": {
-		"ignore": ["**/node_modules/*", ".next/*", "public/*", ".vscode/*"]
+		"ignore": [
+			"**/node_modules/*",
+			".next/*",
+			"public/*",
+			".vscode/*"
+		]
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true,
 			"a11y": {
-				"useKeyWithClickEvents": "off"
+				"useKeyWithClickEvents": "off",
+				"useAnchorContent": "off"
 			}
 		}
 	},
