@@ -5,6 +5,19 @@ import ResumeClient from "./resume-client";
 
 export const metadata: Metadata = {
 	title: "CV",
+	openGraph: {
+		title: "CV",
+		description: "CV",
+		type: "website",
+		url: "itamar.dev/resume",
+		images: ["/images/meta-image.png"],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "CV",
+		description: "CV",
+		images: ["/images/meta-image.png"],
+	},
 };
 
 async function getData(locale: "en" | "he" = "en") {

@@ -4,7 +4,20 @@ import type { Metadata } from "next";
 import styles from "./styles.module.css";
 
 export const metadata: Metadata = {
-	title: "Example Projects",
+	title: "Itamar Sharify - Example Projects",
+	openGraph: {
+		title: "Example Projects",
+		description: "Example Projects",
+		type: "website",
+		url: "itamar.dev/example-projects",
+		images: ["/images/meta-image.png"],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Example Projects",
+		description: "Example Projects",
+		images: ["/images/meta-image.png"],
+	},
 };
 
 export default async function ExampleProjects() {

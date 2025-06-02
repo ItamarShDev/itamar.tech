@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
 			description,
 			type: "article",
 			publishedTime,
-			url: `itamar.tech/${lang}/blog/${post.slug}`,
+			url: `itamar.dev/${lang}/blog/${post.slug}`,
 		},
 		twitter: {
 			card: "summary_large_image",
