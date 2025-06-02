@@ -1,6 +1,5 @@
 import GithubLogo from "images/GithubLogo";
 import LinkedInLogo from "images/LinkedInLogo";
-import TwitterLogo from "images/TwitterLogo";
 import styles from "./SocialRefs.module.css";
 
 function SocialRefs({ withTitle = false }) {
@@ -8,15 +7,6 @@ function SocialRefs({ withTitle = false }) {
 		<div>
 			{withTitle && <h5>Feel free to contact me here:</h5>}
 			<div className={`${styles.row} ${styles.refs}`}>
-				<a
-					className={styles.item}
-					href="https://twitter.com/ISharify"
-					target="_blank"
-					rel="noreferrer noopener"
-					title="Twitter"
-				>
-					<TwitterLogo />
-				</a>
 				<a
 					className={styles.item}
 					href="https://www.github.com/ItamarShDev"

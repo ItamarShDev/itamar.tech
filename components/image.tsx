@@ -1,16 +1,14 @@
-import NextImage from "next/legacy/image";
+import NextImage, { type ImageProps as NextImageProps } from "next/image";
+
 import styles from "./Image.module.css";
 
-interface ImageProps {
+type ImageProps = {
 	alt: string;
-	title?: string;
-	className?: string;
 	size?: string;
 	circle?: boolean;
-	objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 	layout?: "fixed" | "fill" | "responsive" | "intrinsic";
-	image: string;
-}
+	image: NextImageProps["src"];
+} & Omit<NextImageProps, "src">;
 
 export default function Image({
 	alt,
@@ -18,8 +16,8 @@ export default function Image({
 	className = "",
 	size = "100%",
 	circle = false,
-	objectFit = "contain",
 	layout = "fill",
+
 	image,
 }: ImageProps) {
 	return (
@@ -40,8 +38,10 @@ export default function Image({
 				src={image}
 				blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
 				alt={alt}
-				objectFit={objectFit}
-				objectPosition="50% 50%"
+				style={{
+					objectFit: "contain",
+					objectPosition: "50% 50%",
+				}}
 			/>
 		</div>
 	);
