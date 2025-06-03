@@ -79,6 +79,11 @@
 				"slug": "proxy-state",
 				"title": "Proxy State",
 				"summary": "A simple example of a proxy state implementation without using setState."
+			},
+			{
+				"slug": "ai-chat",
+				"title": "AI Chat",
+				"summary": "A simple example of an AI chat implementation."
 			}
 		],
 		"websites": {

@@ -75,6 +75,11 @@
 				"slug": "proxy-state",
 				"title": "Proxy State",
 				"summary": "A simple example of a traffic cross app using generators."
+			},
+			{
+				"slug": "ai-chat",
+				"title": "צ׳אט AI",
+				"summary": "דוגמא פשוטה לאפליקציית צ׳אט AI."
 			}
 		],
 		"websites": {
