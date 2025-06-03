@@ -1,24 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AIChatResponse from "./response";
 import styles from "./style.module.css";
 
 export default function AIChatPage() {
 	const [data, setData] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+	const abortController = useRef(new AbortController());
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const message = formData.get("message");
 		const model = formData.get("model");
 		if (message) {
+			abortController.current.abort();
+			abortController.current = new AbortController();
 			setLoading(true);
 			setData(null);
 			const response = await fetch("/api/chat", {
 				method: "POST",
 				body: JSON.stringify({ message, model }),
+				signal: abortController.current.signal,
 			});
-			const reader = await response.body?.getReader();
+			const reader = response.body?.getReader();
 			let result = "";
 			if (!reader) {
 				return;
