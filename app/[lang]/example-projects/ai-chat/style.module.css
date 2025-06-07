@@ -1,6 +1,98 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1;
+    border: 1px solid var(--colors-decorations);
+    border-radius: 0.5rem;
+    color: var(--colors-text);
+}
+
 .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1;
+    width: 100%;
+}
+
+.modelSelector {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid var(--colors-decorations);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.messages {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.formControls {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 1rem;
+    border: none;
+    border-top: 1px solid var(--colors-decorations);
+    padding: 2rem;
+
+    & * {
+        padding: .5rem;
+    }
+
+    & input {
+        flex: 1;
+        background-color: transparent;
+        font-size: 1.5rem;
+        border: 1px solid var(--colors-decorations);
+        border-radius: 0.5rem;
+        color: var(--colors-text);
+    }
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.response {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+    padding: .5rem;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--colors-hoverDecorations);
+
+    & .title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+        font-size: 1.3rem;
+        color: var(--colors-text);
+
+        & .message {
+            flex: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-style: italic;
+            color: var(--colors-subText);
+        }
+
+        & .model {
+            color: var(--colors-decorations);
+        }
+    }
+
 }

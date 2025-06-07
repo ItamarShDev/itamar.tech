@@ -1,4 +1,4 @@
-import AIChatForm from "./form";
+import { AIChatForm } from "./form";
 
 export default function AIChatPage() {
 	return <AIChatForm />;

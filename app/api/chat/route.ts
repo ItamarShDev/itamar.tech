@@ -5,13 +5,20 @@ type Model =
   | "gemini-2.0-flash"
   | "gemini-2.0-flash-lite";
 
-async function chat(model: Model, message: string) {
+async function chat(
+  model: Model,
+  message: string,
+  context: string | undefined
+) {
   const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
   const chat = ai.chats.create({
     model,
   });
+  const messageWithContext = context
+    ? `previous context: ${context}\nnew message: \n${message}`
+    : message;
   return await chat.sendMessageStream({
-    message,
+    message: messageWithContext,
   });
 }
 
@@ -35,13 +42,16 @@ function iteratorToStream(iterator: Awaited<ReturnType<typeof chat>>) {
 }
 export async function POST(request: Request) {
   const payload = await request.json();
-  if (!payload.message) {
+  const message = payload.message as string;
+  const model = payload.model as Model;
+  const context = payload.context as string;
+  if (!message) {
     return Response.json({ error: "No message provided" }, { status: 400 });
   }
-  const model = payload.model as Model;
   if (!model) {
     return Response.json({ error: "No model provided" }, { status: 400 });
   }
-  const stream = iteratorToStream(await chat(model, payload.message));
+
+  const stream = iteratorToStream(await chat(model, message, context));
   return new Response(stream);
 }
