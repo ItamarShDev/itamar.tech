@@ -81,8 +81,7 @@ export function AIChatForm() {
 					</section>
 					<fieldset className={styles.formControls} disabled={isPending}>
 						<input name="message" />
-						<button type="submit">Send</button>
-						{isPending && <span>Loading...</span>}
+						<button type="submit">{isPending ? "Loading..." : "Send"}</button>
 					</fieldset>
 				</form>
 			</section>
