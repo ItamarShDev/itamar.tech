@@ -9,6 +9,9 @@ export function AIChatForm() {
 	const messagesRef = useRef<HTMLDivElement>(null);
 	const [isPending, startTransition] = useTransition();
 	const [history, setHistory] = useState<ChatHistory[]>([]);
+	const [currentMessage, setCurrentMessage] = useState<ChatHistory | null>(
+		null,
+	);
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		const formData = new FormData(e.currentTarget);
 		const message = formData.get("message") as string;
@@ -18,7 +21,7 @@ export function AIChatForm() {
 		const newMessage = { message, model, response: "" };
 
 		if (message) {
-			setHistory((prev) => [...prev, newMessage]);
+			setCurrentMessage(newMessage);
 			startTransition(async () => {
 				e.preventDefault();
 				abortController.current.abort();
@@ -44,11 +47,17 @@ export function AIChatForm() {
 						break;
 					}
 					result += new TextDecoder().decode(value);
-					newMessage.response = result;
-					setHistory((prev) => {
-						prev[prev.length - 1].response = result;
-						return prev;
+					setCurrentMessage({
+						message,
+						model,
+						response: result,
 					});
+				}
+				if (currentMessage) {
+					setHistory((prev) => {
+						return [...prev, currentMessage];
+					});
+					setCurrentMessage(null);
 				}
 				(e.target as HTMLFormElement).reset();
 			});
@@ -56,18 +65,27 @@ export function AIChatForm() {
 		return false;
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: We want to scroll to the bottom when the messages change
 	useEffect(() => {
 		messagesRef.current?.scrollTo({
 			top: messagesRef.current.scrollHeight,
 		});
-	});
+	}, [currentMessage, history]);
 	return (
 		<section className={styles.container}>
 			<h1>AI Chat</h1>
 			<section className={styles.chat}>
-				<form onSubmit={handleSubmit} className={styles.form}>
+				<form
+					onSubmit={handleSubmit}
+					className={styles.form}
+					suppressHydrationWarning
+				>
 					<div className={styles.modelSelector}>
-						<select name="model" id="model">
+						<select
+							name="model"
+							id="model"
+							defaultValue={"gemini-2.0-flash-lite"}
+						>
 							<option value="gemini-2.5-flash-preview-05-20">
 								Gemini 2.5 Flash Preview
 							</option>
@@ -85,11 +103,28 @@ export function AIChatForm() {
 						</button>
 					</div>
 					<section className={styles.messages} ref={messagesRef}>
-						{history.map((message) => (
-							<AIChatResponse key={message.message} data={message} />
+						{history.map((session, idx) => (
+							<AIChatResponse
+								key={`history-${idx}-${session.message}`}
+								idx={idx + 1}
+								data={session}
+							/>
 						))}
+						{currentMessage && (
+							<AIChatResponse
+								withLoader
+								idx={history.length + 1}
+								key={`new-message-${currentMessage.message}`}
+								data={currentMessage}
+							/>
+						)}
 					</section>
-					<fieldset className={styles.formControls} disabled={isPending}>
+
+					<fieldset
+						className={styles.formControls}
+						disabled={isPending}
+						suppressHydrationWarning
+					>
 						<input name="message" />
 						<button type="submit">{isPending ? "Loading..." : "Send"}</button>
 					</fieldset>
