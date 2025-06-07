@@ -4,8 +4,9 @@ import AIChatResponse from "./response";
 import styles from "./style.module.css";
 import type { ChatHistory } from "./types";
 
-export function AIChatForm() {
+export function AIChatForm({ models }: { models: string[] }) {
 	const abortController = useRef(new AbortController());
+	const inputRef = useRef<HTMLInputElement>(null);
 	const messagesRef = useRef<HTMLDivElement>(null);
 	const [isPending, startTransition] = useTransition();
 	const [history, setHistory] = useState<ChatHistory[]>([]);
@@ -16,11 +17,15 @@ export function AIChatForm() {
 		const formData = new FormData(e.currentTarget);
 		const message = formData.get("message") as string;
 		const model = formData.get("model") as string;
-		const lastMessage = history[history.length - 1];
 
 		const newMessage = { message, model, response: "" };
 
 		if (message) {
+			if (currentMessage) {
+				setHistory((prev) => {
+					return [...prev, currentMessage];
+				});
+			}
 			setCurrentMessage(newMessage);
 			startTransition(async () => {
 				e.preventDefault();
@@ -29,9 +34,23 @@ export function AIChatForm() {
 				const response = await fetch("/api/chat", {
 					method: "POST",
 					body: JSON.stringify({
-						message,
+						messages: [
+							...history.flatMap((message) => [
+								{
+									role: "user",
+									content: message.message,
+								},
+								{
+									role: "assistant",
+									content: message.response,
+								},
+							]),
+							{
+								role: "user",
+								content: message,
+							},
+						],
 						model,
-						context: lastMessage?.response,
 					}),
 					signal: abortController.current.signal,
 				});
@@ -53,13 +72,11 @@ export function AIChatForm() {
 						response: result,
 					});
 				}
-				if (currentMessage) {
-					setHistory((prev) => {
-						return [...prev, currentMessage];
-					});
-					setCurrentMessage(null);
-				}
+
 				(e.target as HTMLFormElement).reset();
+				setTimeout(() => {
+					inputRef.current?.focus();
+				}, 10);
 			});
 		}
 		return false;
@@ -71,6 +88,7 @@ export function AIChatForm() {
 			top: messagesRef.current.scrollHeight,
 		});
 	}, [currentMessage, history]);
+
 	return (
 		<section className={styles.container}>
 			<h1>AI Chat</h1>
@@ -86,18 +104,19 @@ export function AIChatForm() {
 							id="model"
 							defaultValue={"gemini-2.0-flash-lite"}
 						>
-							<option value="gemini-2.5-flash-preview-05-20">
-								Gemini 2.5 Flash Preview
-							</option>
-							<option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
-							<option value="gemini-2.0-flash-lite">
-								Gemini 2.0 Flash Lite
-							</option>
+							{models.map((model) => (
+								<option key={model} value={model}>
+									{model}
+								</option>
+							))}
 						</select>
 						<button
 							type="button"
-							disabled={isPending || history.length === 0}
-							onClick={() => setHistory([])}
+							disabled={isPending}
+							onClick={() => {
+								setHistory([]);
+								setCurrentMessage(null);
+							}}
 						>
 							Start New Session
 						</button>
@@ -112,7 +131,7 @@ export function AIChatForm() {
 						))}
 						{currentMessage && (
 							<AIChatResponse
-								withLoader
+								withLoader={isPending}
 								idx={history.length + 1}
 								key={`new-message-${currentMessage.message}`}
 								data={currentMessage}
@@ -125,7 +144,7 @@ export function AIChatForm() {
 						disabled={isPending}
 						suppressHydrationWarning
 					>
-						<input name="message" />
+						<input name="message" ref={inputRef} />
 						<button type="submit">{isPending ? "Loading..." : "Send"}</button>
 					</fieldset>
 				</form>
