@@ -1,22 +1,26 @@
 "use client";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import AIChatResponse from "./response";
 import styles from "./style.module.css";
 import type { ChatHistory } from "./types";
 
 export function AIChatForm() {
 	const abortController = useRef(new AbortController());
+	const messagesRef = useRef<HTMLDivElement>(null);
 	const [isPending, startTransition] = useTransition();
 	const [history, setHistory] = useState<ChatHistory[]>([]);
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		startTransition(async () => {
-			e.preventDefault();
-			const formData = new FormData(e.currentTarget);
-			const message = formData.get("message") as string;
-			const model = formData.get("model") as string;
-			const lastMessage = history[history.length - 1];
-			const newMessage = { message, model, response: "" };
-			if (message) {
+		const formData = new FormData(e.currentTarget);
+		const message = formData.get("message") as string;
+		const model = formData.get("model") as string;
+		const lastMessage = history[history.length - 1];
+
+		const newMessage = { message, model, response: "" };
+
+		if (message) {
+			setHistory((prev) => [...prev, newMessage]);
+			startTransition(async () => {
+				e.preventDefault();
 				abortController.current.abort();
 				abortController.current = new AbortController();
 				const response = await fetch("/api/chat", {
@@ -33,7 +37,7 @@ export function AIChatForm() {
 				if (!reader) {
 					return;
 				}
-				setHistory((prev) => [...prev, newMessage]);
+
 				while (true) {
 					const { done, value } = await reader.read();
 					if (done) {
@@ -47,10 +51,16 @@ export function AIChatForm() {
 					});
 				}
 				(e.target as HTMLFormElement).reset();
-			}
-		});
+			});
+		}
 		return false;
 	};
+
+	useEffect(() => {
+		messagesRef.current?.scrollTo({
+			top: messagesRef.current.scrollHeight,
+		});
+	});
 	return (
 		<section className={styles.container}>
 			<h1>AI Chat</h1>
@@ -74,7 +84,7 @@ export function AIChatForm() {
 							Start New Session
 						</button>
 					</div>
-					<section className={styles.messages}>
+					<section className={styles.messages} ref={messagesRef}>
 						{history.map((message) => (
 							<AIChatResponse key={message.message} data={message} />
 						))}

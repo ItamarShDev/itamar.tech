@@ -2,6 +2,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    max-height: 85vh;
+    overflow: hidden;
 }
 
 .chat {
@@ -11,6 +13,7 @@
     border: 1px solid var(--colors-decorations);
     border-radius: 0.5rem;
     color: var(--colors-text);
+    overflow: hidden;
 }
 
 
@@ -19,6 +22,7 @@
     flex-direction: column;
     flex: 1;
     gap: 1rem;
+    overflow: hidden;
 }
 
 .modelSelector {
@@ -34,7 +38,9 @@
 .messages {
     flex: 1;
     padding: 2rem;
-    overflow-y: auto;
+    overflow: auto;
+    overflow-wrap: break-word;
+    scroll-behavior: smooth;
 }
 
 .formControls {
@@ -67,30 +73,16 @@
     flex-direction: column;
     align-items: flex-start;
     gap: .5rem;
+    min-height: 100%;
     padding: .5rem;
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--colors-hoverDecorations);
 
     & .title {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         width: 100%;
-        gap: 1rem;
         font-size: 1.3rem;
-        color: var(--colors-text);
-
-        & .message {
-            flex: 1;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            font-style: italic;
-            color: var(--colors-subText);
-        }
-
-        & .model {
-            color: var(--colors-decorations);
-        }
+        color: var(--colors-subText);
+        padding-block: .5rem;
+        border-bottom: 1px solid var(--colors-hoverDecorations);
+        border-top: 1px solid var(--colors-hoverDecorations);
     }
-
 }

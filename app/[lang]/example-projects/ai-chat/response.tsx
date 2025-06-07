@@ -7,10 +7,7 @@ import type { ChatHistory } from "./types";
 export default function AIChatResponse({ data }: { data: ChatHistory }) {
 	return (
 		<div className={styles.response}>
-			<section className={styles.title}>
-				<div className={styles.message}>{data.message}</div>
-				<div className={styles.model}>{data.model}</div>
-			</section>
+			<section className={styles.title}>{data.message}</section>
 			<ReactMarkdown>{data.response}</ReactMarkdown>
 		</div>
 	);
