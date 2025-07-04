@@ -72,6 +72,8 @@
 	line-height: 1.5em;
 }
 
+
+
 .pre code div {
 	font-size: 0.8em;
 	overflow-y: auto;
@@ -81,6 +83,11 @@
 }
 
 .pre {
+	width: 100vw;
+	position: relative;
+	left: -10vw;
+	overflow-x: visible;
+
 	direction: ltr;
 	background-color: var(--colors-modalBg);
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
