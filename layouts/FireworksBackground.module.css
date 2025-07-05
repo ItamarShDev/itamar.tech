@@ -1,3 +1,23 @@
+.fireworksContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+	background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.pyro {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 .pyro > .before,
 .pyro > .after {
 	position: absolute;
@@ -70,56 +90,56 @@
 	to {
 		box-shadow: 
 			-1px -138px #fd1,
-			-7px -123px #fd1,
-			21px -108px #fd1,
-			-34px -93px #fd1,
-			24px -78px #fd1,
-			-5px -63px #fd1,
-			-20px -48px #fd1,
-			27px -33px #fd1,
-			-13px -18px #fd1,
-			24px -3px #fd1,
+			-7px -123px #ff4757,
+			21px -108px #3742fa,
+			-34px -93px #2ed573,
+			24px -78px #ff6348,
+			-5px -63px #ffa502,
+			-20px -48px #ff3838,
+			27px -33px #70a1ff,
+			-13px -18px #5352ed,
+			24px -3px #ff4757,
 			12px 12px #fd1,
-			-5px 27px #fd1,
-			-24px 42px #fd1,
-			27px 57px #fd1,
-			-13px 72px #fd1,
-			24px 87px #fd1,
-			12px 102px #fd1,
-			-5px 117px #fd1,
-			-24px 132px #fd1,
+			-5px 27px #ff6348,
+			-24px 42px #ffa502,
+			27px 57px #3742fa,
+			-13px 72px #2ed573,
+			24px 87px #ff3838,
+			12px 102px #70a1ff,
+			-5px 117px #5352ed,
+			-24px 132px #ff4757,
 			27px 147px #fd1,
-			-13px 162px #fd1,
-			24px 177px #fd1,
-			12px 192px #fd1,
-			-5px 207px #fd1,
-			-24px 222px #fd1,
-			27px 237px #fd1,
-			-13px 252px #fd1,
-			24px 267px #fd1,
+			-13px 162px #ff6348,
+			24px 177px #ffa502,
+			12px 192px #3742fa,
+			-5px 207px #2ed573,
+			-24px 222px #ff3838,
+			27px 237px #70a1ff,
+			-13px 252px #5352ed,
+			24px 267px #ff4757,
 			12px 282px #fd1,
-			-5px 297px #fd1,
-			-24px 312px #fd1,
-			27px 327px #fd1,
-			-13px 342px #fd1,
-			24px 357px #fd1,
-			12px 372px #fd1,
-			-5px 387px #fd1,
-			-24px 402px #fd1,
+			-5px 297px #ff6348,
+			-24px 312px #ffa502,
+			27px 327px #3742fa,
+			-13px 342px #2ed573,
+			24px 357px #ff3838,
+			12px 372px #70a1ff,
+			-5px 387px #5352ed,
+			-24px 402px #ff4757,
 			27px 417px #fd1,
-			-13px 432px #fd1,
-			24px 447px #fd1,
-			12px 462px #fd1,
-			-5px 477px #fd1,
-			-24px 492px #fd1,
-			27px 507px #fd1,
-			-13px 522px #fd1,
-			24px 537px #fd1,
+			-13px 432px #ff6348,
+			24px 447px #ffa502,
+			12px 462px #3742fa,
+			-5px 477px #2ed573,
+			-24px 492px #ff3838,
+			27px 507px #70a1ff,
+			-13px 522px #5352ed,
+			24px 537px #ff4757,
 			12px 552px #fd1,
-			-5px 567px #fd1,
-			-24px 582px #fd1,
-			27px 597px #fd1,
-			-13px 612px #fd1;
+			-5px 567px #ff6348,
+			-24px 582px #ffa502,
+			27px 597px #3742fa,
+			-13px 612px #2ed573;
 	}
 }
 
@@ -150,5 +170,12 @@
 	80%, 99.9% {
 		margin-top: 30%;
 		margin-left: 80%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pyro > .before,
+	.pyro > .after {
+		animation: none;
 	}
 }

@@ -1,54 +1,23 @@
-import {
-	Assistant,
-	Inter,
-	Lora,
-	Noto_Sans,
-	Playfair_Display,
-	Rubik,
-} from "next/font/google";
+// Using fallback fonts due to network issues with Google Fonts
+const fallbackFonts = {
+	variable: "--font-fallback",
+	className: "font-sans",
+};
 
 // Heading font - elegant, distinctive
-const playfair = Playfair_Display({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-playfair",
-});
+const playfair = fallbackFonts;
 
 // Alternative heading font - modern, clean
-const inter = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-inter",
-});
+const inter = fallbackFonts;
 
-export const notoSans = Noto_Sans({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-noto-sans",
-});
+export const notoSans = fallbackFonts;
 
-export const assistant = Assistant({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-assistant",
-});
+export const assistant = fallbackFonts;
 
-export const rubik = Rubik({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-rubik",
-});
+export const rubik = fallbackFonts;
 
 // Body text font - readable serif for long-form content
-const sourceSerif = Lora({
-	weight: ["400", "600", "700"],
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-source-serif",
-});
+const sourceSerif = fallbackFonts;
 
 // Font class variables for use in layout
 export const fontVariables = [

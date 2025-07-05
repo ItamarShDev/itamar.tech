@@ -30,3 +30,38 @@ export async function toggleDarkTheme() {
 	await setCurrentTheme(newTheme);
 	return newTheme;
 }
+
+export async function getClientCountry() {
+	const headersList = await headers();
+	
+	// Try to get country from various headers
+	const country = 
+		headersList.get("x-vercel-ip-country") ||
+		headersList.get("cf-ipcountry") ||
+		headersList.get("x-country-code") ||
+		headersList.get("x-forwarded-for-country") ||
+		null;
+	
+	return country;
+}
+
+export async function isIndependenceDay(date = new Date()) {
+	// Check if it's July 4th
+	return date.getMonth() === 6 && date.getDate() === 4;
+}
+
+export async function shouldShowFireworks() {
+	const headersList = await headers();
+	
+	// Allow manual override for testing
+	const forceFireworks = headersList.get("x-force-fireworks") === "true";
+	if (forceFireworks) {
+		return true;
+	}
+	
+	const country = await getClientCountry();
+	const isUS = country === "US";
+	const isJuly4th = await isIndependenceDay();
+	
+	return isUS && isJuly4th;
+}
