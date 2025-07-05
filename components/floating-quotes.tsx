@@ -32,7 +32,16 @@ function extractQuotesByPerson(quotes: quotes): quote[] {
 	return quotesResult;
 }
 export default function RandomQuotes(props: Props) {
+	if (!props.quotes) {
+		return null; // Don't render anything if quotes are not available
+	}
+	
 	const quotes = extractQuotesByPerson(props.quotes);
+	
+	if (quotes.length === 0) {
+		return null; // Don't render anything if no quotes are available
+	}
+	
 	const [currentQuote, setCurrentQuote] = useState(quotes[0]);
 	const [isVisible, setIsVisible] = useState(true);
 	const [isPaused, setIsPaused] = useState(false);
