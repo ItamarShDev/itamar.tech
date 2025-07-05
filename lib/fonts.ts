@@ -1,54 +1,26 @@
-import {
-	Assistant,
-	Inter,
-	Lora,
-	Noto_Sans,
-	Playfair_Display,
-	Rubik,
-} from "next/font/google";
+// Fallback fonts configuration for environments where Google Fonts are blocked
+// This ensures the build succeeds even when fonts.googleapis.com is not accessible
 
-// Heading font - elegant, distinctive
-const playfair = Playfair_Display({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-playfair",
+// Mock font configuration that provides fallback CSS variables
+const createFallbackFont = (variable: string) => ({
+	variable,
+	className: '',
 });
 
-// Alternative heading font - modern, clean
-const inter = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-inter",
-});
+// Heading font - elegant, distinctive (fallback to serif)
+const playfair = createFallbackFont("--font-playfair");
 
-export const notoSans = Noto_Sans({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-noto-sans",
-});
+// Alternative heading font - modern, clean (fallback to sans-serif)
+const inter = createFallbackFont("--font-inter");
 
-export const assistant = Assistant({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-assistant",
-});
+export const notoSans = createFallbackFont("--font-noto-sans");
 
-export const rubik = Rubik({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	display: "swap",
-	variable: "--font-rubik",
-});
+export const assistant = createFallbackFont("--font-assistant");
 
-// Body text font - readable serif for long-form content
-const sourceSerif = Lora({
-	weight: ["400", "600", "700"],
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-source-serif",
-});
+export const rubik = createFallbackFont("--font-rubik");
+
+// Body text font - readable serif for long-form content (fallback to serif)
+const sourceSerif = createFallbackFont("--font-source-serif");
 
 // Font class variables for use in layout
 export const fontVariables = [

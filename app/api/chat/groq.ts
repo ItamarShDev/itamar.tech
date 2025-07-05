@@ -6,9 +6,17 @@ import type {
 } from "groq-sdk/resources/chat/completions";
 import type { Message } from "./types";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+// Lazy initialization to avoid build-time errors when env vars are missing
+function getGroqClient() {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    throw new Error("GROQ_API_KEY environment variable is required");
+  }
+  return new Groq({ apiKey });
+}
 
 export async function getGroqModels() {
+  const groq = getGroqClient();
   return await groq.models.list();
 }
 
@@ -35,6 +43,7 @@ export async function getGroqChatCompletion(
   model: ChatCompletionCreateParamsBase["model"],
   messages: Message[]
 ) {
+  const groq = getGroqClient();
   return iteratorToStream(
     await groq.chat.completions.create({
       messages: messages.map((message) => ({

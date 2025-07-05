@@ -1,4 +1,13 @@
 /* Font variables are now loaded via next/font in lib/fonts.ts */
+/* Fallback font definitions for when Google Fonts are blocked */
+:root {
+	--font-playfair: "Playfair Display", Georgia, serif;
+	--font-inter: "Inter", system-ui, -apple-system, sans-serif;
+	--font-noto-sans: "Noto Sans", system-ui, -apple-system, sans-serif;
+	--font-assistant: "Assistant", system-ui, -apple-system, sans-serif;
+	--font-rubik: "Rubik", system-ui, -apple-system, sans-serif;
+	--font-source-serif: "Lora", Georgia, serif;
+}
 
 /* Global styles */
 *,
