@@ -1,12 +1,22 @@
 import { GoogleGenAI } from "@google/genai";
 import type { Message, Model } from "./types";
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+
+// Lazy initialization to avoid build-time errors when env vars are missing
+function getGeminiClient() {
+  const apiKey = process.env.GOOGLE_API_KEY;
+  if (!apiKey) {
+    throw new Error("GOOGLE_API_KEY environment variable is required");
+  }
+  return new GoogleGenAI({ apiKey });
+}
 
 export async function getGeminiModels() {
+  const ai = getGeminiClient();
   return ai.models.list();
 }
 
 async function chat(model: Model, messages: Message[]) {
+  const ai = getGeminiClient();
   const chat = ai.chats.create({
     model,
   });

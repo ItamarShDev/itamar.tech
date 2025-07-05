@@ -4,9 +4,22 @@ import MatchCalculator from "components/match-finder/match-calculator";
 import Modal from "components/modal";
 import { useEffect, useRef, useState } from "react";
 import styles from "./FloatingButton.module.css";
-import { properties } from "./properies";
+import { getProperties, type Properties } from "./properies";
 
-function MatchModal(props) {
+function MatchModal(props: { open: boolean; setOpened: (opened: boolean) => void; properties?: Properties }) {
+	if (!props.properties) {
+		return (
+			<Modal
+				open={props.open}
+				setOpened={props.setOpened}
+				title="Are we a match?"
+				refreshOnRender
+			>
+				<div>Loading...</div>
+			</Modal>
+		);
+	}
+
 	return (
 		<Modal
 			open={props.open}
@@ -14,7 +27,7 @@ function MatchModal(props) {
 			title="Are we a match?"
 			refreshOnRender
 		>
-			<MatchCalculator properties={properties} />
+			<MatchCalculator properties={props.properties} />
 		</Modal>
 	);
 }
@@ -36,7 +49,13 @@ function useRandomEmoji() {
 
 function FloatingButton() {
 	const [opened, setOpened] = useState(false);
+	const [properties, setProperties] = useState<Properties | undefined>(undefined);
 	const emoji = useRandomEmoji();
+	
+	useEffect(() => {
+		getProperties().then(setProperties);
+	}, []);
+	
 	const openModal = () => {
 		setOpened(!opened);
 	};
@@ -50,7 +69,7 @@ function FloatingButton() {
 			>
 				{emoji}
 			</button>
-			<MatchModal open={opened} setOpened={setOpened} />
+			<MatchModal open={opened} setOpened={setOpened} properties={properties} />
 		</div>
 	);
 }
