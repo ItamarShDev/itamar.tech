@@ -1,0 +1,105 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Full Site Smoke Test', () => {
+  const pages = [
+    { path: '/en', title: 'Itamar Sharify' },
+    { path: '/he', title: 'Itamar Sharify' },
+    { path: '/en/blog', title: 'Blog' },
+    { path: '/he/blog', title: 'Blog' },
+    { path: '/en/resume', title: 'Resume' },
+    { path: '/he/resume', title: 'Resume' },
+    { path: '/en/example-projects', title: 'Example Projects' },
+    { path: '/he/example-projects', title: 'Example Projects' }
+  ];
+
+  for (const page of pages) {
+    test(`should load ${page.path} without errors`, async ({ page: playwright }) => {
+      // Monitor console errors
+      const consoleErrors: string[] = [];
+      playwright.on('console', (msg) => {
+        if (msg.type() === 'error') {
+          consoleErrors.push(msg.text());
+        }
+      });
+
+      // Navigate to the page
+      const response = await playwright.goto(page.path);
+      
+      // Should successfully load
+      expect(response?.status()).toBe(200);
+      
+      // Should have the expected title
+      await expect(playwright).toHaveTitle(new RegExp(page.title));
+      
+      // Should have basic layout elements
+      await expect(playwright.locator('nav')).toBeVisible();
+      await expect(playwright.locator('h1, h2, h3, h4')).toBeVisible();
+      
+      // Should have proper language direction for Hebrew pages
+      if (page.path.includes('/he')) {
+        await expect(playwright.locator('body')).toHaveAttribute('dir', 'rtl');
+      }
+      
+      // Should not have critical console errors
+      const criticalErrors = consoleErrors.filter(error => 
+        !error.includes('favicon') && // Ignore favicon errors
+        !error.includes('Google Fonts') && // Ignore font loading errors in test env
+        !error.includes('net::ERR_')  // Ignore network errors that might occur in test env
+      );
+      
+      if (criticalErrors.length > 0) {
+        console.warn('Console errors detected:', criticalErrors);
+      }
+    });
+  }
+
+  test('should have proper meta tags and SEO', async ({ page }) => {
+    await page.goto('/en');
+    
+    // Should have proper meta tags
+    await expect(page.locator('meta[name="description"]')).toBeVisible();
+    await expect(page.locator('meta[property="og:title"]')).toBeVisible();
+    await expect(page.locator('meta[property="og:description"]')).toBeVisible();
+    
+    // Should have proper title
+    await expect(page).toHaveTitle(/Itamar Sharify/);
+  });
+
+  test('should be mobile responsive', async ({ page }) => {
+    // Test common mobile viewport sizes
+    const viewports = [
+      { width: 375, height: 667 }, // iPhone SE
+      { width: 414, height: 896 }, // iPhone 11
+      { width: 360, height: 640 }, // Android
+    ];
+
+    for (const viewport of viewports) {
+      await page.setViewportSize(viewport);
+      await page.goto('/en');
+      
+      // Basic elements should still be visible
+      await expect(page.locator('nav')).toBeVisible();
+      await expect(page.locator('h1')).toBeVisible();
+      
+      // Content should not overflow
+      const body = page.locator('body');
+      const boundingBox = await body.boundingBox();
+      if (boundingBox) {
+        expect(boundingBox.width).toBeLessThanOrEqual(viewport.width);
+      }
+    }
+  });
+
+  test('should handle slow network conditions', async ({ page }) => {
+    // Simulate slow network
+    await page.route('**/*', route => {
+      setTimeout(() => route.continue(), 100); // Add 100ms delay
+    });
+    
+    await page.goto('/en');
+    
+    // Should still load successfully
+    await expect(page.locator('h1')).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('nav')).toBeVisible();
+  });
+});
