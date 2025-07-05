@@ -2,9 +2,9 @@ import { getCurrentLang } from "lib/headers";
 import { getDirectionCache, getTranslationsCache } from "lib/server-cache";
 import Link from "next/link";
 import type { Dictionary } from "translations";
-import GithubLogo from "../components/icons/github";
 import LanguageSelector from "../components/language-selector";
 import { ThemedIcon } from "../components/themed-icon";
+import ClientHeader from "../components/ClientHeader";
 import styles from "./Header.module.css";
 
 const Header = async (props) => {
@@ -33,7 +33,7 @@ const Header = async (props) => {
 					<span className={styles.title}>{title}</span>
 				</>
 			</Link>
-			<GithubLogo />
+			<ClientHeader title={title} translation={translation} />
 		</nav>
 	);
 };
