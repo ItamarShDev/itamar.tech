@@ -2,7 +2,7 @@
 
 import { FilterJobs } from "app/[lang]/resume/jobs/filter-jobs";
 import { Job } from "components";
-import { filterJobsByText } from "lib/job-utils";
+import { filterJobsByText } from "lib/utils/job";
 import type { Job as JobType } from "lib/types/jobs";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";

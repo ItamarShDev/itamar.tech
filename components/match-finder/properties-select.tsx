@@ -5,11 +5,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
+import { filterItems } from "lib/utils/array";
+import { 
+  handleTagInputKeyDown, 
+  removeTag as removeTagUtil, 
+  removeLastTag as removeLastTagUtil,
+  addTag as addTagUtil
+} from "lib/utils/tags";
+
 const filterSkills = (skills: string[], tags: string[], text: string) =>
-	text.length > 0 ? skills.filter(
-		(skill) =>
-			skill.toLowerCase().includes(text.toLowerCase()) && !tags.includes(skill),
-	) : skills;
+  filterItems(skills, tags, text);
 
 interface PropertiesSelectProps {
 	properties: Properties;
@@ -50,39 +55,36 @@ export default function PropertiesSelect({
 	}, [tags, setSelectedSkills]);
 
 	const addToResults = (skill: string) => {
-		setTags([...tags, skill]);
+		setTags(addTagUtil(tags, skill));
 		setInputText("");
 	};
 
-	function focusInput() {
-		inputEl?.current?.focus();
-	}
+	const focusInput = () => inputEl?.current?.focus();
 
-	function moveSelection(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === "ArrowDown") {
-			setCurrentIndex((currentIndex + 1) % filteredSkills.length);
-		} else if (e.key === "ArrowUp") {
-			const newItem = currentIndex === 0 ? filteredSkills.length : currentIndex;
-			setCurrentIndex((newItem - 1) % filteredSkills.length);
-		} else if (e.key === "Enter") {
-			const current = filteredSkills[currentIndex];
-			if (current && showResults) addToResults(current);
-		} else if (e.key === "Escape") {
-			setInputText("");
-		} else if (e.key === "Backspace" && inputText === "") {
-			removeLastTag();
-		}
-	}
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		const newIndex = handleTagInputKeyDown(
+			e,
+			currentIndex,
+			filteredSkills,
+			(item) => {
+				if (showResults) {
+					setTags(addTagUtil(tags, item));
+					setInputText("");
+				}
+			},
+			() => setInputText(""),
+			() => setTags(removeLastTagUtil(tags))
+		);
+		setCurrentIndex(newIndex);
+	};
 
-	function removeLastTag() {
-		const _tags = [...tags];
-		_tags.pop();
-		setTags(_tags);
-	}
+	const removeTag = (tagName: string) => {
+		setTags(removeTagUtil(tags, tagName));
+	};
 
-	function removeTag(tagName: string) {
-		setTags(tags.filter((tag) => tag !== tagName));
-	}
+	const removeLastTag = () => {
+		setTags(removeLastTagUtil(tags));
+	};
 
 	return (
 		<div className={styles.matcher}>
@@ -116,14 +118,13 @@ export default function PropertiesSelect({
 						id="search-technologies"
 						list="technologies"
 						ref={inputEl}
-						placeholder="search"
+						value={inputText}
 						onChange={(e) => setInputText(e.target.value)}
-						onKeyDown={moveSelection}
+						onKeyDown={handleKeyDown}
 						onFocus={() => setIsInputFocused(true)}
 						onBlur={() => {
 							setTimeout(() => setIsInputFocused(false), 200);
 						}}
-						value={inputText}
 						className={styles.input}
 						autoComplete="off"
 					/>

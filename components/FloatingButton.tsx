@@ -3,7 +3,7 @@
 import MatchCalculator from "components/match-finder/match-calculator";
 import Modal from "components/modal";
 import { useFireworks } from 'context/FireworksContext';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FloatingButton.module.css";
 import { type Properties } from "./properies";
 
@@ -31,21 +31,6 @@ function MatchModal(props: { open: boolean; setOpened: (opened: boolean) => void
       <MatchCalculator properties={props.properties} />
     </Modal>
   );
-}
-
-const EMOJIS = ["🤩", "🫶", "🫵", "👋", "🙏🏼"];
-function useRandomEmoji() {
-  const [emoji, setEmoji] = useState("🤩");
-  const indexRef = useRef<number>(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      indexRef.current = (indexRef.current + 1) % EMOJIS.length;
-      setEmoji(EMOJIS[indexRef.current]);
-    }, 5000);
-    return () => clearInterval(interval);
-  });
-  return emoji;
 }
 
 function FloatingButton() {

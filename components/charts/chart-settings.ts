@@ -1,6 +1,13 @@
 "use client";
 import { useChartTheme } from "lib/hooks/useChartTheme";
-import { hexToHSL } from "lib/utils";
+import { 
+  randomChartData as generateRandomChartData, 
+  themedDatasets, 
+  themedRadarSettings,
+  themedLineSettings,
+  type ChartTheme,
+  type ChartSettings 
+} from "lib/utils/chart";
 
 import {
 	CategoryScale,
@@ -26,98 +33,11 @@ ChartJS.register(
 	Legend,
 );
 
-function themedDatasets(values, theme: ReturnType<typeof useChartTheme>) {
-	return values.map((item, index) => {
-		const [h, s, l] = hexToHSL(theme.charts, index);
-		const dataset = {
-			label: item.label,
-			data: item.data,
-			borderWidth: 2,
-			backgroundColor: `hsla(${h}, ${s}%, ${l}%, 0.2)`,
-			borderColor: `hsl(${h}, ${s}%, ${l}%)`,
-			yAxisID: "yAxis",
-			xAxisID: "xAxis",
-		};
-		if (Object.hasOwn(item, "settings")) {
-			return { ...dataset, ...item.settings };
-		}
-		return dataset;
-	});
-}
+// Using themedDatasets from @/lib/utils/chart
 
-function themedRadarSettings(title, theme: ReturnType<typeof useChartTheme>) {
-	return {
-		maintainAspectRatio: false,
-		aspectRatio: 1,
-		tooltips: {
-			enabled: false,
-		},
-		plugins: {
-			title: {
-				display: true,
-				text: title,
-				color: theme.text,
-			},
-			legend: { display: false },
-		},
-		scales: {
-			r: {
-				pointLabels: { color: theme.text },
-				ticks: {
-					display: false,
-					maxTicksLimit: 1,
-				},
-			},
-		},
-	};
-}
+// Using themedRadarSettings and themedLineSettings from lib/utils/chart
 
-function themedLineSettings(title, theme: ReturnType<typeof useChartTheme>) {
-	return {
-		maintainAspectRatio: false,
-		aspectRatio: 1,
-		spanGaps: false,
-		plugins: {
-			legend: {
-				position: "top",
-				fullWidth: true,
-				labels: {
-					boxWidth: 5,
-					color: theme.text,
-				},
-			},
-			title: {
-				display: true,
-				text: title,
-				color: theme.text,
-			},
-		},
-		tooltips: {
-			enabled: false,
-		},
-		scales: {
-			xAxis: {
-				ticks: { color: theme.text },
-				gridLines: {
-					drawTicks: false,
-					drawOnChartArea: false,
-					color: theme.headerText,
-				},
-			},
-
-			yAxis: {
-				display: true,
-				ticks: { display: false },
-				gridLines: {
-					drawTicks: false,
-					drawOnChartArea: false,
-					color: theme.headerText,
-				},
-			},
-		},
-	};
-}
-
+// This function is kept for backward compatibility
 export function randomChartData(id: number) {
 	const socialData = {
 		title: `Chart #${id}`,
@@ -162,11 +82,7 @@ export function randomChartData(id: number) {
 	return socialData;
 }
 
-export type ChartSettings = {
-	data?: { datasets: object[]; labels: string[] };
-	radarOptions?: object;
-	lineOptions?: object;
-};
+// Using ChartSettings type from lib/utils/chart
 export default function useChartSettings({
 	title = "Empty",
 	values = [],
