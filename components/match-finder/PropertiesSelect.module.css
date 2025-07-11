@@ -88,6 +88,11 @@
 	}
 }
 
+.matchText {
+	font-style: italic;
+	color: var(--colors-text);
+}
+
 @keyframes fadeIn {
 	from {
 		opacity: 0;

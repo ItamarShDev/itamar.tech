@@ -2,13 +2,14 @@
 
 import type { Properties } from "components/properies";
 import { useEffect, useMemo, useRef, useState } from "react";
+import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
 const filterSkills = (skills: string[], tags: string[], text: string) =>
-	skills.filter(
+	text.length > 0 ? skills.filter(
 		(skill) =>
 			skill.toLowerCase().includes(text.toLowerCase()) && !tags.includes(skill),
-	);
+	) : skills;
 
 interface PropertiesSelectProps {
 	properties: Properties;
@@ -24,14 +25,25 @@ export default function PropertiesSelect({
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [inputText, setInputText] = useState("");
 	const [tags, setTags] = useState<string[]>([]);
+	const [isInputFocused, setIsInputFocused] = useState(false);
 	const inputEl = useRef<HTMLInputElement>(null);
 
 	const skills = Object.keys(properties);
+
 	const filteredSkills = useMemo(
-		() => filterSkills(skills, tags, inputText),
-		[skills, tags, inputText],
+		() => {
+			const filtered = filterSkills(skills, tags, inputText);
+			// Only sort when input is focused and there's no search text
+			if (isInputFocused) {
+				return filtered.sort((a, b) => (RankJson[b as keyof typeof RankJson] || 0) - (RankJson[a as keyof typeof RankJson] || 0));
+			}
+			return filtered;
+		},
+		[skills, tags, inputText, isInputFocused]
 	);
-	const showResults = filteredSkills.length > 0 && inputText !== "";
+
+	const showResults = filteredSkills.length > 0 && isInputFocused;
+
 	useEffect(() => {
 		setSelectedSkills(tags);
 		setCurrentIndex(0);
@@ -41,6 +53,7 @@ export default function PropertiesSelect({
 		setTags([...tags, skill]);
 		setInputText("");
 	};
+
 	function focusInput() {
 		inputEl?.current?.focus();
 	}
@@ -60,6 +73,7 @@ export default function PropertiesSelect({
 			removeLastTag();
 		}
 	}
+
 	function removeLastTag() {
 		const _tags = [...tags];
 		_tags.pop();
@@ -105,6 +119,10 @@ export default function PropertiesSelect({
 						placeholder="search"
 						onChange={(e) => setInputText(e.target.value)}
 						onKeyDown={moveSelection}
+						onFocus={() => setIsInputFocused(true)}
+						onBlur={() => {
+							setTimeout(() => setIsInputFocused(false), 200);
+						}}
 						value={inputText}
 						className={styles.input}
 						autoComplete="off"

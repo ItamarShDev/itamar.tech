@@ -15,8 +15,3 @@
 	overflow: hidden;
 	transition: width 0.2s linear;
 }
-
-.matchText {
-	font-style: italic;
-	color: var(--colors-text);
-}
