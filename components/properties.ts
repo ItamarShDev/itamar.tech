@@ -1,10 +1,16 @@
-let _properties: any = null;
+"use client";
+
+import { useEffect, useState } from "react";
 
 export async function getProperties() {
-  if (!_properties) {
-    _properties = await import("../static-props/technologies.json").then((module) => module.default);
-  }
-  return _properties;
+  return await import("../static-props/technologies.json").then((module) => module.default);
 }
 
+export function useProperties() {
+  const [properties, setProperties] = useState<Properties | null>(null);
+  useEffect(() => {
+    getProperties().then(setProperties);
+  }, []);
+  return properties;
+}
 export type Properties = Awaited<ReturnType<typeof getProperties>>;

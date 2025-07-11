@@ -3,24 +3,14 @@
 import MatchCalculator from "components/match-finder/match-calculator";
 import Modal from "components/modal";
 import { useFireworks } from 'context/FireworksContext';
+import { useRandomEmoji } from "lib/hooks/useRandomEmoji";
 import { useEffect, useState } from "react";
 import styles from "./FloatingButton.module.css";
-import { type Properties } from "./properies";
+import { useProperties } from "./properties";
 
-function MatchModal(props: { open: boolean; setOpened: (opened: boolean) => void; properties?: Properties }) {
-  if (!props.properties) {
-    return (
-      <Modal
-        open={props.open}
-        setOpened={props.setOpened}
-        title="Are we a match?"
-        refreshOnRender
-      >
-        <div>Loading...</div>
-      </Modal>
-    );
-  }
-
+function MatchModal(props: { open: boolean; setOpened: (opened: boolean) => void }) {
+  const properties = useProperties();
+  if (!properties) return null;
   return (
     <Modal
       open={props.open}
@@ -28,7 +18,7 @@ function MatchModal(props: { open: boolean; setOpened: (opened: boolean) => void
       title="Are we a match?"
       refreshOnRender
     >
-      <MatchCalculator properties={props.properties} />
+      <MatchCalculator properties={properties} />
     </Modal>
   );
 }

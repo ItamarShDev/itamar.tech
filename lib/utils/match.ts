@@ -1,4 +1,3 @@
-import type { RankedTechnologies } from "@/types/technologies";
 
 /**
  * Calculates a match score based on the provided attributes and their rankings

@@ -1,8 +1,9 @@
 "use client";
 
-import { calculateMatch, getQualificationText } from "../../lib/utils/match";
+import type { Properties } from 'components/properties';
 import { useEffect, useRef } from "react";
 import { useFireworks } from "../../context/FireworksContext";
+import { calculateMatch, getQualificationText } from "../../lib/utils/match";
 import styles from "./MatchProgress.module.css";
 
 const MatchProgress = ({
@@ -10,17 +11,19 @@ const MatchProgress = ({
   setQualificationText,
   setPercentage,
   percentage,
+  properties,
 }: {
   selectedSkills: string[];
   setQualificationText: React.Dispatch<React.SetStateAction<string>>;
   setPercentage: React.Dispatch<React.SetStateAction<number>>;
   percentage: number;
+  properties: Properties;
 }) => {
   const { toggleFireworks } = useFireworks();
   const hasTriggeredFireworks = useRef(false);
 
   useEffect(() => {
-    const newPercentage = calculateMatch(selectedSkills);
+    const newPercentage = calculateMatch(selectedSkills, properties);
     setQualificationText(getQualificationText(newPercentage));
     const boundedPercentage = Math.min(100, newPercentage);
     setPercentage(boundedPercentage);
@@ -35,7 +38,7 @@ const MatchProgress = ({
     if (boundedPercentage < 80) {
       hasTriggeredFireworks.current = false;
     }
-  }, [selectedSkills, setPercentage, setQualificationText, toggleFireworks]);
+  }, [properties, selectedSkills, setPercentage, setQualificationText, toggleFireworks]);
 
   return (
     <div className={styles.progress}>

@@ -1,20 +1,20 @@
 "use client";
 
-import type { Properties } from "components/properies";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { Properties } from "components/properties";
+import { useMemo, useRef, useState } from "react";
 import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
 import { filterItems } from "lib/utils/array";
-import { 
-  handleTagInputKeyDown, 
-  removeTag as removeTagUtil, 
-  removeLastTag as removeLastTagUtil,
-  addTag as addTagUtil
+import {
+	addTag as addTagUtil,
+	handleTagInputKeyDown,
+	removeLastTag as removeLastTagUtil,
+	removeTag as removeTagUtil
 } from "lib/utils/tags";
 
 const filterSkills = (skills: string[], tags: string[], text: string) =>
-  filterItems(skills, tags, text);
+	filterItems(skills, tags, text);
 
 interface PropertiesSelectProps {
 	properties: Properties;
@@ -49,13 +49,12 @@ export default function PropertiesSelect({
 
 	const showResults = filteredSkills.length > 0 && isInputFocused;
 
-	useEffect(() => {
-		setSelectedSkills(tags);
-		setCurrentIndex(0);
-	}, [tags, setSelectedSkills]);
 
 	const addToResults = (skill: string) => {
-		setTags(addTagUtil(tags, skill));
+		const newTags = addTagUtil(tags, skill);
+		setTags(newTags);
+		setSelectedSkills(newTags);
+		setCurrentIndex(0);
 		setInputText("");
 	};
 
@@ -80,10 +79,6 @@ export default function PropertiesSelect({
 
 	const removeTag = (tagName: string) => {
 		setTags(removeTagUtil(tags, tagName));
-	};
-
-	const removeLastTag = () => {
-		setTags(removeLastTagUtil(tags));
 	};
 
 	return (
