@@ -1,11 +1,13 @@
 name: Tests
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    types:
+      - opened
+    paths:
+      - '.github/workflows/**'
+      - '.github/CODEOWNERS'
+      - 'package*.json'
 
 jobs:
   test:
