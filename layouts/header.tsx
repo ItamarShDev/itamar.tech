@@ -2,9 +2,9 @@ import { getCurrentLang } from "lib/headers";
 import { getDirectionCache, getTranslationsCache } from "lib/server-cache";
 import Link from "next/link";
 import type { Dictionary } from "translations";
+import ClientHeader from "../components/ClientHeader";
 import LanguageSelector from "../components/language-selector";
 import { ThemedIcon } from "../components/themed-icon";
-import ClientHeader from "../components/ClientHeader";
 import styles from "./Header.module.css";
 
 const Header = async (props) => {
@@ -15,7 +15,7 @@ const Header = async (props) => {
 		"header",
 	)) as Dictionary["header"];
 	return (
-		<nav className={styles.nav} dir="ltr">
+		<nav className={styles.nav} dir="ltr" data-testid="header">
 			<LanguageSelector />
 			<ThemedIcon translations={translation} />
 			<Link
@@ -24,6 +24,7 @@ const Header = async (props) => {
 				title="Click to go home"
 				className={styles.link}
 				dir={direction}
+				data-testid={lang}
 			>
 				<>
 					<span className={styles.name}>{translation.title}</span>

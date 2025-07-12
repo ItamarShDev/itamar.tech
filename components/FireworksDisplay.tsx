@@ -8,11 +8,9 @@ const Fireworks = dynamic(() => import('./fireworks'), { ssr: false });
 
 export default function FireworksDisplay() {
   const { showFireworks } = useFireworks();
-  
-  console.log('FireworksDisplay - showFireworks:', showFireworks);
-  
+
   if (!showFireworks) return null;
-  
+
   return (
     <div style={{
       position: 'fixed',
