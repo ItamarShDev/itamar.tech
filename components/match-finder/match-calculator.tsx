@@ -3,7 +3,7 @@
 import Fireworks from "components/match-finder/fireworks";
 import MatchProgress from "components/match-finder/match-progress";
 import PropertiesSelect from "components/match-finder/properties-select";
-import type { Properties } from "components/properies";
+import type { Properties } from "components/properties";
 import { useState } from "react";
 import styles from "./MatchCalculator.module.css";
 import CallMe from "./call-me";
@@ -25,6 +25,7 @@ function MatchCalculator({ properties }: { properties: Properties }) {
 					setQualificationText={setQualificationText}
 					percentage={percentage}
 					setPercentage={setPercentage}
+					properties={properties}
 				/>
 			</section>
 			<section>

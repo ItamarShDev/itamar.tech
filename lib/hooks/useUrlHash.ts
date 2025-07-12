@@ -2,19 +2,39 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export default function useUrlHash(hash) {
-	const [currentUrlHash, setCurrentUrlHash] = useState<string>();
-	const updateCurrentHash = useCallback(() => {
-		if (location.hash !== currentUrlHash) {
-			setCurrentUrlHash(location.hash);
-		}
-	}, [currentUrlHash]);
-	useEffect(() => {
-		window.addEventListener("hashchange", updateCurrentHash, false);
-		return () => {
-			window.removeEventListener("hashchange", updateCurrentHash);
-		};
-	}, [updateCurrentHash]);
+/**
+ * A custom hook that tracks the URL hash and returns whether it matches the provided hash
+ * @param hash The hash to match against (without the # prefix)
+ * @returns boolean indicating if the current URL hash matches the provided hash
+ */
+export default function useUrlHash(hash: string): boolean {
+  const [currentUrlHash, setCurrentUrlHash] = useState<string>(
+    typeof window !== 'undefined' ? window.location.hash : ''
+  );
 
-	return currentUrlHash === `#${hash}`;
+  const updateCurrentHash = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrlHash(window.location.hash);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Initial check
+    updateCurrentHash();
+    
+    // Set up event listener for hash changes
+    window.addEventListener("hashchange", updateCurrentHash);
+    
+    // Clean up event listener on unmount
+    return () => {
+      window.removeEventListener("hashchange", updateCurrentHash);
+    };
+  }, [updateCurrentHash]);
+
+  // Check if the current hash matches the provided hash (with or without # prefix)
+  const normalizedHash = hash.startsWith('#') ? hash : `#${hash}`;
+  return currentUrlHash === normalizedHash || 
+         currentUrlHash === (normalizedHash.startsWith('#') ? normalizedHash.slice(1) : normalizedHash);
 }

@@ -2,13 +2,7 @@
 import { ThemeItem } from "components/theme-switch-client";
 import { THEMES, useThemeContext } from "providers/theme";
 import styles from "./ThemedIcon.module.css";
-
-export function getIconClassAndAction(isDark: boolean) {
-	if (isDark) {
-		return "darkIcon";
-	}
-	return "lightIcon";
-}
+import { getIconClassAndAction } from "@/lib/utils/theme";
 
 export function ThemeList() {
 	const { theme: selectedTheme, selectTheme } = useThemeContext();

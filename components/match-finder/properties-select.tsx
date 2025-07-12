@@ -1,14 +1,20 @@
 "use client";
 
-import type { Properties } from "components/properies";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { Properties } from "components/properties";
+import { useMemo, useRef, useState } from "react";
+import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
+import { filterItems } from "lib/utils/array";
+import {
+	addTag as addTagUtil,
+	handleTagInputKeyDown,
+	removeLastTag as removeLastTagUtil,
+	removeTag as removeTagUtil
+} from "lib/utils/tags";
+
 const filterSkills = (skills: string[], tags: string[], text: string) =>
-	skills.filter(
-		(skill) =>
-			skill.toLowerCase().includes(text.toLowerCase()) && !tags.includes(skill),
-	);
+	filterItems(skills, tags, text);
 
 interface PropertiesSelectProps {
 	properties: Properties;
@@ -24,51 +30,56 @@ export default function PropertiesSelect({
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [inputText, setInputText] = useState("");
 	const [tags, setTags] = useState<string[]>([]);
+	const [isInputFocused, setIsInputFocused] = useState(false);
 	const inputEl = useRef<HTMLInputElement>(null);
 
 	const skills = Object.keys(properties);
+
 	const filteredSkills = useMemo(
-		() => filterSkills(skills, tags, inputText),
-		[skills, tags, inputText],
+		() => {
+			const filtered = filterSkills(skills, tags, inputText);
+			// Only sort when input is focused and there's no search text
+			if (isInputFocused) {
+				return filtered.sort((a, b) => (RankJson[b as keyof typeof RankJson] || 0) - (RankJson[a as keyof typeof RankJson] || 0));
+			}
+			return filtered;
+		},
+		[skills, tags, inputText, isInputFocused]
 	);
-	const showResults = filteredSkills.length > 0 && inputText !== "";
-	useEffect(() => {
-		setSelectedSkills(tags);
-		setCurrentIndex(0);
-	}, [tags, setSelectedSkills]);
+
+	const showResults = filteredSkills.length > 0 && isInputFocused;
+
 
 	const addToResults = (skill: string) => {
-		setTags([...tags, skill]);
+		const newTags = addTagUtil(tags, skill);
+		setTags(newTags);
+		setSelectedSkills(newTags);
+		setCurrentIndex(0);
 		setInputText("");
 	};
-	function focusInput() {
-		inputEl?.current?.focus();
-	}
 
-	function moveSelection(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === "ArrowDown") {
-			setCurrentIndex((currentIndex + 1) % filteredSkills.length);
-		} else if (e.key === "ArrowUp") {
-			const newItem = currentIndex === 0 ? filteredSkills.length : currentIndex;
-			setCurrentIndex((newItem - 1) % filteredSkills.length);
-		} else if (e.key === "Enter") {
-			const current = filteredSkills[currentIndex];
-			if (current && showResults) addToResults(current);
-		} else if (e.key === "Escape") {
-			setInputText("");
-		} else if (e.key === "Backspace" && inputText === "") {
-			removeLastTag();
-		}
-	}
-	function removeLastTag() {
-		const _tags = [...tags];
-		_tags.pop();
-		setTags(_tags);
-	}
+	const focusInput = () => inputEl?.current?.focus();
 
-	function removeTag(tagName: string) {
-		setTags(tags.filter((tag) => tag !== tagName));
-	}
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		const newIndex = handleTagInputKeyDown(
+			e,
+			currentIndex,
+			filteredSkills,
+			(item) => {
+				if (showResults) {
+					setTags(addTagUtil(tags, item));
+					setInputText("");
+				}
+			},
+			() => setInputText(""),
+			() => setTags(removeLastTagUtil(tags))
+		);
+		setCurrentIndex(newIndex);
+	};
+
+	const removeTag = (tagName: string) => {
+		setTags(removeTagUtil(tags, tagName));
+	};
 
 	return (
 		<div className={styles.matcher}>
@@ -102,10 +113,13 @@ export default function PropertiesSelect({
 						id="search-technologies"
 						list="technologies"
 						ref={inputEl}
-						placeholder="search"
-						onChange={(e) => setInputText(e.target.value)}
-						onKeyDown={moveSelection}
 						value={inputText}
+						onChange={(e) => setInputText(e.target.value)}
+						onKeyDown={handleKeyDown}
+						onFocus={() => setIsInputFocused(true)}
+						onBlur={() => {
+							setTimeout(() => setIsInputFocused(false), 200);
+						}}
 						className={styles.input}
 						autoComplete="off"
 					/>

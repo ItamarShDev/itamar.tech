@@ -1,27 +1,17 @@
 "use client";
 import { Switch } from "components/switch";
+import { getRoute as getRouteUtil } from "lib/utils/routing";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import styles from "./LanguageSelector.module.css";
+
 export function useLocales() {
 	const pathname = usePathname();
 	const { replace, refresh } = useRouter();
-
 	const params = useParams<{ lang: string }>();
+	// Wrapper function to maintain the same interface as before
 	const getRoute = (locale?: string) => {
-		const pathnames = pathname?.split("/");
-
-		if (!pathnames) {
-			return `/${params?.lang}`;
-		}
-		if (locale) {
-			pathnames[1] = locale;
-		} else if (pathnames?.[1] === "he") {
-			pathnames[1] = "en";
-		} else {
-			pathnames[1] = "he";
-		}
-		return pathnames.join("/");
+		return getRouteUtil(pathname || '/', locale);
 	};
 
 	const goToNextLocale = () => {

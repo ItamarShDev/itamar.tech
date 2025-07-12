@@ -1,0 +1,5 @@
+[test]
+coverage = true
+coverageDir = "coverage"
+coverageReporters = ["json", "lcov", "text"]
+preload = "./test/setup.ts"
