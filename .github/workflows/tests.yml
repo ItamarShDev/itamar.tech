@@ -4,10 +4,6 @@ on:
   pull_request:
     types:
       - opened
-    paths:
-      - '.github/workflows/**'
-      - '.github/CODEOWNERS'
-      - 'package*.json'
 
 jobs:
   test:
