@@ -1,4 +1,23 @@
 /* Font variables are now loaded via next/font in lib/fonts.ts */
+
+a,
+button,
+[role="button"] {
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+a:hover,
+button:hover,
+[role="button"]:hover {
+  transform: scale(1.05);
+}
+
+a:active,
+button:active,
+[role="button"]:active {
+  transform: scale(0.98);
+}
+
 /* Fallback font definitions for when Google Fonts are blocked */
 :root {
 	--font-playfair: "Playfair Display", Georgia, serif;
