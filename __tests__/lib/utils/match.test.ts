@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { calculateMatch, getQualificationText } from "./match";
+import { calculateMatch, getQualificationText } from "lib/utils/match";
 
 describe("Match Utilities", () => {
 	const testRankings = {

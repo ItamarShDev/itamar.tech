@@ -1,7 +1,19 @@
 [test]
+# Look for tests in the __tests__ directory and its subdirectories
+src="**/__tests__/**/*.test.ts"
+
+# Coverage settings
 coverage = true
 coverageDir = "coverage"
 coverageReporters = ["json", "lcov", "text"]
+coveragePathIgnorePatterns = ["**/*.test.ts", "**/test/**"]
 
+# Test configuration
 preload = "./test/setup.ts"
-include = ["**/*.test.ts"]
+config = "./tsconfig.test.json"
+
+# Setup module resolution to find source files
+[test.module]
+# Map imports to the correct source directories
+"^@/(.*)" = "./src/$1"
+"^lib/(.*)" = "./lib/$1"
