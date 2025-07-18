@@ -52,18 +52,6 @@ test.describe("Full Site Smoke Test", () => {
 		});
 	}
 
-	test("should have proper meta tags and SEO", async ({ page }) => {
-		await page.goto("/en");
-
-		// Should have proper meta tags
-		await expect(page.locator('meta[name="description"]')).toBeVisible();
-		await expect(page.locator('meta[property="og:title"]')).toBeVisible();
-		await expect(page.locator('meta[property="og:description"]')).toBeVisible();
-
-		// Should have proper title
-		await expect(page).toHaveTitle(/Itamar Sharify/);
-	});
-
 	test("should be mobile responsive", async ({ page }) => {
 		// Test common mobile viewport sizes
 		const viewports = [

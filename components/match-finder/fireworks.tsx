@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Fireworks.module.css";
 
 function Fireworks(props) {

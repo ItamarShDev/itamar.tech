@@ -1,5 +1,9 @@
 [test]
+src="__tests__"
 coverage = true
 coverageDir = "coverage"
 coverageReporters = ["json", "lcov", "text"]
+
 preload = "./test/setup.ts"
+config = "./tsconfig.test.json"
+

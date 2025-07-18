@@ -43,16 +43,17 @@
 	padding: 0 0.8rem;
 	border-radius: 0.5rem;
 	background-color: var(--colors-decorations);
-	color: white;
+	color: var(--colors-main);
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	animation: fadeIn 0.2s, zoomIn 0.1s;
 }
 
 .removeTag {
+	all: unset;
 	cursor: pointer;
-	margin: 0.5rem;
-	font-size: 1.1rem;
+	padding-inline-start: 0.5rem;
+	font-size: 1.2rem;
 }
 
 .resultsContainer {
