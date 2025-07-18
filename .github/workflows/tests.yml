@@ -56,6 +56,9 @@ jobs:
           
       - name: Install dependencies
         run: bun install --frozen-lockfile
+      
+      - name: Install Playwright
+        run: bunx playwright install
         
       - name: Run Playwright tests
         run: bun test:e2e
