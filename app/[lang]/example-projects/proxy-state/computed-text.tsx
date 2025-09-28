@@ -1,8 +1,8 @@
 "use client";
 
 import {
-	StateProvider,
-	useProxyState,
+  StateProvider,
+  useProxyState,
 } from "app/[lang]/example-projects/proxy-state/context";
 import { useTranslation } from "translations/hooks";
 import styles from "./styles.module.css";
@@ -10,14 +10,14 @@ import styles from "./styles.module.css";
 function Input({
   name,
   defaultValue,
-}: { 
-  name: string; 
-  defaultValue: number | string 
+}: {
+  name: string;
+  defaultValue: number | string
 }) {
-  const value = useProxyState(name, defaultValue, { 
+  const value = useProxyState(name, defaultValue, {
     testId: `input-${name}`
   });
-  
+
   return (
     <input
       data-testid={`input-${name}`}
@@ -39,9 +39,9 @@ function Result() {
   const firstNumber = useProxyState("firstNumber", 0, { testId: 'first-number' });
   const secondNumber = useProxyState("secondNumber", 1, { testId: 'second-number' });
   const result = firstNumber.value + secondNumber.value;
-  
+
   return (
-    <div 
+    <div
       className={styles.mathItem}
       data-testid="result-display"
       aria-live="polite"
@@ -53,41 +53,42 @@ function Result() {
 }
 
 function ComputedStateExample() {
-	const { translations } = useTranslation("proxy-state");
-	const name = useProxyState<string>("name", translations?.placeholders.name || '', { 
-    testId: 'name-input' 
+  const { translations } = useTranslation("proxy-state");
+  const name = useProxyState<string>("name", translations?.placeholders.name || '', {
+    testId: 'name-input'
   });
-  
+  if (!translations) return null;
+
   return (
     <div data-testid="computed-state-example">
       <div>
-        <h2 data-testid="example-title">{translations?.title}</h2>
-        <section 
+        <h2 data-testid="example-title">{translations.title}</h2>
+        <section
           className={styles.explanation}
           data-testid="explanation-section"
         >
-          <code>{translations?.explanation}</code>
+          <code>{translations.explanation}</code>
         </section>
 
         <div className={styles.row} data-testid="input-container">
           <div className={styles.flex} data-testid="name-input-container">
-            <label htmlFor="name">{translations?.placeholders.name}</label>
-            <Input 
-              name="name" 
-              defaultValue={translations?.placeholders.name} 
+            <label htmlFor="name">{translations.placeholders.name}</label>
+            <Input
+              name="name"
+              defaultValue={translations.placeholders.name}
             />
           </div>
-          
+
           <div className={styles.flex} data-testid="first-number-container">
             <label htmlFor="firstNumber">
-              {translations?.placeholders.firstNumber}
+              {translations.placeholders.firstNumber}
             </label>
             <Input
               name="firstNumber"
-              defaultValue={translations?.placeholders.firstNumber}
+              defaultValue={translations.placeholders.firstNumber}
             />
           </div>
-          
+
           <div className={styles.flex} data-testid="second-number-container">
             <label htmlFor="secondNumber">
               {translations?.placeholders.secondNumber}
@@ -98,7 +99,7 @@ function ComputedStateExample() {
             />
           </div>
         </div>
-        
+
         <Result />
       </div>
     </div>
@@ -106,9 +107,9 @@ function ComputedStateExample() {
 }
 
 export function ComputedProxyStateExample() {
-	return (
-		<StateProvider>
-			<ComputedStateExample />
-		</StateProvider>
-	);
+  return (
+    <StateProvider>
+      <ComputedStateExample />
+    </StateProvider>
+  );
 }

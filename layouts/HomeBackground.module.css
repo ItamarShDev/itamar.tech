@@ -1,27 +1,96 @@
-.bg {
-	animation: slide 20s ease-in-out infinite alternate;
-	bottom: 0;
-	left: -50%;
-	opacity: 0.5;
+.auroraContainer {
 	position: fixed;
-	right: -50%;
-	top: 0;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
 	z-index: -1;
+	background: radial-gradient(150% 150% at 50% 50%, color-mix(in srgb, var(--colors-hoverDecorations) 20%, transparent) 0%, transparent 70%);
 }
 
-@media (prefers-reduced-motion) {
-	.bg {
-		animation: none;
+.auroraLayer {
+	position: absolute;
+	width: 55vw;
+	height: 55vw;
+	border-radius: 45%;
+	filter: blur(140px);
+	opacity: 0.55;
+	mix-blend-mode: screen;
+	transform-origin: center;
+	animation: auroraDrift 28s linear infinite, auroraPulse 12s ease-in-out infinite alternate;
+}
+
+.auroraLayer1 {
+	background: radial-gradient(circle at 20% 20%, var(--colors-main) 0%, transparent 65%);
+}
+
+.auroraLayer2 {
+	background: radial-gradient(circle at 70% 40%, color-mix(in srgb, var(--colors-decorations) 70%, var(--colors-main) 30%) 0%, transparent 70%);
+	animation-duration: 32s, 14s;
+}
+
+.auroraLayer3 {
+	background: radial-gradient(circle at 35% 80%, color-mix(in srgb, var(--colors-hoverDecorations) 65%, var(--colors-main) 35%) 0%, transparent 75%);
+	animation-duration: 36s, 16s;
+}
+
+.auroraLayer4 {
+	background: radial-gradient(circle at 80% 75%, color-mix(in srgb, var(--colors-header) 60%, transparent) 0%, transparent 70%);
+	animation-duration: 40s, 18s;
+}
+
+.auroraNoise {
+	position: absolute;
+	inset: -30%;
+	background-image:
+		repeating-linear-gradient(125deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 6px),
+		repeating-linear-gradient(305deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 4px);
+	opacity: 0.12;
+	mix-blend-mode: soft-light;
+	animation: grainShift 7s steps(6) infinite;
+}
+
+@keyframes auroraDrift {
+	0% {
+		transform: translate3d(-25%, -10%, 0) rotate(0deg);
+	}
+
+	50% {
+		transform: translate3d(20%, 15%, 0) rotate(120deg);
+	}
+
+	100% {
+		transform: translate3d(-20%, 5%, 0) rotate(360deg);
 	}
 }
 
-.bg2 {
-	animation-direction: alternate-reverse;
-	animation-duration: 15s;
+@keyframes auroraPulse {
+	0% {
+		opacity: 0.35;
+		filter: blur(120px);
+	}
+
+	100% {
+		opacity: 0.7;
+		filter: blur(160px);
+	}
 }
 
-.bg3 {
-	animation-duration: 12s;
+@keyframes grainShift {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+
+	100% {
+		transform: translate3d(10%, -10%, 0);
+	}
+}
+
+@media (prefers-reduced-motion) {
+
+	.auroraLayer,
+	.auroraNoise {
+		animation: none;
+	}
 }
 
 @keyframes slide {
