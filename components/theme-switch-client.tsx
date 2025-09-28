@@ -1,25 +1,27 @@
 "use client";
+import { startTransition } from 'react';
 import styles from "./ThemedIcon.module.css";
 
 export function ThemeItem({
 	currentTheme,
 	isSelected,
-	setTheme,
+	setThemeAction,
 }: {
 	currentTheme: string;
 	isSelected: boolean;
-	setTheme: (theme: string) => void;
+	setThemeAction: (theme: string) => void;
 }) {
+	const label = currentTheme === "gpt5" ? "GPT 5" : currentTheme;
 	return (
 		<li
 			className={`${styles.themeItem} ${isSelected ? styles.selected : ""}`}
 		>
 			<button
 				type="button"
-				onClick={() => setTheme(currentTheme)}
+				onClick={() => startTransition(() => setThemeAction(currentTheme))}
 				className={styles.themeButton}
 			>
-				{currentTheme}
+				{label}
 			</button>
 		</li>
 	);
