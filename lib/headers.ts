@@ -18,15 +18,14 @@ export async function getCurrentTheme() {
 }
 
 export async function setCurrentTheme(theme: string) {
+	console.log(theme);
 	const cookieCache = await cookies();
 	cookieCache.set("current-theme", theme);
-	revalidatePath("/", "layout");
-	return theme;
+	// revalidatePath("/", "layout");
 }
 
 export async function toggleDarkTheme() {
 	const theme = await getCurrentTheme();
 	const newTheme = theme === "dark" ? "light" : "dark";
 	await setCurrentTheme(newTheme);
-	return newTheme;
 }

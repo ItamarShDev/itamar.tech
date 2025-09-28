@@ -14,8 +14,8 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType>({
 	theme: "dark",
-	selectTheme: () => {},
-	toggleMode: () => {},
+	selectTheme: () => { },
+	toggleMode: () => { },
 });
 
 export function useThemeContext() {
@@ -28,9 +28,9 @@ function useTheme(currentThemeName: Theme) {
 
 	const selectTheme = async (theme: Theme) => {
 		document.body.setAttribute("data-theme", theme);
+		setTheme(theme);
 		await setCurrentTheme(theme);
 		router.refresh();
-		setTheme(theme);
 	};
 
 	const toggleMode = async () => {
