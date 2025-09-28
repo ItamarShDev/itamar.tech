@@ -1,5 +1,4 @@
 "use client";
-import { startTransition } from 'react';
 import styles from "./ThemedIcon.module.css";
 
 export function ThemeItem({
@@ -18,7 +17,7 @@ export function ThemeItem({
 		>
 			<button
 				type="button"
-				onClick={() => startTransition(() => setThemeAction(currentTheme))}
+				onClick={() => setThemeAction(currentTheme)}
 				className={styles.themeButton}
 			>
 				{label}

@@ -3,7 +3,8 @@
 import { setCurrentTheme, toggleDarkTheme } from "lib/headers";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-export const THEMES = ["light", "dark", "monokai", "cobalt2"] as const;
+
+export const THEMES = ["light", "dark", "monokai", "cobalt2", "gpt5"] as const;
 export type Theme = (typeof THEMES)[number];
 
 type ThemeContextType = {
