@@ -2,7 +2,6 @@
 import { ThemeItem } from "components/theme-switch-client";
 import { THEMES, useThemeContext } from "providers/theme";
 import styles from "./ThemedIcon.module.css";
-import { getIconClassAndAction } from "@/lib/utils/theme";
 
 export function ThemeList() {
 	const { theme: selectedTheme, selectTheme } = useThemeContext();
@@ -14,7 +13,7 @@ export function ThemeList() {
 						key={theme}
 						currentTheme={theme}
 						isSelected={selectedTheme === theme}
-						setTheme={selectTheme}
+						setThemeAction={selectTheme}
 					/>
 				))}
 			</ul>

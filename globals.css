@@ -1,4 +1,23 @@
 /* Font variables are now loaded via next/font in lib/fonts.ts */
+
+a,
+button,
+[role="button"] {
+	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+a:hover,
+button:hover,
+[role="button"]:hover {
+	transform: scale(1.05);
+}
+
+a:active,
+button:active,
+[role="button"]:active {
+	transform: scale(0.98);
+}
+
 /* Fallback font definitions for when Google Fonts are blocked */
 :root {
 	--font-playfair: "Playfair Display", Georgia, serif;
@@ -159,6 +178,32 @@ body[data-theme="cobalt2"] {
 	--sh-string: #00a99a;
 	--sh-keyword: #f47067;
 	--sh-comment: #a19595;
+}
+
+body[data-theme="gpt5"] {
+	--color-lang: white;
+	--colors-bg: #0d1117;
+	--colors-modalBg: #0f141b;
+	--colors-main: #7c3aed;
+	--colors-text: #e6edf3;
+	--colors-subText: rgba(230, 237, 243, 0.7);
+	--colors-headerText: #58a6ff;
+	--colors-header: #7c3aed;
+	--colors-paragraph: #c9d1d9;
+	--colors-decorations: #58a6ff;
+	--colors-hoverDecorations: rgba(88, 166, 255, 0.12);
+	--colors-inputs: rgba(124, 58, 237, 0.25);
+	--colors-link: #58a6ff;
+	--colors-charts: #7c3aed;
+	--sh-class: var(--colors-header);
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #2dd4bf;
+	--sh-jsxliterals: #a78bfa;
+	--sh-string: #10b981;
+	--sh-keyword: #f47067;
+	--sh-comment: #8b949e;
 }
 
 body[data-theme="light"],

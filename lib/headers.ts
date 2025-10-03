@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 import type { Theme } from "providers/theme";
+
 export async function getCurrentLang() {
 	const headersList = await headers();
 	const pathname = headersList.get("x-current-path") || "";
@@ -21,7 +22,7 @@ export async function setCurrentTheme(theme: string) {
 	const cookieCache = await cookies();
 	cookieCache.set("current-theme", theme);
 	revalidatePath("/", "layout");
-	return theme;
+	return { success: true, message: theme };
 }
 
 export async function toggleDarkTheme() {

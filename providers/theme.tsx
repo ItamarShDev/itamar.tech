@@ -3,7 +3,8 @@
 import { setCurrentTheme, toggleDarkTheme } from "lib/headers";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-export const THEMES = ["light", "dark", "monokai", "cobalt2"] as const;
+
+export const THEMES = ["light", "dark", "monokai", "cobalt2", "gpt5"] as const;
 export type Theme = (typeof THEMES)[number];
 
 type ThemeContextType = {
@@ -14,8 +15,8 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType>({
 	theme: "dark",
-	selectTheme: () => {},
-	toggleMode: () => {},
+	selectTheme: () => { },
+	toggleMode: () => { },
 });
 
 export function useThemeContext() {
@@ -28,9 +29,9 @@ function useTheme(currentThemeName: Theme) {
 
 	const selectTheme = async (theme: Theme) => {
 		document.body.setAttribute("data-theme", theme);
+		setTheme(theme);
 		await setCurrentTheme(theme);
 		router.refresh();
-		setTheme(theme);
 	};
 
 	const toggleMode = async () => {

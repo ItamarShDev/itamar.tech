@@ -86,7 +86,7 @@ export default function PropertiesSelect({
 			<label htmlFor="search-technologies" className={styles.label}>
 				Search for tech
 				{qualificationText && (
-					<span className={styles.matchText}> - {qualificationText}</span>
+					<span className={styles.matchText}>Match score: {qualificationText}</span>
 				)}
 			</label>
 			<div className={styles.container}>
@@ -99,12 +99,16 @@ export default function PropertiesSelect({
 						{tags.map((tag) => (
 							<div className={styles.tag} key={tag}>
 								{tag}
-								<span
+								<button
+									type="button"
 									className={styles.removeTag}
-									onClick={() => removeTag(tag)}
+									onClick={(e) => {
+										e.stopPropagation();
+										removeTag(tag);
+									}}
 								>
-									x
-								</span>
+									&#x2716;
+								</button>
 							</div>
 						))}
 					</div>

@@ -1,7 +1,9 @@
-import HomeBackground from "layouts/home-background";
+import { HomeBackgroundAurora } from "layouts/home-background";
 import HomePage from "layouts/home-page";
 import { getFromKV } from "lib/get-data-methods";
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
 	title: {
 		default: "Itamar Sharify",
 		template: "%s - Itamar Sharify",
@@ -26,7 +28,7 @@ export default async function Home() {
 
 	return (
 		<>
-			<HomeBackground />
+			<HomeBackgroundAurora />
 			<HomePage quotes={quotes?.en} />
 		</>
 	);
