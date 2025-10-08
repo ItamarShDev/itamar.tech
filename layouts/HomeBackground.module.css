@@ -48,6 +48,225 @@
 	mix-blend-mode: soft-light;
 }
 
+.radiantContainer {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+	background:
+		radial-gradient(120% 120% at 50% 40%, color-mix(in srgb, var(--colors-main) 38%, transparent) 0%, transparent 70%),
+		radial-gradient(140% 140% at 55% 70%, color-mix(in srgb, var(--colors-decorations) 24%, transparent) 0%, transparent 75%),
+		linear-gradient(130deg, rgba(18, 21, 36, 0.65) 0%, rgba(14, 16, 27, 0.9) 65%, rgba(11, 13, 22, 0.95) 100%);
+}
+
+.radiantLayer {
+	position: absolute;
+	width: 80vw;
+	height: 80vw;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 45%;
+	filter: blur(220px);
+	opacity: 0.6;
+	mix-blend-mode: screen;
+	animation: radiantDrift 42s ease-in-out infinite alternate, radiantPulse 24s ease-in-out infinite alternate;
+}
+
+.radiantLayer1 {
+	background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--colors-main) 70%, transparent) 0%, transparent 70%);
+	opacity: 0.52;
+	animation-duration: 46s, 28s;
+}
+
+.radiantLayer2 {
+	background: radial-gradient(circle at 62% 55%, color-mix(in srgb, var(--colors-hoverDecorations) 80%, var(--colors-main) 20%) 0%, transparent 75%);
+	opacity: 0.48;
+	animation-duration: 50s, 30s;
+}
+
+.radiantLayer3 {
+	background: radial-gradient(circle at 30% 65%, color-mix(in srgb, var(--colors-decorations) 65%, var(--colors-main) 35%) 0%, transparent 80%);
+	animation-duration: 54s, 34s;
+	filter: blur(260px);
+}
+
+.radiantBeam {
+	position: absolute;
+	top: -20vh;
+	left: 50%;
+	width: 36vw;
+	height: 160vh;
+	transform: translateX(-50%);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 90%);
+	mix-blend-mode: screen;
+	filter: blur(140px);
+	opacity: 0.35;
+	animation: beamPulse 24s ease-in-out infinite;
+}
+
+.radiantGlow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 120vw;
+	height: 120vw;
+	transform: translate(-50%, -45%);
+	background: radial-gradient(circle, color-mix(in srgb, var(--colors-header) 40%, transparent) 0%, transparent 70%);
+	opacity: 0.22;
+	filter: blur(260px);
+	animation: glowPulse 22s ease-in-out infinite alternate;
+}
+
+.radiantParticleField {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+}
+
+.radiantParticle {
+	position: absolute;
+	display: block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--colors-hoverDecorations) 80%, var(--colors-main) 20%);
+	box-shadow: 0 0 24px rgba(255, 255, 255, 0.4);
+	filter: blur(2px);
+	animation: particleFloat var(--particleDuration, 22s) ease-in-out infinite;
+}
+
+.radiantParticle::after {
+	content: "";
+	position: absolute;
+	inset: -12px;
+	opacity: 0.6;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+	filter: blur(12px);
+}
+
+.professionalContainer {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+	background: radial-gradient(180% 150% at 50% 35%, color-mix(in srgb, var(--colors-header) 12%, transparent) 0%, transparent 70%);
+}
+
+.professionalBackdrop {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(150deg, rgba(6, 8, 18, 0.98) 0%, rgba(18, 21, 33, 0.94) 45%, rgba(8, 11, 24, 0.98) 100%);
+}
+
+.professionalVignette {
+	position: absolute;
+	inset: -10%;
+	background: radial-gradient(130% 120% at 50% 45%, transparent 55%, rgba(6, 8, 18, 0.85) 100%);
+}
+
+.professionalGradient {
+	position: absolute;
+	inset: -18%;
+	background:
+		radial-gradient(90% 60% at 68% 18%, color-mix(in srgb, var(--colors-main) 22%, transparent) 0%, transparent 80%),
+		radial-gradient(80% 60% at 32% 78%, color-mix(in srgb, var(--colors-decorations) 18%, transparent) 0%, transparent 85%);
+	filter: blur(160px);
+	opacity: 0.75;
+}
+
+.professionalGrid {
+	position: absolute;
+	inset: -12%;
+	background-image:
+		linear-gradient(transparent 92%, rgba(255, 255, 255, 0.045) 93%),
+		linear-gradient(90deg, transparent 92%, rgba(255, 255, 255, 0.045) 93%);
+	background-size: 140px 140px;
+	mask: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 45%, transparent 100%);
+	opacity: 0.35;
+	mix-blend-mode: soft-light;
+	animation: gridSlide 54s linear infinite;
+}
+
+.professionalSheen {
+	position: absolute;
+	top: -15%;
+	left: -35%;
+	width: 70%;
+	height: 150%;
+	background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.07) 34%, rgba(255, 255, 255, 0) 68%);
+	transform: rotate(10deg);
+	mix-blend-mode: screen;
+	animation: sheenSweep 36s ease-in-out infinite;
+}
+
+.professionalAccents {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.professionalAccent {
+	position: absolute;
+	display: block;
+	width: 32vw;
+	height: 32vw;
+	border-radius: 50%;
+	filter: blur(120px);
+	mix-blend-mode: screen;
+	opacity: 0.38;
+	animation: accentFloat 28s ease-in-out infinite alternate;
+}
+
+.professionalAccentPrimary {
+	right: 12%;
+	top: 28%;
+	background: radial-gradient(circle at 45% 55%, color-mix(in srgb, var(--colors-main) 50%, transparent) 0%, transparent 80%);
+}
+
+.professionalAccentSecondary {
+	left: 16%;
+	bottom: 20%;
+	width: 28vw;
+	height: 28vw;
+	background: radial-gradient(circle at 55% 45%, color-mix(in srgb, var(--colors-decorations) 42%, transparent) 0%, transparent 85%);
+	animation-direction: alternate-reverse;
+}
+
+.professionalFocus {
+	position: absolute;
+	top: 52%;
+	left: 50%;
+	width: 56vw;
+	height: 56vw;
+	transform: translate(-50%, -52%);
+	filter: blur(40px);
+	opacity: 0.52;
+	mix-blend-mode: screen;
+}
+
+.professionalFocusRing {
+	position: absolute;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 0 60px rgba(255, 255, 255, 0.2);
+	animation: focusPulse 26s ease-in-out infinite;
+}
+
+.professionalFocusRingOuter {
+	inset: 0;
+}
+
+.professionalFocusRingInner {
+	inset: 18%;
+	border-color: rgba(255, 255, 255, 0.12);
+	animation-duration: 32s;
+	animation-delay: -6s;
+}
+
 @keyframes auroraDrift {
 	0% {
 		transform: translate3d(-25%, -10%, 0) rotate(0deg);
@@ -74,6 +293,131 @@
 	}
 }
 
+@keyframes radiantDrift {
+	0% {
+		transform: translate(-48%, -52%) scale(0.95) rotate(-15deg);
+	}
+
+	50% {
+		transform: translate(-52%, -48%) scale(1.05) rotate(12deg);
+	}
+
+	100% {
+		transform: translate(-48%, -50%) scale(0.98) rotate(-10deg);
+	}
+}
+
+@keyframes radiantPulse {
+	0% {
+		opacity: 0.45;
+		filter: blur(200px);
+	}
+
+	100% {
+		opacity: 0.7;
+		filter: blur(240px);
+	}
+}
+
+@keyframes glowPulse {
+	0% {
+		opacity: 0.18;
+	}
+
+	100% {
+		opacity: 0.32;
+	}
+}
+
+@keyframes beamPulse {
+	0% {
+		opacity: 0.25;
+		filter: blur(120px);
+	}
+
+	50% {
+		opacity: 0.38;
+		filter: blur(150px);
+	}
+
+	100% {
+		opacity: 0.28;
+		filter: blur(130px);
+	}
+}
+
+@keyframes particleFloat {
+	0% {
+		transform: translate3d(0, 0, 0) scale(var(--particleScale, 1));
+	}
+
+	50% {
+		transform: translate3d(var(--driftX, 0), var(--driftY, 0), 0) scale(calc(var(--particleScale, 1) * 1.08));
+	}
+
+	100% {
+		transform: translate3d(calc(var(--driftX, 0) * -0.6), calc(var(--driftY, 0) * -0.6), 0) scale(calc(var(--particleScale, 1) * 0.95));
+	}
+}
+
+@keyframes gridSlide {
+	0% {
+		background-position: 0 0, 0 0;
+	}
+
+	100% {
+		background-position: 140px 180px, 140px 180px;
+	}
+}
+
+@keyframes sheenSweep {
+	0% {
+		transform: translateX(-45%) rotate(10deg);
+		opacity: 0.08;
+	}
+
+	45% {
+		transform: translateX(25%) rotate(10deg);
+		opacity: 0.16;
+	}
+
+	100% {
+		transform: translateX(110%) rotate(10deg);
+		opacity: 0.03;
+	}
+}
+
+@keyframes accentFloat {
+	0% {
+		transform: translate3d(0, 0, 0) scale(0.96);
+	}
+
+	50% {
+		transform: translate3d(12px, -14px, 0) scale(1.04);
+	}
+
+	100% {
+		transform: translate3d(-10px, 16px, 0) scale(0.98);
+	}
+}
+
+@keyframes focusPulse {
+	0% {
+		opacity: 0.35;
+		transform: scale(0.98);
+	}
+
+	50% {
+		opacity: 0.6;
+		transform: scale(1.02);
+	}
+
+	100% {
+		opacity: 0.4;
+		transform: scale(0.99);
+	}
+}
+
 @keyframes grainShift {
 	0% {
 		transform: translate3d(0, 0, 0);
@@ -88,6 +432,20 @@
 
 	.auroraLayer,
 	.auroraNoise {
+		animation: none;
+	}
+
+	.radiantLayer,
+	.radiantBeam,
+	.radiantGlow,
+	.radiantParticle {
+		animation: none;
+	}
+
+	.professionalGrid,
+	.professionalSheen,
+	.professionalAccent,
+	.professionalFocusRing {
 		animation: none;
 	}
 }

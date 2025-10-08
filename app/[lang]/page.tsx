@@ -1,4 +1,4 @@
-import { HomeBackgroundAurora } from "layouts/home-background";
+import { HomeBackgroundProfessional } from "layouts/home-background";
 import HomePage from "layouts/home-page";
 import { getFromKV } from "lib/get-data-methods";
 import type { Metadata } from "next";
@@ -28,7 +28,7 @@ export default async function Home() {
 
   return (
     <>
-      <HomeBackgroundAurora />
+      <HomeBackgroundProfessional />
       <HomePage quotes={quotes?.en} />
     </>
   );

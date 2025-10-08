@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 import styles from "./HomeBackground.module.css";
 
@@ -106,3 +106,94 @@ export function HomeBackgroundAurora() {
     </div>
   );
 }
+
+type RadiantParticle = {
+  id: number;
+  left: string;
+  top: string;
+  duration: number;
+  delay: number;
+  scale: number;
+  opacity: number;
+  driftX: number;
+  driftY: number;
+};
+
+const RADIANT_PARTICLE_COUNT = 20;
+
+function createRadiantParticle(id: number): RadiantParticle {
+  const duration = 18 + Math.random() * 16;
+  const delay = -Math.random() * duration;
+  const scale = 0.6 + Math.random() * 1.2;
+  const opacity = 0.28 + Math.random() * 0.5;
+  const driftRange = 28;
+
+  return {
+    id,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    duration,
+    delay,
+    scale,
+    opacity,
+    driftX: (Math.random() - 0.5) * driftRange,
+    driftY: (Math.random() - 0.5) * driftRange,
+  };
+}
+
+export function HomeBackgroundRadiant() {
+  const [particles] = useState(() =>
+    Array.from({ length: RADIANT_PARTICLE_COUNT }, (_, id) => createRadiantParticle(id))
+  );
+
+  return (
+    <div className={styles.radiantContainer}>
+      <div className={`${styles.radiantLayer} ${styles.radiantLayer1}`} />
+      <div className={`${styles.radiantLayer} ${styles.radiantLayer2}`} />
+      <div className={`${styles.radiantLayer} ${styles.radiantLayer3}`} />
+      <div className={styles.radiantBeam} />
+      <div className={styles.radiantGlow} />
+      <div className={styles.radiantParticleField}>
+        {particles.map((particle) => (
+          <span
+            key={particle.id}
+            className={styles.radiantParticle}
+            style={
+              {
+                left: particle.left,
+                top: particle.top,
+                opacity: particle.opacity,
+                animationDelay: `${particle.delay.toFixed(2)}s`,
+                "--particleDuration": `${particle.duration.toFixed(2)}s`,
+                "--driftX": `${particle.driftX.toFixed(2)}px`,
+                "--driftY": `${particle.driftY.toFixed(2)}px`,
+                "--particleScale": particle.scale.toFixed(2),
+              } as CSSProperties
+            }
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function HomeBackgroundProfessional() {
+  return (
+    <div className={styles.professionalContainer}>
+      <div className={styles.professionalBackdrop} />
+      <div className={styles.professionalVignette} />
+      <div className={styles.professionalGradient} />
+      <div className={styles.professionalGrid} />
+      <div className={styles.professionalSheen} />
+      <div className={styles.professionalAccents}>
+        <span className={`${styles.professionalAccent} ${styles.professionalAccentPrimary}`} />
+        <span className={`${styles.professionalAccent} ${styles.professionalAccentSecondary}`} />
+      </div>
+      <div className={styles.professionalFocus}>
+        <span className={`${styles.professionalFocusRing} ${styles.professionalFocusRingOuter}`} />
+        <span className={`${styles.professionalFocusRing} ${styles.professionalFocusRingInner}`} />
+      </div>
+    </div>
+  );
+}
+

@@ -3,19 +3,24 @@
 a,
 button,
 [role="button"] {
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+	transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 a:hover,
-button:hover,
-[role="button"]:hover {
-	transform: scale(1.05);
+a:focus-visible {
+	color: color-mix(in srgb, var(--colors-link) 60%, var(--colors-decorations) 40%);
 }
 
-a:active,
+button:hover,
+[role="button"]:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 24px rgba(2, 12, 32, 0.12);
+}
+
 button:active,
 [role="button"]:active {
-	transform: scale(0.98);
+	transform: translateY(0);
+	box-shadow: 0 4px 14px rgba(2, 12, 32, 0.16);
 }
 
 /* Fallback font definitions for when Google Fonts are blocked */
@@ -60,8 +65,20 @@ body {
 a {
 	color: var(--colors-link);
 	scroll-margin-top: 6.5rem;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.2em;
+	text-decoration-line: underline;
+	text-decoration-thickness: 0.1em;
+	text-decoration-color: transparent;
+	text-underline-offset: 0.18em;
+	transition:
+		color 0.2s ease,
+		text-decoration-color 0.28s ease,
+		text-underline-offset 0.28s ease;
+}
+
+a:hover,
+a:focus-visible {
+	text-decoration-color: color-mix(in srgb, var(--colors-decorations) 55%, transparent);
+	text-underline-offset: 0.22em;
 }
 
 h1,
