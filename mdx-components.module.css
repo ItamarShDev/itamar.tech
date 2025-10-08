@@ -83,9 +83,9 @@
 }
 
 .pre {
-	width: 100vw;
+	width: 100%;
 	position: relative;
-	left: -10vw;
+	left: 0;
 	overflow-x: visible;
 
 	direction: ltr;
@@ -158,6 +158,8 @@
 
 @media only screen and (max-width: 640px) {
 	.pre {
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
 		font-size: 1em;
 		line-height: 2em;
 	}

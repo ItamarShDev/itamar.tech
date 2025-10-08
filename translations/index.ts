@@ -1,17 +1,23 @@
 const dictionaries = {
-	en: () => import("./dictionaries/en.json").then((module) => module.default),
-	he: () => import("./dictionaries/he.json").then((module) => module.default),
+  en: () =>
+    import("./dictionaries/en.json", { with: { type: "json" } }).then(
+      (module) => module.default
+    ),
+  he: () =>
+    import("./dictionaries/he.json", { with: { type: "json" } }).then(
+      (module) => module.default
+    ),
 };
 export type Dictionary = Awaited<ReturnType<(typeof dictionaries)["en"]>>;
 
 export const getDictionary: (locale: string) => Promise<Dictionary> = async (
-	locale,
+  locale
 ) => dictionaries[locale]();
 
 export async function getTranslations<P extends keyof Dictionary>(
-	locale: string,
-	path: P,
+  locale: string,
+  path: P
 ) {
-	const dictionary = await getDictionary(locale);
-	return dictionary[path];
+  const dictionary = await getDictionary(locale);
+  return dictionary[path];
 }
