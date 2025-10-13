@@ -3,8 +3,6 @@ import Header from "layouts/header";
 import { fontVariables } from "lib/fonts";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
-import { FireworksProvider } from "../context/FireworksContext";
-import FireworksDisplay from "../components/FireworksDisplay";
 import "../globals.css";
 import styles from "./layout.module.css";
 
@@ -27,16 +25,13 @@ export default async function RootLayout({
 		<html lang={lang} className={fontVariables}>
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
-        <FireworksProvider>
-          <body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
-            <FireworksDisplay />
-            <div id="main-view" className={styles.mainView}>
-              <Header />
-              <main className={styles.main}>{children}</main>
-            </div>
-          </body>
-        </FireworksProvider>
-      </ThemeProvider>
+				<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+					<div id="main-view" className={styles.mainView}>
+						<Header />
+						<main className={styles.main}>{children}</main>
+					</div>
+				</body>
+			</ThemeProvider>
 		</html>
 	);
 }
