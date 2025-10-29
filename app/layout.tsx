@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import FireworksDisplay from "components/FireworksDisplay";
 import { FireworksProvider } from "context/FireworksContext";
 import Header from "layouts/header";
 import { fontVariables } from "lib/fonts";
@@ -15,12 +16,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  const lang = await getCurrentLang();
-  const theme = await getCurrentTheme();
+	const lang = await getCurrentLang();
+	const theme = await getCurrentTheme();
 
 	return (
 		<html lang={lang} className={fontVariables}>
@@ -28,6 +29,7 @@ export default async function RootLayout({
 			<ThemeProvider defaultTheme={theme}>
 				<FireworksProvider>
 					<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+						<FireworksDisplay />
 						<div id="main-view" className={styles.mainView}>
 							<Header />
 							<main className={styles.main}>{children}</main>
