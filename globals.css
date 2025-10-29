@@ -223,6 +223,32 @@ body[data-theme="gpt5"] {
 	--sh-comment: #8b949e;
 }
 
+body[data-theme="cursor"] {
+	--color-lang: white;
+	--colors-bg: #1a1a1a;
+	--colors-modalBg: #242424;
+	--colors-main: #0066ff;
+	--colors-text: #e8e8e8;
+	--colors-subText: rgba(232, 232, 232, 0.7);
+	--colors-headerText: #00d4ff;
+	--colors-header: #0066ff;
+	--colors-paragraph: #d4d4d4;
+	--colors-decorations: #00d4ff;
+	--colors-hoverDecorations: rgba(0, 212, 255, 0.15);
+	--colors-inputs: rgba(0, 102, 255, 0.2);
+	--colors-link: #00d4ff;
+	--colors-charts: #0066ff;
+	--sh-class: #00d4ff;
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #8996a3;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #00d4ff;
+	--sh-jsxliterals: #a78bfa;
+	--sh-string: #10b981;
+	--sh-keyword: #ff6b9d;
+	--sh-comment: #6a9955;
+}
+
 body[data-theme="light"],
 body {
 	--colors-bg: hsla(0, 0%, 96%, 0.8);
