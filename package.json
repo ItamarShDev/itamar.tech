@@ -1,54 +1,56 @@
 {
-	"name": "itamar-tech",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev --turbopack",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"format": "biome format",
-		"ci": "biome ci",
-		"fix": "biome  check --write . --diagnostic-level=error",
-		"test:e2e": "playwright test",
-		"test:e2e:ui": "playwright test --ui"
-	},
-	"dependencies": {
-		"@google/genai": "^1.21.0",
-		"@mdx-js/loader": "^3.1.1",
-		"@mdx-js/react": "^3.1.1",
-		"@next/mdx": "15.4.1",
-		"@vercel/analytics": "^1.5.0",
-		"@vercel/kv": "^3.0.0",
-		"bright": "^1.0.0",
-		"chart.js": "^4.5.0",
-		"eslint-config-next": "15.4.1",
-		"groq-sdk": "^0.23.0",
-		"lodash": "^4.17.21",
-		"next": "15.4.1",
-		"next-mdx-remote": "^5.0.0",
-		"nodemailer": "^6.10.1",
-		"react": "19.1.0",
-		"react-chartjs-2": "^5.3.0",
-		"react-dom": "19.1.0",
-		"react-markdown": "^10.1.0"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
-		"@playwright/test": "^1.55.1",
-		"@testing-library/jest-dom": "^6.8.0",
-		"@testing-library/react": "^16.3.0",
-		"@testing-library/react-hooks": "^8.0.1",
-		"@types/bun": "latest",
-		"@types/jest": "^30.0.0",
-		"@types/node": "^24.5.2",
-		"@types/react": "19.1.8",
-		"jsdom": "^26.1.0",
-		"typescript": "^5.9.2",
-		"vitest": "^3.2.4"
-	},
-	"overrides": {
-		"@types/react": "19.1.8"
-	},
-	"trustedDependencies": ["@biomejs/biome"]
+  "name": "itamar-tech",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "format": "biome format",
+    "ci": "biome ci",
+    "fix": "biome  check --write . --diagnostic-level=error",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "dependencies": {
+    "@google/genai": "^1.28.0",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "16.0.1",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/kv": "^3.0.0",
+    "bright": "^1.0.0",
+    "chart.js": "^4.5.1",
+    "eslint-config-next": "16.0.1",
+    "groq-sdk": "^0.34.0",
+    "lodash": "^4.17.21",
+    "next": "16.0.1",
+    "next-mdx-remote": "^5.0.0",
+    "nodemailer": "^7.0.10",
+    "react": "19.2.0",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "19.2.0",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.2",
+    "@playwright/test": "^1.56.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/bun": "latest",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.9.2",
+    "@types/react": "19.2.2",
+    "eslint": "^9.39.0",
+    "jsdom": "^27.1.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.6"
+  },
+  "overrides": {
+    "@types/react": "19.2.2"
+  },
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
 }
