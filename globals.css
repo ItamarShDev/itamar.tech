@@ -275,3 +275,148 @@ body {
 	--sh-keyword: #f47067;
 	--sh-comment: #a19595;
 }
+
+/* View Transition Animations */
+@keyframes fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes fade-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes slide-from-right {
+	from { transform: translateX(100px); opacity: 0; }
+	to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-to-left {
+	from { transform: translateX(0); opacity: 1; }
+	to { transform: translateX(-100px); opacity: 0; }
+}
+
+@keyframes slide-from-left {
+	from { transform: translateX(-100px); opacity: 0; }
+	to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-to-right {
+	from { transform: translateX(0); opacity: 1; }
+	to { transform: translateX(100px); opacity: 0; }
+}
+
+@keyframes slide-from-top {
+	from { transform: translateY(-50px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-to-bottom {
+	from { transform: translateY(0); opacity: 1; }
+	to { transform: translateY(50px); opacity: 0; }
+}
+
+@keyframes slide-from-bottom {
+	from { transform: translateY(50px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-to-top {
+	from { transform: translateY(0); opacity: 1; }
+	to { transform: translateY(-50px); opacity: 0; }
+}
+
+@keyframes scale-in {
+	from { transform: scale(0.8); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes scale-out {
+	from { transform: scale(1); opacity: 1; }
+	to { transform: scale(0.8); opacity: 0; }
+}
+
+@keyframes perspective-slide-in {
+	from { 
+		transform: perspective(1000px) translateX(100px) rotateY(-10deg); 
+		opacity: 0; 
+	}
+	to { 
+		transform: perspective(1000px) translateX(0) rotateY(0deg); 
+		opacity: 1; 
+	}
+}
+
+@keyframes perspective-slide-out {
+	from { 
+		transform: perspective(1000px) translateX(0) rotateY(0deg); 
+		opacity: 1; 
+	}
+	to { 
+		transform: perspective(1000px) translateX(-100px) rotateY(10deg); 
+		opacity: 0; 
+	}
+}
+
+/* Default cross-fade transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 300ms;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+	animation: 150ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+}
+
+::view-transition-new(root) {
+	animation: 300ms cubic-bezier(0, 0, 0.2, 1) 150ms both fade-in;
+}
+
+/* Slide transition (for blog pages) */
+::view-transition-old(.slide-transition) {
+	animation: 200ms cubic-bezier(0.4, 0, 1, 1) both slide-to-left;
+}
+
+::view-transition-new(.slide-transition) {
+	animation: 400ms cubic-bezier(0, 0, 0.2, 1) 200ms both slide-from-right;
+}
+
+/* Scale transition (for resume page) */
+::view-transition-old(.scale-transition) {
+	animation: 250ms cubic-bezier(0.4, 0, 1, 1) both scale-out;
+}
+
+::view-transition-new(.scale-transition) {
+	animation: 350ms cubic-bezier(0, 0, 0.2, 1) 250ms both scale-in;
+}
+
+/* Perspective transition (for projects page) */
+::view-transition-old(.perspective-transition) {
+	animation: 300ms cubic-bezier(0.4, 0, 1, 1) both perspective-slide-out;
+}
+
+::view-transition-new(.perspective-transition) {
+	animation: 500ms cubic-bezier(0, 0, 0.2, 1) 300ms both perspective-slide-in;
+}
+
+/* Bottom-up transition (for resume/career page) */
+::view-transition-old(.bottom-up-transition) {
+	animation: 250ms cubic-bezier(0.4, 0, 1, 1) both slide-to-top;
+}
+
+::view-transition-new(.bottom-up-transition) {
+	animation: 450ms cubic-bezier(0, 0, 0.2, 1) 250ms both slide-from-bottom;
+}
+
+/* Slow fade transition */
+::view-transition-old(.slow-fade) {
+	animation-duration: 500ms;
+	animation: 250ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+}
+
+::view-transition-new(.slow-fade) {
+	animation-duration: 500ms;
+	animation: 500ms cubic-bezier(0, 0, 0.2, 1) 250ms both fade-in;
+}

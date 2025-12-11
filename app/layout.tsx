@@ -3,6 +3,7 @@ import FireworksDisplay from "components/FireworksDisplay";
 import { FireworksProvider } from "context/FireworksContext";
 import Header from "layouts/header";
 import PersonalChat from "components/PersonalChat";
+import AnimatedViewTransition from "components/AnimatedViewTransition";
 import { fontVariables } from "lib/fonts";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
@@ -33,7 +34,9 @@ export default async function RootLayout({
 						<FireworksDisplay />
 						<div id="main-view" className={styles.mainView}>
 							<Header />
-							<main className={styles.main}>{children}</main>
+							<AnimatedViewTransition>
+								<main className={styles.main}>{children}</main>
+							</AnimatedViewTransition>
 						</div>
 						<PersonalChat />
 					</body>

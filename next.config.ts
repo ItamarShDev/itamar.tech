@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
 	},
 	experimental: {
 		mdxRs: true,
+		viewTransition: true,
 	},
 	transpilePackages: ["next-mdx-remote"],
 };
