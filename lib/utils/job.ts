@@ -23,6 +23,7 @@ export function filterJobsByText(jobs: Job[], text = ""): Job[] {
 			const jobTitle = job.title.toLowerCase();
 			const jobDescription = job.description.toLowerCase();
 			const jobTags = job.tags.map((tag) => tag.toLowerCase());
+			const jobCompany = job.company.name.toLowerCase();
 
 			// If there are multiple search terms, the job must match at least one of them
 			if (searchTerms.length > 1) {
@@ -30,8 +31,9 @@ export function filterJobsByText(jobs: Job[], text = ""): Job[] {
 					const hasTag = jobTags.some((tag) => tag.includes(term));
 					const hasTitle = jobTitle.includes(term);
 					const hasDescription = jobDescription.includes(term);
+					const hasCompany = jobCompany.includes(term);
 
-					return hasTag || hasTitle || hasDescription;
+					return hasTag || hasTitle || hasDescription || hasCompany;
 				});
 			}
 
@@ -40,8 +42,9 @@ export function filterJobsByText(jobs: Job[], text = ""): Job[] {
 			const hasTag = jobTags.some((tag) => tag.includes(term));
 			const hasTitle = jobTitle.includes(term);
 			const hasDescription = jobDescription.includes(term);
+			const hasCompany = jobCompany.includes(term);
 
-			return hasTag || hasTitle || hasDescription;
+			return hasTag || hasTitle || hasDescription || hasCompany;
 		});
 }
 
