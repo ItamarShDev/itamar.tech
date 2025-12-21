@@ -1,16 +1,16 @@
 "use client";
 
 import type { Properties } from "components/properties";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
 import { filterItems } from "lib/utils/array";
 import {
-	addTag as addTagUtil,
-	handleTagInputKeyDown,
-	removeLastTag as removeLastTagUtil,
-	removeTag as removeTagUtil
+    addTag as addTagUtil,
+    handleTagInputKeyDown,
+    removeLastTag as removeLastTagUtil,
+    removeTag as removeTagUtil
 } from "lib/utils/tags";
 
 const filterSkills = (skills: string[], tags: string[], text: string) =>
@@ -35,17 +35,17 @@ export default function PropertiesSelect({
 
 	const skills = Object.keys(properties);
 
-	const filteredSkills = useMemo(
-		() => {
-			const filtered = filterSkills(skills, tags, inputText);
-			// Only sort when input is focused and there's no search text
-			if (isInputFocused) {
-				return filtered.sort((a, b) => (RankJson[b as keyof typeof RankJson] || 0) - (RankJson[a as keyof typeof RankJson] || 0));
-			}
-			return filtered;
-		},
-		[skills, tags, inputText, isInputFocused]
-	);
+	const filteredSkills = (() => {
+		const filtered = filterSkills(skills, tags, inputText);
+		if (isInputFocused) {
+			return filtered.sort(
+				(a, b) =>
+					(RankJson[b as keyof typeof RankJson] || 0) -
+					(RankJson[a as keyof typeof RankJson] || 0),
+			);
+		}
+		return filtered;
+	})();
 
 	const showResults = filteredSkills.length > 0 && isInputFocused;
 

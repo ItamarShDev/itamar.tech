@@ -1,26 +1,22 @@
 "use client";
 import { useChartTheme } from "lib/hooks/useChartTheme";
-import { 
-  randomChartData as generateRandomChartData, 
-  themedDatasets, 
-  themedRadarSettings,
-  themedLineSettings,
-  type ChartTheme,
-  type ChartSettings 
+import {
+    themedDatasets,
+    themedRadarSettings,
+    themedLineSettings, type ChartSettings
 } from "lib/utils/chart";
 
 import {
-	CategoryScale,
-	Chart as ChartJS,
-	Filler,
-	Legend,
-	LineElement,
-	LinearScale,
-	PointElement,
-	RadialLinearScale,
-	Title,
+    CategoryScale,
+    Chart as ChartJS,
+    Filler,
+    Legend,
+    LineElement,
+    LinearScale,
+    PointElement,
+    RadialLinearScale,
+    Title,
 } from "chart.js";
-import { useEffect, useMemo, useState } from "react";
 
 ChartJS.register(
 	LineElement,
@@ -88,21 +84,14 @@ export default function useChartSettings({
 	values = [],
 	labels = ["Empty"],
 }: ReturnType<typeof randomChartData>): ChartSettings {
-	const [settings, setSettings] = useState({});
 	const theme = useChartTheme();
-	const datasets = useMemo(
-		() => themedDatasets(values, theme),
-		[values, theme],
-	);
-	useEffect(() => {
-		const data = {
-			labels,
-			datasets,
-		};
-		const radarOptions = themedRadarSettings(title, theme);
-		const lineOptions = themedLineSettings(title, theme);
-		setSettings({ lineOptions, radarOptions, data });
-	}, [theme, datasets, labels, title]);
+	const datasets = themedDatasets(values, theme);
+	const data = {
+		labels,
+		datasets,
+	};
+	const radarOptions = themedRadarSettings(title, theme);
+	const lineOptions = themedLineSettings(title, theme);
 
-	return settings;
+	return { lineOptions, radarOptions, data };
 }

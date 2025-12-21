@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Tags.module.css";
 type Base = {
 	onClick: (filterText: string) => void;
@@ -35,10 +35,7 @@ function getSearchedTextCompare(filterText: string, tag: string) {
 }
 
 function Tag({ tag, filterText = "", onClick }: TagProps) {
-	const searchedTags = useMemo(
-		() => getSearchedTextCompare(filterText, tag),
-		[filterText, tag],
-	);
+	const searchedTags = getSearchedTextCompare(filterText, tag);
 	if (!searchedTags) {
 		return (
 			<span className={styles.tag} onClick={() => onClick(tag)}>

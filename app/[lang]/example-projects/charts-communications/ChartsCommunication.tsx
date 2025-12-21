@@ -1,10 +1,10 @@
 "use client";
 import type { ChartData } from "chart.js";
 import useChartSettings, {
-	randomChartData,
+    randomChartData,
 } from "components/charts/chart-settings";
 import { Input } from "components/input";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "./ChartsCommunication.module.css";
 
@@ -49,17 +49,18 @@ export class EventRouter {
 function Chart({ chartId }) {
 	const [chartData, setChartData] = useState(randomChartData(chartId));
 	const { data, lineOptions } = useChartSettings(chartData);
-	const chartEventHandler = useCallback((event) => {
-		if (event.detail.data) {
-			setChartData(event.detail.data);
-		}
-	}, []);
 	useEffect(() => {
+		const chartEventHandler = (event: CustomEvent) => {
+			if (event.detail.data) {
+				setChartData(event.detail.data);
+			}
+		};
+
 		EventHandler.subscribe(`${chartId}::data`, chartEventHandler);
 		return () => {
 			EventHandler.unsubscribe(`${chartId}::data`, chartEventHandler);
 		};
-	}, [chartId, chartEventHandler]);
+	}, [chartId]);
 
 	if (data) {
 		return <Line data={data as ChartData<"line">} options={lineOptions} />;
@@ -71,15 +72,15 @@ export default function ChartsCommunicationExample() {
 	const [numberOfCharts, setNumberOfCharts] = useState(5);
 	const chart_ids = Array.from(Array(numberOfCharts).keys());
 	const [chartIds, setChartIds] = useState(chart_ids);
-	const router = useMemo(() => new EventRouter(), []);
+	const routerRef = useRef(new EventRouter());
 
 	useEffect(() => {
 		setChartIds(Array.from(Array(numberOfCharts).keys()));
 	}, [numberOfCharts]);
 
 	useEffect(() => {
-		router.fetchChartsData(chartIds);
-	}, [chartIds, router]);
+		routerRef.current.fetchChartsData(chartIds);
+	}, [chartIds]);
 
 	return (
 		<>

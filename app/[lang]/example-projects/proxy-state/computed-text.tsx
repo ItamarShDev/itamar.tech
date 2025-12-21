@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  StateProvider,
-  useProxyState,
+    StateProvider,
+    useProxyState,
 } from "app/[lang]/example-projects/proxy-state/context";
 import { useTranslation } from "translations/hooks";
 import styles from "./styles.module.css";
@@ -14,22 +14,24 @@ function Input({
   name: string;
   defaultValue: number | string
 }) {
-  const value = useProxyState(name, defaultValue, {
+  const isNumber =
+    typeof defaultValue === "number" ||
+    (typeof defaultValue === "string" && !Number.isNaN(Number(defaultValue)));
+  const initialValue = isNumber ? Number(defaultValue) : defaultValue;
+
+  const value = useProxyState(name, initialValue, {
     testId: `input-${name}`
   });
 
   return (
     <input
       data-testid={`input-${name}`}
-      type={typeof defaultValue === "number" ? "number" : "text"}
+      type={isNumber ? "number" : "text"}
       name={name}
       onChange={(e) => {
-        value.value =
-          typeof defaultValue === "number"
-            ? Number(e.target.value)
-            : e.target.value;
+        value.value = isNumber ? Number(e.target.value) : e.target.value;
       }}
-      value={value.value}
+      value={isNumber ? Number(value.value ?? 0) : value.value ?? ""}
       aria-label={name}
     />
   );
@@ -38,7 +40,8 @@ function Input({
 function Result() {
   const firstNumber = useProxyState("firstNumber", 0, { testId: 'first-number' });
   const secondNumber = useProxyState("secondNumber", 1, { testId: 'second-number' });
-  const result = firstNumber.value + secondNumber.value;
+  const result =
+    Number(firstNumber.value ?? 0) + Number(secondNumber.value ?? 0);
 
   return (
     <div

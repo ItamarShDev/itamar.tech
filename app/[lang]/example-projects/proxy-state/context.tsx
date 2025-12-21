@@ -1,12 +1,9 @@
 "use client";
 
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
+    createContext,
+    useContext, useRef,
+    useState
 } from "react";
 
 type State = Record<string, any>;
@@ -26,31 +23,34 @@ const StateContext = createContext<StateContextType | null>(null);
 export function StateProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<State>({});
   const ref = useRef<State>(state);
+  const createProxyRef = useRef<(name: string, testId?: string) => Value<unknown>>();
 
-  const createProxy = useCallback((name: string, testId?: string) => {
-    const StateItemProxy = new Proxy(
-      {},
-      {
-        set(target: any, property: string, value: any) {
-          target[property] = { 
-            value,
-            __testId: testId || name
-          };
-          setState((prev) => ({ ...prev, [name]: StateItemProxy }));
-          return true;
+  if (!createProxyRef.current) {
+    createProxyRef.current = (name: string, testId?: string) => {
+      const StateItemProxy = new Proxy(
+        {},
+        {
+          set(target: any, property: string, value: any) {
+            target[property] = {
+              value,
+              __testId: testId || name,
+            };
+            setState((prev) => ({ ...prev, [name]: StateItemProxy }));
+            return true;
+          },
+          get(target: any, property: string) {
+            return target[property]?.value;
+          },
         },
-        get(target: any, property: string) {
-          return target[property]?.value;
-        },
-      }
-    );
-    
-    ref.current = { ...ref.current, [name]: StateItemProxy };
-    return ref.current[name] as Value<unknown>;
-  }, []);
+      );
+
+      ref.current = { ...ref.current, [name]: StateItemProxy };
+      return ref.current[name] as Value<unknown>;
+    };
+  }
 
   return (
-    <StateContext.Provider value={{ state: ref.current, createProxy }}>
+    <StateContext.Provider value={{ state: ref.current, createProxy: createProxyRef.current }}>
       {children}
     </StateContext.Provider>
   );
@@ -68,24 +68,14 @@ export function useProxyState<T = any>(
   }
 
   const { state, createProxy } = context;
-  
-  useEffect(() => {
-    if (initialValue !== undefined) {
-      const existingValue = state[name]?.value;
-      if (existingValue === undefined) {
-        createProxy(name, options?.testId);
-        state[name] = { 
-          value: initialValue,
-          __testId: options?.testId || name
-        };
-      }
-    }
-  }, [state, name, initialValue, options?.testId, createProxy]);
 
-  const value = state[name] as Value<T> || { 
-    value: initialValue as T,
-    __testId: options?.testId || name
-  };
-  
-  return value;
+  if (!state[name]) {
+    const proxy = createProxy(name, options?.testId);
+    if (initialValue !== undefined && proxy.value === undefined) {
+      proxy.value = initialValue as T;
+    }
+    return proxy as Value<T>;
+  }
+
+  return state[name] as Value<T>;
 }

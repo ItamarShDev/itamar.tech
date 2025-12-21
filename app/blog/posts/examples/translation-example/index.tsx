@@ -1,15 +1,15 @@
 "use client";
 import get from "lodash/get";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import en from "./dictionaries/en.json";
 import he from "./dictionaries/he.json";
 import type {
-	AllPaths,
-	PrefixedPath,
-	Results,
-	TemplateParams,
-	TranslationFunction,
-	TranslationPath,
+    AllPaths,
+    PrefixedPath,
+    Results,
+    TemplateParams,
+    TranslationFunction,
+    TranslationPath,
 } from "./types";
 const LANGUAGES_RESOURCES = {
 	en,
@@ -63,14 +63,11 @@ export function useTranslation<
 >(prefix?: Partial) {
 	const [locale, setLocale] = useState("en");
 
-	const t = useCallback(
-		// biome-ignore lint/suspicious/noExplicitAny: let TS above handle the type
-		(path: any, templateParams = {}): string =>
-			prefix
-				? getTranslation(`${locale}.${prefix}.${path}`, templateParams)
-				: getTranslation(`${locale}.${path}`, templateParams),
-		[locale, prefix],
-	);
+	// biome-ignore lint/suspicious/noExplicitAny: let TS above handle the type
+	const t = (path: any, templateParams = {}): string =>
+		prefix
+			? getTranslation(`${locale}.${prefix}.${path}`, templateParams)
+			: getTranslation(`${locale}.${path}`, templateParams);
 
 	return { t, locale, setLocale };
 }

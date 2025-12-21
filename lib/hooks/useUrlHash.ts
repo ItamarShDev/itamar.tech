@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * A custom hook that tracks the URL hash and returns whether it matches the provided hash
@@ -12,11 +12,11 @@ export default function useUrlHash(hash: string): boolean {
     typeof window !== 'undefined' ? window.location.hash : ''
   );
 
-  const updateCurrentHash = useCallback(() => {
+  const updateCurrentHash = () => {
     if (typeof window !== 'undefined') {
       setCurrentUrlHash(window.location.hash);
     }
-  }, []);
+  };
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

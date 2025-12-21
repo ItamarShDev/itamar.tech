@@ -1,11 +1,11 @@
 "use client";
 
 import {
-	STATES,
-	getTrafficLights,
-	sleep,
+    STATES,
+    getTrafficLights,
+    sleep,
 } from "app/[lang]/example-projects/generator-traffic/example/helpers";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useTrafficStateMachine() {
 	const [state, setState] = useState<(typeof STATES)[number]>(STATES[0]);
@@ -34,10 +34,10 @@ export function useTrafficStateMachine() {
 		};
 	}, [trafficLights, isRunning]);
 
-	const restartTrafficLights = useCallback(() => {
+	const restartTrafficLights = () => {
 		setTrafficLights(getTrafficLights());
 		setIsRunning(true);
-	}, []);
+	};
 
 	return {
 		state,
