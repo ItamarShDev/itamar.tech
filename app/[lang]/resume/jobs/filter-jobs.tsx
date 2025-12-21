@@ -153,7 +153,6 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
         </Input>
       </div>
 
-      {/*{showSuggestions  && filteredSuggestions.length > 0 && (*/}
       <div className={styles.suggestionsDropdown}>
         {showSuggestions && filteredSuggestions.length > 0 && filteredSuggestions.map((suggestion, index) => (
           <div
@@ -168,7 +167,6 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
           </div>
         ))}
       </div>
-      {/*)}*/}
     </div>
   );
 }

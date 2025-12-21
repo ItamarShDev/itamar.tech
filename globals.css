@@ -251,20 +251,20 @@ body[data-theme="cursor"] {
 
 body[data-theme="light"],
 body {
-	--colors-bg: hsla(0, 0%, 96%, 0.8);
-	--colors-modalBg: hsla(0, 0%, 96.1%);
-	--colors-main: hsla(193.9, 100%, 50%, 0.9);
+	--color-lang: black;
+	--colors-bg: hsl(0, 0%, 98%);
+	--colors-modalBg: hsl(0, 0%, 98.1%);
+	--colors-main: hsl(193.9, 100%, 50%);
 	--colors-text: hsl(204.2, 100%, 28.6%);
-	--colors-header: hsl(216.5, 100%, 50%);
-	--colors-headerText: hsl(204.2, 100%, 28.6%);
-	--colors-paragraph: hsl(216.9, 10.2%, 24.9%);
 	--colors-subText: hsla(204.2, 100%, 28.6%, 0.7);
+	--colors-headerText: hsl(193.9, 100%, 40%);
+	--colors-header: hsl(216.5, 100%, 50%);
+	--colors-paragraph: hsl(216.9, 10.2%, 24.9%);
 	--colors-decorations: hsl(215.1, 90.8%, 61.6%);
 	--colors-hoverDecorations: hsla(215.1, 90.8%, 61.6%, 0.1);
 	--colors-inputs: hsla(215, 91%, 62%, 0.2);
-	--colors-link: hsl(0, 0%, 0%);
+	--colors-link: hsl(204.2, 100%, 25%);
 	--colors-charts: #448ef6;
-	--color-lang: white;
 	--sh-class: var(--colors-header);
 	--sh-identifier: var(--colors-subText);
 	--sh-sign: #8996a3;

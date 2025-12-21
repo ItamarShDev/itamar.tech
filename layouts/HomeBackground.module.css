@@ -159,13 +159,13 @@
 .professionalBackdrop {
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(150deg, rgba(6, 8, 18, 0.98) 0%, rgba(18, 21, 33, 0.94) 45%, rgba(8, 11, 24, 0.98) 100%);
+	background: var(--colors-bg);
 }
 
 .professionalVignette {
 	position: absolute;
 	inset: -10%;
-	background: radial-gradient(130% 120% at 50% 45%, transparent 55%, rgba(6, 8, 18, 0.85) 100%);
+	background: radial-gradient(130% 120% at 50% 45%, transparent 55%, color-mix(in srgb, var(--colors-bg) 85%, black) 100%);
 }
 
 .professionalGradient {
