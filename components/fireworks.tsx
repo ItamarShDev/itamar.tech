@@ -246,43 +246,27 @@ export default function Fireworks() {
       }
     }, 500) as unknown as NodeJS.Timeout;
 
-  // Cleanup function
-  const cleanup = () => {
-    // Stop any new fireworks from launching immediately
-    if (fireworkIntervalRef.current) {
-      clearInterval(fireworkIntervalRef.current);
-      fireworkIntervalRef.current = null;
-    }
-    
-    // Force explode all active fireworks immediately with fast explosion
-    const currentFireworks = [...fireworksRef.current];
-    for (const firework of currentFireworks) {
-      if (!firework.exploded) {
-        // Use fast explosion for immediate cleanup
-        explodeFirework(firework, true);
-      }
-    }
-    
-    // Schedule a quick cleanup after a short delay
-    const cleanupDelay = 300; // Only show explosions for 300ms
-    const cleanupTimer = setTimeout(() => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
-        animationFrameRef.current = null;
-      }
-      window.removeEventListener('resize', resizeCanvas);
-    }, cleanupDelay);
-    
-    // Return cleanup function
+    // Cleanup function
     return () => {
-      clearTimeout(cleanupTimer);
+      if (fireworkIntervalRef.current) {
+        clearInterval(fireworkIntervalRef.current);
+        fireworkIntervalRef.current = null;
+      }
+
+      // Force explode all active fireworks immediately with fast explosion
+      const currentFireworks = [...fireworksRef.current];
+      for (const firework of currentFireworks) {
+        if (!firework.exploded) {
+          explodeFirework(firework, true);
+        }
+      }
+
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
         animationFrameRef.current = null;
       }
       window.removeEventListener('resize', resizeCanvas);
     };
-  };
   }, [isIndependenceDay, launchFirework, animate, explodeFirework]);
 
 if (!isIndependenceDay) return null;
