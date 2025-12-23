@@ -1,8 +1,11 @@
 import GithubLogo from "images/GithubLogo";
 import TwitterLogo from "images/TwitterLogo";
+import { getTranslationsCache } from "lib/server-cache";
 import styles from "./Footer.module.css";
 
-const Footer = () => {
+const Footer = async () => {
+	const footerTranslations = await getTranslationsCache("footer");
+
 	return (
 		<footer className={styles.footer}>
 			<a
@@ -14,7 +17,7 @@ const Footer = () => {
 				<div className={styles.iconWrapper}>
 					<TwitterLogo center />
 				</div>
-				Twitter
+				{footerTranslations?.twitter || "Twitter"}
 			</a>
 			<a
 				href="https://www.github.com/ItamarShDev"
@@ -25,7 +28,7 @@ const Footer = () => {
 				<div className={styles.iconWrapper}>
 					<GithubLogo center />
 				</div>
-				Github
+				{footerTranslations?.github || "Github"}
 			</a>
 		</footer>
 	);

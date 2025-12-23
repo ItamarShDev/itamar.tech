@@ -40,6 +40,10 @@
 		"play": "הפעל",
 		"pause": "השהה"
 	},
+	"offer_me_job": {
+		"title": "אנחנו מתאימים! בואו נדבר.",
+		"text": "הציעו לי עבודה"
+	},
 	"email": {
 		"title": "שלחו לי אימייל",
 		"text": "שלחו לי הודעה",
@@ -73,13 +77,8 @@
 			},
 			{
 				"slug": "proxy-state",
-				"title": "Proxy State",
-				"summary": "A simple example of a traffic cross app using generators."
-			},
-			{
-				"slug": "ai-chat",
-				"title": "צ׳אט AI",
-				"summary": "דוגמא פשוטה לאפליקציית צ׳אט AI."
+				"title": "מצב פרוקסי",
+				"summary": "דוגמא פשוטה ליישום מצב פרוקסי ללא שימוש ב-setState."
 			}
 		],
 		"websites": {
@@ -91,12 +90,63 @@
 		}
 	},
 	"proxy-state": {
-		"title": "Proxy State",
+		"title": "מצב פרוקסי",
 		"placeholders": {
-			"name": "Name",
-			"firstNumber": "First Number",
-			"secondNumber": "Second Number"
+			"name": "שם",
+			"firstNumber": "מספר ראשון",
+			"secondNumber": "מספר שני"
 		},
-		"explanation": "This example shows how to use the Proxy State hook to create a simple calculator."
+		"explanation": "דוגמא זו מציגה כיצד להשתמש ב-Proxy State hook ליצירת מחשבון פשוט."
+	},
+	"chat": {
+		"headerTitle": "שאלו על איתמר",
+		"newChat": "שיחה חדשה",
+		"placeholder": "שאלו אותי כל דבר...",
+		"greeting": "היי! אני העוזר של איתמר. אני יכול לספר לכם הכל עליו - הפרויקטים שלו, הכישורים שלו, ואיך ליצור איתו קשר. מה תרצו לדעת?",
+		"error": "מצטער, יש לי בעיה להתחבר כרגע. אנא נסו שוב בעוד רגע.",
+		"askMeAnything": "שאלו אותי כל דבר:",
+		"suggestedQuestions": [
+			"מה השם שלך ומה אתה עושה?",
+			"ספר לי על הפרויקטים שלך",
+			"אילו כישורים יש לך?",
+			"איך אפשר ליצור איתך קשר?",
+			"אילו אתרים בנית?",
+			"עם אילו טכנולוגיות אתה עובד?",
+			"האם אנחנו מתאימים?",
+			"כמה אנחנו תואמים לפי כישורים?",
+			"מה אחוז ההתאמה שלנו?",
+			"האם יש לנו תחומי עניין טכניים דומים?",
+			"עזור לי ליצור גרף",
+			"הראה לי דוגמאות לגרפים"
+		]
+	},
+	"match_finder": {
+		"modalTitle": "האם אנחנו מתאימים?",
+		"searchLabel": "חפשו טכנולוגיה",
+		"matchScore": "ציון התאמה:",
+		"match": "התאמה",
+		"qualifications": {
+			"perfect": "התאמה מושלמת!",
+			"great": "התאמה מעולה!",
+			"good": "התאמה טובה",
+			"fair": "התאמה סבירה"
+		}
+	},
+	"charts": {
+		"abilities": {
+			"title": "יכולות"
+		},
+		"progress": {
+			"title": "התקדמות לאורך זמן",
+			"labels": ["שבוע", "חודש", "4 חודשים", "6 חודשים", "שנה"],
+			"userOriented": "עיצוב מוכוון משתמש",
+			"learning": "למידה",
+			"mingling": "היכרות",
+			"involvement": "מעורבות"
+		}
+	},
+	"footer": {
+		"twitter": "טוויטר",
+		"github": "גיטהאב"
 	}
 }

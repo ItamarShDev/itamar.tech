@@ -1,4 +1,5 @@
 import { LinkCard } from "components";
+import { getCurrentLang } from "lib/headers";
 import { getTranslationsCache } from "lib/server-cache";
 import type { Metadata } from "next";
 import styles from "./styles.module.css";
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExampleProjects() {
+	const lang = await getCurrentLang();
 	const { links, websites, externalWebsites, examplesTitle } =
 		await getTranslationsCache("example_projects");
 
@@ -30,7 +32,7 @@ export default async function ExampleProjects() {
 			{links.map((example) => (
 				<LinkCard
 					key={example.slug}
-					route={`/example-projects/${example.slug}`}
+					route={`/${lang}/example-projects/${example.slug}`}
 					title={example.title}
 					subTitle={example.summary}
 				/>

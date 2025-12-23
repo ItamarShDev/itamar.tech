@@ -2,6 +2,7 @@
 
 import type { Properties } from 'components/properties';
 import { useEffect, useRef } from "react";
+import { useTranslation } from "translations/hooks";
 import { useFireworks } from "../../context/FireworksContext";
 import { calculateMatch, getQualificationText } from "../../lib/utils/match";
 import styles from "./MatchProgress.module.css";
@@ -21,10 +22,14 @@ const MatchProgress = ({
 }) => {
   const { toggleFireworks } = useFireworks();
   const hasTriggeredFireworks = useRef(false);
+  const { translations: matchFinderTranslations } = useTranslation('match_finder');
+
+  const matchLabel = matchFinderTranslations?.match || "Match";
+  const qualifications = matchFinderTranslations?.qualifications;
 
   useEffect(() => {
     const newPercentage = calculateMatch(selectedSkills, properties);
-    setQualificationText(getQualificationText(newPercentage));
+    setQualificationText(getQualificationText(newPercentage, qualifications));
     const boundedPercentage = Math.min(100, newPercentage);
     setPercentage(boundedPercentage);
 
@@ -38,7 +43,7 @@ const MatchProgress = ({
     if (boundedPercentage < 80) {
       hasTriggeredFireworks.current = false;
     }
-  }, [properties, selectedSkills, setPercentage, setQualificationText, toggleFireworks]);
+  }, [properties, selectedSkills, setPercentage, setQualificationText, toggleFireworks, qualifications]);
 
   return (
     <div className={styles.progress}>
@@ -50,7 +55,7 @@ const MatchProgress = ({
           color: `hsl(0, 0%, ${50 - percentage}%)`,
         }}
       >
-        {percentage}% Match
+        {percentage}% {matchLabel}
       </div>
     </div>
   );

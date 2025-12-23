@@ -74,6 +74,12 @@ export default async function Blog({ params }) {
 					}),
 				}}
 			/>
+			{lang === "he" && (
+				<div className={styles.aiTranslatedBanner}>
+					<span className={styles.aiIcon}>🤖</span>
+					<span>תורגם אוטומטית באמצעות AI</span>
+				</div>
+			)}
 			<h1 className={styles.title}>{post.metadata.title}</h1>
 			<div className={styles.subTitle}>{post.metadata.summary}</div>
 			<div className={styles.date}>{post.metadata.date}</div>

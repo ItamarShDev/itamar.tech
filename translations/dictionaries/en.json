@@ -97,5 +97,56 @@
 			"secondNumber": "Second Number"
 		},
 		"explanation": "This example shows how to use the Proxy State hook to create a simple calculator."
+	},
+	"chat": {
+		"headerTitle": "Ask about Itamar",
+		"newChat": "New Chat",
+		"placeholder": "Ask me anything...",
+		"greeting": "Hi! I'm Itamar's AI assistant. I can tell you all about him - his projects, skills, and how to get in touch. What would you like to know?",
+		"error": "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
+		"askMeAnything": "Ask me anything:",
+		"suggestedQuestions": [
+			"What's your name and what do you do?",
+			"Tell me about your projects",
+			"What skills do you have?",
+			"How can I contact you?",
+			"What websites have you built?",
+			"What technologies do you work with?",
+			"Are we a good match?",
+			"How compatible are we based on skills?",
+			"What's our match percentage?",
+			"Do we share similar technical interests?",
+			"Help me create a chart",
+			"Show me chart examples"
+		]
+	},
+	"match_finder": {
+		"modalTitle": "Are we a match?",
+		"searchLabel": "Search for tech",
+		"matchScore": "Match score:",
+		"match": "Match",
+		"qualifications": {
+			"perfect": "Perfect Match!",
+			"great": "Great Match!",
+			"good": "Good Match",
+			"fair": "Fair Match"
+		}
+	},
+	"charts": {
+		"abilities": {
+			"title": "Abilities"
+		},
+		"progress": {
+			"title": "Progress Over Time",
+			"labels": ["1 week", "1 month", "4 months", "6 months", "1 year"],
+			"userOriented": "User oriented design",
+			"learning": "Learning",
+			"mingling": "Mingling",
+			"involvement": "Involvement"
+		}
+	},
+	"footer": {
+		"twitter": "Twitter",
+		"github": "Github"
 	}
 }

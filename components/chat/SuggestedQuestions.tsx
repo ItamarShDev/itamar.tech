@@ -1,12 +1,13 @@
 'use client';
 
+import { useTranslation } from 'translations/hooks';
 import styles from './SuggestedQuestions.module.css';
 
 interface SuggestedQuestionsProps {
   onSelectQuestion: (question: string) => void;
 }
 
-const suggestedQuestions = [
+const defaultQuestions = [
   "What's your name and what do you do?",
   "Tell me about your projects",
   "What skills do you have?",
@@ -22,11 +23,16 @@ const suggestedQuestions = [
 ];
 
 export default function SuggestedQuestions({ onSelectQuestion }: SuggestedQuestionsProps) {
+  const { translations: chatTranslations } = useTranslation('chat');
+  
+  const questions = chatTranslations?.suggestedQuestions || defaultQuestions;
+  const titleText = chatTranslations?.askMeAnything || 'Ask me anything:';
+
   return (
     <div className={styles.container}>
-      <p className={styles.title}>Ask me anything:</p>
+      <p className={styles.title}>{titleText}</p>
       <div className={styles.questions}>
-        {suggestedQuestions.map((question, index) => (
+        {questions.map((question, index) => (
           <button
             key={index}
             className={styles.question}

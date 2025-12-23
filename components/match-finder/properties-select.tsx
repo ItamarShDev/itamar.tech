@@ -2,6 +2,7 @@
 
 import type { Properties } from "components/properties";
 import { useRef, useState } from "react";
+import { useTranslation } from "translations/hooks";
 import RankJson from "../../static-props/technologies.json";
 import styles from "./PropertiesSelect.module.css";
 
@@ -32,6 +33,10 @@ export default function PropertiesSelect({
 	const [tags, setTags] = useState<string[]>([]);
 	const [isInputFocused, setIsInputFocused] = useState(false);
 	const inputEl = useRef<HTMLInputElement>(null);
+	const { translations: matchFinderTranslations } = useTranslation('match_finder');
+
+	const searchLabel = matchFinderTranslations?.searchLabel || "Search for tech";
+	const matchScoreLabel = matchFinderTranslations?.matchScore || "Match score:";
 
 	const skills = Object.keys(properties);
 
@@ -84,9 +89,9 @@ export default function PropertiesSelect({
 	return (
 		<div className={styles.matcher}>
 			<label htmlFor="search-technologies" className={styles.label}>
-				Search for tech
+				{searchLabel}
 				{qualificationText && (
-					<span className={styles.matchText}>Match score: {qualificationText}</span>
+					<span className={styles.matchText}>{matchScoreLabel} {qualificationText}</span>
 				)}
 			</label>
 			<div className={styles.container}>

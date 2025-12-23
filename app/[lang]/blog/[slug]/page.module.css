@@ -3,6 +3,23 @@
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
 }
 
+.aiTranslatedBanner {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	margin-bottom: 1.5rem;
+	background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+	border: 1px solid rgba(99, 102, 241, 0.3);
+	border-radius: 8px;
+	font-size: 0.9rem;
+	color: var(--colors-subText);
+}
+
+.aiIcon {
+	font-size: 1.2rem;
+}
+
 .title {
 	color: var(--colors-text);
 	margin-bottom: 0.5rem;

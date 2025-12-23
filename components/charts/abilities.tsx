@@ -1,7 +1,9 @@
 "use client";
 import type { ChartData } from "chart.js";
 import { Radar } from "react-chartjs-2";
-import useChartSettings, { type ChartSettings } from "./chart-settings";
+import type { ChartSettings } from "lib/utils/chart";
+import { useTranslation } from "translations/hooks";
+import useChartSettings from "./chart-settings";
 
 const labels = [
 	"Python",
@@ -13,7 +15,7 @@ const labels = [
 	"TypeScript",
 ];
 
-const values = [
+const defaultValues = [
 	{
 		label: "Abilities",
 		data: [85, 70, 90, 90, 90, 70, 90],
@@ -25,10 +27,20 @@ const values = [
  * Shows a Radar chart with given data
  */
 const Abilities = () => {
+	const { translations: chartsTranslations } = useTranslation('charts');
+	
+	const title = chartsTranslations?.abilities?.title || "Abilities";
+	const values = [
+		{
+			...defaultValues[0],
+			label: title,
+		},
+	];
+
 	const { data, radarOptions }: ChartSettings = useChartSettings({
 		labels,
 		values,
-		title: "Abilities",
+		title,
 	});
 	if (data)
 		return <Radar data={data as ChartData<"radar">} options={radarOptions} />;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'translations/hooks';
 import Message from './Message';
 import SuggestedQuestions from './SuggestedQuestions';
 import styles from './ChatWindow.module.css';
@@ -16,15 +17,21 @@ interface ChatWindowProps {
 }
 
 export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      type: 'response',
-      content: "Hi! I'm Itamar's AI assistant. I can tell you all about him - his projects, skills, and how to get in touch. What would you like to know?"
-    }
-  ]);
+  const { translations: chatTranslations } = useTranslation('chat');
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Initialize greeting message when translations are loaded
+  useEffect(() => {
+    if (chatTranslations?.greeting && messages.length === 0) {
+      setMessages([{
+        type: 'response',
+        content: chatTranslations.greeting
+      }]);
+    }
+  }, [chatTranslations?.greeting, messages.length]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -140,7 +147,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, {
         type: 'response',
-        content: "Sorry, I'm having trouble connecting right now. Please try again in a moment."
+        content: chatTranslations?.error || "Sorry, I'm having trouble connecting right now. Please try again in a moment."
       }]);
     } finally {
       setIsLoading(false);
@@ -148,7 +155,10 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   };
 
   const handleNewChat = () => {
-    setMessages([]);
+    setMessages(chatTranslations?.greeting ? [{
+      type: 'response',
+      content: chatTranslations.greeting
+    }] : []);
     setInputValue('');
     setIsLoading(false);
   };
@@ -158,9 +168,9 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   return (
     <div className={styles.chatWindow}>
       <div className={styles.header}>
-        <h5>Ask about Itamar</h5>
+        <h5>{chatTranslations?.headerTitle || 'Ask about Itamar'}</h5>
         <div className={styles.headerButtons}>
-          <button className={styles.newChatButton} onClick={handleNewChat} title="New Chat">
+          <button className={styles.newChatButton} onClick={handleNewChat} title={chatTranslations?.newChat || 'New Chat'}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
               <path d="M3 3v5h5" />
@@ -205,7 +215,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Ask me anything..."
+          placeholder={chatTranslations?.placeholder || 'Ask me anything...'}
           className={styles.input}
           disabled={isLoading}
         />
