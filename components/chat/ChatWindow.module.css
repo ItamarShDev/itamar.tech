@@ -3,7 +3,7 @@
   bottom: 6rem;
   left: 2rem;
   width: 34rem;
-  height: 52rem;
+  height: min(60rem, calc(100vh - 8rem));
   background: var(--colors-bg);
   border-radius: 1rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -19,12 +19,14 @@
   align-items: center;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   color: var(--colors-headerText);
   border-bottom: 1px solid var(--colors-border);
 
   h5 {
       margin: 0 !important;
+      font-size: 1.8rem;
+      font-weight: 600;
   }
 }
 

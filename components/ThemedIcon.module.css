@@ -20,11 +20,16 @@
 
 .icon {
 	all: unset;
-	font-size: 1.5em;
-	font-style: normal;
-	rotate: 180deg;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	cursor: pointer;
 	color: var(--colors-paragraph);
+	transition: transform 0.2s ease;
+}
+
+.container:hover .icon {
+	transform: translateY(2px);
 }
 
 .themeItem {

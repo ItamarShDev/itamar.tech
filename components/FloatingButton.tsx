@@ -44,7 +44,10 @@ function FloatingButton() {
   }, [opened, showFireworks, toggleFireworks]);
 
   return (
-    <div className={styles.container} title={modalTitle}>
+    <div 
+      className={styles.container} 
+      title={modalTitle}
+    >
       <button
         type="button"
         className={styles.floatingButton}

@@ -32,13 +32,17 @@ export function useChartTheme() {
 	if (!themeConfig) {
 		return {
 			charts: "#448ef6",
-			text: "hsl(204.2, 100%, 28.6%)",
-			headerText: "hsl(204.2, 100%, 28.6%)",
+			text: "#1a365d",
+			headerText: "#1a365d",
 		};
 	}
+	const charts = themeConfig.getPropertyValue("--colors-charts")?.trim() || "#448ef6";
+	const text = themeConfig.getPropertyValue("--colors-text")?.trim() || "#1a365d";
+	const headerText = themeConfig.getPropertyValue("--colors-headerText")?.trim() || "#1a365d";
+	
 	return {
-		charts: themeConfig.getPropertyValue("--colors-charts"),
-		text: themeConfig.getPropertyValue("--colors-text"),
-		headerText: themeConfig.getPropertyValue("--colors-headerText"),
+		charts,
+		text,
+		headerText,
 	};
 }

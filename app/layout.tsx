@@ -1,5 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import FireworksDisplay from "components/FireworksDisplay";
+import FloatingButton from "components/FloatingButton";
+import { ChatProvider } from "context/ChatContext";
 import { FireworksProvider } from "context/FireworksContext";
 import Header from "layouts/header";
 import PersonalChat from "components/PersonalChat";
@@ -30,16 +32,19 @@ export default async function RootLayout({
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
 				<FireworksProvider>
-					<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
-						<FireworksDisplay />
-						<div id="main-view" className={styles.mainView}>
-							<Header />
-							<AnimatedViewTransition>
-								<main className={styles.main}>{children}</main>
-							</AnimatedViewTransition>
-						</div>
-						<PersonalChat />
-					</body>
+					<ChatProvider>
+						<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+							<FireworksDisplay />
+							<div id="main-view" className={styles.mainView}>
+								<Header />
+								<AnimatedViewTransition>
+									<main className={styles.main}>{children}</main>
+								</AnimatedViewTransition>
+							</div>
+							<FloatingButton />
+							<PersonalChat />
+						</body>
+					</ChatProvider>
 				</FireworksProvider>
 			</ThemeProvider>
 		</html>

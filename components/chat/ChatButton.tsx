@@ -13,7 +13,7 @@ export default function ChatButton({ onClick, isOpen }: ChatButtonProps) {
 
   return (
     <button
-      className={styles.chatButton}
+      className={`${styles.chatButton} ${isOpen ? styles.hidden : ''}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -1,14 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useChatContext } from 'context/ChatContext';
 import { ChatButton, ChatWindow } from './chat';
 
 export default function PersonalChat() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const toggleChat = () => {
-    setIsChatOpen(!isChatOpen);
-  };
+  const { isChatOpen, toggleChat, closeChat } = useChatContext();
 
   return (
     <>
@@ -18,7 +14,7 @@ export default function PersonalChat() {
       />
       <ChatWindow 
         isOpen={isChatOpen} 
-        onClose={() => setIsChatOpen(false)} 
+        onClose={closeChat} 
       />
     </>
   );

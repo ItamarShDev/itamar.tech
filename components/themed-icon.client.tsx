@@ -22,7 +22,18 @@ export function ThemedIconClient({
 			<div className={styles.iconContainer}>
 				{switchComponent}
 				<button type="button" className={styles.icon} title={text}>
-					^
+					<svg 
+						width="12" 
+						height="12" 
+						viewBox="0 0 12 12" 
+						fill="none" 
+						stroke="currentColor" 
+						strokeWidth="2" 
+						strokeLinecap="round" 
+						strokeLinejoin="round"
+					>
+						<path d="M2 4l4 4 4-4" />
+					</svg>
 				</button>
 			</div>
 			<div className={styles.list}>{listComponent}</div>

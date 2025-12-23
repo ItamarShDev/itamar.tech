@@ -84,8 +84,8 @@ export interface ThemedDataset extends Omit<ChartDataset, 'settings'> {
   borderWidth: number;
   backgroundColor: string;
   borderColor: string;
-  yAxisID: string;
-  xAxisID: string;
+  yAxisID: 'y';
+  xAxisID: 'x';
   // Add other specific properties that might come from settings
   fill?: boolean;
   borderDash?: number[];
@@ -161,18 +161,18 @@ export function themedLineSettings(
       enabled: false,
     },
     scales: {
-      xAxis: {
+      x: {
         ticks: { color: theme.text },
-        gridLines: {
+        grid: {
           drawTicks: false,
           drawOnChartArea: false,
           color: theme.headerText,
         },
       },
-      yAxis: {
+      y: {
         display: true,
         ticks: { display: false },
-        gridLines: {
+        grid: {
           drawTicks: false,
           drawOnChartArea: false,
           color: theme.headerText,
@@ -200,8 +200,8 @@ export function themedDatasets(
       borderWidth: 2,
       backgroundColor: `hsla(${h}, ${s}%, ${l}%, 0.2)`,
       borderColor: `hsl(${h}, ${s}%, ${l}%)`,
-      yAxisID: 'yAxis',
-      xAxisID: 'xAxis',
+      yAxisID: 'y',
+      xAxisID: 'x',
     };
     
     if (item.settings) {
