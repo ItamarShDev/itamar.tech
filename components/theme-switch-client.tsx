@@ -8,7 +8,7 @@ export function ThemeItem({
 }: {
 	currentTheme: string;
 	isSelected: boolean;
-	setThemeAction: (theme: string) => void;
+	setThemeAction: (theme: string, event?: React.MouseEvent) => void;
 }) {
 	const label = currentTheme === "gpt5" ? "GPT 5" : currentTheme;
 	return (
@@ -17,7 +17,7 @@ export function ThemeItem({
 		>
 			<button
 				type="button"
-				onClick={() => setThemeAction(currentTheme)}
+				onClick={(e) => setThemeAction(currentTheme, e)}
 				className={styles.themeButton}
 			>
 				{label}

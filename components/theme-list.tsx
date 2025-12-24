@@ -25,13 +25,20 @@ export function ThemeSwitch({ translations }) {
 	const { theme, toggleMode } = useThemeContext();
 	const selectedDark = theme !== "light";
 	return (
-		<label htmlFor="theme-switch" className={styles.themeSwitch}>
+		<label
+			htmlFor="theme-switch"
+			className={styles.themeSwitch}
+			onClick={(e) => {
+				e.preventDefault();
+				toggleMode(e);
+			}}
+		>
 			<input
 				type="checkbox"
 				name="theme-switch"
 				id="theme-switch"
 				checked={selectedDark}
-				onChange={() => toggleMode()}
+				readOnly
 				title={selectedDark ? translations.lightMode : translations.darkMode}
 			/>
 			<span className={styles.slider} />

@@ -420,3 +420,23 @@ body {
 	animation-duration: 500ms;
 	animation: 500ms cubic-bezier(0, 0, 0.2, 1) 250ms both fade-in;
 }
+
+/* Theme ripple transition */
+html.theme-transition::view-transition-old(root) {
+	z-index: 1;
+	animation: none;
+}
+
+html.theme-transition::view-transition-new(root) {
+	z-index: 9999;
+	animation: theme-ripple-expand 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes theme-ripple-expand {
+	from {
+		clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 0));
+	}
+	to {
+		clip-path: circle(var(--ripple-radius, 100vmax) at var(--ripple-x, 50%) var(--ripple-y, 0));
+	}
+}
