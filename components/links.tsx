@@ -23,6 +23,11 @@ async function Links() {
 				title={translation.examples.title}
 				subTitle={translation.examples.subTitle}
 			/>
+			<LinkCard
+				route={`https://tanstack.itamar.dev`}
+				title={translation.tanstack.title}
+				subTitle={translation.tanstack.subTitle}
+			/>
 		</div>
 	);
 }

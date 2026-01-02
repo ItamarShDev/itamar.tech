@@ -33,6 +33,10 @@
 		"examples": {
 			"title": "Examples",
 			"subTitle": "Project examples recreated"
+		},
+		"tanstack": {
+			"title": "My Tanstack based website",
+			"subTitle": "Built with pure tanstack tech"
 		}
 	},
 	"player": {
@@ -138,7 +142,13 @@
 		},
 		"progress": {
 			"title": "Progress Over Time",
-			"labels": ["1 week", "1 month", "4 months", "6 months", "1 year"],
+			"labels": [
+				"1 week",
+				"1 month",
+				"4 months",
+				"6 months",
+				"1 year"
+			],
 			"userOriented": "User oriented design",
 			"learning": "Learning",
 			"mingling": "Mingling",
