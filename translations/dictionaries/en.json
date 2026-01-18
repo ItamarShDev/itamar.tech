@@ -90,6 +90,11 @@
 				"title": "Hakapit",
 				"summary": "Liverpool fan podcasts",
 				"link": "https://hakapit.online"
+			},
+			"conflict-bars": {
+				"title": "Conflict Bars",
+				"summary": "A simple example of a conflict bars app.",
+				"link": "https://conflict-bars.itamar.dev"
 			}
 		}
 	},

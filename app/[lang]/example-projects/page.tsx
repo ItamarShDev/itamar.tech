@@ -47,6 +47,13 @@ export default async function ExampleProjects() {
 				title={websites.hakapit.title}
 				subTitle={websites.hakapit.summary}
 			/>
+			<LinkCard
+				key={"conflict-bars"}
+				newTab
+				route={websites["conflict-bars"].link}
+				title={websites["conflict-bars"].title}
+				subTitle={websites["conflict-bars"].summary}
+			/>
 		</div>
 	);
 }
