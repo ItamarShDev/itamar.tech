@@ -37,6 +37,10 @@
 		"tanstack": {
 			"title": "My Tanstack based website",
 			"subTitle": "Built with pure tanstack tech"
+		},
+		"reactwind": {
+			"title": "Reactwind",
+			"subTitle": "Tailwind CSS as JSX props"
 		}
 	},
 	"player": {
@@ -95,6 +99,11 @@
 				"title": "Conflict Bars",
 				"summary": "Cross reference Israeli hip hop with Israels conflicts",
 				"link": "https://conflict-bars.itamar.dev"
+			},
+			"reactwind": {
+				"title": "Reactwind",
+				"summary": "A library adding tailwind as jsx props",
+				"link": "https://reactwind.itamar.dev"
 			}
 		}
 	},

@@ -37,6 +37,10 @@
 		"tanstack": {
 			"title": "האתר שלי עם Tanstack",
 			"subTitle": "בנוי עם טכנולוגיות Tanstack"
+		},
+		"reactwind": {
+			"title": "Reactwind",
+			"subTitle": "חבילת Tailwind CSS כ-JSX props"
 		}
 	},
 	"player": {
@@ -90,6 +94,11 @@
 				"title": "הכפית",
 				"summary": "אתר פודקסטים של ליברפול",
 				"link": "https://hakapit.online"
+			},
+			"reactwind": {
+				"title": "Reactwind",
+				"summary": "חבילת Tailwind CSS כ-JSX props",
+				"link": "https://reactwind.itamar.dev"
 			}
 		}
 	},

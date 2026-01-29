@@ -54,6 +54,13 @@ export default async function ExampleProjects() {
 				title={websites["conflict-bars"].title}
 				subTitle={websites["conflict-bars"].summary}
 			/>
+			<LinkCard
+				key={"reactwind"}
+				newTab
+				route={websites.reactwind.link}
+				title={websites.reactwind.title}
+				subTitle={websites.reactwind.summary}
+			/>
 		</div>
 	);
 }

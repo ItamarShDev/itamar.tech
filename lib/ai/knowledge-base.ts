@@ -87,6 +87,12 @@ export const personalKnowledgeBase: PersonalInfo = {
       title: "Hakapit",
       summary: "Liverpool fan podcasts",
       link: "https://hakapit.online"
+    },
+    {
+      name: "reactwind",
+      title: "Reactwind",
+      summary: "A library adding tailwind as jsx props",
+      link: "https://reactwind.itamar.dev"
     }
   ],
   skills: [
@@ -225,34 +231,34 @@ export const getProperties = (): string[] => {
 export const searchPersonalInfo = (query: string): string => {
   const lowerQuery = query.toLowerCase();
   const info = personalKnowledgeBase;
-  
+
   // Search in different sections
   if (lowerQuery.includes('name') || lowerQuery.includes('who')) {
     return `My name is ${info.name} and I'm a ${info.profession}.`;
   }
-  
+
   if (lowerQuery.includes('project') || lowerQuery.includes('work')) {
     const projectList = info.projects.map(p => `- ${p.title}: ${p.summary}`).join('\n');
     return `Here are my projects:\n${projectList}`;
   }
-  
+
   if (lowerQuery.includes('skill') || lowerQuery.includes('technology')) {
     return `My skills include: ${info.skills.join(', ')}.`;
   }
-  
+
   if (lowerQuery.includes('website') || lowerQuery.includes('site')) {
     const websiteList = info.websites.map(w => `- ${w.title}: ${w.summary} (${w.link})`).join('\n');
     return `My websites:\n${websiteList}`;
   }
-  
+
   if (lowerQuery.includes('contact') || lowerQuery.includes('email')) {
     return `You can contact me through the email form on this website. I'm open to job opportunities and collaborations.`;
   }
-  
+
   if (lowerQuery.includes('language')) {
     return `I speak ${info.languages.join(' and ')}.`;
   }
-  
+
   // Default response
   return `I'm ${info.name}, a ${info.profession}. I've worked on various projects including web applications, examples, and tools. You can ask me about my projects, skills, websites, or how to contact me.`;
 };
