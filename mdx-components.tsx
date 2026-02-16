@@ -58,6 +58,7 @@ export function CodeComponent(theme) {
 		default: "dark-plus",
 		monokai: "monokai",
 		cobalt2: "solarized-dark",
+		opus: "solarized-dark",
 	};
 
 	return function Component({ children, ...props }) {

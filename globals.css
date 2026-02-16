@@ -249,6 +249,32 @@ body[data-theme="cursor"] {
 	--sh-comment: #6a9955;
 }
 
+body[data-theme="opus"] {
+	--color-lang: white;
+	--colors-bg: #1c1917;
+	--colors-modalBg: #231f1c;
+	--colors-main: #d4a574;
+	--colors-text: #ede0d4;
+	--colors-subText: rgba(237, 224, 212, 0.65);
+	--colors-headerText: #e8b88a;
+	--colors-header: #d4a574;
+	--colors-paragraph: #d5c4a1;
+	--colors-decorations: #c2885c;
+	--colors-hoverDecorations: rgba(194, 136, 92, 0.12);
+	--colors-inputs: rgba(212, 165, 116, 0.18);
+	--colors-link: #e8b88a;
+	--colors-charts: #d4a574;
+	--sh-class: #e8b88a;
+	--sh-identifier: var(--colors-subText);
+	--sh-sign: #a89984;
+	--sh-property: var(--colors-paragraph);
+	--sh-entity: #8ec07c;
+	--sh-jsxliterals: #d3869b;
+	--sh-string: #b8bb26;
+	--sh-keyword: #fb4934;
+	--sh-comment: #7c6f64;
+}
+
 body[data-theme="light"],
 body {
 	--color-lang: black;

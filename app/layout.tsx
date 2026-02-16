@@ -1,11 +1,11 @@
 import { Analytics } from "@vercel/analytics/react";
+import AnimatedViewTransition from "components/AnimatedViewTransition";
 import FireworksDisplay from "components/FireworksDisplay";
 import FloatingButton from "components/FloatingButton";
+import PersonalChat from "components/PersonalChat";
 import { ChatProvider } from "context/ChatContext";
 import { FireworksProvider } from "context/FireworksContext";
 import Header from "layouts/header";
-import PersonalChat from "components/PersonalChat";
-import AnimatedViewTransition from "components/AnimatedViewTransition";
 import { fontVariables } from "lib/fonts";
 import { getCurrentLang, getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
@@ -28,7 +28,7 @@ export default async function RootLayout({
 	const theme = await getCurrentTheme();
 
 	return (
-		<html lang={lang} className={fontVariables}>
+		<html lang={lang} className={fontVariables} suppressHydrationWarning>
 			<Analytics />
 			<ThemeProvider defaultTheme={theme}>
 				<FireworksProvider>
