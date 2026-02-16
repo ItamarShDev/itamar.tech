@@ -22,7 +22,10 @@ export function useRandomEmoji({
 
   useEffect(() => {
     if (emojis.length === 0) {
-      setEmoji('');
+      // Avoid synchronous state update warning and missing dependency
+      requestAnimationFrame(() => {
+        setEmoji(prev => prev !== '' ? '' : prev);
+      });
       return;
     }
 

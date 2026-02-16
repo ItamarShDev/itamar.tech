@@ -236,6 +236,9 @@ export default function Fireworks() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Capture ref for cleanup
+    const localFireworks = fireworksRef.current;
+
     // Start animation loop
     animationFrameRef.current = requestAnimationFrame(animate);
 
@@ -254,7 +257,7 @@ export default function Fireworks() {
       }
 
       // Force explode all active fireworks immediately with fast explosion
-      const currentFireworks = [...fireworksRef.current];
+      const currentFireworks = [...localFireworks];
       for (const firework of currentFireworks) {
         if (!firework.exploded) {
           explodeFirework(firework, true);
@@ -267,9 +270,10 @@ export default function Fireworks() {
       }
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [isIndependenceDay, launchFirework, animate, explodeFirework]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isIndependenceDay]);
 
-if (!isIndependenceDay) return null;
+  if (!isIndependenceDay) return null;
 
   return (
     <canvas

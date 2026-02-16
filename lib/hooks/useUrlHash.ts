@@ -12,29 +12,28 @@ export default function useUrlHash(hash: string): boolean {
     typeof window !== 'undefined' ? window.location.hash : ''
   );
 
-  const updateCurrentHash = () => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrlHash(window.location.hash);
-    }
-  };
-
   useEffect(() => {
+    // Only run on client
     if (typeof window === 'undefined') return;
-    
+
+    const updateCurrentHash = () => {
+      setCurrentUrlHash(window.location.hash);
+    };
+
     // Initial check
     updateCurrentHash();
-    
+
     // Set up event listener for hash changes
     window.addEventListener("hashchange", updateCurrentHash);
-    
+
     // Clean up event listener on unmount
     return () => {
       window.removeEventListener("hashchange", updateCurrentHash);
     };
-  }, [updateCurrentHash]);
+  }, []);
 
   // Check if the current hash matches the provided hash (with or without # prefix)
   const normalizedHash = hash.startsWith('#') ? hash : `#${hash}`;
-  return currentUrlHash === normalizedHash || 
-         currentUrlHash === (normalizedHash.startsWith('#') ? normalizedHash.slice(1) : normalizedHash);
+  return currentUrlHash === normalizedHash ||
+    currentUrlHash === (normalizedHash.startsWith('#') ? normalizedHash.slice(1) : normalizedHash);
 }

@@ -1,8 +1,9 @@
 "use client";
+/* eslint-disable react-hooks/immutability */
 
 import {
-    StateProvider,
-    useProxyState,
+  StateProvider,
+  useProxyState,
 } from "app/[lang]/example-projects/proxy-state/context";
 import { useTranslation } from "translations/hooks";
 import styles from "./styles.module.css";

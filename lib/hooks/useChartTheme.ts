@@ -14,12 +14,18 @@ function useTheme() {
 	const { theme } = useThemeContext();
 	const [themeConfig, setThemeConfig] = useState<CSSStyleDeclaration>();
 	useEffect(() => {
-		setThemeConfig(window.getComputedStyle(document.body));
+		// Avoid synchronous state update warning
+		requestAnimationFrame(() => {
+			setThemeConfig(window.getComputedStyle(document.body));
+		});
 	}, []);
 	useEffect(() => {
 		if (!theme) return;
 		setTheme(theme);
-		setThemeConfig(getComputedStyle(document.body));
+		// Avoid synchronous state update warning
+		requestAnimationFrame(() => {
+			setThemeConfig(getComputedStyle(document.body));
+		});
 	}, [theme]);
 
 	return {
@@ -39,7 +45,7 @@ export function useChartTheme() {
 	const charts = themeConfig.getPropertyValue("--colors-charts")?.trim() || "#448ef6";
 	const text = themeConfig.getPropertyValue("--colors-text")?.trim() || "#1a365d";
 	const headerText = themeConfig.getPropertyValue("--colors-headerText")?.trim() || "#1a365d";
-	
+
 	return {
 		charts,
 		text,

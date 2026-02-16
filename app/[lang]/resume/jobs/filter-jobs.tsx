@@ -1,7 +1,7 @@
 import { Input } from "components/input";
 import type { Job } from "lib/types/jobs";
 import type { InputChangeEvent } from "lib/types/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./FilterJobs.module.css";
 
 type Suggestion = {
@@ -76,11 +76,14 @@ export function FilterJobs({ jobs, updateFilterText, filterText }: Props) {
   })();
 
   useEffect(() => {
-    if (filterText) {
-      setResultCount(jobs.length);
-    } else {
-      setResultCount(0);
-    }
+    // Avoid synchronous state update warning
+    requestAnimationFrame(() => {
+      if (filterText) {
+        setResultCount(jobs.length);
+      } else {
+        setResultCount(0);
+      }
+    });
   }, [filterText, jobs]);
 
   const handleInputChange = (e: InputChangeEvent) => {

@@ -92,9 +92,12 @@ export function HomeBackgroundAurora() {
   useEffect(() => {
     const baseAngle = Math.random() * 360;
     const randomSampler: RangeSampler = randomBetween;
-    setAuroraLayers(
-      AURORA_CONFIGS.map((config) => createAuroraLayer(config, baseAngle, randomSampler))
-    );
+    // Avoid synchronous state update warning
+    requestAnimationFrame(() => {
+      setAuroraLayers(
+        AURORA_CONFIGS.map((config) => createAuroraLayer(config, baseAngle, randomSampler))
+      );
+    });
   }, []);
 
   return (

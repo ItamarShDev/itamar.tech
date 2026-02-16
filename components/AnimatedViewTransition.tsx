@@ -28,7 +28,7 @@ export default function AnimatedViewTransition({ children }: AnimatedViewTransit
 	const transitionType = getTransitionType();
 
 	return (
-		<ViewTransition 
+		<ViewTransition
 			default={transitionType}
 			enter={transitionType}
 			exit={transitionType}

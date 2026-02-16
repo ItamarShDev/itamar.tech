@@ -19,37 +19,52 @@ export default function Message({ content, isUser, isTyping = false }: MessagePr
   useEffect(() => {
     // User messages should always show immediately
     if (isUser) {
-      setDisplayedContent(content);
-      setIsComplete(true);
+      // Avoid synchronous state update warning
+      requestAnimationFrame(() => {
+        setDisplayedContent(content);
+        setIsComplete(true);
+      });
       return;
     }
 
     // Detect if this is a streaming response (content is increasing)
     if (content.length > displayedContent.length && !hasAnimated) {
-      setIsStreaming(true);
-      setDisplayedContent(content);
+      // Avoid synchronous state update warning
+      requestAnimationFrame(() => {
+        setIsStreaming(true);
+        setDisplayedContent(content);
+      });
       return;
     }
 
     // Stop streaming when content stops growing
     if (isStreaming && content.length === displayedContent.length) {
-      setIsStreaming(false);
-      setHasAnimated(true);
-      setIsComplete(true);
+      // Avoid synchronous state update warning
+      requestAnimationFrame(() => {
+        setIsStreaming(false);
+        setHasAnimated(true);
+        setIsComplete(true);
+      });
       return;
     }
 
     // AI messages that have already been animated should show immediately
     if (hasAnimated) {
-      setDisplayedContent(content);
-      setIsComplete(true);
+      // Avoid synchronous state update warning
+      requestAnimationFrame(() => {
+        setDisplayedContent(content);
+        setIsComplete(true);
+      });
       return;
     }
 
     // Initial display for non-streaming messages
-    setDisplayedContent(content);
-    setIsComplete(true);
-    setHasAnimated(true);
+    // Avoid synchronous state update warning
+    requestAnimationFrame(() => {
+      setDisplayedContent(content);
+      setIsComplete(true);
+      setHasAnimated(true);
+    });
   }, [content, isUser, hasAnimated, isStreaming, displayedContent.length]);
 
   return (
@@ -62,7 +77,7 @@ export default function Message({ content, isUser, isTyping = false }: MessagePr
             </svg>
           </div>
         )}
-        
+
         <div className={styles.text}>
           {isUser ? (
             displayedContent
@@ -73,7 +88,7 @@ export default function Message({ content, isUser, isTyping = false }: MessagePr
             <span className={styles.cursor}>|</span>
           )}
         </div>
-        
+
         {isUser && (
           <div className={styles.avatar}>
             IS

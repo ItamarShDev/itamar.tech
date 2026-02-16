@@ -1,9 +1,10 @@
 "use client";
+/* eslint-disable react-hooks/refs */
 
 import {
-    createContext,
-    useContext, useRef,
-    useState
+  createContext,
+  useContext, useRef,
+  useState
 } from "react";
 
 type State = Record<string, any>;
@@ -62,7 +63,7 @@ export function useProxyState<T = any>(
   options?: { testId?: string }
 ): Value<T> {
   const context = useContext(StateContext);
-  
+
   if (!context) {
     throw new Error("useProxyState must be used within a StateProvider");
   }

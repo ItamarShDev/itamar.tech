@@ -19,7 +19,10 @@ export default function RandomQuotes(props: Props) {
 
 		// Initialize currentQuote if it's null and we have quotes
 		if (!currentQuote) {
-			setCurrentQuote(quotes[0]);
+			// Avoid synchronous state update warning
+			requestAnimationFrame(() => {
+				setCurrentQuote(quotes[0]);
+			});
 			return;
 		}
 

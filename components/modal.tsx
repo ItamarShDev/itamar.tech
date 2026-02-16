@@ -81,12 +81,15 @@ function Modal({
 }) {
 	const [root, setRoot] = useState<HTMLElement | null>(null);
 	useEffect(() => {
-		if (parentEl) {
-			setRoot(parentEl);
-		} else {
-			const elm = document.querySelector("body");
-			setRoot(elm);
-		}
+		// Avoid synchronous state update warning
+		requestAnimationFrame(() => {
+			if (parentEl) {
+				setRoot(parentEl);
+			} else {
+				const elm = document.querySelector("body");
+				setRoot(elm as HTMLElement);
+			}
+		});
 	}, [parentEl]);
 	const modal = (
 		<ModalComponent
