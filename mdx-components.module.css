@@ -1,158 +1,190 @@
-.inlineCode {
-	color: var(--colors-headerText);
-	background-color: var(--colors-modalBg);
-	padding: 0.25em 0.5em;
-	border-radius: 0.25em;
+/* ══════════════════════════════════════════════
+   MDX Components — Variant 1 Design Language
+   ══════════════════════════════════════════════ */
+
+/* ── Article wrapper ── */
+.article {
+	font-weight: 400;
+	font-size: 1.4rem;
+	letter-spacing: 0.01em;
+	color: var(--colors-paragraph);
+	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	line-height: 1.8;
 }
 
+/* ── Paragraphs ── */
 .p {
 	color: var(--colors-subText);
-	margin: 0 0 0 0;
+	margin: 0 0 1.4rem 0;
+	line-height: 1.8;
 }
 
-.h1 {
-
-	color: var(--colors-text);
-}
-
-.h2 {
-	font-size: 1.6em;
-}
-
-.h3 {
-	font-size: 1.2em;
-}
-
-.h4 {
-	font-size: 1.1em;
-}
-
-.h2,
-.h3,
-.h4 {
-	margin-block-end: 0.3em;
-}
-
+/* ── Headings ── */
 .h1,
 .h2,
 .h3,
 .h4 {
 	scroll-margin-top: 7.5rem;
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	color: var(--colors-text);
+	letter-spacing: -0.02em;
 }
 
-.h1>a,
-.h2>a,
-.h4>a,
-.h3>a {
-	filter: brightness(225%);
-	font-weight: 300;
+.h1 {
+	font-size: 2em;
+	font-weight: 700;
+	margin: 2rem 0 1rem 0;
+}
+
+.h2 {
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 2.5rem 0 0.8rem 0;
+	padding-bottom: 0.4rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 15%, transparent);
+}
+
+.h3 {
+	font-size: 1.25em;
+	font-weight: 600;
+	margin: 2rem 0 0.6rem 0;
+}
+
+.h4 {
+	font-size: 1.1em;
+	font-weight: 600;
+	margin: 1.5rem 0 0.5rem 0;
+}
+
+/* Heading anchor links */
+.h1 > a,
+.h2 > a,
+.h3 > a,
+.h4 > a {
+	color: inherit;
 	text-decoration: none;
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	gap: 10px;
+	gap: 0.5rem;
+	transition: color 0.15s ease;
 }
 
-.code {
-	font-family: "Fira Code", monospace;
-	font-size: 1em;
+.h1 > a:hover,
+.h2 > a:hover,
+.h3 > a:hover,
+.h4 > a:hover {
+	color: var(--colors-decorations);
 }
 
-.article {
-	font-weight: 400;
-	font-size: 1em;
-	letter-spacing: 0.5px;
-	color: var(--colors-paragraph);
-	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+/* ── Inline code ── */
+.inlineCode {
+	color: var(--colors-headerText);
+	background-color: color-mix(in srgb, var(--colors-decorations) 8%, transparent);
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 15%, transparent);
+	padding: 0.15em 0.4em;
+	border-radius: 0.4em;
+	font-size: 0.88em;
+	font-family: "Fira Code", ui-monospace, monospace;
 }
 
-.article>p {
-	filter: opacity(0.9);
-	line-height: 1.5em;
-}
-
-
-
-.pre code div {
-	font-size: 0.8em;
-	overflow-y: auto;
-	overflow-x: auto;
-	border-inline-start: 3px var(--colors-decorations) solid;
-	font-family: "Fira Code", monospace;
-}
-
+/* ── Code blocks ── */
 .pre {
 	width: 100%;
 	position: relative;
 	left: 0;
 	overflow-x: visible;
-
 	direction: ltr;
 	background-color: var(--colors-modalBg);
-	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 12%, transparent);
+	border-radius: 0.8rem;
+	margin: 1.5rem 0;
+	font-family: "Fira Code", ui-monospace, monospace;
+}
 
-	.div:first-child {
-		margin: 0 !important;
-	}
+.pre code div {
+	font-size: 0.85em;
+	overflow-y: auto;
+	overflow-x: auto;
+	border-inline-start: 3px solid color-mix(in srgb, var(--colors-decorations) 30%, transparent);
+	font-family: "Fira Code", ui-monospace, monospace;
 }
 
 .pre div {
-	font-size: 1.4rem;
+	font-size: 1.35rem;
 	font-weight: 400;
 	line-height: 2.2rem;
 	font-variant-ligatures: normal;
-	font-family: "Fira Code", monospace;
+	font-family: "Fira Code", ui-monospace, monospace;
 }
 
-.blockquote:before {
-	content: "„";
-	position: absolute;
-	font-size: 5em;
-	left: 0;
-	top: 0;
-	color: grey;
-}
-
+/* ── Blockquotes ── */
 .blockquote {
 	position: relative;
-	font-family: "Helvetica", serif;
-	padding: 2.5em 1em 1em 2em;
-	margin: 0;
+	margin: 2rem 0;
+	padding: 1.2rem 1.6rem;
+	border-inline-start: 3px solid var(--colors-decorations);
+	background-color: color-mix(in srgb, var(--colors-decorations) 5%, transparent);
+	border-radius: 0 0.6rem 0.6rem 0;
 	font-style: italic;
-	font-size: 0.8em;
-	font-weight: 100;
-	line-height: 1.4em;
+	font-size: 1em;
+	line-height: 1.7;
+	color: var(--colors-subText);
+}
+
+.blockquote::before {
+	content: "❝";
+	position: absolute;
+	font-size: 2.5rem;
+	top: -0.6rem;
+	inset-inline-start: 0.8rem;
+	color: var(--colors-decorations);
+	opacity: 0.4;
+	font-style: normal;
 }
 
 .blockquote p {
 	margin: 0;
 }
 
+/* ── Lists ── */
 .ul {
-	font-family: "Roboto", sans-serif;
-	font-size: 0.7em;
-	list-style-type: square;
+	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	font-size: 1em;
+	list-style-type: none;
+	padding-inline-start: 1.5rem;
+	margin: 1rem 0;
 }
 
 .ul li {
-	margin: 0.8em auto;
+	position: relative;
+	padding-inline-start: 0.8rem;
+	margin: 0.6rem 0;
+	line-height: 1.7;
+	color: var(--colors-subText);
 }
 
+.ul li::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: -0.8rem;
+	top: 0.55em;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: var(--colors-decorations);
+	opacity: 0.6;
+}
+
+/* ── Responsive ── */
 @media only screen and (max-width: 968px) {
 	.blockquote {
 		font-size: 1em;
-		font-weight: 300;
 	}
 
 	.h1.post-title,
-	.article> :not(pre, iframe) {
-		max-width: 80vw;
+	.article > :not(pre, iframe) {
+		max-width: 90vw;
 		margin-inline: auto;
-	}
-
-	.blockquote::before {
-		line-height: 0.5em;
 	}
 }
 
@@ -160,24 +192,7 @@
 	.pre {
 		width: 100vw;
 		margin-inline: calc(50% - 50vw);
-		font-size: 1em;
-		line-height: 2em;
+		border-radius: 0;
+		border-inline: none;
 	}
-}
-
-.title {
-	color: var(--colors-text);
-	margin-bottom: 0.5rem;
-}
-
-.subTitle {
-	color: var(--colors-subText);
-	opacity: 0.7;
-	font-size: 1.3em;
-}
-
-.date {
-	color: var(--colors-subText);
-	font-size: 0.8em;
-	filter: brightness(80%);
 }

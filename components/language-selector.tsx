@@ -2,7 +2,7 @@
 import { Switch } from "components/switch";
 import { getRoute as getRouteUtil } from "lib/utils/routing";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { startTransition, useEffect } from "react";
 import styles from "./LanguageSelector.module.css";
 
 export function useLocales() {
@@ -15,13 +15,17 @@ export function useLocales() {
 	};
 
 	const goToNextLocale = () => {
-		replace(getRoute(), { scroll: false });
-		refresh();
+		startTransition(() => {
+			replace(getRoute(), { scroll: false });
+			refresh();
+		});
 	};
 
 	const goToLocale = (locale: string) => {
-		replace(`/${locale}`, { scroll: false });
-		refresh();
+		startTransition(() => {
+			replace(`/${locale}`, { scroll: false });
+			refresh();
+		});
 	};
 
 	return { goToNextLocale, goToLocale, getRoute, lang: params?.lang };
