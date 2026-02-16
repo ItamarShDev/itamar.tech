@@ -1,5 +1,8 @@
+/* Modal — Variant 1 design language */
+
+/* ── Backdrop ── */
 .container {
-	transition: backdrop-filter 1s ease-in-out;
+	transition: backdrop-filter 0.3s ease, opacity 0.3s ease;
 	z-index: 10;
 	bottom: 0;
 	top: 0;
@@ -7,12 +10,12 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.5);
 
 	&.opened {
 		position: fixed;
 		display: block;
-		backdrop-filter: blur(5px) grayscale(1);
+		backdrop-filter: blur(8px) grayscale(0.3);
 	}
 
 	&.closed {
@@ -20,80 +23,116 @@
 	}
 }
 
+/* ── Positioning ── */
 .modalWrapper {
 	position: absolute;
-	top: 30%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
+/* ── Modal box ── */
 .modal {
-	width: 600px;
-	display: grid;
-	grid-template-rows: 6rem 1fr;
-	background-color: var(--colors-modalBg);
-	border: 1px solid var(--colors-decorations);
+	width: min(560px, 90vw);
+	display: flex;
+	flex-direction: column;
+	background-color: var(--colors-bg);
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 25%, transparent);
 	border-radius: 1rem;
-	padding: 1rem;
-	box-shadow: 0 0 10em -3em var(--colors-decorations);
+	padding: 0;
+	box-shadow:
+		0 24px 80px -12px rgba(0, 0, 0, 0.25),
+		0 0 1px 0 color-mix(in srgb, var(--colors-decorations) 30%, transparent);
 	transform-origin: center;
+	overflow: visible;
 
 	&.opened {
-		transition: transform 0.5s ease-in;
-		transform: scale(1);
+		animation: modalSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 	}
 
 	&.closed {
-		transition: transform 0.5s ease-in;
-		transform: scale(0);
+		animation: modalSlideOut 0.2s ease-in forwards;
 	}
 }
 
+/* ── Header ── */
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.2rem 1.6rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 15%, transparent);
+}
+
+.title {
+	font-size: 1.6rem;
+	font-weight: 700;
+	margin: 0;
+	padding: 0;
+	letter-spacing: -0.02em;
+	color: var(--colors-text);
+	font-family: var(--font-inter, system-ui, sans-serif);
+}
+
+/* ── Close button ── */
+.header .close {
+	all: unset;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	cursor: pointer;
+	color: var(--colors-subText);
+	transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.close:hover {
+	background-color: var(--colors-hoverDecorations);
+	color: var(--colors-text);
+	transform: scale(1.05);
+}
+
+/* ── Body ── */
+.body {
+	padding: 1.6rem;
+	overflow: visible;
+}
+
+/* ── Animations ── */
+@keyframes modalSlideIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95) translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+@keyframes modalSlideOut {
+	from {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.95) translateY(10px);
+	}
+}
+
+/* ── Mobile ── */
 @media screen and (max-width: 768px) and (orientation: portrait) {
 	.modalWrapper {
-		left: 0;
-		right: 0;
-		top: 60px;
-		transform: translate(0, 0);
+		left: 5%;
+		right: 5%;
+		top: 50%;
+		transform: translate(0, -50%);
 	}
 
 	.modal {
 		width: 100%;
 	}
-}
-
-.header {
-	display: grid;
-	grid-template-columns: 1fr 6rem;
-}
-
-.title {
-	line-height: 6rem;
-	font-size: 3rem;
-	margin: 0;
-	padding: 0 1rem;
-}
-
-.body {
-	padding: 15px 1rem;
-	height: 100%;
-}
-
-.header .close {
-	all: unset;
-	font-size: 3rem;
-	display: flex;
-	text-align: center;
-	line-height: 6rem;
-	cursor: pointer;
-	color: var(--colors-text);
-	justify-content: center;
-	align-items: center;
-}
-
-.close:hover {
-	opacity: 0.8;
-	transform: scale(1.3) rotate(1turn);
-	transition: transform ease-in-out 0.3s;
-	transform-origin: center center;
 }

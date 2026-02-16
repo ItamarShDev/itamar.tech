@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'translations/hooks';
+import styles from './ChatWindow.module.css';
 import Message from './Message';
 import SuggestedQuestions from './SuggestedQuestions';
-import styles from './ChatWindow.module.css';
 
 interface Message {
   type: 'message' | 'response';
@@ -37,10 +37,6 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
@@ -51,6 +47,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    requestAnimationFrame(scrollToBottom);
     setInputValue('');
     setIsLoading(true);
 
@@ -68,7 +65,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const handleSuggestedQuestion = (question: string) => {
     // Send the suggested question directly without setting input
     if (isLoading) return;
-    
+
     const userMessage = {
       type: 'message' as const,
       content: question.trim()
@@ -100,10 +97,10 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       }
 
       let aiResponse = '';
-      
+
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      
+
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
@@ -111,26 +108,25 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
 
           const chunk = decoder.decode(value);
           const lines = chunk.split('\n');
-          
+
           for (const line of lines) {
             if (line.startsWith('data: ')) {
               try {
                 const data = JSON.parse(line.slice(6));
                 if (data.content) {
                   aiResponse += data.content;
+                  const snapshot = aiResponse;
                   setMessages(prev => {
                     const newMessages = [...prev];
                     const lastMessage = newMessages[newMessages.length - 1];
                     if (lastMessage && lastMessage.type === 'response') {
-                      lastMessage.content = aiResponse;
-                    } else {
-                      newMessages.push({
-                        type: 'response',
-                        content: aiResponse
-                      });
+                      return prev.map((m, i) =>
+                        i === prev.length - 1 ? { ...m, content: snapshot } : m
+                      );
                     }
-                    return newMessages;
+                    return [...prev, { type: 'response', content: snapshot }];
                   });
+                  requestAnimationFrame(scrollToBottom);
                 }
               } catch (e) {
                 // Ignore parsing errors

@@ -52,11 +52,11 @@ const MatchProgress = ({
         style={{
           width: `${percentage}%`,
           backgroundColor: `hsl(${percentage}, 100%, 50%)`,
-          color: `hsl(0, 0%, ${50 - percentage}%)`,
         }}
-      >
+      />
+      <span className={styles.label}>
         {percentage}% {matchLabel}
-      </div>
+      </span>
     </div>
   );
 };

@@ -8,10 +8,10 @@ import styles from "./PropertiesSelect.module.css";
 
 import { filterItems } from "lib/utils/array";
 import {
-    addTag as addTagUtil,
-    handleTagInputKeyDown,
-    removeLastTag as removeLastTagUtil,
-    removeTag as removeTagUtil
+	addTag as addTagUtil,
+	handleTagInputKeyDown,
+	removeLastTag as removeLastTagUtil,
+	removeTag as removeTagUtil
 } from "lib/utils/tags";
 
 const filterSkills = (skills: string[], tags: string[], text: string) =>
@@ -83,7 +83,9 @@ export default function PropertiesSelect({
 	};
 
 	const removeTag = (tagName: string) => {
-		setTags(removeTagUtil(tags, tagName));
+		const newTags = removeTagUtil(tags, tagName);
+		setTags(newTags);
+		setSelectedSkills(newTags);
 	};
 
 	return (
