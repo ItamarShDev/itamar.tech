@@ -1,7 +1,6 @@
 .blogPost {
 	font-size: 17px;
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
-	animation: postFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .aiTranslatedBanner {
@@ -43,15 +42,4 @@
 	padding-bottom: 1.5rem;
 	margin-bottom: 1.5rem;
 	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 20%, transparent);
-}
-
-@keyframes postFadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(12px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
 }

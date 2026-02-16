@@ -5,7 +5,7 @@ import { getCurrentTheme } from "lib/headers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
 import styles from "./mdx-components.module.css";
 
 function Table({ data }) {
@@ -74,17 +74,15 @@ export function CodeComponent(theme) {
 		const codeTheme = themeMap[theme] || themeMap.default;
 
 		return (
-			<Suspense fallback={<div>Loading...</div>}>
-				<Code
-					className={`${styles.pre} ${bodyFontClass}`}
-					lineNumbers
-					theme={codeTheme}
-					lightThemeSelector='[data-theme="light"]'
-					lang={props.className === "language-python" ? "py" : "ts"}
-				>
-					{children}
-				</Code>
-			</Suspense>
+			<Code
+				className={`${styles.pre} ${bodyFontClass}`}
+				lineNumbers
+				theme={codeTheme}
+				lightThemeSelector='[data-theme="light"]'
+				lang={props.className === "language-python" ? "py" : "ts"}
+			>
+				{children}
+			</Code>
 		);
 	};
 }
