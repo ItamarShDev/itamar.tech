@@ -5,7 +5,12 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   bundlePagesRouterDependencies: true,
   images: {
-    domains: ["media.giphy.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.giphy.com",
+      },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,
