@@ -1,61 +1,73 @@
 .jobContainer {
 	position: relative;
+	animation: jobFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .jobContainer::before {
 	content: "";
 	position: absolute;
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 10px;
+	height: 10px;
 	display: flex;
-	color: #ffffff;
 	background-color: var(--colors-decorations);
-	border: 0.2rem solid white;
+	border: 2px solid var(--colors-bg);
 	border-radius: 50%;
 }
 
 [dir="ltr"] .jobContainer::before {
-	left: -2.25rem;
+	left: -2.05rem;
+	top: 1.5rem;
 }
 
 [dir="rtl"] .jobContainer::before {
-	left: calc(100% + 0.75rem);
+	left: calc(100% + 0.95rem);
+	top: 1.5rem;
 }
 
 .duration {
-	font-size: 1.5rem;
-	padding: 1rem;
-	transform: translateY(-0.75rem);
+	font-size: 1.2rem;
+	padding: 0.8rem 1rem 0.3rem;
+	color: var(--colors-subText);
+	opacity: 0.7;
+	font-family: var(--font-inter, system-ui, sans-serif);
 }
 
 .box {
-	background-color: var(--colors-hoverDecorations);
-	border-radius: 1em;
+	background-color: color-mix(in srgb, var(--colors-bg) 88%, var(--colors-decorations) 12%);
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 15%, transparent);
+	border-radius: 0.8rem;
 	padding: 1.5em;
 	margin-inline-start: 0.5em;
 	display: flex;
 	flex-direction: column;
 	line-height: 2rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 16px color-mix(in srgb, var(--colors-decorations) 10%, transparent);
 }
 
 .title {
-	font-size: 2.5rem;
-	line-height: 2.5rem;
-	margin-block: 0.5rem;
-	font-weight: bold;
-	font-family: "Codystar", Arial, Helvetica, sans-serif;
+	font-size: 2rem;
+	line-height: 2.2rem;
+	margin-block: 0.3rem;
+	font-weight: 700;
+	font-family: var(--font-inter, system-ui, sans-serif);
+	letter-spacing: -0.02em;
 }
 
 .company {
 	display: flex;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-style: italic;
 	align-items: center;
-	margin-block: 1rem 1.5rem;
+	margin-block: 0.5rem 1rem;
 }
 
 .company a {
-	filter: opacity(0.9);
+	opacity: 0.8;
 	color: var(--colors-subText);
 	text-decoration: none;
 }
@@ -63,22 +75,22 @@
 .company:before {
 	content: "@";
 	font-style: italic;
-	opacity: 0.5;
+	opacity: 0.4;
 	font-size: 1rem;
 	margin: 0 0.5rem;
 }
 
 .summary {
-	font-family: "Quicksand", sans-serif;
-	font-size: 2rem;
+	font-family: var(--font-noto-sans, sans-serif);
+	font-size: 1.6rem;
 	break-after: always;
 	white-space: wrap;
 }
 
 .extra {
-	font-size: 1.5rem;
-	filter: opacity(0.9);
-	font-family: "Roboto", sans-serif;
+	font-size: 1.3rem;
+	opacity: 0.8;
+	font-family: var(--font-noto-sans, sans-serif);
 }
 
 @media (hover: hover) {
@@ -88,20 +100,32 @@
 
 	.company:hover a {
 		color: var(--colors-decorations);
-		text-decoration: underline double;
+		text-decoration: underline;
 	}
 }
 
 @media only screen and (max-width: 968px) {
 	.title {
-		font-size: 2rem;
-	}
-
-	.summary {
 		font-size: 1.8rem;
 	}
 
+	.summary {
+		font-size: 1.5rem;
+	}
+
 	.extra {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 }
+
+@keyframes jobFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+

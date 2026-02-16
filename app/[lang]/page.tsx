@@ -1,5 +1,4 @@
-import { HomeBackgroundProfessional } from "layouts/home-background";
-import HomePage from "layouts/home-page";
+import HomeVariant1 from "layouts/home-variant-1";
 import { getFromKV } from "lib/get-data-methods";
 import type { Metadata } from "next";
 
@@ -26,10 +25,5 @@ export const metadata: Metadata = {
 export default async function Home() {
   const quotes = await getFromKV("quotes");
 
-  return (
-    <>
-      <HomeBackgroundProfessional />
-      <HomePage quotes={quotes?.en} />
-    </>
-  );
+  return <HomeVariant1 quotes={quotes?.en} />;
 }

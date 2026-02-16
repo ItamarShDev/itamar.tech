@@ -252,18 +252,18 @@ body[data-theme="cursor"] {
 body[data-theme="light"],
 body {
 	--color-lang: black;
-	--colors-bg: hsl(0, 0%, 98%);
-	--colors-modalBg: hsl(0, 0%, 98.1%);
+	--colors-bg: hsl(216, 20%, 94%);
+	--colors-modalBg: hsl(216, 18%, 93%);
 	--colors-main: hsl(193.9, 100%, 50%);
-	--colors-text: hsl(204.2, 100%, 28.6%);
-	--colors-subText: hsla(204.2, 100%, 28.6%, 0.7);
-	--colors-headerText: hsl(193.9, 100%, 40%);
+	--colors-text: hsl(204.2, 60%, 22%);
+	--colors-subText: hsla(204.2, 50%, 30%, 0.75);
+	--colors-headerText: hsl(193.9, 100%, 35%);
 	--colors-header: hsl(216.5, 100%, 50%);
 	--colors-paragraph: hsl(216.9, 10.2%, 24.9%);
-	--colors-decorations: hsl(215.1, 90.8%, 61.6%);
-	--colors-hoverDecorations: hsla(215.1, 90.8%, 61.6%, 0.1);
-	--colors-inputs: hsla(215, 91%, 62%, 0.2);
-	--colors-link: hsl(204.2, 100%, 25%);
+	--colors-decorations: hsl(215.1, 70%, 52%);
+	--colors-hoverDecorations: hsla(215.1, 60%, 52%, 0.1);
+	--colors-inputs: hsla(215, 60%, 52%, 0.15);
+	--colors-link: hsl(204.2, 80%, 30%);
 	--colors-charts: #448ef6;
 	--sh-class: var(--colors-header);
 	--sh-identifier: var(--colors-subText);

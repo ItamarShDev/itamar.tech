@@ -1,6 +1,7 @@
 .blogPost {
 	font-size: 17px;
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	animation: postFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .aiTranslatedBanner {
@@ -9,9 +10,9 @@
 	gap: 0.5rem;
 	padding: 0.75rem 1rem;
 	margin-bottom: 1.5rem;
-	background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-	border: 1px solid rgba(99, 102, 241, 0.3);
-	border-radius: 8px;
+	background: var(--colors-hoverDecorations);
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 25%, transparent);
+	border-radius: 0.8rem;
 	font-size: 0.9rem;
 	color: var(--colors-subText);
 }
@@ -24,6 +25,9 @@
 	color: var(--colors-text);
 	margin-bottom: 0.5rem;
 	font-family: var(--font-noto-sans), var(--font-assistant), var(--font-rubik), Arial, sans-serif;
+	font-size: 2.8rem;
+	letter-spacing: -0.03em;
+	line-height: 1.15;
 }
 
 .subTitle {
@@ -35,5 +39,19 @@
 .date {
 	color: var(--colors-subText);
 	font-size: 0.8em;
-	filter: brightness(80%);
+	opacity: 0.6;
+	padding-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 20%, transparent);
+}
+
+@keyframes postFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

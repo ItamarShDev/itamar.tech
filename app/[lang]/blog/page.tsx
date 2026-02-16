@@ -1,6 +1,7 @@
-import { LinkCard } from "components";
 import { type Post, getSortedPostsData } from "lib/posts";
 import type { Metadata } from "next";
+import Link from "next/link";
+import styles from "./blog-list.module.css";
 
 export const metadata: Metadata = {
 	title: "Blog",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 	},
 };
 
-function BlogCard({
+function BlogRow({
 	post,
 	lang,
 }: {
@@ -25,25 +26,32 @@ function BlogCard({
 	lang: string;
 }) {
 	return (
-		<LinkCard
-			key={post.slug}
-			route={`/${lang}/blog/${post.slug}`}
-			title={post.metadata.title}
-			subTitle={post.metadata.summary}
-			date={post.metadata.date}
-		/>
+		<Link
+			href={`/${lang}/blog/${post.slug}`}
+			className={styles.blogRow}
+		>
+			<div className={styles.blogRowContent}>
+				<span className={styles.blogRowTitle}>
+					{post.metadata.title}
+				</span>
+				<span className={styles.blogRowSummary}>
+					{post.metadata.summary}
+				</span>
+			</div>
+			<span className={styles.blogRowDate}>{post.metadata.date}</span>
+			<span className={styles.blogRowArrow}>→</span>
+		</Link>
 	);
 }
 
 export default async function BlogList({ params }) {
 	const { lang } = await params;
-	// Default to English if no locale is provided
 	const allPostsData = getSortedPostsData(lang ?? "en");
 
 	return (
-		<div>
+		<div className={styles.blogList}>
 			{allPostsData.map((post) => (
-				<BlogCard key={post.slug} post={post} lang={lang} />
+				<BlogRow key={post.slug} post={post} lang={lang} />
 			))}
 		</div>
 	);

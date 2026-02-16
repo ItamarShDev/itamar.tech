@@ -6,13 +6,14 @@
 	position: relative;
 	padding-inline-start: 2.2rem;
 	margin: 0 auto;
+	animation: resumeFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
 .timeline::before {
 	content: "";
-	width: 0.3rem;
+	width: 2px;
 	height: 100%;
-	background: var(--colors-subText);
+	background: color-mix(in srgb, var(--colors-decorations) 35%, transparent);
 	position: absolute;
 	top: 0;
 	border-radius: 4rem 4rem;
@@ -25,3 +26,15 @@
 [dir="rtl"] .timeline::before {
 	right: 0.5rem;
 }
+
+@keyframes resumeFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+

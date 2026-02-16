@@ -1,0 +1,116 @@
+/* Blog List — Variant 1 style: bordered rows with staggered animations */
+
+.blogList {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.pageTitle {
+	font-size: 2.4rem;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	margin: 0 0 2rem;
+	color: var(--colors-text);
+}
+
+.blogRow {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	padding: 1.2rem 1.6rem;
+	border: 1px solid color-mix(in srgb, var(--colors-decorations) 20%, transparent);
+	border-bottom: none;
+	text-decoration: none;
+	color: var(--colors-text);
+	transition: background-color 0.15s ease;
+	font-family: var(--font-inter, system-ui, sans-serif);
+	animation: blogFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.blogRow:first-child {
+	border-radius: 0.8rem 0.8rem 0 0;
+}
+
+.blogRow:last-child {
+	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 20%, transparent);
+	border-radius: 0 0 0.8rem 0.8rem;
+}
+
+.blogRow:only-child {
+	border-radius: 0.8rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--colors-decorations) 20%, transparent);
+}
+
+.blogRow:hover {
+	background-color: var(--colors-hoverDecorations);
+}
+
+.blogRowContent {
+	flex: 1;
+	min-width: 0;
+}
+
+.blogRowTitle {
+	font-size: 1.5rem;
+	font-weight: 600;
+	display: block;
+	margin-bottom: 0.2rem;
+}
+
+.blogRowSummary {
+	font-size: 1.2rem;
+	color: var(--colors-subText);
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.blogRowDate {
+	font-size: 1.1rem;
+	color: var(--colors-subText);
+	opacity: 0.6;
+	white-space: nowrap;
+	margin-inline-start: 1.5rem;
+	flex-shrink: 0;
+}
+
+.blogRowArrow {
+	color: var(--colors-decorations);
+	font-size: 1.4rem;
+	transition: transform 0.2s ease;
+	flex-shrink: 0;
+	margin-inline-start: 1rem;
+}
+
+.blogRow:hover .blogRowArrow {
+	transform: translateX(4px);
+}
+
+[dir="rtl"] .blogRow:hover .blogRowArrow {
+	transform: translateX(-4px);
+}
+
+/* Staggered animation delays */
+.blogRow:nth-child(1) { animation-delay: 0s; }
+.blogRow:nth-child(2) { animation-delay: 0.04s; }
+.blogRow:nth-child(3) { animation-delay: 0.08s; }
+.blogRow:nth-child(4) { animation-delay: 0.12s; }
+.blogRow:nth-child(5) { animation-delay: 0.16s; }
+.blogRow:nth-child(6) { animation-delay: 0.2s; }
+.blogRow:nth-child(7) { animation-delay: 0.24s; }
+.blogRow:nth-child(8) { animation-delay: 0.28s; }
+.blogRow:nth-child(9) { animation-delay: 0.32s; }
+.blogRow:nth-child(10) { animation-delay: 0.36s; }
+
+@keyframes blogFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
