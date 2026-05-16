@@ -28,8 +28,7 @@ export const groqAdapter = {
 export const geminiAdapter = {
   fetch: async ({ messages, temperature, maxTokens }: any) => {
     const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY || '' });
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    
+
     // Convert system message to user message for Gemini (it doesn't support system messages)
     const convertedMessages = messages.map((msg: any) => {
       if (msg.role === 'system') {
@@ -44,16 +43,17 @@ export const geminiAdapter = {
       };
     });
 
-    const result = await model.generateContent({
+    const result = await genAI.models.generateContent({
+      model: 'gemini-1.5-flash',
       contents: convertedMessages,
-      generationConfig: {
+      config: {
         temperature: temperature || 0.7,
         maxOutputTokens: maxTokens || 1000,
       },
     });
 
     return {
-      text: result.response.text(),
+      text: result.text,
     };
   },
 };
