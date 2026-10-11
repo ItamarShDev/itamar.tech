@@ -29,11 +29,6 @@ export default async function HomeVariant1({ quotes }) {
             sub: linksTranslation.examples.subTitle,
         },
         {
-            route: `https://tanstack.itamar.dev`,
-            title: linksTranslation.tanstack.title,
-            sub: linksTranslation.tanstack.subTitle,
-        },
-        {
             route: `https://reactwind.itamar.dev`,
             title: linksTranslation.reactwind.title,
             sub: linksTranslation.reactwind.subTitle,

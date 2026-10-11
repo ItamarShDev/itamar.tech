@@ -71,21 +71,21 @@ describe("Chart Settings Utilities", () => {
 			});
 
 			// Check scales configuration
-			expect(settings.scales?.xAxis).toBeDefined();
-			expect(settings.scales?.xAxis.ticks).toEqual({
+			expect(settings.scales?.x).toBeDefined();
+			expect(settings.scales?.x.ticks).toEqual({
 				color: mockTheme.text,
 			});
-			expect(settings.scales?.xAxis.gridLines).toEqual({
+			expect(settings.scales?.x.grid).toEqual({
 				drawTicks: false,
 				drawOnChartArea: false,
 				color: mockTheme.headerText,
 			});
 
-			expect(settings.scales?.yAxis).toBeDefined();
-			expect(settings.scales?.yAxis).toMatchObject({
+			expect(settings.scales?.y).toBeDefined();
+			expect(settings.scales?.y).toMatchObject({
 				display: true,
 				ticks: { display: false },
-				gridLines: {
+				grid: {
 					drawTicks: false,
 					drawOnChartArea: false,
 					color: mockTheme.headerText,

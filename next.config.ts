@@ -12,12 +12,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   experimental: {
     mdxRs: true,
-    viewTransition: true,
   },
   transpilePackages: ["next-mdx-remote"],
 };

@@ -1,55 +1,45 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, cleanup, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import useUrlHash from "lib/hooks/useUrlHash";
-
-// Mock window and location objects
-interface MockLocation extends Location {
-	hash: string;
-	href: string;
-	assign: ReturnType<typeof mock>;
-	onhashchange?: (event: HashChangeEvent) => void;
-}
-
-const mockLocation: MockLocation = {
-	hash: "",
-	href: "http://test.com",
-	assign: mock(() => {}),
-	onhashchange: undefined,
-	// Add required Location properties with dummy values
-	ancestorOrigins: [] as unknown as DOMStringList,
-	host: "test.com",
-	hostname: "test.com",
-	origin: "http://test.com",
-	pathname: "/",
-	port: "",
-	protocol: "http:",
-	search: "",
-	replace: mock(() => {}),
-	reload: mock(() => {}),
-	toString: () => "http://test.com",
-};
 
 // Track event listeners
 const eventListeners: Record<string, EventListener> = {};
 
-const mockAddEventListener = mock((event: string, callback: EventListener) => {
-	eventListeners[event] = callback;
-});
-
-const mockRemoveEventListener = mock((event: string) => {
-	delete eventListeners[event];
-});
-
 // Store original globals
 const originalWindow = global.window;
-const originalLocation = global.location;
+const originalAddEventListener = originalWindow.addEventListener;
+const originalRemoveEventListener = originalWindow.removeEventListener;
+
+const mockAddEventListener = mock((
+	event: string,
+	callback: EventListenerOrEventListenerObject,
+	options?: boolean | AddEventListenerOptions,
+) => {
+	if (event === "hashchange") {
+		eventListeners[event] = callback as EventListener;
+	} else {
+		originalAddEventListener.call(originalWindow, event, callback, options);
+	}
+});
+
+const mockRemoveEventListener = mock((
+	event: string,
+	callback: EventListenerOrEventListenerObject,
+	options?: boolean | EventListenerOptions,
+) => {
+	if (event === "hashchange") {
+		delete eventListeners[event];
+	} else {
+		originalRemoveEventListener.call(originalWindow, event, callback, options);
+	}
+});
 
 // Helper to trigger hash change
 function triggerHashChange(newHash: string, oldHash = "") {
 	const oldURL = `http://test.com${oldHash ? `#${oldHash}` : ""}`;
 	const newURL = `http://test.com${newHash ? `#${newHash}` : ""}`;
 
-	mockLocation.hash = newHash ? `#${newHash}` : "";
+	global.window.history.replaceState(null, "", newHash ? `#${newHash}` : "/");
 
 	const hashChangeCallback = eventListeners.hashchange;
 	if (hashChangeCallback) {
@@ -63,46 +53,36 @@ function triggerHashChange(newHash: string, oldHash = "") {
 
 describe("useUrlHash", () => {
 	beforeEach(() => {
-		// Reset mocks and state
-		mockLocation.hash = "";
-		mockLocation.href = "http://test.com";
-		mockLocation.assign.mockClear();
+		delete eventListeners.hashchange;
 		mockAddEventListener.mockClear();
 		mockRemoveEventListener.mockClear();
 
-		// Apply mocks
-		global.window = {
-			...global.window,
-			addEventListener: mockAddEventListener,
-			removeEventListener: mockRemoveEventListener,
-			location: mockLocation,
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		} as any;
-
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		global.location = mockLocation as any;
+		global.window.history.replaceState(null, "", "/");
+		global.window.addEventListener = mockAddEventListener as typeof global.window.addEventListener;
+		global.window.removeEventListener = mockRemoveEventListener as typeof global.window.removeEventListener;
 	});
 
 	afterEach(() => {
-		// Restore original globals
-		global.window = originalWindow;
-		global.location = originalLocation;
+		cleanup();
+		global.window.addEventListener = originalAddEventListener;
+		global.window.removeEventListener = originalRemoveEventListener;
+		global.window.history.replaceState(null, "", "/");
 	});
 
 	test("should return false when hash does not match", () => {
-		mockLocation.hash = "#other-hash";
+		global.window.history.replaceState(null, "", "#other-hash");
 		const { result } = renderHook(() => useUrlHash("test-hash"));
 		expect(result.current).toBe(false);
 	});
 
 	test("should return true when hash matches", () => {
-		mockLocation.hash = "#test-hash";
+		global.window.history.replaceState(null, "", "#test-hash");
 		const { result } = renderHook(() => useUrlHash("test-hash"));
 		expect(result.current).toBe(true);
 	});
 
 	test("should work with or without leading # in the hash", () => {
-		mockLocation.hash = "#test-hash";
+		global.window.history.replaceState(null, "", "#test-hash");
 
 		// Test with hash that includes #
 		const { result: result1 } = renderHook(() => useUrlHash("#test-hash"));

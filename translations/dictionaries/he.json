@@ -34,10 +34,6 @@
 			"title": "דוגמאות",
 			"subTitle": "שחזור יצירות עבר"
 		},
-		"tanstack": {
-			"title": "האתר שלי עם Tanstack",
-			"subTitle": "בנוי עם טכנולוגיות Tanstack"
-		},
 		"reactwind": {
 			"title": "Reactwind",
 			"subTitle": "חבילת Tailwind CSS כ-JSX props"

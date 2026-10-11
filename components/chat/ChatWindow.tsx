@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'translations/hooks';
 import styles from './ChatWindow.module.css';
 import Message from './Message';
@@ -23,15 +23,9 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize greeting message when translations are loaded
-  useEffect(() => {
-    if (chatTranslations?.greeting && messages.length === 0) {
-      setMessages([{
-        type: 'response',
-        content: chatTranslations.greeting
-      }]);
-    }
-  }, [chatTranslations?.greeting, messages.length]);
+  const conversation: Message[] = chatTranslations?.greeting
+    ? [{ type: 'response', content: chatTranslations.greeting }, ...messages]
+    : messages;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -87,7 +81,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, { type: 'message' as const, content: messageContent }],
+          messages: [...conversation, { type: 'message' as const, content: messageContent }],
           useTanStack: true
         }),
       });
@@ -151,10 +145,7 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   };
 
   const handleNewChat = () => {
-    setMessages(chatTranslations?.greeting ? [{
-      type: 'response',
-      content: chatTranslations.greeting
-    }] : []);
+    setMessages([]);
     setInputValue('');
     setIsLoading(false);
   };
@@ -182,26 +173,26 @@ export default function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       </div>
 
       <div className={styles.messages}>
-        {messages.map((message, index) => (
+        {conversation.map((message, index) => (
           <Message
             key={index}
             content={message.content}
             isUser={message.type === 'message'}
-            isTyping={index === messages.length - 1 && isLoading}
+            isTyping={index === conversation.length - 1 && isLoading}
           />
         ))}
         <div ref={messagesEndRef} />
       </div>
 
-      {messages.length === 0 && (
+      {conversation.length === 0 && (
         <SuggestedQuestions onSelectQuestion={handleSuggestedQuestion} />
       )}
 
-      {messages.length === 1 && (
+      {conversation.length === 1 && (
         <SuggestedQuestions onSelectQuestion={handleSuggestedQuestion} />
       )}
 
-      {messages.length >= 2 && messages.length % 2 === 0 && !isLoading && (
+      {conversation.length >= 2 && conversation.length % 2 === 0 && !isLoading && (
         <SuggestedQuestions onSelectQuestion={handleSuggestedQuestion} />
       )}
 

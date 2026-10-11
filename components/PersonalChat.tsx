@@ -1,10 +1,13 @@
 'use client';
 
 import { useChatContext } from 'context/ChatContext';
-import { ChatButton, ChatWindow } from './chat';
+import dynamic from 'next/dynamic';
+import ChatButton from './chat/ChatButton';
+
+const ChatWindow = dynamic(() => import('./chat/ChatWindow'), { ssr: false });
 
 export default function PersonalChat() {
-  const { isChatOpen, toggleChat, closeChat } = useChatContext();
+  const { isChatOpen, hasChatOpened, toggleChat, closeChat } = useChatContext();
 
   return (
     <>
@@ -12,10 +15,10 @@ export default function PersonalChat() {
         onClick={toggleChat} 
         isOpen={isChatOpen} 
       />
-      <ChatWindow 
+      {hasChatOpened && <ChatWindow
         isOpen={isChatOpen} 
         onClose={closeChat} 
-      />
+      />}
     </>
   );
 }

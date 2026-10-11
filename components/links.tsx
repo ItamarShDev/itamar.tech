@@ -24,11 +24,6 @@ async function Links() {
 				subTitle={translation.examples.subTitle}
 			/>
 			<LinkCard
-				route={`https://tanstack.itamar.dev`}
-				title={translation.tanstack.title}
-				subTitle={translation.tanstack.subTitle}
-			/>
-			<LinkCard
 				route={`https://reactwind.itamar.dev`}
 				title={translation.reactwind.title}
 				subTitle={translation.reactwind.subTitle}

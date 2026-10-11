@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import styles from "./Tags.module.css";
 type Base = {
 	onClick: (filterText: string) => void;
@@ -60,10 +59,7 @@ type TagsProps = Base & {
 };
 
 export function Tags({ tagsString, filterText, onClick }: TagsProps) {
-	const [tags, setTags] = useState<string[]>([]);
-	useEffect(() => {
-		setTags(tagsString.split(", "));
-	}, [tagsString]);
+	const tags = tagsString.split(", ");
 
 	return (
 		<div className={styles.tags}>

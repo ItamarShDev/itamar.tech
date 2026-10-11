@@ -4,7 +4,7 @@ import useChartSettings, {
     randomChartData,
 } from "components/charts/chart-settings";
 import { Input } from "components/input";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "./ChartsCommunication.module.css";
 
@@ -47,7 +47,7 @@ export class EventRouter {
 }
 
 function Chart({ chartId }) {
-	const [chartData, setChartData] = useState(randomChartData(chartId));
+	const [chartData, setChartData] = useState(() => randomChartData(chartId));
 	const { data, lineOptions } = useChartSettings(chartData);
 	useEffect(() => {
 		const chartEventHandler = (event: CustomEvent) => {
@@ -70,16 +70,17 @@ function Chart({ chartId }) {
 
 export default function ChartsCommunicationExample() {
 	const [numberOfCharts, setNumberOfCharts] = useState(5);
-	const chart_ids = Array.from(Array(numberOfCharts).keys());
-	const [chartIds, setChartIds] = useState(chart_ids);
-	const routerRef = useRef(new EventRouter());
+	const chartIds = useMemo(
+		() => Array.from({ length: numberOfCharts }, (_, index) => index),
+		[numberOfCharts],
+	);
 
 	useEffect(() => {
-		setChartIds(Array.from(Array(numberOfCharts).keys()));
-	}, [numberOfCharts]);
-
-	useEffect(() => {
-		routerRef.current.fetchChartsData(chartIds);
+		const router = new EventRouter();
+		router.fetchChartsData(chartIds);
+		return () => {
+			if (router.interval) clearInterval(router.interval);
+		};
 	}, [chartIds]);
 
 	return (

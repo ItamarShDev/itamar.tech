@@ -10,14 +10,19 @@ export const DEFAULT_INTERVAL = 5000;
  * @param options.interval - Time in milliseconds between emoji changes (default: 5000)
  * @returns The current emoji
  */
+export function useRandomEmoji(): (typeof DEFAULT_EMOJIS)[number];
+export function useRandomEmoji(options: {
+  emojis?: readonly string[];
+  interval?: number;
+}): string;
 export function useRandomEmoji({
   emojis = DEFAULT_EMOJIS,
   interval = DEFAULT_INTERVAL,
 }: {
-  emojis?: string[];
+  emojis?: readonly string[];
   interval?: number;
 } = {}) {
-  const [emoji, setEmoji] = useState(emojis[0] || '');
+  const [emoji, setEmoji] = useState<string>(emojis[0] || '');
   const indexRef = useRef<number>(0);
 
   useEffect(() => {

@@ -34,10 +34,6 @@
 			"title": "Examples",
 			"subTitle": "Project examples recreated"
 		},
-		"tanstack": {
-			"title": "My Tanstack based website",
-			"subTitle": "Built with pure tanstack tech"
-		},
 		"reactwind": {
 			"title": "Reactwind",
 			"subTitle": "Tailwind CSS as JSX props"

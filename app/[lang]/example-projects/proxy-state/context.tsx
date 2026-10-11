@@ -24,7 +24,9 @@ const StateContext = createContext<StateContextType | null>(null);
 export function StateProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<State>({});
   const ref = useRef<State>(state);
-  const createProxyRef = useRef<(name: string, testId?: string) => Value<unknown>>();
+  const createProxyRef = useRef<
+    ((name: string, testId?: string) => Value<unknown>) | null
+  >(null);
 
   if (!createProxyRef.current) {
     createProxyRef.current = (name: string, testId?: string) => {
@@ -51,7 +53,9 @@ export function StateProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <StateContext.Provider value={{ state: ref.current, createProxy: createProxyRef.current }}>
+    <StateContext.Provider
+      value={{ state: ref.current, createProxy: createProxyRef.current }}
+    >
       {children}
     </StateContext.Provider>
   );

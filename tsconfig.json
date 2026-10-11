@@ -1,6 +1,21 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "paths": {
+      "app/*": ["./app/*"],
+      "actions/*": ["./actions/*"],
+      "components": ["./components/index.ts"],
+      "components/*": ["./components/*"],
+      "context/*": ["./context/*"],
+      "images/*": ["./images/*"],
+      "layouts/*": ["./layouts/*"],
+      "lib/*": ["./lib/*"],
+      "mdx-components": ["./mdx-components.tsx"],
+      "providers/*": ["./providers/*"],
+      "public/*": ["./public/*"],
+      "translations": ["./translations/index.ts"],
+      "translations/*": ["./translations/*"]
+    },
+    "types": ["bun", "jest", "node"],
     "jsx": "react-jsx",
     "checkJs": true,
     "target": "ES2023",

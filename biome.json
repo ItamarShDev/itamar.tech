@@ -1,20 +1,19 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
-		"ignore": [
-			"**/node_modules/*",
-			".next/*",
-			"public/*",
-			".vscode/*"
+		"includes": [
+			"**",
+			"!**/node_modules/**/*",
+			"!**/.next/**/*",
+			"!**/public/**/*",
+			"!**/.vscode/**/*"
 		]
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"a11y": {
 				"useKeyWithClickEvents": "off",
 				"useAnchorContent": "off"
@@ -22,6 +21,12 @@
 		}
 	},
 	"formatter": {
-		"enabled": true
+		"enabled": true,
+		"lineEnding": "auto"
+	},
+	"javascript": {
+		"formatter": {
+			"trailingCommas": "es5"
+		}
 	}
 }

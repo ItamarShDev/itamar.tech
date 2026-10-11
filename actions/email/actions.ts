@@ -19,7 +19,7 @@ export function sendThankYouMail(payload: EmailTemplateProps) {
 
 	transporter.sendMail(mailOptions, (error) => {
 		if (error) {
-			throw new Error(error);
+			throw error;
 		}
 	});
 }
@@ -42,7 +42,7 @@ export function sendMail(payload: EmailTemplateProps) {
 
 	transporter.sendMail(mailOptions, (error) => {
 		if (error) {
-			throw new Error(error);
+			throw error;
 		}
 	});
 }

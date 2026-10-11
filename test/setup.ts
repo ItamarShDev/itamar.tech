@@ -30,6 +30,8 @@ const { document } = window;
 // Set up global objects that would normally be available in a browser
 global.window = window as unknown as Window & typeof globalThis;
 global.document = document;
+global.requestAnimationFrame = window.requestAnimationFrame.bind(window);
+global.cancelAnimationFrame = window.cancelAnimationFrame.bind(window);
 
 // Create a simplified navigator object to avoid infinite recursion
 const mockNavigator = {

@@ -7,7 +7,7 @@ type Response =
 	| { message: string }
 	| { error: string }
 	| { error: string; message: string };
-export async function sendEMail(_: Response, formData: FormData) {
+export async function sendEMail(_: Response | null, formData: FormData) {
 	const translations = await getTranslationsCache("email");
 	const value: EmailTemplateProps = {
 		title: formData.get("title") as string,

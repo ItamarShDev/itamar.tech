@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from './Message.module.css';
 
@@ -11,62 +10,6 @@ interface MessageProps {
 }
 
 export default function Message({ content, isUser, isTyping = false }: MessageProps) {
-  const [displayedContent, setDisplayedContent] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const [isStreaming, setIsStreaming] = useState(false);
-
-  useEffect(() => {
-    // User messages should always show immediately
-    if (isUser) {
-      // Avoid synchronous state update warning
-      requestAnimationFrame(() => {
-        setDisplayedContent(content);
-        setIsComplete(true);
-      });
-      return;
-    }
-
-    // Detect if this is a streaming response (content is increasing)
-    if (content.length > displayedContent.length && !hasAnimated) {
-      // Avoid synchronous state update warning
-      requestAnimationFrame(() => {
-        setIsStreaming(true);
-        setDisplayedContent(content);
-      });
-      return;
-    }
-
-    // Stop streaming when content stops growing
-    if (isStreaming && content.length === displayedContent.length) {
-      // Avoid synchronous state update warning
-      requestAnimationFrame(() => {
-        setIsStreaming(false);
-        setHasAnimated(true);
-        setIsComplete(true);
-      });
-      return;
-    }
-
-    // AI messages that have already been animated should show immediately
-    if (hasAnimated) {
-      // Avoid synchronous state update warning
-      requestAnimationFrame(() => {
-        setDisplayedContent(content);
-        setIsComplete(true);
-      });
-      return;
-    }
-
-    // Initial display for non-streaming messages
-    // Avoid synchronous state update warning
-    requestAnimationFrame(() => {
-      setDisplayedContent(content);
-      setIsComplete(true);
-      setHasAnimated(true);
-    });
-  }, [content, isUser, hasAnimated, isStreaming, displayedContent.length]);
-
   return (
     <div className={`${styles.message} ${isUser ? styles.user : styles.ai}`}>
       <div className={styles.messageContent}>
@@ -80,11 +23,11 @@ export default function Message({ content, isUser, isTyping = false }: MessagePr
 
         <div className={styles.text}>
           {isUser ? (
-            displayedContent
+            content
           ) : (
-            <ReactMarkdown>{displayedContent}</ReactMarkdown>
+            <ReactMarkdown>{content}</ReactMarkdown>
           )}
-          {isStreaming && (
+          {isTyping && !isUser && (
             <span className={styles.cursor}>|</span>
           )}
         </div>
