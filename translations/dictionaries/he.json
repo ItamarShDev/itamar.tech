@@ -91,6 +91,11 @@
 				"summary": "אתר פודקסטים של ליברפול",
 				"link": "https://hakapit.online"
 			},
+			"conflict-bars": {
+				"title": "Conflict Bars",
+				"summary": "היפ הופ ישראלי על ציר הזמן של הסכסוך",
+				"link": "https://conflict-bars.itamar.dev"
+			},
 			"reactwind": {
 				"title": "Reactwind",
 				"summary": "חבילת Tailwind CSS כ-JSX props",
