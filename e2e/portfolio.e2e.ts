@@ -68,6 +68,17 @@ for (const lang of ["en", "he"]) {
 		]) {
 			await page.goto(`/${lang}${path}`);
 			await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+			for (const image of await page.locator("main img").all()) {
+				await image.scrollIntoViewIfNeeded();
+				await expect
+					.poll(() =>
+						image.evaluate(
+							(element: HTMLImageElement) =>
+								element.complete && element.naturalWidth > 0
+						)
+					)
+					.toBe(true);
+			}
 			expect(
 				await page.evaluate(
 					() => document.documentElement.scrollWidth <= window.innerWidth
