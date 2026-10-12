@@ -14,7 +14,7 @@ export async function getCurrentLang() {
 
 export async function getCurrentTheme() {
 	const cookieCache = await cookies();
-	const theme = cookieCache.get("current-theme")?.value || "dark";
+	const theme = cookieCache.get("current-theme")?.value || "light";
 	return theme as Theme;
 }
 

@@ -14,8 +14,7 @@ export function proxy(request: NextRequest) {
 
 	// Check if there is any supported locale in the pathname
 	const pathnameIsMissingLocale = ["en", "he"].every(
-		(locale) =>
-			!pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+		(locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
 	);
 
 	if (pathnameIsMissingLocale) {
@@ -28,8 +27,8 @@ export function proxy(request: NextRequest) {
 		return NextResponse.redirect(
 			new URL(
 				`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-				request.url,
-			),
+				request.url
+			)
 		);
 	}
 	const headers = new Headers(request.headers);
@@ -41,5 +40,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/((?!api|icons|_next/static|_next/image|favicon.ico).*)"],
+	matcher: [
+		"/((?!api|icons|project-artwork/|_next/static|_next/image|favicon.ico).*)",
+	],
 };

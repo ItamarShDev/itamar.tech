@@ -1,0 +1,118 @@
+body {
+	font-family: var(--font-inter), Arial, sans-serif;
+	font-size: 1.5rem;
+	--studio-line: color-mix(in srgb, var(--colors-text) 17%, var(--colors-bg));
+	--studio-soft: color-mix(in srgb, var(--colors-text) 5%, var(--colors-bg));
+}
+body[dir="rtl"] {
+	font-family: var(--font-heebo), Arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: inherit;
+}
+body[data-theme="light"] {
+	color-scheme: light;
+	--colors-bg: #faf9f6;
+	--colors-modalBg: #faf9f6;
+	--colors-text: #243b33;
+	--colors-subText: #627168;
+	--colors-paragraph: #40554b;
+	--colors-main: #294b3d;
+	--colors-headerText: #243b33;
+	--colors-header: #294b3d;
+	--colors-decorations: #ae482b;
+	--colors-hoverDecorations: #eee6db;
+	--colors-inputs: #eeeee7;
+	--colors-link: #294b3d;
+	--colors-charts: #ae482b;
+}
+body[data-theme="dark"] {
+	color-scheme: dark;
+	--colors-bg: #1c2521;
+	--colors-modalBg: #253129;
+	--colors-text: #eeefe7;
+	--colors-subText: #b2bcb4;
+	--colors-paragraph: #d4dcd4;
+	--colors-main: #c7c5df;
+	--colors-headerText: #eeefe7;
+	--colors-header: #d99b7f;
+	--colors-decorations: #efaa8c;
+	--colors-hoverDecorations: #3e473b;
+	--colors-inputs: #2a3730;
+	--colors-link: #eeefe7;
+	--colors-charts: #efaa8c;
+}
+body:not([data-theme="light"]) {
+	color-scheme: dark;
+}
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+}
+:is(a, button, summary, select):focus-visible {
+	outline: 2px solid var(--colors-decorations);
+	outline-offset: 5px;
+}
+.skip-link {
+	position: fixed;
+	z-index: 10000;
+	inset-inline-start: 20px;
+	top: -100px;
+	padding: 12px 20px;
+	background: var(--colors-bg);
+	border: 1px solid var(--colors-text);
+}
+.skip-link:focus {
+	top: 12px;
+}
+::view-transition-group(.project-morph) {
+	animation-duration: 360ms;
+	animation-timing-function: cubic-bezier(0.22, 0.75, 0.24, 1);
+}
+::view-transition-old(.page-exit) {
+	animation: studio-exit 140ms ease both;
+}
+::view-transition-new(.page-enter) {
+	animation: studio-enter 260ms 70ms ease both;
+}
+@keyframes studio-exit {
+	to {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+}
+@keyframes studio-enter {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
