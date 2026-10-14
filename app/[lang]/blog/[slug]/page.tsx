@@ -5,16 +5,7 @@ import styles from "./page.module.css";
 
 export async function generateStaticParams() {
 	const posts = getBlogPosts();
-	return posts.flatMap((post) => [
-		{
-			lang: "en",
-			slug: post.slug,
-		},
-		{
-			lang: "he",
-			slug: post.slug,
-		},
-	]);
+	return posts.map((post) => ({ lang: "en", slug: post.slug }));
 }
 
 export async function generateMetadata({ params }) {
@@ -74,12 +65,6 @@ export default async function Blog({ params }) {
 					}),
 				}}
 			/>
-			{lang === "he" && (
-				<div className={styles.aiTranslatedBanner}>
-					<span className={styles.aiIcon}>🤖</span>
-					<span>תורגם אוטומטית באמצעות AI</span>
-				</div>
-			)}
 			<h1 className={styles.title}>{post.metadata.title}</h1>
 			<div className={styles.subTitle}>{post.metadata.summary}</div>
 			<div className={styles.date}>{post.metadata.date}</div>

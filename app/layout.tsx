@@ -1,15 +1,14 @@
 import { Analytics } from "@vercel/analytics/react";
-import AnimatedViewTransition from "components/AnimatedViewTransition";
 import FireworksDisplay from "components/FireworksDisplay";
 import FloatingButton from "components/FloatingButton";
 import PersonalChat from "components/PersonalChat";
 import { ChatProvider } from "context/ChatContext";
 import { FireworksProvider } from "context/FireworksContext";
-import Header from "layouts/header";
 import { fontVariables } from "lib/fonts";
-import { getCurrentLang, getCurrentTheme } from "lib/headers";
+import { getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
+import "../studio.css";
 import styles from "./layout.module.css";
 
 export const metadata = {
@@ -24,29 +23,25 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const lang = await getCurrentLang();
 	const theme = await getCurrentTheme();
 
 	return (
-		<html lang={lang} className={fontVariables} suppressHydrationWarning>
-			<Analytics />
-			<ThemeProvider defaultTheme={theme}>
-				<FireworksProvider>
-					<ChatProvider>
-						<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+		<html lang="en" className={fontVariables} suppressHydrationWarning>
+			<body data-theme={theme} dir="ltr">
+				<Analytics />
+				<ThemeProvider defaultTheme={theme}>
+					<FireworksProvider>
+						<ChatProvider>
 							<FireworksDisplay />
 							<div id="main-view" className={styles.mainView}>
-								<Header />
-								<AnimatedViewTransition>
-									<main className={styles.main}>{children}</main>
-								</AnimatedViewTransition>
+								{children}
 							</div>
 							<FloatingButton />
 							<PersonalChat />
-						</body>
-					</ChatProvider>
-				</FireworksProvider>
-			</ThemeProvider>
+						</ChatProvider>
+					</FireworksProvider>
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

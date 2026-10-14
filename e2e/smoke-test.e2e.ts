@@ -33,17 +33,18 @@ test.describe("Full Site Smoke Test", () => {
 			// Should have basic layout elements
 			await expect(playwright.getByTestId("header")).toBeVisible();
 
-			// Should have proper language direction for Hebrew pages
-			if (page.path.includes("/he")) {
-				await expect(playwright.locator("body")).toHaveAttribute("dir", "rtl");
-			}
+			await expect(playwright).toHaveURL(
+				page.path.replace(/^\/he(?=\/|$)/, "/en")
+			);
+			await expect(playwright.locator("html")).toHaveAttribute("lang", "en");
+			await expect(playwright.locator("body")).toHaveAttribute("dir", "ltr");
 
 			// Should not have critical console errors
 			const criticalErrors = consoleErrors.filter(
 				(error) =>
 					!error.includes("favicon") && // Ignore favicon errors
 					!error.includes("Google Fonts") && // Ignore font loading errors in test env
-					!error.includes("net::ERR_"), // Ignore network errors that might occur in test env
+					!error.includes("net::ERR_") // Ignore network errors that might occur in test env
 			);
 
 			if (criticalErrors.length > 0) {
