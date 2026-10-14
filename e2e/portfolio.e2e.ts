@@ -103,6 +103,14 @@ test("themes persist with reduced motion and legacy features stay reachable", as
 }) => {
 	await page.emulateMedia({ reducedMotion: "reduce" });
 	await page.goto("/en");
+	const themeRefresh = page.waitForResponse((response) => {
+		const request = response.request();
+		return (
+			request.method() === "GET" &&
+			request.headers().rsc === "1" &&
+			new URL(response.url()).pathname === "/en"
+		);
+	});
 	await page.getByRole("button", { name: "Switch to dark mode" }).click();
 	await expect(page.locator("body")).toHaveAttribute("data-theme", "dark");
 	await expect
@@ -113,6 +121,7 @@ test("themes persist with reduced motion and legacy features stay reachable", as
 				)?.value
 		)
 		.toBe("dark");
+	expect((await themeRefresh).ok()).toBe(true);
 	await page.reload();
 	await expect(page.locator("body")).toHaveAttribute("data-theme", "dark");
 	await page.getByTestId("header").locator("summary").click();
