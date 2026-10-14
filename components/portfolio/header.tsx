@@ -1,9 +1,7 @@
 "use client";
-import { getRoute } from "lib/utils/routing";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { THEMES, type Theme, useThemeContext } from "providers/theme";
-import { useEffect } from "react";
 import type { Dictionary } from "translations";
 import Mark from "./mark";
 import styles from "./portfolio.module.css";
@@ -17,11 +15,6 @@ export default function PortfolioHeader({
 }) {
 	const pathname = usePathname();
 	const { theme, selectTheme } = useThemeContext();
-	const nextLang = lang === "he" ? "en" : "he";
-	useEffect(() => {
-		document.documentElement.lang = lang;
-		document.body.dir = lang === "he" ? "rtl" : "ltr";
-	}, [lang]);
 	const links = [
 		{
 			href: `/${lang}`,
@@ -99,15 +92,6 @@ export default function PortfolioHeader({
 						</select>
 					</div>
 				</details>
-				<Link
-					className={styles.language}
-					href={getRoute(pathname, nextLang)}
-					hrefLang={nextLang}
-					lang={nextLang}
-					aria-label={nextLang === "he" ? "עברית" : "English"}
-				>
-					{nextLang === "he" ? "עב" : "EN"}
-				</Link>
 			</nav>
 		</header>
 	);

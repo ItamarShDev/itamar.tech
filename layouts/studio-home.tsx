@@ -1,4 +1,4 @@
-import Mark from "components/portfolio/mark";
+import PlayfulMark from "components/portfolio/playful-mark";
 import styles from "components/portfolio/portfolio.module.css";
 import ProjectArt from "components/portfolio/project-art";
 import { getCurrentLang } from "lib/headers";
@@ -27,27 +27,23 @@ export default async function StudioHome() {
 							{copy.moreAbout}
 							<span aria-hidden="true">↗</span>
 						</Link>
-						<Link className={styles.quietLink} href={`/${lang}/resume`}>
-							{copy.resume}
-							<span aria-hidden="true">↗</span>
-						</Link>
 					</div>
 				</div>
-				<div className={styles.heroMark}>
-					<Mark />
-				</div>
+				<PlayfulMark />
 			</section>
 			<section aria-labelledby="selected-work">
 				<div className={styles.sectionHeading}>
-					<h2 id="selected-work">{copy.selectedWork}</h2>
+					<h2 id="selected-work">
+						{copy.selectedWork} <sup>03</sup>
+					</h2>
 					<span>{copy.selectedNote}</span>
 				</div>
 				<div className={styles.projects}>
-					{workSlugs.map((slug, index) => (
+					{workSlugs.map((slug) => (
 						<Link
 							key={slug}
 							href={`/${lang}/work/${slug}`}
-							className={`${styles.project} ${index === 2 ? styles.compactProject : ""}`}
+							className={styles.project}
 							data-testid={`project-${slug}`}
 						>
 							<ProjectArt slug={slug} />

@@ -2,6 +2,7 @@ import styles from "app/layout.module.css";
 import AnimatedViewTransition from "components/AnimatedViewTransition";
 import Footer from "layouts/footer";
 import Header from "layouts/header";
+import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 export default async function LanguageLayout({
@@ -12,10 +13,11 @@ export default async function LanguageLayout({
 	params: Promise<{ lang: string }>;
 }) {
 	const { lang } = await params;
+	if (lang !== "en") notFound();
 	return (
 		<>
 			<a className="skip-link" href="#content">
-				{lang === "he" ? "דילוג לתוכן" : "Skip to content"}
+				Skip to content
 			</a>
 			<Header />
 			<AnimatedViewTransition>

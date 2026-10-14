@@ -1,15 +1,10 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import type { Theme } from "providers/theme";
 
-export async function getCurrentLang() {
-	const headersList = await headers();
-	const pathname = headersList.get("x-current-path") || "";
-
-	// Extract language from URL path (/en/... or /he/...)
-	const lang = pathname.split("/")[1];
-	return lang || "en"; // default to 'en' if no language found
+export async function getCurrentLang(): Promise<string> {
+	return "en";
 }
 
 export async function getCurrentTheme() {

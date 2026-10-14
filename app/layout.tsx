@@ -5,7 +5,7 @@ import PersonalChat from "components/PersonalChat";
 import { ChatProvider } from "context/ChatContext";
 import { FireworksProvider } from "context/FireworksContext";
 import { fontVariables } from "lib/fonts";
-import { getCurrentLang, getCurrentTheme } from "lib/headers";
+import { getCurrentTheme } from "lib/headers";
 import { ThemeProvider } from "providers/theme";
 import "../globals.css";
 import "../studio.css";
@@ -23,12 +23,11 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const lang = await getCurrentLang();
 	const theme = await getCurrentTheme();
 
 	return (
-		<html lang={lang} className={fontVariables} suppressHydrationWarning>
-			<body data-theme={theme} dir={lang === "he" ? "rtl" : "ltr"}>
+		<html lang="en" className={fontVariables} suppressHydrationWarning>
+			<body data-theme={theme} dir="ltr">
 				<Analytics />
 				<ThemeProvider defaultTheme={theme}>
 					<FireworksProvider>

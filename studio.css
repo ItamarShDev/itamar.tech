@@ -4,9 +4,6 @@ body {
 	--studio-line: color-mix(in srgb, var(--colors-text) 17%, var(--colors-bg));
 	--studio-soft: color-mix(in srgb, var(--colors-text) 5%, var(--colors-bg));
 }
-body[dir="rtl"] {
-	font-family: var(--font-heebo), Arial, sans-serif;
-}
 h1,
 h2,
 h3,

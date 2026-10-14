@@ -25,7 +25,7 @@ export default async function WorkPage({ params }: Props) {
 	return (
 		<article className={styles.page} data-studio-page>
 			<Link className={styles.backLink} href={`/${lang}`}>
-				<span aria-hidden="true">{lang === "he" ? "→" : "←"}</span>
+				<span aria-hidden="true">←</span>
 				{copy.backToWork}
 			</Link>
 			<header className={styles.detailHeader}>

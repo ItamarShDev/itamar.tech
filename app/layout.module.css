@@ -21,7 +21,7 @@
 	align-items: center;
 	justify-content: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 	.main,
 	.main:has(> [data-studio-page]) {
 		width: calc(100% - 40px);

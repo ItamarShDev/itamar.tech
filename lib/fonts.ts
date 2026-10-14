@@ -6,12 +6,5 @@ const inter = localFont({
 	display: "swap",
 	weight: "100 900",
 });
-const heebo = localFont({
-	src: "../public/fonts/studio-heebo.woff2",
-	variable: "--font-heebo",
-	display: "swap",
-	weight: "100 900",
-	preload: false,
-});
-export const fontVariables = `${inter.variable} ${heebo.variable}`;
+export const fontVariables = inter.variable;
 export const bodyFontClass = inter.className;
