@@ -1,6 +1,5 @@
 "use client";
 
-import { setCurrentTheme } from "lib/headers";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useRef, useState } from "react";
 
@@ -88,10 +87,10 @@ function useTheme(currentThemeName: Theme) {
 
 	const selectTheme = async (theme: Theme, event?: React.MouseEvent) => {
 		const version = ++revision.current;
+		document.cookie = `current-theme=${theme}; Path=/; SameSite=Lax`;
 		setTheme(theme);
 		await applyThemeWithRipple(theme, event);
 		if (version !== revision.current) return;
-		await setCurrentTheme(theme);
 		router.refresh();
 	};
 
