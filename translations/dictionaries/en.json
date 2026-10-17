@@ -152,13 +152,7 @@
 		},
 		"progress": {
 			"title": "Progress Over Time",
-			"labels": [
-				"1 week",
-				"1 month",
-				"4 months",
-				"6 months",
-				"1 year"
-			],
+			"labels": ["1 week", "1 month", "4 months", "6 months", "1 year"],
 			"userOriented": "User oriented design",
 			"learning": "Learning",
 			"mingling": "Mingling",
@@ -168,5 +162,68 @@
 	"footer": {
 		"twitter": "Twitter",
 		"github": "Github"
+	},
+	"portfolio": {
+		"name": "Itamar Sharify",
+		"home": "Home",
+		"navigation": "Main navigation",
+		"work": "Work",
+		"about": "About",
+		"writing": "Writing",
+		"darkMode": "Switch to dark mode",
+		"lightMode": "Switch to light mode",
+		"themes": "Color theme",
+		"light": "Light",
+		"dark": "Dark",
+		"role": "Software engineer",
+		"headline": "Thoughtful code.",
+		"headlineSecond": "A curious mind.",
+		"intro": "I’m Itamar. I build web experiences, developer tools, and side projects that follow my curiosity.",
+		"moreAbout": "A little about me",
+		"resume": "Résumé",
+		"selectedWork": "Selected work",
+		"selectedNote": "A few things I’ve made",
+		"experimentLabel": "The smaller things",
+		"experimentTitle": "Room to experiment.",
+		"experimentDescription": "Interactive demos, curious ideas, and a closer look at how things work.",
+		"experimentLink": "Explore the experiments",
+		"footer": "A personal space for work & experiments.",
+		"elsewhere": "More about me",
+		"backToWork": "Back to work",
+		"visitSite": "Visit live site",
+		"aboutProject": "About the project",
+		"category": "Category",
+		"projectType": "Project type",
+		"webProject": "Web application",
+		"nextProject": "Next project",
+		"aboutTitle": "Hello, I’m Itamar.",
+		"aboutIntro": "I’m a software engineer interested in the space between how things work and how they feel to use.",
+		"aboutBody": "My projects range from developer tools to football and music. This site brings that work together, alongside experiments and writing.",
+		"aboutCareer": "For professional experience and career history, see my résumé.",
+		"interests": [
+			"Web development",
+			"Developer experience",
+			"Culture & community"
+		],
+		"projects": {
+			"reactwind": {
+				"title": "Reactwind",
+				"summary": "Tailwind CSS, written as JSX props.",
+				"category": "Developer tools",
+				"description": "A developer tool exploring a different way to work with Tailwind CSS in React: express styling through JSX props rather than a long class string."
+			},
+			"hakapit": {
+				"title": "Hakapit",
+				"summary": "A home for Liverpool fans and podcasts.",
+				"category": "Football & community",
+				"description": "A Hebrew-language home for Liverpool fans, bringing football and fan podcasts together in one place."
+			},
+			"conflict-bars": {
+				"title": "Conflict Bars",
+				"summary": "Israeli hip-hop in its historical context.",
+				"category": "Music & history",
+				"description": "An interactive timeline connecting Israeli hip-hop with moments in the conflict. A way to explore the music alongside the events surrounding it."
+			}
+		}
 	}
 }
