@@ -37,7 +37,8 @@ describe("English-only routes", () => {
 		"/en/about",
 		"/manifest.json",
 		"/fonts/studio-inter.woff2",
-		"/images/me.png",
+		"/images/meta-image.png",
+		"/project-artwork/hakapit.svg",
 	])("does not redirect %s", (path) => {
 		const response = proxy(new NextRequest(`https://itamar.tech${path}`));
 		expect(response.headers.has("location")).toBe(false);
